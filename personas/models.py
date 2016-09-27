@@ -8,7 +8,6 @@ class Persona(models.Model):
     direccion = models.CharField(max_length=100)
     telefono = models.IntegerField()
     localidad = models.CharField(max_length=100)
-    roles = []
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
@@ -32,7 +31,7 @@ class Persona(models.Model):
             return getattr(r[0], attr)
 
 class Rol(models.Model):
-    persona = None
+    persona = models.ForeignKey(Persona)
 
 
 class Cliente(Rol):
