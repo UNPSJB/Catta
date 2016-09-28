@@ -1,22 +1,25 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
 
 <html lang="en">
     <head>
-        <title>Catta - Crea tu cuenta</title>
+        <title>Catta - Crear sector</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link href="favicon.ico" rel="shortcut icon">
-        <link rel="stylesheet" href="assets/css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/animate.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/nexus.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/responsive.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'assets/css/nexus.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
@@ -71,7 +74,7 @@
                             <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
                                 <form class="login-page">
                                     <div class="login-header margin-bottom-30">
-                                        <h2>Crear una cuenta nueva</h2>
+                                        <h2>Crear una nuevo sector</h2>
                                     </div>
                                     <!-- -->
                                     <div class="input-group margin-bottom-20">
@@ -83,41 +86,13 @@
                                     <!-- -->
                                     <div class="input-group margin-bottom-20">
                                         <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                            <i class="fa fa-font"></i>
                                         </span>
-                                        <input placeholder="Apellido" class="form-control" type="text">
-                                    </div>
-                                    <!-- -->
-                                    <div class="input-group margin-bottom-20">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
-                                        </span>
-                                        <input placeholder="Teléfono" class="form-control" type="text">
-                                    </div>
-                                    <!-- -->
-                                    <div class="input-group margin-bottom-20">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-envelope"></i>
-                                        </span>
-                                        <input placeholder="E-Mail" class="form-control" type="text">
-                                    </div>
-                                    <!-- -->
-                                    <div class="input-group margin-bottom-20">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
-                                        </span>
-                                        <input placeholder="Nombre de usuario" class="form-control" type="text">
-                                    </div>
-                                    <!-- -->
-                                    <div class="input-group margin-bottom-20">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-lock"></i>
-                                        </span>
-                                        <input placeholder="Contraseña" class="form-control" type="password">
+                                        <input placeholder="Descripción" class="form-control" type="text">
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-primary pull-right" type="submit">Crear Cuenta</button>
+                                            <button class="btn btn-primary pull-right" type="submit">Crear Sector</button>
                                         </div>
                                     </div>
                                 </form>
@@ -209,14 +184,14 @@
             </div>
             <!-- Fin pie de página -->
 
-            <script type="text/javascript" src="assets/js/jquery.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="assets/js/scripts.js"></script>
-            <script type="text/javascript" src="assets/js/jquery.isotope.js" type="text/javascript"></script>
-            <script type="text/javascript" src="assets/js/jquery.slicknav.js" type="text/javascript"></script>
-            <script type="text/javascript" src="assets/js/jquery.visible.js" charset="utf-8"></script>
-            <script type="text/javascript" src="assets/js/jquery.sticky.js" charset="utf-8"></script>
-            <script type="text/javascript" src="assets/js/slimbox2.js" charset="utf-8"></script>
-            <script src="assets/js/modernizr.custom.js" type="text/javascript"></script>
+            <script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}" type="text/javascript"></script>
+            <script type="text/javascript" src="{% static 'assets/js/bootstrap.min.js' %}" type="text/javascript"></script>
+            <script type="text/javascript" src="{% static 'assets/js/scripts.js' %}"></script>
+            <script type="text/javascript" src="{% static 'assets/js/jquery.isotope.js' %}" type="text/javascript"></script>
+            <script type="text/javascript" src="{% static 'assets/js/jquery.slicknav.js' %}" type="text/javascript"></script>
+            <script type="text/javascript" src="{% static 'assets/js/jquery.visible.js' %}" charset="utf-8"></script>
+            <script type="text/javascript" src="{% static 'assets/js/jquery.sticky.js' %}" charset="utf-8"></script>
+            <script type="text/javascript" src="{% static 'assets/js/slimbox2.js' %}" charset="utf-8"></script>
+            <script src="{% static 'assets/js/modernizr.custom.js' %}" type="text/javascript"></script>
     </body>
 </html>

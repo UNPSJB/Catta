@@ -11,3 +11,6 @@ def cuenta(request):
 
 def empleado(request):
     return render(request, 'empleado/index_empleado.html', {})
+
+def sector(request):
+    return render(request, 'sector/sector.html', {})

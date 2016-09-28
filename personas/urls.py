@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^login/$',views.login),
     url(r'^empleado/$',views.empleado),
     url(r'^cuenta/$',views.cuenta),
+    url(r'^sector/$',views.sector),
 ]
