@@ -5,6 +5,8 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^login/$',views.login),
     url(r'^empleado/$',views.empleado),
+    url(r'^duenio/$', views.duenio),
     url(r'^cuenta/$',views.cuenta),
     url(r'^sector/$',views.sector),
+    url(r'^cliente/$', views.cliente),
 ]
