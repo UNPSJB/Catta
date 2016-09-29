@@ -8,10 +8,10 @@
             <div class="col-md-24 no-padding">
                 <div class="visible-lg">
                     <ul id="hornavmenu" class="navbar-fixed-top">
-                        <form class="navbar-form navbar-right">
-                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
-                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
-                        </form>
+                        <div class="navbar-right">
+                            <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
+                            <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                         <input type="checkbox"><font color="Black"><font face="arial">Mantenerme conectado</font></font></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <b><button class="btn btn-violet pull-right" type="submit">Iniciar Sesión</button></b>
+                                    <b><a class="btn btn-violet pull-right" href="{% url 'empleado' %}">Iniciar Sesión</a></b>
                                 </div>
                             </div>
                             <hr>

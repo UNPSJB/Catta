@@ -11,10 +11,10 @@
                         <li class="navbar-left">
                             <a href="{% url 'index' %}" class="fa-home">Principal</a>
                         </li>
-                        <form class="navbar-form navbar-right">
-                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
-                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
-                        </form>
+                        <div class="navbar-right">
+                            <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
+                            <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <b><button class="btn btn-violet pull-right" type="submit">Crear Cuenta</button></b>
+                                            <b><a class="btn btn-violet pull-right" href="{% url 'empleado' %}">Crear Cuenta</a></b>
                                         </div>
                                     </div>
                                 </form>
