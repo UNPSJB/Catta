@@ -8,10 +8,10 @@
         <div class="col-md-24 no-padding">
             <div class="visible-lg">
                 <ul id="hornavmenu" class="navbar-fixed-top">
-                    <div class="navbar-right">
-                        <a class="btn btn-aqua" href="{% url 'crear' %}">Crear Cuenta</a>
-                        <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
-                    </div>
+                    <form class="navbar-form navbar-right">
+                        <button type="submit" class="btn btn-aqua" onclick="goto_link('cuenta/')">Crear Cuenta</button>
+                        <button type="submit" class="btn btn-green" onclick="goto_link('login/')">Iniciar Sesión</button>
+                    </form>
                 </ul>
             </div>
         </div>
