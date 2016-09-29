@@ -2,12 +2,12 @@ from django.db import models
 
 
 class Persona(models.Model):
-    dni = models.IntegerField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
-    direccion = models.CharField(max_length=100)
-    telefono = models.IntegerField()
-    localidad = models.CharField(max_length=100)
+    dni = models.IntegerField(primary_key=True, default=123456)
+    nombre = models.CharField(max_length=100, default='John')
+    apellido = models.CharField(max_length=100, default='Doe')
+    direccion = models.CharField(max_length=100, default='Calle Falsa 123')
+    telefono = models.IntegerField(default=123456)
+    localidad = models.CharField(max_length=100, default='Neverland')
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
@@ -29,13 +29,13 @@ class Persona(models.Model):
         r = list(filter(lambda r: hasattr(r, attr), self.roles))
         if r:
             return getattr(r[0], attr)
-
+"""
 class Rol(models.Model):
-    persona = models.ForeignKey(Persona)
+    persona = models.ForeignKey(Persona, default=None)
 
 
 class Cliente(Rol):
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(max_length=50, default='test@test.com')
     historial = []  # LISTA DE TURNOS (HISTORIAL)
 
 
@@ -116,7 +116,8 @@ class Dueña(Rol):
         pass
 
 class Usuario(Rol):
-    username = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, default='test')
 
     def login(self):
         pass
+"""

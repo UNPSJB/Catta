@@ -8,10 +8,10 @@
         <div class="col-md-24 no-padding">
             <div class="visible-lg">
                 <ul id="hornavmenu" class="navbar-fixed-top">
-                    <form class="navbar-form navbar-right">
-                        <button type="submit" class="btn btn-aqua" onclick="goto_link('cuenta/')">Crear Cuenta</button>
-                        <button type="submit" class="btn btn-green" onclick="goto_link('login/')">Iniciar Sesión</button>
-                    </form>
+                    <div class="navbar-right">
+                        <a class="btn btn-aqua" href="{% url 'crear' %}">Crear Cuenta</a>
+                        <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -33,7 +33,7 @@
                     <h3 style="color: #FA5858;">Centro de estética N°1 en el mundo!</h3>
                     <div style="margin-top: 60px;">
                         <a href="#info" class="btn btn-primary btn-lg page-scroll" role="button">Aprenda más</a>
-                        <a href="" class="btn btn-default btn-lg" role="button" onclick="goto_link('cuenta/')">Crear cuenta</a>
+                        <a href="{% url 'cuenta' %}" class="btn btn-default btn-lg" role="button" onclick="goto_link('cuenta/')">Crear cuenta</a>
                     </div>
                 </div>
                 <div class="col-sm-4"></div>
