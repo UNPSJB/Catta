@@ -12,12 +12,17 @@ def cuenta(request):
 def empleado(request):
     return render(request, 'empleado/index_empleado.html', {})
 
+def nuevo_empleado(request):
+    return render(request, 'empleado/nuevo_empleado.html', {})
+
 def duenio(request):
     return render(request, 'duenio/index_duenio.html', {})
 
 def cliente(request):
     return render(request, 'cliente/index_cliente.html', {})
 
+def nuevo_cliente(request):
+    return render(request, 'cliente/nuevo_cliente.html', {})
 
 def sector(request):
     return render(request, 'sector/sector.html', {})
