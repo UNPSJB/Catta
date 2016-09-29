@@ -44,21 +44,27 @@
             {% endblock %}
             <!-- Fin barra de navegación -->
 
+            <!-- Espacio previo al contenido de la página -->
+            <div id="post_header" class="container" style="height:90px"></div>
+            <!-- Fin espacio previo al contenido de la página -->
+
             {% block presentacion %}
             {% endblock %}
 
-            <!-- Espacio previo al contenido de la página -->
-            <div id="content-top-border" class="container"></div>
-            <!-- Fin espacio previo al contenido de la página -->
+            <!-- Barrita negra arriba del contenido -->
+            {% block borde_arriba %}
+            {% endblock %}
+            <!-- Fin barrita negra arriba del contenido -->
 
             <!-- Inicio contenido de la página -->
             {% block contenido %}
             {% endblock %}
             <!-- Fin contenido de la página -->
 
-            <!-- Espacio debajo del contenido de la página -->
-            <div id="content-bottom-border" class="container"></div>
-            <!-- Fin espacio debajo del contenido de la página -->
+            <!-- Barrita negra abajo del contenido -->
+            {% block borde_abajo %}
+            {% endblock %}
+            <!-- Fin barrita negra abajo del contenido -->
 
             <!-- Pie de página -->
             <div id="base">
