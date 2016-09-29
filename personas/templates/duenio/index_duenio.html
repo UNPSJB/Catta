@@ -8,11 +8,9 @@
             <div class="col-md-12 no-padding">
                 <div class="visible-lg">
                     <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top">
-
                         <li class="navbar-left">
-                            <a href="index.html" class="fa-home">Principal</a>
+                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
                         </li>
-
                         <li class="navbar-right">
                             <span class="fa-user-md">Cuenta</span>
                             <ul>
@@ -69,7 +67,7 @@
                             <ul class="posts-list margin-top-10">
                                 <li>
                                     <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Empleado</button>
+                                        <a class="btn btn-aqua" href="{% url 'nuevo_empleado' %}">Nuevo Empleado</a>
                                         <br>
                                     </div>
                                     <div class="clearfix"></div>
@@ -83,14 +81,14 @@
                                 </li>
                                 <li>
                                     <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Cliente</button>
+                                        <a class="btn btn-aqua" href="{% url 'nuevo_cliente' %}">Nuevo Cliente</a>
                                         <br>
                                     </div>
                                     <div class="clearfix"></div>
                                 </li>
                                 <li>
                                     <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Sector</button>
+                                        <a class="btn btn-aqua" href="{% url 'sector' %}">Nuevo Sector</a>
                                         <br>
                                     </div>
                                     <div class="clearfix"></div>
@@ -104,7 +102,7 @@
                                 </li>
                                 <li>
                                     <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Liquidar comiisones diarias</button>
+                                        <button type="submit" class="btn btn-aqua" href="#">Liquidar comisones diarias</button>
                                         <br>
                                     </div>
                                     <div class="clearfix"></div>
