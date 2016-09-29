@@ -93,9 +93,6 @@ body {
   text-align: center;
   z-index: 20;
 }
-.is-sticky #hornav ul#hornavmenu {
-  background-color: #171717;
-}
 .is-sticky #header {
   z-index: 21;
 }
