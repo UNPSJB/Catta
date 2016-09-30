@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^sector/$',views.sector, name='sector'),
     url(r'^cliente/$', views.cliente, name='cliente'),
     url(r'^nuevo_cliente/$', views.nuevo_cliente, name='nuevo_cliente'),
+    url(r'^index_turnos/$', views.index_turnos, name='index_turnos'),
 ]

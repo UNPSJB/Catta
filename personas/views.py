@@ -26,3 +26,6 @@ def nuevo_cliente(request):
 
 def sector(request):
     return render(request, 'sector/sector.html', {})
+
+def index_turnos(request):
+	return render(request, 'Turnos/index_turnos.html', {})

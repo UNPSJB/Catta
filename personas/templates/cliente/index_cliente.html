@@ -48,77 +48,98 @@
 {% endblock %}
 
 {% block contenido %}
-    <div id="content">
-        <div class="container background-white">
-            <div class="row margin-vert-30">
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Menú</h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul class="posts-list margin-top-10">
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Turno</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Mis Turnos</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Cliente</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Sector</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Insumo</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Liquidar comiisones diarias</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <!-- Tab v1 -->
-                    <div class="tabs">
-                        <div class="tab-content">
-                            <h1 align="center"> Bienvenido </h1>
-                            <p>MI vieja mula</p>
-                        </div>
-                    </div>
-                    <!-- End Tab v1 -->
-                    <div class="margin-bottom-30">
-                        <hr>
-                    </div>
-                </div>
+   <div id="info" class="container background-white">
+        <div class="row margin-vert-60">
+            <div class="col-md-12">
+                <h2 class="text-center">Bienvenidos a Catta</h2>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                    lobortis nisl ut aliquip ex ea commodo consequat.
+                </p>
+                <p class="text-center">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit
+                    augue duis dolore te feugait nulla facilisi. Cras non sem sem, at eleifend mi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Curabitur eget nisl
+                    a risus.
+                </p>
             </div>
         </div>
     </div>
+    <div class="container background-transparent-lighter">
+        <div class="row padding-vert-20">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <ul class="portfolio-group">
+                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                        <a href="#">
+                            <figure class="animate fadeInLeft">
+                                <img alt="promo1" src="{% static 'assets/img/promos/promo1.jpg' %}" width='397' height='210'>
+                                <figcaption>
+                                    <h3> SHOCK + BOTOX </h3>
+                                    <span> $550 </span>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                        <a href="#">
+                            <figure class="animate fadeInRight">
+                                <img alt="promo2" src="{% static 'assets/img/promos/promo2.jpg' %}" width='397' height='210'>
+                                <figcaption>
+                                    <h3> DESGASTE + BUCLES </h3>
+                                    <span>$500</span>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                        <a href="#">
+                            <figure class="animate fadeInLeft">
+                                <img alt="promo3" src="{% static 'assets/img/promos/promo3.jpg' %}" width='397' height='210'>
+                                <figcaption>
+                                    <h3> LIMPIEZA FACIAL </h3>
+                                    <span> $250 </span>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                        <a href="#">
+                            <figure class="animate fadeInRight">
+                                <img alt="promo4" src="{% static 'assets/img/promos/promo4.jpg' %}" width='397' height='210'>
+                                <figcaption>
+                                    <h3> ALISADO + NUTRICION </h3>
+                                    <span> $600 </span>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                        <a href="#">
+                            <figure class="animate fadeInLeft">
+                                <img alt="promo5" src="{% static 'assets/img/promos/promo5.jpg' %}" width='397' height='210'>
+                                <figcaption>
+                                    <h3> PEDI YA TU PEINADO !!!</h3>
+                                    <span> DE $250 A $350</span>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                        <a href="#">
+                            <figure class="animate fadeInRight">
+                                <img alt="promo6" src="{% static 'assets/img/promos/promo6.jpg' %}" width='397' height='210'>
+                                <figcaption>
+                                    <h3> DEJA TUS MANOS BELLAS </h3>
+                                    <span> $200 </span>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
