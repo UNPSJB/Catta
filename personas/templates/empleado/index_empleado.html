@@ -47,56 +47,27 @@
 {% endblock %}
 
 {% block contenido %}
-    <div id="content">
-        <div class="container background-white">
-            <div class="row margin-vert-30">
-                <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Menú</h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul class="posts-list margin-top-10">
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Turno</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Nuevo Cliente</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                                <li>
-                                    <div class="recent-post">
-                                        <button type="submit" class="btn btn-aqua" href="#">Agenda</button>
-                                        <br>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <!-- Tab v1 -->
-                    <div class="tabs">
 
-                        <div class="tab-content">
-                            <h1 align="center"> Bienvenido </h1>
-                            <p>MI vieja mula</p>
-                        </div>
-                    </div>
-                    <!-- End Tab v1 -->
-                    <div class="margin-bottom-30">
-                        <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+      <div class="row">
+          <div class="col-lg-4 text-center padding-10">
+            <center>
+              <a href="#"><img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'></a>
+            </center>
+          </div>
+          <div class="col-lg-4 text-center padding-10">
+            <center>
+              <a href="#">
+                  <img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'>
+              </a>
+            </center>
+          </div>
+          <div class="col-lg-4 text-center padding-10">
+            <center>
+              <a href="#">
+                  <img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'>
+              </a>
+            </center>
+          </div>
+      </div>
+
 {% endblock %}
