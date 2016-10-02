@@ -23,44 +23,116 @@
 {% endblock %}
 
 {% block contenido %}
-    <div id="content">
-        <div class="container background-transparent">
-            <div class="container">
-                <div class="row margin-vert-30">
-                    <!-- Login Box -->
-                    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-                        <form class="login-page">
-                            <div class="login-header margin-bottom-30">
-                                <h2><font color="Purple"><font face="arial"> Iniciar sesion en tu Cuenta </font></font></h2>
-                            </div>
-                            <div class="input-group margin-bottom-20">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                </span>
-                                <b><input placeholder="Nombre de usuario" class="form-control" type="text"></b>
-                            </div>
-                            <div class="input-group margin-bottom-20">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-lock"></i>
-                                </span>
-                                <b><input placeholder="Contraseña" class="form-control" type="password"></b>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="checkbox">
-                                        <input type="checkbox"><font color="Black"><font face="arial">Mantenerme conectado</font></font></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <b><a class="btn btn-violet pull-right" href="{% url 'empleado' %}">Iniciar Sesión</a></b>
-                                </div>
-                            </div>
-                            <hr>
-                            <h4><font color="Black"><font face="arial">Olvidaste tu contraseña?</font></font></h4>
-                            <p>
-                                <a href="#"> <font color="Purple"><font face="arial">Click aquí</font></font></a><font color="Black"><font face="arial"> para resetear la contraseña.</font></font></p>
-                        </form>
+    <div class="container">
+        <div class="row margin-vert-30">
+            <!-- Login Box -->
+            <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+                <form class="login-page">
+                    <div class="login-header margin-bottom-30">
+                        <h2><font color="Purple"><font face="arial"> Iniciar sesion en tu Cuenta </font></font></h2>
                     </div>
-                    <!-- End Login Box -->
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <b><input placeholder="Nombre de usuario" class="form-control" type="text"></b>
+                    </div>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <b><input placeholder="Contraseña" class="form-control" type="password"></b>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="checkbox">
+                                <input type="checkbox"><font color="Black"><font face="arial">Mantenerme conectado</font></font></label>
+                        </div>
+                        <div class="col-md-6">
+                            <b><a class="btn btn-violet pull-right" href="{% url 'empleado' %}">Iniciar Sesión</a></b>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4><font color="Black"><font face="arial">Olvidaste tu contraseña?</font></font></h4>
+                    <p>
+                        <a href="#"> <font color="Purple"><font face="arial">Click aquí</font></font></a><font color="Black"><font face="arial"> para resetear la contraseña.</font></font></p>
+                </form>
+            </div>
+            <!-- End Login Box -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div id="base">
+        <div class="container padding-vert-30 margin-top-60">
+            <div class="row">
+                <div class="col-md-4 margin-bottom-20">
+                    <h3 class="margin-bottom-10">Detalles de Contacto</h3>
+                    <p>
+                        <span class="fa-phone">Teléfono:</span>(212)888-77-88
+                        <br>
+                        <span class="fa-envelope">Email:</span>
+                        <a href="mailto:info@joomla51.com">info@catta.com</a>
+                        <br>
+                    </p>
+                    <p>Calle de tierra 123 (Al lado de la herrería),
+                        <br>Gaiman county, Chubut
+                        <br>9000,25^-99,
+                        <br>Argentina</p>
+                </div>
+                <div class="col-md-3 margin-bottom-20">
+                    <h3 class="margin-bottom-10">Menu</h3>
+                    <ul class="menu">
+                        <li>
+                            <a class="fa-tasks" href="#">Mi vieja mula</a>
+                        </li>
+                        <li>
+                            <a class="fa-users" href="#">Ya no es lo que era</a>
+                        </li>
+                        <li>
+                            <a class="fa-signal" href="#">Ya no es lo que era</a>
+                        </li>
+                        <li>
+                            <a class="fa-coffee" href="#">Ya no es lo que era</a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
+                    <h3 class="color-gray margin-bottom-10">Novedades</h3>
+                    <p>
+                        Para saber todas las novedades de estilos y
+                        <br>cortes del centro de estética más
+                        <br>influyente de la región patagónica.
+                    </p>
+                    <input type="email">
+                    <br>
+                    <button class="btn btn-primary btn-lg margin-top-20" type="button">Por dios, suscribirme YA!</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div id="footermenu" class="col-md-8">
+                    <ul class="list-unstyled list-inline">
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

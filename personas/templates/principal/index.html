@@ -3,20 +3,12 @@
 {% load staticfiles %}
 
 {% block barra %}
-<div id="hornav" class="container no-padding">
-    <div class="row">
-        <div class="col-md-24 no-padding">
-            <div class="visible-lg">
-                <ul id="hornavmenu" class="navbar-fixed-top" style="height: 60px">
-                    <div class="navbar-right" style="margin-top: 12px;">
-                        <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
-                        <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
-                    </div>
-                </ul>
-            </div>
-        </div>
+<ul id="hornavmenu" class="navbar-fixed-top" style="height: 60px">
+    <div class="navbar-right" style="margin-top: 12px;">
+        <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
+        <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
     </div>
-</div>
+</ul>
 {% endblock %}
 
 {% block presentacion %}
@@ -48,7 +40,6 @@
 {% endblock %}
 
 {% block contenido %}
-<div id="content">
     <div class="container no-padding">
         <div class="row">
             <div id="carousel-example" class="carousel slide" data-ride="carousel">
@@ -61,16 +52,16 @@
                 <div class="clearfix"></div>
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="{% static 'assets/img/slideshow/catta.jpeg' %}">
+                        <img src="{% static 'assets/img/slideshow/catta.jpeg' %}" width="1400px">
                     </div>
                     <div class="item">
-                        <img src="{% static 'assets/img/slideshow/catta1.jpeg' %}">
+                        <img src="{% static 'assets/img/slideshow/catta1.jpeg' %}" width="1400px">
                     </div>
                     <div class="item">
-                        <img src="{% static 'assets/img/slideshow/catta2.jpeg' %}">
+                        <img src="{% static 'assets/img/slideshow/catta2.jpeg' %}" width="1400px">
                     </div>
                     <div class="item">
-                        <img src="{% static 'assets/img/slideshow/catta3.jpeg' %}">
+                        <img src="{% static 'assets/img/slideshow/catta3.jpeg' %}" width="1400px">
                     </div>
                 </div>
                 <a class="left carousel-control" href="#carousel-example" data-slide="prev">
@@ -174,9 +165,84 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block borde_abajo %}
 <div id="content-bottom-border" class="container"></div>
+{% endblock %}
+
+{% block footer %}
+    <div id="base">
+        <div class="container padding-vert-30 margin-top-60">
+            <div class="row">
+                <div class="col-md-4 margin-bottom-20">
+                    <h3 class="margin-bottom-10">Detalles de Contacto</h3>
+                    <p>
+                        <span class="fa-phone">Teléfono:</span>(212)888-77-88
+                        <br>
+                        <span class="fa-envelope">Email:</span>
+                        <a href="mailto:info@joomla51.com">info@catta.com</a>
+                        <br>
+                    </p>
+                    <p>Calle de tierra 123 (Al lado de la herrería),
+                        <br>Gaiman county, Chubut
+                        <br>9000,25^-99,
+                        <br>Argentina</p>
+                </div>
+                <div class="col-md-3 margin-bottom-20">
+                    <h3 class="margin-bottom-10">Menu</h3>
+                    <ul class="menu">
+                        <li>
+                            <a class="fa-tasks" href="#">Mi vieja mula</a>
+                        </li>
+                        <li>
+                            <a class="fa-users" href="#">Ya no es lo que era</a>
+                        </li>
+                        <li>
+                            <a class="fa-signal" href="#">Ya no es lo que era</a>
+                        </li>
+                        <li>
+                            <a class="fa-coffee" href="#">Ya no es lo que era</a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
+                    <h3 class="color-gray margin-bottom-10">Novedades</h3>
+                    <p>
+                        Para saber todas las novedades de estilos y
+                        <br>cortes del centro de estética más
+                        <br>influyente de la región patagónica.
+                    </p>
+                    <input type="email">
+                    <br>
+                    <button class="btn btn-primary btn-lg margin-top-20" type="button">Por dios, suscribirme YA!</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div id="footermenu" class="col-md-8">
+                    <ul class="list-unstyled list-inline">
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Link</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
