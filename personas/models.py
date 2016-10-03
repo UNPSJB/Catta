@@ -1,42 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Persona(models.Model):
-    dni = models.IntegerField(primary_key=True, default=123456)
-    nombre = models.CharField(max_length=100, default='John')
-    apellido = models.CharField(max_length=100, default='Doe')
-    direccion = models.CharField(max_length=100, default='Calle Falsa 123')
-    telefono = models.IntegerField(default=123456)
-    localidad = models.CharField(max_length=100, default='Neverland')
+    dni = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100)
+    telefono = models.IntegerField()
+    localidad = models.CharField(max_length=100)
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
 
-    def _get_rol(self, klass):
-        roles = list(filter(lambda r: isinstance(r, klass), self.roles))
-        if roles:
-            return roles[0]
-
-    def _has_rol(self, klass):
-        return self._get_rol(klass) is not None
-
-    def add_rol(self, rol):
-        if not self._has_rol(rol.__class__):
-            rol.persona = self
-            self.roles.append(rol)
-
-    def __getattr__(self, attr):
-        r = list(filter(lambda r: hasattr(r, attr), self.roles))
-        if r:
-            return getattr(r[0], attr)
-"""
 class Rol(models.Model):
-    persona = models.ForeignKey(Persona, default=None)
+    persona = models.ForeignKey(Persona, related_name='%(class)s_roles')
+
+    class Meta:
+        abstract = True 
 
 
 class Cliente(Rol):
     email = models.EmailField(max_length=50, default='test@test.com')
-    historial = []  # LISTA DE TURNOS (HISTORIAL)
+    #historial = []  # LISTA DE TURNOS (HISTORIAL)
 
 
     def sacar_turno(self):
@@ -45,7 +31,7 @@ class Cliente(Rol):
 
 class Empleado(Rol):
     porc_comicion = models.IntegerField()
-    agenda = []  # LISTA DE TURNOS (AGENDA)
+    #agenda = []  # LISTA DE TURNOS (AGENDA)
 
     def alta_cliente(self):
         pass
@@ -91,8 +77,8 @@ class Empleado(Rol):
     def listar_historial_cliente(self, cliente):
         pass
 
-class Dueña(Rol):
-    agenda = []  # LISTA DE TURNOS (AGENDA)
+class Duenia(Rol):
+    #agenda = []  # LISTA DE TURNOS (AGENDA)
 
     def alta_sector(self):
         pass
@@ -115,9 +101,8 @@ class Dueña(Rol):
     def servicios_mas_solicitados(self):
         pass
 
-class Usuario(Rol):
-    username = models.CharField(max_length=100, default='test')
+class Usuario(AbstractUser, Rol):
+    
 
     def login(self):
         pass
-"""
