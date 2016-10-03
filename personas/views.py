@@ -24,8 +24,5 @@ def cliente(request):
 def nuevo_cliente(request):
     return render(request, 'cliente/nuevo_cliente.html', {})
 
-def sector(request):
-    return render(request, 'sector/sector.html', {})
-
 def index_turnos(request):
 	return render(request, 'Turnos/index_turnos.html', {})

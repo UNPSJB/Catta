@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def sector(request):
+    return render(request, 'sector/sector.html', {})
