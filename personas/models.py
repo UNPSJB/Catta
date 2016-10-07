@@ -87,12 +87,12 @@ class Duenia(Rol):
 
     def servicios_mas_solicitados(self):
         pass
-"""
-class Usuario(Rol):
+
+class Usuario(AbstractUser, Rol):
 
     def login(self):
         pass
-    """
+
 
 class Persona(models.Model):
     dni = models.IntegerField(primary_key=True)
@@ -103,8 +103,8 @@ class Persona(models.Model):
     localidad = models.CharField(max_length=100, null=True)
     cliente = models.OneToOneField(Cliente, null=True)
     empleado = models.OneToOneField(Empleado, null=True)
-    Duenia = models.OneToOneField(Duenia, null=True)
-    #usuario = models.OneToOneField(Usuario)
+    duenia = models.OneToOneField(Duenia, null=True)
+    usuario = models.OneToOneField(Usuario, null=True)
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
