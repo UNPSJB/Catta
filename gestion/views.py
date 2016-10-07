@@ -1,4 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from gestion.forms import SectorForm
 
 def sector(request):
-    return render(request, 'sector/sector.html', {})
+    if request.method == "POST":
+        form = SectorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/duenio')
+        print(form)
+    else:
+        form = SectorForm()
+    return render(request, 'sector/sector.html', {"form": form})
