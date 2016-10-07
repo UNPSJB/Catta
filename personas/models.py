@@ -1,23 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-
-class Persona(models.Model):
-    dni = models.IntegerField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
-    direccion = models.CharField(max_length=100)
-    telefono = models.IntegerField()
-    localidad = models.CharField(max_length=100)
-
-    def __str__(self):
-        return "{} {}".format(self.nombre, self.apellido)
-
 class Rol(models.Model):
-    persona = models.ForeignKey(Persona, related_name='%(class)s_roles')
 
     class Meta:
-        abstract = True 
+        abstract = True
 
 
 class Cliente(Rol):
@@ -26,7 +13,7 @@ class Cliente(Rol):
 
 
     def sacar_turno(self):
-        pass
+        print ("sacando el turno")
 
 
 class Empleado(Rol):
@@ -100,9 +87,24 @@ class Duenia(Rol):
 
     def servicios_mas_solicitados(self):
         pass
-
-class Usuario(AbstractUser, Rol):
-    
+"""
+class Usuario(Rol):
 
     def login(self):
         pass
+    """
+
+class Persona(models.Model):
+    dni = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100, null=True)
+    telefono = models.IntegerField(null=True)
+    localidad = models.CharField(max_length=100, null=True)
+    cliente = models.OneToOneField(Cliente, null=True)
+    empleado = models.OneToOneField(Empleado, null=True)
+    Duenia = models.OneToOneField(Duenia, null=True)
+    #usuario = models.OneToOneField(Usuario)
+
+    def __str__(self):
+        return "{} {}".format(self.nombre, self.apellido)

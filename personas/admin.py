@@ -1,19 +1,17 @@
 from django.contrib import admin
-
 """
-class UsuarioAdmin(admin.ModelsAdmin):
+class UsuarioAdmin(admin.ModelAdmin):
 	pass
 
-class PersonaAdmin(admin.ModelsAdmin):
+class PersonaAdmin(admin.ModelAdmin):
 	pass
 
-class EmpleadoAdmin(admin.ModelsAdmin):
+class EmpleadoAdmin(admin.ModelAdmin):
 	pass
 
-class DueniaAdmin(admin.ModelsAdmin):
+class DueniaAdmin(admin.ModelAdmin):
 	pass
 
-class ClientesAdmin(admin.ModelsAdmin):
+class ClientesAdmin(admin.ModelAdmin):
 	pass
-
 """
