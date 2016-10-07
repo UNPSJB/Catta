@@ -22,6 +22,7 @@ class Servicio (models.Model):
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField(default=0)
     duracion = models.IntegerField(default=0)
+    insumos = models.ManyToManyField(Insumo)
 
     def __str__(self):
         return "{}".format(self.nombre)
