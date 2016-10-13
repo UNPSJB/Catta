@@ -34,7 +34,6 @@
                             <a href="">Servicios</a>
                         </li>
 
-
                         <li class="navbar-left">
                             <a href="">Clientes</a>
                         </li>
@@ -54,47 +53,108 @@
     </div>
 {% endblock %}
 
+{% block borde_arriba %}
+<div id="content-top-border" class="container"></div>
+{% endblock %}
+
 {% block contenido %}
-<div class="row">
-    <div class="col-lg-4 text-center padding-10">
-      <center>
-        <a href="#"><img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'></a>
-      </center>
-    </div>
-    <div class="col-lg-4 text-center padding-10">
-      <center>
-        <a href="#">
-            <img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'>
-        </a>
-      </center>
-    </div>
-    <div class="col-lg-4 text-center padding-10">
-      <center>
-        <a href="#">
-            <img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'>
-        </a>
-      </center>
+<div class="container background-white" style="opacity: 0.95">
+    <div class="row margin-vert-30">
+        <!-- Menú izquierdo -->
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Menú</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#turnos" data-toggle="tab">
+                                <i class="fa fa-paperclip"></i> Crear Turno</a>
+                        </li>
+                        <li>
+                            <a href="#clientes" data-toggle="tab">
+                                <i class="fa fa-user"></i> Clientes</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" data-toggle="tab">
+                                <i class="fa fa-scissors"></i> Servicios</a>
+                        </li>
+                        <li>
+                            <a href="#agenda" data-toggle="tab">
+                                <i class="fa fa-book"></i> Agenda</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Fin menú izquierdo -->
+        <!-- Contenido -->
+        <div class="col-md-9">
+            <div class="tab-content">
+                <div class="tab-pane fade in" id="turnos">
+                    <div id="acordeon-turnos" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" href="#nuevo-turno" data-parent="#acordeon-turnos" data-toggle="collapse">
+                                        Nuevo Turno
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="nuevo-turno" class="accordion-body collapse in">
+                                <div class="panel-body">
+                                    <p>Formulario de nuevo turno</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" href="#turnos-prox" data-parent="#acordeon-turnos" data-toggle="collapse">
+                                        Próximos Turnos
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="turnos-prox" class="accordion-body collapse">
+                                <div class="panel-body">
+                                    <p>Lista de turnos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="clientes">
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" href="#nuevo-cliente" data-parent="#acordeon-clientes" data-toggle="collapse">
+                                        Nuevo Cliente
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="nuevo-cliente" class="accordion-body collapse in">
+                                <div class="panel-body">
+                                    <p>Formulario de nuevo cliente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="servicios">
+                    <p>Listado de servicios</p>
+                </div>
+                <div class="tab-pane fade in" id="agenda">
+                    <p>Listado de turnos de la agenda</p>
+                </div>
+            </div>
+        </div>
+        <!-- Fin contenido -->
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-4 text-center padding-10">
-      <center>
-        <a href="#"><img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'></a>
-      </center>
-    </div>
-    <div class="col-lg-4 text-center padding-10">
-      <center>
-        <a href="#">
-            <img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'>
-        </a>
-      </center>
-    </div>
-    <div class="col-lg-4 text-center padding-10">
-      <center>
-        <a href="#">
-            <img class="img-circle img-responsive img-center" src="{% static 'assets/img/promos/promo1.jpg' %}" alt="" width='150' height='150'>
-        </a>
-      </center>
-    </div>
-</div>
+{% endblock %}
+
+{% block borde_abajo %}
+<div id="content-bottom-border" class="container"></div>
 {% endblock %}
