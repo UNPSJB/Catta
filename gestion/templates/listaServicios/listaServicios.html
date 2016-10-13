@@ -1,0 +1,60 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block barra %}
+    <div id="hornav" class="container no-padding">
+        <div class="row">
+            <div class="col-md-24 no-padding">
+                <div class="visible-lg">
+                    <ul id="hornavmenu" class="navbar-fixed-top">
+                        <li class="navbar-left">
+                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
+                        </li>
+                        <form class="navbar-form navbar-right">
+                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
+                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div id="content">
+        <div class="container background-transparent">
+            <div class="container">
+                <div class="row margin-vert-30">
+                    <!-- Login Box -->
+                    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+                        <form method="post" class="login-page">
+                            {% csrf_token %}
+                            <div class="login-header margin-bottom-30">
+                                <h2>Nuestros Servicios</h2>
+                            </div>
+                            <!-- -->
+
+                                {% for servicio in servicios %}
+                                    {{ servicio.nombre }} |
+                                    {{ servicio.descripcion }} |
+                                    {{ servicio.precio }} |
+                                    {{ servicio.duracion }}
+                                    <br>
+                                    {% for insumo in insumos %}
+                                        <li>
+                                        {{ insumo }}
+                                    {% endfor %}
+                                {% endfor %}
+
+                        </form>
+
+                    </div>
+                    <!-- End Login Box -->
+                </div>
+            </div>
+        </div>
+        </div>
+{% endblock %}
