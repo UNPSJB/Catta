@@ -31,19 +31,20 @@
                     <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 
                         <form method="post" class="login-page">
+                            {% load crispy_forms_tags %}
+
                             {% csrf_token %}
                             <div class="login-header margin-bottom-30">
                                 <h2>Crear un Nuevo Sector</h2>
                             </div>
                             <!-- -->
 
-                                {{ form }}
-
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-violet pull-right" type="submit">Crear Sector</button>
                                 </div>
-                            </div>
+                            </div>-->
+                            {% crispy form %}
                         </form>
 
                     </div>

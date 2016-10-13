@@ -10,7 +10,7 @@ from personas.models import Duenia
 
 class CuentaNuevaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(CuentaNuevaForm, self).__init__(*args, *kwargs)
+        super(CuentaNuevaForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
