@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+
+from personas.forms import CuentaNuevaForm
+
 
 def index(request):
     return render(request, 'principal/index.html', {})
@@ -7,7 +11,14 @@ def login(request):
     return render(request, 'login/login.html', {})
 
 def cuenta(request):
-    return render(request, 'cuentaNueva/cuenta_nueva.html', {})
+    if request.method == "POST":
+        form = CuentaNuevaForm(request.POST)
+        if form.is_valid():
+            # hacer algo aca con los datos de la form
+            print ("asd")
+    else:
+        form = CuentaNuevaForm
+    return render(request, 'cuentaNueva/cuenta_nueva.html', {"form": form})
 
 def empleado(request):
     return render(request, 'empleado/index_empleado.html', {})

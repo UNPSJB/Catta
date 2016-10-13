@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class Rol(models.Model):
 
+class Rol(models.Model):
     class Meta:
         abstract = True
 
@@ -11,13 +11,12 @@ class Cliente(Rol):
     email = models.EmailField(max_length=50, default='test@test.com')
     #historial = []  # LISTA DE TURNOS (HISTORIAL)
 
-
     def sacar_turno(self):
         print ("sacando el turno")
 
 
 class Empleado(Rol):
-    porc_comicion = models.IntegerField()
+    porc_comision = models.IntegerField()
     #agenda = []  # LISTA DE TURNOS (AGENDA)
 
     def alta_cliente(self):
@@ -64,6 +63,7 @@ class Empleado(Rol):
     def listar_historial_cliente(self, cliente):
         pass
 
+
 class Duenia(Rol):
     #agenda = []  # LISTA DE TURNOS (AGENDA)
 
@@ -87,6 +87,7 @@ class Duenia(Rol):
 
     def servicios_mas_solicitados(self):
         pass
+
 
 class Usuario(AbstractUser, Rol):
 
