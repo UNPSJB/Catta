@@ -3,41 +3,50 @@
 {% load staticfiles %}
 
 {% block barra %}
-    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
-        <li class="navbar-left">
-            <a>Vista de Empleados</p>
-        </li>
-        <li class="navbar-right">
-            <span class="fa-cog">Cuenta</span>
-            <ul>
-                <li class="parent">
-                    <a href="#">Información</a>
-                </li>
-                <li class="parent">
-                    <a href="">Configuración</a>
-                </li>
-                <li class="parent">
-                    <a href="">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </li>
-        <!--
-        <li class="navbar-left">
-            <a href="" class="fa-paperclip">Turnos</a>
-        </li>
+   <div id="hornav" class="container no-padding">
+        <div class="row">
+            <div class="col-md-12 no-padding">
+                <div class="visible-lg">
+                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
+                        <li class="navbar-left">
+                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
+                        </li>
+                        <li class="navbar-right">
+                            <span class="fa-user-md">Cuenta</span>
+                            <ul>
+                                <li class="parent">
+                                    <a href="#">Información</a>
+                                </li>
+                                <li class="parent">
+                                    <a href="">Configuración</a>
+                                </li>
+                                <li class="parent">
+                                    <a href="">Cerrar Sesión</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="navbar-left">
+                            <a href="">Servicios</a>
+                        </li>
 
-        <li class="navbar-left">
-            <a href="" class="fa-scissors">Servicios</a>
-        </li>
-        <li class="navbar-left">
-            <a href="" class="fa-user">Clientes</a>
-        </li>
+                        <li class="navbar-left">
+                            <a href="">Clientes</a>
+                        </li>
 
-        <li class="navbar-left">
-            <a href="" class="fa-book">Agenda</a>
-        </li>
-        -->
-    </ul>
+                        <li class="navbar-left">
+                            <a href="">Agenda</a>
+                        </li>
+
+                         <li class="navbar-left">
+                            <a href="">Turnos</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block borde_arriba %}
