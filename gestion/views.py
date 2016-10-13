@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from gestion.forms import SectorForm
 from gestion.forms import InsumoForm
 from gestion.forms import ServicioForm
+from gestion.models import Servicio
+from gestion.models import Insumo
+
 
 def sector(request):
     if request.method == "POST":
@@ -35,3 +38,9 @@ def servicio(request):
     else:
         form = ServicioForm()
     return render(request, 'servicio/servicio.html', {"form": form})
+
+def listaServicios(request):
+    servicios = Servicio.objects.all()
+    insumos = Insumo.objects.all()
+
+    return render(request, 'listaServicios/listaServicios.html', {'servicios':servicios, 'insumos':insumos})
