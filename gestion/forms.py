@@ -40,3 +40,5 @@ class ServicioForm(ModelForm):
         model = Servicio
         fields = {"nombre", "descripcion", "precio", "duracion", "insumos"}
 
+
+

@@ -1,0 +1,65 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block barra %}
+    <div id="hornav" class="container no-padding">
+        <div class="row">
+            <div class="col-md-24 no-padding">
+                <div class="visible-lg">
+                    <ul id="hornavmenu" class="navbar-fixed-top">
+                        <li class="navbar-left">
+                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
+                        </li>
+                        <form class="navbar-form navbar-right">
+                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
+                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block contenido %}
+    <div id="content">
+        <div class="container background-transparent">
+            <div class="container">
+                <div class="row margin-vert-30">
+                    <!-- Login Box -->
+                    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+                        <form method="post" class="login-page">
+                            {% csrf_token %}
+                            <div class="login-header margin-bottom-30">
+                                <h2>Insumo</h2>
+                            </div>
+                            <!-- -->
+
+                                <li> Nombre: {{ insumo.nombre }}
+                                <li> Marca: {{ insumo.marca }}
+                                <li> Contenido Neto: {{ insumo.contenidoNeto }} (gramos)
+                                <li> Stock actual: {{ insumo.stock }}
+
+
+                                <br>
+                                <br>
+                                Actualizar cantidad en stock: <br>
+                                <input name="stockNuevo">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Modificar Stock</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- End Login Box -->
+                </div>
+            </div>
+        </div>
+        </div>
+{% endblock %}

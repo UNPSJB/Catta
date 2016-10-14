@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from gestion.forms import SectorForm
 from gestion.forms import InsumoForm
 from gestion.forms import ServicioForm
@@ -43,4 +43,23 @@ def listaServicios(request):
     servicios = Servicio.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'servicio/listaServicios.html', {'servicios':servicios, 'insumos':insumos})
+
+def listaInsumos(request):
+    insumos = Insumo.objects.all()
+
+    #if request.method == "POST":
+   #     return redirect('/insumo/modificarStockInsumo')
+
+
+    return render(request, 'insumo/listaInsumos.html', {'insumos':insumos})
+
+def modificarStockInsumo(request, id):
+    insumo = get_object_or_404(Insumo, pk=id)
+    if request.method == "POST":
+        insumo.stock = request.POST['stockNuevo']
+        insumo.save()
+        return redirect('/gestion/listaInsumos')
+    else:
+        insumo = get_object_or_404(Insumo, pk=id)
+    return render(request, 'insumo/modificarStockInsumo.html', {'insumo':insumo})
 
