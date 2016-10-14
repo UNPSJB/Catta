@@ -8,7 +8,7 @@ class Rol(models.Model):
 
 
 class Cliente(Rol):
-    email = models.EmailField(max_length=50, default='test@test.com')
+    email = models.EmailField(max_length=100, default='test@test.com')
     #historial = []  # LISTA DE TURNOS (HISTORIAL)
 
     def sacar_turno(self):
