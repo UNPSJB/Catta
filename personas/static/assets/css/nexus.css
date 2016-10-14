@@ -53,7 +53,7 @@ body {
   background-origin: padding-box;
   background-position: 50% 0;
   background-repeat: no-repeat;
-  background-size: cover !important;
+  background-size: cover;
   position: relative;
 }
 .primary-container-background .primary-container {

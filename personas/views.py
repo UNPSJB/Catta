@@ -31,7 +31,17 @@ def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})
 
 def duenio(request):
-    return render(request, 'duenio/index_duenio.html', {})
+    ret = 'duenio/index_duenio.html'
+
+    if request.method == "POST":
+        form = CuentaNuevaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            ret = 'cliente/index_cliente.html'
+    else:
+        form = CuentaNuevaForm
+
+    return render(request, ret, {"form": form})
 
 def cliente(request):
     return render(request, 'cliente/index_cliente.html', {})
