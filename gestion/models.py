@@ -8,12 +8,10 @@ class Sector(models.Model):
         return "{}".format(self.nombre)
 
 class Insumo (models.Model):
-    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     contenidoNeto = models.IntegerField(default=0)
     marca = models.CharField(max_length=100)
     stock = models.IntegerField(default=0)
-
     def __str__(self):
         return "{} {}".format(self.nombre, self.marca)
 
@@ -23,6 +21,8 @@ class Servicio (models.Model):
     precio = models.IntegerField(default=0)
     duracion = models.IntegerField(default=0)
     insumos = models.ManyToManyField(Insumo)
+    sector = models.ForeignKey(Sector, null=True, blank=True)
+    servicios = models.ManyToManyField('self')
 
     def __str__(self):
         return "{}".format(self.nombre)

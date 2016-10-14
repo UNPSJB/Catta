@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from gestion.models import *
 
 
 class Rol(models.Model):
@@ -17,6 +18,7 @@ class Cliente(Rol):
 
 class Empleado(Rol):
     porc_comision = models.IntegerField()
+    sector = models.ForeignKey(Sector, null=True, blank=True)
     #agenda = []  # LISTA DE TURNOS (AGENDA)
 
     def alta_cliente(self):
