@@ -119,18 +119,25 @@
                 <div class="tab-pane fade in" id="clientes">
                     <div id="acordeon-clientes" class="panel-group alternative">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" href="#nuevo-cliente" data-parent="#acordeon-clientes" data-toggle="collapse">
-                                        Nuevo Cliente
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="nuevo-cliente" class="accordion-body collapse in">
-                                <div class="panel-body">
-                                    <p>Formulario de nuevo cliente</p>
+                                <div class="container">
+                                    <div class="row margin-vert-30">
+                                     <!-- Login Box -->
+                                        <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                            <form method="post" class="login-page"> <!--buscaaar-->
+                                                {% load crispy_forms_tags %}
+
+                                                {% csrf_token %}
+                                                <div class="login-header margin-bottom-30">
+                                                    <h2><font color="Purple"><font face="arial"> Crear una cuenta nueva </font></font></h2>
+                                                </div>
+
+                                                {% crispy form %}
+
+                                            </form>
+                                        </div>
+                                        <!-- End Login Box -->
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
