@@ -10,7 +10,7 @@ class Rol(models.Model):
 
 class Cliente(Rol):
     email = models.EmailField(max_length=100, default='test@test.com')
-    #historial = []  # LISTA DE TURNOS (HISTORIAL)
+    # historial = []  # LISTA DE TURNOS (HISTORIAL)
 
     def sacar_turno(self):
         print ("sacando el turno")
@@ -19,7 +19,7 @@ class Cliente(Rol):
 class Empleado(Rol):
     porc_comision = models.IntegerField()
     sector = models.ForeignKey(Sector, null=True, blank=True)
-    #agenda = []  # LISTA DE TURNOS (AGENDA)
+    # agenda = []  # LISTA DE TURNOS (AGENDA)
 
     def alta_cliente(self):
         pass
@@ -33,8 +33,8 @@ class Empleado(Rol):
     def reg_turno_realizado(self):
         pass
 
-    #TODOS LOS EMPLEADOS VAN A PODER MANEJAR TURNOS FIJOS? SINO HAY
-    #QUE CREEAR EL ROL ESTETICISTA
+    # TODOS LOS EMPLEADOS VAN A PODER MANEJAR TURNOS FIJOS? SINO HAY
+    # QUE CREEAR EL ROL ESTETICISTA
 
     def reg_turno_fijo(self):
         pass
@@ -67,7 +67,7 @@ class Empleado(Rol):
 
 
 class Duenia(Rol):
-    #agenda = []  # LISTA DE TURNOS (AGENDA)
+    # agenda = []  # LISTA DE TURNOS (AGENDA)
 
     def alta_sector(self):
         pass

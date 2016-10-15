@@ -1,15 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
 
-from personas.models import Persona
-from personas.forms import CuentaNuevaForm, LoginForm
+from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
+from gestion.forms import SectorForm, InsumoForm, ServicioForm
 
-
-def index(request):
-    return render(request, 'principal/index.html', {})
-
-def login(request):
-    return render(request, 'login/login.html', {})
 
 def cuenta(request):
     ret = 'cuentaNueva/cuenta_nueva.html'
@@ -18,11 +12,12 @@ def cuenta(request):
         form = CuentaNuevaForm(request.POST)
         if form.is_valid():
             form.save()
-            ret = 'cliente/index_cliente.html'
+            return redirect("iniciar_sesion")
     else:
-        form = CuentaNuevaForm
+        form = CuentaNuevaForm()
 
     return render(request, ret, {"form": form})
+
 
 def empleado(request):
     ret = 'empleado/index_empleado.html'
@@ -33,31 +28,72 @@ def empleado(request):
             form.save()
             ret = 'cliente/index_cliente.html'
     else:
-        form = CuentaNuevaForm
+        form = CuentaNuevaForm()
 
     return render(request, ret, {"form": form})
 
-def nuevo_empleado(request):
-    return render(request, 'empleado/nuevo_empleado.html', {})
 
 def duenio(request):
-    ret = 'duenio/index_duenio.html'
-
     if request.method == "POST":
-        form = CuentaNuevaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            ret = 'cliente/index_cliente.html'
-    else:
-        form = CuentaNuevaForm
+        form_clientes = CuentaNuevaForm(request.POST)
+        form_empleados = EmpleadoNuevoForm(request.POST)
+        form_sector = SectorForm(request.POST)
+        form_insumo = InsumoForm(request.POST)
+        form_servicio = ServicioForm(request.POST)
 
-    return render(request, ret, {"form": form})
+        if 'crear_cuenta' in request.POST:
+            if form_clientes.is_valid():
+                form_clientes.save()
+                return redirect('duenio')
+        elif 'crear_empleado' in request.POST:
+            if form_empleados.is_valid():
+                print("antes")
+                form_empleados.save()
+                print("despues")
+                return redirect('duenio')
+        elif 'crear_sector' in request.POST:
+            if form_sector.is_valid():
+                form_sector.save()
+                return redirect('duenio')
+        elif 'crear_insumo' in request.POST:
+            if form_insumo.is_valid():
+                form_insumo.save()
+                return redirect('duenio')
+        elif 'crear_servicio' in request.POST:
+            if form_servicio.is_valid():
+                form_servicio.save()
+                return redirect('duenio')
+    else:
+        form_clientes = CuentaNuevaForm()
+        form_empleados = EmpleadoNuevoForm()
+        form_sector = SectorForm()
+        form_insumo = InsumoForm()
+        form_servicio = ServicioForm()
+
+    return render(request, 'duenio/index_duenio.html',
+                  {'form_clientes' : form_clientes ,
+                   'form_empleados' : form_empleados ,
+                   'form_sector' : form_sector,
+                   'form_insumo' : form_insumo,
+                   'form_servicio' : form_servicio })
+
 
 def cliente(request):
     return render(request, 'cliente/index_cliente.html', {})
 
+
+def nuevo_empleado(request):
+    return render(request, 'empleado/nuevo_empleado.html', {})
+
+
 def nuevo_cliente(request):
     return render(request, 'cliente/nuevo_cliente.html', {})
 
+
 def index_turnos(request):
-	return render(request, 'Turnos/index_turnos.html', {})
+    return render(request, 'Turnos/index_turnos.html', {})
+
+
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('index')

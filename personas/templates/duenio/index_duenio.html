@@ -14,14 +14,14 @@
                         <li class="navbar-right">
                             <span class="fa-user-md">Cuenta</span>
                             <ul>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Información</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Configuración</a>
                                 </li>
-                                <li class="parent">
-                                    <a href="">Cerrar Sesión</a>
+                                <li class="">
+                                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </li>
@@ -29,13 +29,13 @@
                         <li class="navbar-left">
                             <a href="">Empleados</a>
                             <ul>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Empleado1</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Empleado2</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Empleado3</a>
                                 </li>
                             </ul>
@@ -44,13 +44,13 @@
                         <li class="navbar-left">
                             <a href="">Servicios</a>
                             <ul>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Servicios1</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Servicios2</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Servicios3</a>
                                 </li>
                             </ul>
@@ -59,13 +59,13 @@
                         <li class="navbar-left">
                             <a href="">Clientes</a>
                             <ul>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Clientes1</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Clientes2</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Clientes3</a>
                                 </li>
                             </ul>
@@ -74,13 +74,13 @@
                         <li class="navbar-left">
                             <a href="">Agenda</a>
                             <ul>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Agenda1</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Agenda2</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Agenda3</a>
                                 </li>
                             </ul>
@@ -89,13 +89,13 @@
                          <li class="navbar-left">
                             <a href="">Turnos</a>
                             <ul>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Turnos1</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Turnos2</a>
                                 </li>
-                                <li class="parent">
+                                <li class="">
                                     <a href="">Turnos3</a>
                                 </li>
                             </ul>
@@ -132,11 +132,11 @@
                                 <i class="fa fa-scissors"></i>  Crear Servicio</a>
                         </li>
                          <li>
-                            <a href="#servicios" data-toggle="tab">
+                            <a href="#promociones" data-toggle="tab">
                                 <i class="fa fa-scissors"></i> Crear Promoción</a>
                         </li>
                         <li>
-                            <a href="#clientes" data-toggle="tab">
+                            <a href="#empleados" data-toggle="tab">
                                 <i class="fa fa-user"></i>   Crear Empleado</a>
                         </li>
                             <li>
@@ -144,15 +144,15 @@
                                 <i class="fa fa-user"></i>   Crear Cliente</a>
                         </li>
                         <li>
-                            <a href="#turnos" data-toggle="tab">
+                            <a href="#sector" data-toggle="tab">
                                 <i class="fa fa-tags"></i>  Crear Sector</a>
                         </li>
                         <li>
-                            <a href="#turnos" data-toggle="tab">
+                            <a href="#insumo" data-toggle="tab">
                                 <i class="fa fa-shopping-cart"></i>  Crear Insumo</a>
                         </li>
                         <li>
-                            <a href="#agenda" data-toggle="tab">
+                            <a href="#liquidar" data-toggle="tab">
                                 <i class="fa-money"></i>Liquidar Comision</a>
                         </li>
                     </ul>
@@ -163,6 +163,9 @@
         <!-- Contenido -->
         <div class="col-md-9">
             <div class="tab-content">
+                {% load crispy_forms_tags %}
+
+                {% csrf_token %}
                 <div class="tab-pane fade in" id="turnos">
                     <div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
@@ -195,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="clientes">
+                <div class="tab-pane fade in" id="servicios">
                     <div id="acordeon-clientes" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -203,14 +206,11 @@
                                 <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <form method="post" class="login-page"> <!--buscaaar-->
-                                            {% load crispy_forms_tags %}
-
-                                            {% csrf_token %}
                                             <div class="login-header margin-bottom-30">
-                                                <h2><font color="Purple"><font face="arial"> Crear una cuenta nueva </font></font></h2>
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta un servicio </font></font></h2>
                                             </div>
 
-                                            {% crispy form %}
+                                            {% crispy form_servicio %}
 
                                         </form>
                                     </div>
@@ -220,11 +220,102 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="servicios">
-                    <p>Listado de servicios</p>
+                <div class="tab-pane fade in" id="promociones">
+                    <p>Alta de promociones</p>
+                </div>
+                <div class="tab-pane fade in" id="empleados">
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                <!-- Login Box -->
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta un empleado </font></font></h2>
+                                            </div>
+
+                                            {% crispy form_empleados %}
+
+                                        </form>
+                                    </div>
+                                    <!-- End Login Box -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="clientes">
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                <!-- Login Box -->
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta un cliente </font></font></h2>
+                                            </div>
+
+                                            {% crispy form_clientes %}
+
+                                        </form>
+                                    </div>
+                                    <!-- End Login Box -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="sector">
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                <!-- Login Box -->
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta un sector </font></font></h2>
+                                            </div>
+
+                                            {% crispy form_sector %}
+
+                                        </form>
+                                    </div>
+                                    <!-- End Login Box -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="insumo">
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                <!-- Login Box -->
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta un insumo </font></font></h2>
+                                            </div>
+
+                                            {% crispy form_insumo %}
+
+                                        </form>
+                                    </div>
+                                    <!-- End Login Box -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade in" id="agenda">
                     <p>Listado de turnos de la agenda</p>
+                </div>
+                <div class="tab-pane fade in" id="liquidar">
+                    <p>Liquidacion de comisión</p>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@
                                     <a href="">Configuración</a>
                                 </li>
                                 <li class="parent">
-                                    <a href="">Cerrar Sesión</a>
+                                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </li>
@@ -30,7 +30,7 @@
                         </li>
 
                         <li class="navbar-left">
-                            <a href="">Servicios</a>
+                            <a href="{% url 'listaServicios' %}">Servicios</a>
                         </li>
 
                         <li class="navbar-left">
@@ -142,4 +142,3 @@
     </div>
 </div>
 {% endblock %}
-

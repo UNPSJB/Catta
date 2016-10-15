@@ -13,7 +13,7 @@
                         </li>
                         <div class="navbar-right" style="margin-top: 12px;">
                             <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
-                            <a class="btn btn-green" href="{% url 'login' %}">Iniciar Sesión</a>
+                            <a class="btn btn-green" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
                         </div>
                     </ul>
                 </div>
@@ -27,35 +27,16 @@
         <div class="row margin-vert-30">
             <!-- Login Box -->
             <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-                <form class="login-page">
+                <form method="post" class="login-page">
+                    {% load crispy_forms_tags %}
+
+                    {% csrf_token %}
                     <div class="login-header margin-bottom-30">
                         <h2><font color="Purple"><font face="arial"> Iniciar sesion en tu Cuenta </font></font></h2>
                     </div>
-                    <div class="input-group margin-bottom-20">
-                        <span class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                        </span>
-                        <b><input placeholder="Nombre de usuario" class="form-control" type="text"></b>
-                    </div>
-                    <div class="input-group margin-bottom-20">
-                        <span class="input-group-addon">
-                            <i class="fa fa-lock"></i>
-                        </span>
-                        <b><input placeholder="Contraseña" class="form-control" type="password"></b>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label class="checkbox">
-                                <input type="checkbox"><font color="Black"><font face="arial">Mantenerme conectado</font></font></label>
-                        </div>
-                        <div class="col-md-6">
-                            <b><a class="btn btn-violet pull-right" href="{% url 'empleado' %}">Iniciar Sesión</a></b>
-                        </div>
-                    </div>
-                    <hr>
-                    <h4><font color="Black"><font face="arial">Olvidaste tu contraseña?</font></font></h4>
-                    <p>
-                        <a href="#"> <font color="Purple"><font face="arial">Click aquí</font></font></a><font color="Black"><font face="arial"> para resetear la contraseña.</font></font></p>
+
+                    {% crispy form %}
+
                 </form>
             </div>
             <!-- End Login Box -->

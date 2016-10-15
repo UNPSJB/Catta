@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Sector(models.Model):
     nombre = models.CharField(primary_key=True, max_length=100)
     descripcion = models.CharField(max_length=100)
@@ -7,13 +8,16 @@ class Sector(models.Model):
     def __str__(self):
         return "{}".format(self.nombre)
 
+
 class Insumo (models.Model):
     nombre = models.CharField(max_length=100)
     marca = models.CharField(max_length=100)
     contenidoNeto = models.IntegerField(default=0)
     stock = models.IntegerField(default=0)
+
     def __str__(self):
         return "{} {}".format(self.nombre, self.marca)
+
 
 class Servicio (models.Model):
     nombre = models.CharField(primary_key=True, max_length=100)
