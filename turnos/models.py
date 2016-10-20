@@ -1,5 +1,6 @@
 from django.db import models
 from gestion.models import *
+from personas.models import *
 
 class Turno(models.Model):
     fecha = models.DateTimeField()
@@ -9,6 +10,8 @@ class Turno(models.Model):
     fecha_realizacion = models.DateTimeField()
     realizado = models.BooleanField()
     servicios = models.ManyToManyField(Servicio)
+    empleado = models.ForeignKey(Empleado)
+    cliente = models.ForeignKey(Cliente)
 
     SIN_CONFIRMAR = 'SC'
     CONFIRMADO = 'CO'
