@@ -1,34 +1,33 @@
+import datetime
 from django.db import models
 from gestion.models import *
 from personas.models import *
 
+
 class Turno(models.Model):
-    fecha = models.DateTimeField()
-    origen = models.CharField(max_length=50)
-    fecha_creacion= models.DateTimeField()
-    fecha_confirmacion = models.DateTimeField()
-    fecha_realizacion = models.DateTimeField()
-    realizado = models.BooleanField()
+    fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
+    fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
+    fecha_confirmacion = models.DateTimeField(null=True)
+    fecha_realizacion = models.DateTimeField(null=True)
+    fecha_cancelacion = models.DateTimeField(null=True)
     servicios = models.ManyToManyField(Servicio)
     empleado = models.ForeignKey(Empleado)
     cliente = models.ForeignKey(Cliente)
 
-    SIN_CONFIRMAR = 'SC'
-    CONFIRMADO = 'CO'
-    REALIZADO = 'RE'
-    CANCELADO = 'CA'
-    ESTADO_TURNO = (
-        (SIN_CONFIRMAR, 'Sin_Confirmar'),
-        (CONFIRMADO, 'Confirmado'),
-        (REALIZADO, 'Realizado'),
-        (CANCELADO, 'Cancelado'),
-    )
+    def estado (self):
+        if fecha_realizacion is not None:
+            return "Realizado"
+        else:
+            if fecha_confirmacion is not None:
+                return "Confirmado"
+            else:
+                if fecha_cancelacion is not None:
+                    return "Cancelado"
+                else:
+                    return "Sin Confirmar"
 
-    estado = models.CharField(
-        max_length=2,
-        choices=ESTADO_TURNO,
-        default=SIN_CONFIRMAR,
-    )
+    def cancelar_turno(self):
+        fecha_cancelacion = datetime.datetime.now()
 
     def agregar_servicio(self):
         pass
@@ -36,9 +35,10 @@ class Turno(models.Model):
     def eliminar_servicio(self):
         pass
 
+
 class TurnoFijo(Turno):
     #ATRIBUTO DIA (EJEMPLO: Turno fijo los JUEVES) PUEDE SER ENUMERADO
-    turno_siguiente = models.OneToOneField(TurnoFijo)
+    turno_siguiente = models.OneToOneField('self', null=True)
     fecha_fin = models.DateTimeField()
 
     def calcular_turno_siguiente(self):

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'personas',
     'gestion',
+    'turnos',
 ]
 
 MIDDLEWARE = [
