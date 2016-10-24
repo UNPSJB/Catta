@@ -15,6 +15,16 @@ class Turno(models.Model):
     empleado = models.ForeignKey(Empleado)
     cliente = models.ForeignKey(Cliente)
 
+    def __str__(self):
+        return "{} {}", self.fecha, self.get_duracion()
+
+    def get_duracion(self):
+        servicios = self.servicios.all()
+        duracion = self.fecha
+
+        for servicio in servicios:
+            duracion += servicio.duracion * servicio.MODULO
+        return duracion
 
     def estado (self):
         if fecha_realizacion is not None:

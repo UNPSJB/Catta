@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timedelta
 
 
 class Sector(models.Model):
@@ -20,7 +21,7 @@ class Insumo (models.Model):
 
 
 class Servicio (models.Model):
-    MODULO = 15
+    MODULO = timedelta(minutes=15)
     nombre = models.CharField(primary_key=True, max_length=100)
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField(default=0)
