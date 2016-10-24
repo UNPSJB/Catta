@@ -5,14 +5,16 @@ from personas.models import *
 
 
 class Turno(models.Model):
+    TIEMPO_MAX_CONFIRMACION = 48*60 # Tiempo maximo de confirmación expresado en minutos
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
     fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
-    fecha_confirmacion = models.DateTimeField(null=True)
-    fecha_realizacion = models.DateTimeField(null=True)
-    fecha_cancelacion = models.DateTimeField(null=True)
+    fecha_confirmacion = models.DateTimeField(null=True, blank=True)
+    fecha_realizacion = models.DateTimeField(null=True, blank=True)
+    fecha_cancelacion = models.DateTimeField(null=True, blank=True)
     servicios = models.ManyToManyField(Servicio)
     empleado = models.ForeignKey(Empleado)
     cliente = models.ForeignKey(Cliente)
+
 
     def estado (self):
         if fecha_realizacion is not None:

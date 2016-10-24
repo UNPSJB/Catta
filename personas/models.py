@@ -7,6 +7,8 @@ class Rol(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return "{} {}".format(self.persona.nombre, self.persona.apellido)
 
 class Cliente(Rol):
     email = models.EmailField(max_length=100, default='test@test.com')
@@ -106,7 +108,7 @@ class Persona(models.Model):
     localidad = models.CharField(max_length=100, null=True)
     cliente = models.OneToOneField(Cliente, null=True)
     empleado = models.OneToOneField(Empleado, null=True)
-    duenia = models.OneToOneField(Duenia, null=True)
+    duenia = models.OneToOneField(Duenia, null=True, blank=True)
     usuario = models.OneToOneField(Usuario, null=True)
 
     def __str__(self):
