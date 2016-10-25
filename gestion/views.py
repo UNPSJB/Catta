@@ -63,3 +63,6 @@ def modificarStockInsumo(request, id):
         insumo = get_object_or_404(Insumo, pk=id)
     return render(request, 'insumo/modificarStockInsumo.html', {'insumo':insumo})
 
+def detalleServicio(request, id):
+    servicio = get_object_or_404(Servicio, nombre=id)
+    return render(request, 'insumo/modificarStockInsumo.html', {'servicio':servicio})

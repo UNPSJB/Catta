@@ -5,16 +5,71 @@
 {% block barra %}
     <div id="hornav" class="container no-padding">
         <div class="row">
-            <div class="col-md-24 no-padding">
+            <div class="col-md-12 no-padding">
                 <div class="visible-lg">
-                    <ul id="hornavmenu" class="navbar-fixed-top">
+                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
                         <li class="navbar-left">
-                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
+                            <a href="{% url 'duenio' %}" class="fa-home">Principal</a>
                         </li>
-                        <form class="navbar-form navbar-right">
-                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
-                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
-                        </form>
+                        <li class="navbar-right">
+                            <span class="fa-user-md">Cuenta</span>
+                            <ul>
+                                <li class="">
+                                    <a href="">Información</a>
+                                </li>
+                                <li class="">
+                                    <a href="">Configuración</a>
+                                </li>
+                                <li class="">
+                                    <a href="{% url 'index' %}">Cerrar Sesión</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="navbar-left">
+                            <a href="">Empleados</a>
+
+                        </li>
+
+                        <li class="navbar-left">
+                            <a href="{% url 'listaServicios' %}" role="button" onclick="goto_link ('/gestion/listaServicios/')">Servicios</a>
+
+                        </li>
+
+                        <li class="navbar-left">
+                            <a href="">Clientes</a>
+
+                        </li>
+
+
+                        <!-- AGENDA !-->
+                        <li class="navbar-right">
+                            <a href=""><i class="fa fa-calendar-o"></i></a>
+
+                        </li>
+
+                        <li class="navbar-left">
+                            <a href="{% url 'listaInsumos' %}" role="button" onclick="goto_link ('/gestion/listaInsumos/')">Insumos</a>
+                            <!--
+                            <ul>
+                                <li class="">
+                                    <a href="">Agenda1</a>
+                                </li>
+                                <li class="">
+                                    <a href="">Agenda2</a>
+                                </li>
+                                <li class="">
+                                    <a href="">Agenda3</a>
+                                </li>
+                            </ul>
+                            !-->
+                        </li>
+
+                         <li class="navbar-left">
+                            <a href="">Turnos</a>
+
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -42,6 +97,7 @@
                                     {{ servicio.descripcion }} |
                                     {{ servicio.precio }} |
                                     {{ servicio.duracion }}
+
                                     <br>
                                     {% for insumo in insumos %}
                                         <li>

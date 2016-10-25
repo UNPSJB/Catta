@@ -9,7 +9,7 @@
                 <div class="visible-lg">
                     <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
                         <li class="navbar-left">
-                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
+                            <a href="{% url 'duenio' %}" class="fa-home">Principal</a>
                         </li>
                         <li class="navbar-right">
                             <span class="fa-user-md">Cuenta</span>
@@ -21,58 +21,36 @@
                                     <a href="">Configuración</a>
                                 </li>
                                 <li class="">
-                                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+                                    <a href="{% url 'index' %}">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="navbar-left">
                             <a href="">Empleados</a>
-                            <ul>
-                                <li class="">
-                                    <a href="">Empleado1</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Empleado2</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Empleado3</a>
-                                </li>
-                            </ul>
+
                         </li>
 
                         <li class="navbar-left">
-                            <a href="">Servicios</a>
-                            <ul>
-                                <li class="">
-                                    <a href="">Servicios1</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Servicios2</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Servicios3</a>
-                                </li>
-                            </ul>
+                            <a href="{% url 'listaServicios' %}" role="button" onclick="goto_link ('/gestion/listaServicios/')">Servicios</a>
+
                         </li>
 
                         <li class="navbar-left">
                             <a href="">Clientes</a>
-                            <ul>
-                                <li class="">
-                                    <a href="">Clientes1</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Clientes2</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Clientes3</a>
-                                </li>
-                            </ul>
+
+                        </li>
+
+
+                        <!-- AGENDA !-->
+                        <li class="navbar-right">
+                            <a href=""><i class="fa fa-calendar-o"></i></a>
+
                         </li>
 
                         <li class="navbar-left">
-                            <a href="">Agenda</a>
+                            <a href="{% url 'listaInsumos' %}" role="button" onclick="goto_link ('/gestion/listaInsumos/')">Insumos</a>
+                            <!--
                             <ul>
                                 <li class="">
                                     <a href="">Agenda1</a>
@@ -84,21 +62,12 @@
                                     <a href="">Agenda3</a>
                                 </li>
                             </ul>
+                            !-->
                         </li>
 
                          <li class="navbar-left">
                             <a href="">Turnos</a>
-                            <ul>
-                                <li class="">
-                                    <a href="">Turnos1</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Turnos2</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Turnos3</a>
-                                </li>
-                            </ul>
+
                         </li>
 
                     </ul>
@@ -288,7 +257,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <form method="post" class="login-page"> <!--buscaaar-->
                                             <div class="login-header margin-bottom-30">
-                                                <h2><font color="Purple"><font face="arial"> Dar de alta un insumo </font></font></h2>
+                                                <h2><font color="Purple" font face="arial">Dar de alta un insumo</font></h2>
                                             </div>
 
                                             {% crispy form_insumo %}
