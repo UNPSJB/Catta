@@ -2,11 +2,11 @@ import datetime
 from django.db import models
 from gestion.models import *
 from personas.models import *
-
+from datetime import timedelta
 
 class Turno(models.Model):
-    TIEMPO_MAX_CONFIRMACION = 48*60 # Tiempo maximo de confirmación expresado en minutos
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
+   # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
     fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
