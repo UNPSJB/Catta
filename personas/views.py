@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm
+from turnos.forms import TurnoForm
 
 
 def cuenta(request):
@@ -24,14 +25,24 @@ def empleado(request):
     ret = 'empleado/index_empleado.html'
 
     if request.method == "POST":
-        form = CuentaNuevaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            ret = 'cliente/index_cliente.html'
-    else:
-        form = CuentaNuevaForm()
+        form_clientes = CuentaNuevaForm(request.POST)
+        form_turnos = TurnoForm(request.POST)
 
-    return render(request, ret, {"form": form})
+        if 'crear_cuenta' in request.POST:
+            if form_clientes.is_valid():
+                form_clientes.save()
+                return redirect('empleado')
+        elif 'crear_turno' in request.POST:
+            if form_turnos.is_valid():
+                form_turnos.save()
+                return redirect('empleado')
+
+    else:
+            form_clientes = CuentaNuevaForm()
+            form_turnos = TurnoForm()
+
+    return render(request, ret,  {'form_clientes' : form_clientes ,
+                       'form_turnos' : form_turnos})
 
 
 @login_required(login_url='iniciar_sesion')
@@ -44,6 +55,7 @@ def duenio(request):
             form_sector = SectorForm(request.POST)
             form_insumo = InsumoForm(request.POST)
             form_servicio = ServicioForm(request.POST)
+            form_turno = TurnoForm(request.POST)
 
             if 'crear_cuenta' in request.POST:
                 if form_clientes.is_valid():
@@ -67,19 +79,25 @@ def duenio(request):
                 if form_servicio.is_valid():
                     form_servicio.save()
                     return redirect('duenio')
+            elif 'crear_turno' in request.POST:
+                if form_turno.is_valid():
+                    form_turno.save()
+                    return redirect('duenio')
         else:
             form_clientes = CuentaNuevaForm()
             form_empleados = EmpleadoNuevoForm()
             form_sector = SectorForm()
             form_insumo = InsumoForm()
             form_servicio = ServicioForm()
+            form_turno = TurnoForm()
 
         return render(request, 'duenio/index_duenio.html',
                       {'form_clientes' : form_clientes ,
                        'form_empleados' : form_empleados ,
                        'form_sector' : form_sector,
                        'form_insumo' : form_insumo,
-                       'form_servicio' : form_servicio })
+                       'form_servicio' : form_servicio,
+                       'form_turno' : form_turno})
 
 
 def cliente(request):

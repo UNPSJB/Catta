@@ -87,32 +87,25 @@
                 <div class="tab-pane fade in" id="turnos">
                     <div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" href="#nuevo-turno" data-parent="#acordeon-turnos" data-toggle="collapse">
-                                        Nuevo Turno
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="nuevo-turno" class="accordion-body collapse in">
-                                <div class="panel-body">
-                                    <p>Formulario de nuevo turno</p>
+                                <div class="container">
+                                    <div class="row margin-vert-30">
+                                     <!-- Login Box -->
+                                        <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                            <form method="post" class="login-page"> <!--buscaaar-->
+                                                {% load crispy_forms_tags %}
+
+                                                {% csrf_token %}
+                                                <div class="login-header margin-bottom-30">
+                                                    <h2><font color="Purple"><font face="arial"> Crear un Turno nuevo </font></font></h2>
+                                                </div>
+
+                                                {% crispy form %}
+
+                                            </form>
+                                        </div>
+                                        <!-- End Login Box -->
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" href="#turnos-prox" data-parent="#acordeon-turnos" data-toggle="collapse">
-                                        Próximos Turnos
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="turnos-prox" class="accordion-body collapse">
-                                <div class="panel-body">
-                                    <p>Lista de turnos</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
