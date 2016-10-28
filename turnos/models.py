@@ -27,13 +27,13 @@ class Turno(models.Model):
         return duracion
 
     def estado (self):
-        if fecha_realizacion is not None:
+        if self.fecha_realizacion is not None:
             return "Realizado"
         else:
-            if fecha_confirmacion is not None:
+            if self.fecha_confirmacion is not None:
                 return "Confirmado"
             else:
-                if fecha_cancelacion is not None:
+                if self.fecha_cancelacion is not None:
                     return "Cancelado"
                 else:
                     return "Sin Confirmar"

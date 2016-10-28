@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login/$', views.iniciar_sesion, name='iniciar_sesion'),
     url(r'^admin/', admin.site.urls),
+    url(r'^turnos/', include('turnos.urls')),
     url(r'^gestion/', include('gestion.urls')),
     url(r'^personas/', include('personas.urls')),
+
 ]

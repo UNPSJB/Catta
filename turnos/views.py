@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from turnos.forms import TurnoForm
 from turnos.models import Turno
 
+
 def turno(request):
     if request.method == "POST":
         form_turno = TurnoForm(request.POST)
@@ -12,3 +13,6 @@ def turno(request):
     else:
         form_turno = TurnoForm()
     return render(request, 'sector/altaSector.html', {"form": form_turno})
+
+def escupoJSON(request):
+    return render(request, 'escupoJSON/escupoJSON.html', {})
