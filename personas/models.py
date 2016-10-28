@@ -98,6 +98,19 @@ class Usuario(AbstractUser, Rol):
     def login(self):
         pass
 
+    def get_vista(self):
+        try:
+            p = self.persona
+            if p.duenia is not None:
+                return 'duenio'
+            elif p.empleado is not None:
+                return 'empleado'
+            elif p.cliente:
+                return 'cliente'
+        except models.ObjectDoesNotExist:
+            pass
+        return 'admin:index'
+
 
 class Persona(models.Model):
     dni = models.IntegerField(primary_key=True)

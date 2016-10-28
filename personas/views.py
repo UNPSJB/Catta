@@ -45,59 +45,34 @@ def empleado(request):
                        'form_turnos' : form_turnos})
 
 
+# La clave es el nombre del form, el nombre del input
+FORMS_DUENIO = {
+    ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
+    ('form_empleado', 'crear_emplado'): EmpleadoNuevoForm,
+    ('form_sector', 'crear_sector'): SectorForm,
+    ('form_servicio', 'crear_servicio'): ServicioForm,
+    ('form_turno', 'crear_turno'): TurnoForm,
+    ('form_insumo', 'crear_insumo'): InsumoForm
+}
+
 @login_required(login_url='iniciar_sesion')
 def duenio(request):
-    if request.user.is_authenticated:
-        print(request.user.is_authenticated)
-        if request.method == "POST":
-            form_clientes = CuentaNuevaForm(request.POST)
-            form_empleados = EmpleadoNuevoForm(request.POST)
-            form_sector = SectorForm(request.POST)
-            form_insumo = InsumoForm(request.POST)
-            form_servicio = ServicioForm(request.POST)
-            form_turno = TurnoForm(request.POST)
+    usuario = request.user
 
-            if 'crear_cuenta' in request.POST:
-                if form_clientes.is_valid():
-                    form_clientes.save()
-                    return redirect('duenio')
-            elif 'crear_empleado' in request.POST:
-                if form_empleados.is_valid():
-                    print("antes")
-                    form_empleados.save()
-                    print("despues")
-                    return redirect('duenio')
-            elif 'crear_sector' in request.POST:
-                if form_sector.is_valid():
-                    form_sector.save()
-                    return redirect('duenio')
-            elif 'crear_insumo' in request.POST:
-                if form_insumo.is_valid():
-                    form_insumo.save()
-                    return redirect('duenio')
-            elif 'crear_servicio' in request.POST:
-                if form_servicio.is_valid():
-                    form_servicio.save()
-                    return redirect('duenio')
-            elif 'crear_turno' in request.POST:
-                if form_turno.is_valid():
-                    form_turno.save()
-                    return redirect('duenio')
+    contexto = {}
+    for form_name, input_name in FORMS_DUENIO:
+        klassForm = FORMS_DUENIO[(form_name, input_name)]
+        if request.method == "POST" and input_name in request.POST:
+            _form = klassForm(request.POST)
+            if _form.is_valid():
+                _form.save()
+                _form = klassForm()
+                redirect(usuario.get_vista())
+            contexto[form_name] = _form
         else:
-            form_clientes = CuentaNuevaForm()
-            form_empleados = EmpleadoNuevoForm()
-            form_sector = SectorForm()
-            form_insumo = InsumoForm()
-            form_servicio = ServicioForm()
-            form_turno = TurnoForm()
+            contexto[form_name] = klassForm()
 
-        return render(request, 'duenio/index_duenio.html',
-                      {'form_clientes' : form_clientes ,
-                       'form_empleados' : form_empleados ,
-                       'form_sector' : form_sector,
-                       'form_insumo' : form_insumo,
-                       'form_servicio' : form_servicio,
-                       'form_turno' : form_turno})
+    return render(request, 'duenio/index_duenio.html', contexto)
 
 
 def cliente(request):

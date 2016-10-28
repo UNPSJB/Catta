@@ -16,16 +16,7 @@ def iniciar_sesion(request):
         if form.is_valid():
             usuario = form.user_cache
             login(request, form.get_user())
-
-            p = Persona.objects.filter(usuario=usuario).get()
-
-            if p.duenia is not None:
-                return redirect('duenio')
-            else:
-                if p.empleado is not None:
-                    return redirect('empleado')
-                else:
-                    return redirect('cliente')
+            return redirect(usuario.get_vista())
     else:
         form = LoginForm()
     return render(request, 'login/login.html', {'form': form})
