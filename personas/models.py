@@ -49,7 +49,7 @@ class Empleado(Rol):
     def confirmar_turno(self):
         pass
 
-    def modificar_turno(self):
+    def modificar_turno(self, Turno):
         pass
 
     def modificar_stock_insumo(self):

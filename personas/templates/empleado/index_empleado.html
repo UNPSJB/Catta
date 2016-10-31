@@ -73,6 +73,10 @@
                                 <i class="fa fa-calendar-o"></i>  Crear Turno</a>
                         </li>
                         <li>
+                            <a href="#modTurnos" data-toggle="tab">
+                                <i class="fa fa-calendar-o"></i>  modificar Turno</a>
+                        </li>
+                        <li>
                             <a href="#turnos" data-toggle="tab">
                                 <i class="fa fa-calendar"></i>  Listar Turnos</a>
                         </li>
@@ -99,7 +103,7 @@
                                                     <h2><font color="Purple"><font face="arial"> Crear un turno nuevo </font></font></h2>
                                                 </div>
 
-                                                {% crispy form_turnos %}
+                                                {% crispy form_crear_turno %}
 
                                             </form>
                                         </div>
@@ -121,7 +125,29 @@
                                                     <h2><font color="Purple"><font face="arial"> Dar de alta un cliente </font></font></h2>
                                                 </div>
 
-                                                {% crispy form_clientes %}
+                                                {% crispy form_cliente %}
+
+                                            </form>
+                                        </div>
+                                        <!-- End Login Box -->
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="modTurnos">
+                    <div id="acordeon-turnos" class="panel-group alternative">
+                        <div class="panel panel-default">
+                                <div class="container">
+                                    <div class="row margin-vert-30">
+                                     <!-- Login Box -->
+                                        <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                            <form method="post" class="login-page"> <!--buscaaar-->
+                                                <div class="login-header margin-bottom-30">
+                                                    <h2><font color="Purple"><font face="arial"> Modificar Turno </font></font></h2>
+                                                </div>
+
+                                                {% crispy form_modificar_turno %}
 
                                             </form>
                                         </div>
