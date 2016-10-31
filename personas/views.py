@@ -21,28 +21,30 @@ def cuenta(request):
     return render(request, ret, {"form": form})
 
 
+FORMS_EMPLEADO = {
+    ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
+    ('form_turno', 'crear_turno'): TurnoForm
+}
+
+
+@login_required(login_url='iniciar_sesion')
 def empleado(request):
-    ret = 'empleado/index_empleado.html'
+    usuario = request.user
 
-    if request.method == "POST":
-        form_clientes = CuentaNuevaForm(request.POST)
-        form_turnos = TurnoForm(request.POST)
+    contexto = {}
+    for form_name, input_name in FORMS_EMPLEADO:
+        klassForm = FORMS_EMPLEADO[(form_name, input_name)]
+        if request.method == "POST" and input_name in request.POST:
+            _form = klassForm(request.POST)
+            if _form.is_valid():
+                _form.save()
+                _form = klassForm()
+                redirect(usuario.get_vista())
+            contexto[form_name] = _form
+        else:
+            contexto[form_name] = klassForm()
 
-        if 'crear_cuenta' in request.POST:
-            if form_clientes.is_valid():
-                form_clientes.save()
-                return redirect('empleado')
-        elif 'crear_turno' in request.POST:
-            if form_turnos.is_valid():
-                form_turnos.save()
-                return redirect('empleado')
-
-    else:
-            form_clientes = CuentaNuevaForm()
-            form_turnos = TurnoForm()
-
-    return render(request, ret,  {'form_clientes' : form_clientes ,
-                       'form_turnos' : form_turnos})
+    return render(request, 'empleado/index_empleado.html', contexto)
 
 
 # La clave es el nombre del form, el nombre del input
@@ -54,6 +56,7 @@ FORMS_DUENIO = {
     ('form_turno', 'crear_turno'): TurnoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm
 }
+
 
 @login_required(login_url='iniciar_sesion')
 def duenio(request):
@@ -81,14 +84,6 @@ def cliente(request):
 
 def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})
-
-
-def nuevo_cliente(request):
-    return render(request, 'cliente/nuevo_cliente.html', {})
-
-
-def index_turnos(request):
-    return render(request, 'Turnos/index_turnos.html', {})
 
 
 def cerrar_sesion(request):

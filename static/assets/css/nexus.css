@@ -45,7 +45,6 @@ body {
 }
 #body-bg {
   width: 100%;
-  height: 100%;
   background-attachment: fixed;
   background-clip: border-box;
   background-color: rgba(0, 0, 0, 0);
