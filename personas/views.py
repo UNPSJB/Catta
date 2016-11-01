@@ -7,6 +7,7 @@ from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 
 from personas.models import Persona, Cliente, Empleado
+from gestion.models import Servicio, Insumo
 
 
 def cuenta(request):
@@ -31,6 +32,7 @@ FORMS_EMPLEADO = {
 }
 
 
+@login_required(login_url='iniciar_sesion')
 def empleado(request):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
@@ -92,15 +94,28 @@ def duenio_lista_clientes(request):
     clientes = Persona.objects.filter(cliente__isnull=False)
     return render(request, 'duenio/clientes_duenio.html', {'clientes': clientes})
 
+def duenio_lista_servicios(request):
+    servicios = Servicio.objects.all()
+    insumos = Insumo.objects.all()
+    return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
+                                                            'insumos': insumos})
 
+def duenio_lista_insumos(request):
+    insumos = Insumo.objects.all()
+    return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
+
+
+@login_required(login_url='iniciar_sesion')
 def cliente(request):
     return render(request, 'cliente/index_cliente.html', {})
 
 
+# TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})
 
 
+# TODO Ver si esto es realmente necesario.
 def index_turnos(request):
     return render(request, 'Turnos/index_turnos.html', {})
 

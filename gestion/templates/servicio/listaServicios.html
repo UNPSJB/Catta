@@ -1,106 +1,43 @@
-{% extends "base/base.html" %}
+<div class="container background-white" style="opacity: 0.95;">
+    <div class="row margin-vert-30">
+        <div class="col-md-12">
+            {% csrf_token %}
 
-{% load staticfiles %}
+            <h2><font color="Purple"><font face="arial"><center> Listado de Servicios </center></font></font></h2>
 
-{% block barra %}
-    <div id="hornav" class="container no-padding">
-        <div class="row">
-            <div class="col-md-12 no-padding">
-                <div class="visible-lg">
-                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
-                        <li class="navbar-left">
-                            <a href="{% url 'duenio' %}" class="fa-home">Principal</a>
-                        </li>
-                        <li class="navbar-right">
-                            <span class="fa-user-md">Cuenta</span>
-                            <ul>
-                                <li class="">
-                                    <a href="">Información</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Configuración</a>
-                                </li>
-                                <li class="">
-                                    <a href="{% url 'index' %}">Cerrar Sesión</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="navbar-left">
-                            <a href="">Empleados</a>
-                        </li>
-                        <li class="navbar-left">
-                            <a href="{% url 'listaServicios' %}" role="button" onclick="goto_link ('/gestion/listaServicios/')">Servicios</a>
-                        </li>
-                        <li class="navbar-left">
-                            <a href="">Clientes</a>
-                        </li>
-                        <!-- AGENDA !-->
-                        <li class="navbar-right">
-                            <a href=""><i class="fa fa-calendar-o"></i></a>
-                        </li>
-                        <li class="navbar-left">
-                            <a href="{% url 'listaInsumos' %}" role="button" onclick="goto_link ('/gestion/listaInsumos/')">Insumos</a>
-                        </li>
-                         <li class="navbar-left">
-                            <a href="">Turnos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <table class="table table-striped">
+                <thread>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Duración</th>
+                        <th>Insumos</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for servicio in servicios %}
+                    <tr>
+                        <td>{{servicio.nombre}}</td>
+                        <td>{{servicio.descripcion}}</td>
+                        <td>{{servicio.precio}}</td>
+                        <td>{{servicio.duracion}}</td>
+                        <td>{% if servicio.promocion %}
+                                {% for s in servicio.servicios.all %}
+                                    {% for insumo in s.insumos.all %}
+                                        {{insumo}}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% else %}
+                                {% for insumo in servicio.insumos.all %}
+                                    {{insumo}}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-{% endblock %}
-
-{% block borde_arriba %}
-<div id="content-top-border" class="container"></div>
-{% endblock %}
-
-{% block contenido %}
-            <div class="container background-white" style="opacity: 0.95;">
-                <div class="row margin-vert-30">
-                    <div class="col-md-12">
-                        {% csrf_token %}
-
-                        <h2><font color="Purple"><font face="arial"><center> Listado de Servicios </center></font></font></h2>
-
-                        <table class="table table-striped">
-                            <thread>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Precio</th>
-                                    <th>Duración</th>
-                                    <th>Insumos</th>
-                                </tr>
-                            </thread>
-                            <tbody>
-                                {% for servicio in servicios %}
-                                <tr>
-                                    <td>{{servicio.nombre}}</td>
-                                    <td>{{servicio.descripcion}}</td>
-                                    <td>{{servicio.precio}}</td>
-                                    <td>{{servicio.duracion}}</td>
-                                    <td>{% if servicio.promocion %}
-                                            {% for s in servicio.servicios.all %}
-                                                {% for insumo in s.insumos.all %}
-                                                    {{insumo}}
-                                                {% endfor %}
-                                            {% endfor %}
-                                        {% else %}
-                                            {% for insumo in servicio.insumos.all %}
-                                                {{insumo}}
-                                            {% endfor %}
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-{% endblock %}
-
-{% block borde_abajo %}
-<div id="content-bottom-border" class="container"></div>
-{% endblock %}
+</div>
