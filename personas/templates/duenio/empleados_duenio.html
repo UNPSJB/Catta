@@ -1,0 +1,38 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+                {% csrf_token %}
+
+                <h2><font color="Purple"><font face="arial"><center> Listado de Empleados </center></font></font></h2>
+
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Direccion</th>
+                            <th>Teléfono</th>
+                            <th>Localidad</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for empleado in empleados %}
+                        <tr>
+                            <td>{{empleado.nombre}}</td>
+                            <td>{{empleado.apellido}}</td>
+                            <td>{{empleado.direccion}}</td>
+                            <td>{{empleado.telefono}}</td>
+                            <td>{{empleado.localidad}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

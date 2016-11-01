@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <body>
 
-<h2>JSON Object Creation in JavaScript</h2>
+    <h2>JSON Object Creation in JavaScript</h2>
 
-<p id="demo"></p>
+    <p id="demo"></p>
 
-<script>
-var text = '{"name":"John Johnson","street":"Oslo West 16","phone":"555 1234567"}';
+    <script>
+        var text = '{"name":"John Johnson","street":"Oslo West 16","phone":"555 1234567"}';
 
-var obj = JSON.parse(text);
+        var obj = JSON.parse(text);
 
-document.getElementById("demo").innerHTML =
-obj.name + "<br>" +
-obj.street + "<br>" +
-obj.phone;
-</script>
+        document.getElementById("demo").innerHTML = obj.name + "<br>" +
+                                                    obj.street + "<br>" +
+                                                    obj.phone;
+    </script>
 
-</body>
+    </body>
 </html>

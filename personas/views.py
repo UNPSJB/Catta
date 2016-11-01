@@ -6,6 +6,8 @@ from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 
+from personas.models import Persona, Cliente, Empleado
+
 
 def cuenta(request):
     usuario = request.user
@@ -79,6 +81,16 @@ def duenio(request):
             contexto[form_name] = klassForm()
 
     return render(request, ret, contexto)
+
+
+def duenio_lista_empleados(request):
+    empleados = Persona.objects.filter(empleado__isnull=False)
+    return render(request, 'duenio/empleados_duenio.html', {'empleados': empleados})
+
+
+def duenio_lista_clientes(request):
+    clientes = Persona.objects.filter(cliente__isnull=False)
+    return render(request, 'duenio/clientes_duenio.html', {'clientes': clientes})
 
 
 def cliente(request):

@@ -1,0 +1,38 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+                {% csrf_token %}
+
+                <h2><font color="Purple"><font face="arial"><center> Listado de Clientes </center></font></font></h2>
+
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Direccion</th>
+                            <th>Teléfono</th>
+                            <th>Localidad</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for cliente in clientes %}
+                        <tr>
+                            <td>{{cliente.nombre}}</td>
+                            <td>{{cliente.apellido}}</td>
+                            <td>{{cliente.direccion}}</td>
+                            <td>{{cliente.telefono}}</td>
+                            <td>{{cliente.localidad}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
