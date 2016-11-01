@@ -55,7 +55,7 @@ def empleado(request):
 # La clave es el nombre del form, el nombre del input
 FORMS_DUENIO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
-    ('form_empleado', 'crear_emplado'): EmpleadoNuevoForm,
+    ('form_empleado', 'crear_empleado'): EmpleadoNuevoForm,
     ('form_sector', 'crear_sector'): SectorForm,
     ('form_servicio', 'crear_servicio'): ServicioForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
