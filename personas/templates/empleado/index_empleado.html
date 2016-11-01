@@ -1,57 +1,6 @@
-{% extends "base/base.html" %}
+{% extends "empleado/base_empleado.html" %}
 
 {% load staticfiles %}
-
-{% block barra %}
-   <div id="hornav" class="container no-padding">
-        <div class="row">
-            <div class="col-md-12 no-padding">
-                <div class="visible-lg">
-                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
-                        <li class="navbar-left">
-                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
-                        </li>
-                        <li class="navbar-right">
-                            <span class="fa-user-md">Cuenta</span>
-                            <ul>
-                                <li class="parent">
-                                    <a href="#">Información</a>
-                                </li>
-                                <li class="parent">
-                                    <a href="">Configuración</a>
-                                </li>
-                                <li class="parent">
-                                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="navbar-left">
-                            <a href="">Servicios</a>
-                        </li>
-
-                        <li class="navbar-left">
-                            <a href="">Clientes</a>
-                        </li>
-
-                        <li class="navbar-left">
-                            <a href="">Agenda</a>
-                        </li>
-
-                         <li class="navbar-left">
-                            <a href="">Turnos</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block borde_arriba %}
-<div id="content-top-border" class="container"></div>
-{% endblock %}
 
 {% block contenido %}
 <div class="container background-white" style="opacity: 0.95">
@@ -70,15 +19,11 @@
                         </li>
                         <li>
                             <a href="#turnos" data-toggle="tab">
-                                <i class="fa fa-calendar-o"></i>  Crear Turno</a>
+                                <i class="fa fa-calendar-o"></i>   Crear Turno</a>
                         </li>
                         <li>
                             <a href="#modTurnos" data-toggle="tab">
-                                <i class="fa fa-calendar-o"></i>  modificar Turno</a>
-                        </li>
-                        <li>
-                            <a href="#turnos" data-toggle="tab">
-                                <i class="fa fa-calendar"></i>  Listar Turnos</a>
+                                <i class="fa fa-calendar-o"></i>   Modificar Turno</a>
                         </li>
                     </ul>
                 </div>
@@ -91,88 +36,62 @@
                 {% load crispy_forms_tags %}
 
                 {% csrf_token %}
-                <div class="tab-pane fade in" id="turnos">
-                    <div id="acordeon-turnos" class="panel-group alternative">
-                        <div class="panel panel-default">
-                                <div class="container">
-                                    <div class="row margin-vert-30">
-                                     <!-- Login Box -->
-                                        <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                            <form method="post" class="login-page"> <!--buscaaar-->
-                                                <div class="login-header margin-bottom-30">
-                                                    <h2><font color="Purple"><font face="arial"> Crear un turno nuevo </font></font></h2>
-                                                </div>
-
-                                                {% crispy form_crear_turno %}
-
-                                            </form>
-                                        </div>
-                                        <!-- End Login Box -->
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="tab-pane fade in" id="clientes">
                     <div id="acordeon-clientes" class="panel-group alternative">
                         <div class="panel panel-default">
-                                <div class="container">
-                                    <div class="row margin-vert-30">
-                                     <!-- Login Box -->
-                                        <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                            <form method="post" class="login-page"> <!--buscaaar-->
-                                                <div class="login-header margin-bottom-30">
-                                                    <h2><font color="Purple"><font face="arial"> Dar de alta un cliente </font></font></h2>
-                                                </div>
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page">
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta un cliente </font></font></h2>
+                                            </div>
 
-                                                {% crispy form_cliente %}
+                                            {% crispy form_cliente %}
 
-                                            </form>
-                                        </div>
-                                        <!-- End Login Box -->
+                                        </form>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="turnos">
+                    <div id="acordeon-turnos" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <h2><font color="Purple"><font face="arial"> Crear un turno nuevo </font></font></h2>
+                                        {% crispy form_crear_turno %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="modTurnos">
                     <div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
-                                <div class="container">
-                                    <div class="row margin-vert-30">
-                                     <!-- Login Box -->
-                                        <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                            <form method="post" class="login-page"> <!--buscaaar-->
-                                                <div class="login-header margin-bottom-30">
-                                                    <h2><font color="Purple"><font face="arial"> Modificar Turno </font></font></h2>
-                                                </div>
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page">
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Modificar Turno </font></font></h2>
+                                            </div>
 
-                                                {% crispy form_modificar_turno %}
+                                            {% crispy form_modificar_turno %}
 
-                                            </form>
-                                        </div>
-                                        <!-- End Login Box -->
+                                        </form>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="servicios">
-                    <p>Listado de servicios</p>
-                </div>
-                <div class="tab-pane fade in" id="agenda">
-                    <p>Listado de turnos de la agenda</p>
-                </div>
             </div>
         </div>
-        <!-- Fin contenido -->
     </div>
 </div>
-{% endblock %}
-
-{% block borde_abajo %}
-<div id="content-bottom-border" class="container"></div>
-{% endblock %}
-
-{% block footer %}
 {% endblock %}

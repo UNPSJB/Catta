@@ -104,6 +104,19 @@ def duenio_lista_insumos(request):
     insumos = Insumo.objects.all()
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
 
+def empleado_lista_clientes(request):
+    clientes = Persona.objects.filter(cliente__isnull=False)
+    return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes})
+
+def empleado_lista_servicios(request):
+    servicios = Servicio.objects.all()
+    insumos = Insumo.objects.all()
+    return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
+                                                            'insumos': insumos})
+
+def empleado_lista_insumos(request):
+    insumos = Insumo.objects.all()
+    return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos})
 
 @login_required(login_url='iniciar_sesion')
 def cliente(request):
