@@ -25,51 +25,25 @@
                                 </li>
                             </ul>
                         </li>
-
                         <li class="navbar-left">
                             <a href="">Empleados</a>
-
                         </li>
-
                         <li class="navbar-left">
                             <a href="{% url 'listaServicios' %}" role="button" onclick="goto_link ('/gestion/listaServicios/')">Servicios</a>
-
                         </li>
-
                         <li class="navbar-left">
                             <a href="{% url 'listaServicios' %}" role="button" onclick="goto_link ('/gestion/listaServicios/')">Clientes</a>
-
                         </li>
-
-
                         <!-- AGENDA !-->
                         <li class="navbar-right">
                             <a href=""><i class="fa fa-calendar-o"></i></a>
-
                         </li>
-
                         <li class="navbar-left">
                             <a href="{% url 'listaInsumos' %}" role="button" onclick="goto_link ('/gestion/listaInsumos/')">Insumos</a>
-                            <!--
-                            <ul>
-                                <li class="">
-                                    <a href="">Agenda1</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Agenda2</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Agenda3</a>
-                                </li>
-                            </ul>
-                            !-->
                         </li>
-
-                         <li class="navbar-left">
+                        <li class="navbar-left">
                             <a href="">Turnos</a>
-
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -140,11 +114,10 @@
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
-                                <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                            {% crispy form_crear_turno %}
+                                        <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
+                                        {% crispy form_crear_turno %}
                                     </div>
-                                    <!-- End Login Box -->
                                 </div>
                             </div>
                         </div>
@@ -155,43 +128,50 @@
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
-                                <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple"><font face="arial"> Dar de alta un servicio </font></font></h2>
                                             </div>
-
                                             {% crispy form_servicio %}
-
                                         </form>
                                     </div>
-                                    <!-- End Login Box -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="promociones">
-                    <p>Alta de promociones</p>
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <form method="post" class="login-page">
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Dar de alta una promocion </font></font></h2>
+                                            </div>
+                                            {% crispy form_promo %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade in" id="empleados">
                     <div id="acordeon-clientes" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
-                                <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple"><font face="arial"> Dar de alta un empleado </font></font></h2>
                                             </div>
-
                                             {% crispy form_empleado %}
-
                                         </form>
                                     </div>
-                                    <!-- End Login Box -->
                                 </div>
                             </div>
                         </div>
@@ -202,18 +182,14 @@
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
-                                <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple"><font face="arial"> Dar de alta un cliente </font></font></h2>
                                             </div>
-
                                             {% crispy form_cliente %}
-
                                         </form>
                                     </div>
-                                    <!-- End Login Box -->
                                 </div>
                             </div>
                         </div>
@@ -224,18 +200,14 @@
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
-                                <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple"><font face="arial"> Dar de alta un sector </font></font></h2>
                                             </div>
-
                                             {% crispy form_sector %}
-
                                         </form>
                                     </div>
-                                    <!-- End Login Box -->
                                 </div>
                             </div>
                         </div>
@@ -246,18 +218,14 @@
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
-                                <!-- Login Box -->
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page"> <!--buscaaar-->
+                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple" font face="arial">Dar de alta un insumo</font></h2>
                                             </div>
-
                                             {% crispy form_insumo %}
-
                                         </form>
                                     </div>
-                                    <!-- End Login Box -->
                                 </div>
                             </div>
                         </div>

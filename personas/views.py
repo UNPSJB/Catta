@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
 from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
-from gestion.forms import SectorForm, InsumoForm, ServicioForm
+from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 
 
@@ -53,6 +53,7 @@ FORMS_DUENIO = {
     ('form_servicio', 'crear_servicio'): ServicioForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_promo', 'crear_promo'): PromoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm
 }
 

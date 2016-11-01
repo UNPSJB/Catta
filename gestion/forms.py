@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 from gestion.models import Sector
 from gestion.models import Insumo
 from gestion.models import Servicio
@@ -41,4 +42,30 @@ class ServicioForm(ModelForm):
         fields = {"nombre", "descripcion", "precio", "duracion", "insumos"}
 
 
+class PromoForm(ModelForm):
+    servicios = forms.ModelMultipleChoiceField(queryset=Servicio.basicos.all())
 
+    def __init__(self, *args, **kwargs):
+        super(PromoForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('crear_promo', 'Crear Promo'))
+
+        """
+        La duracion de la promo y los insumos se sacan de los servicios que la componen.
+        """
+
+    def save(self, commit=True):
+        datos = super(PromoForm, self).save()
+
+        datos.promocion = True
+
+        if commit:
+            datos.save()
+
+        return datos
+
+    class Meta:
+        model = Servicio
+        fields = ("nombre", "descripcion", "precio", "sector", "servicios")
