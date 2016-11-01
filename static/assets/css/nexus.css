@@ -39,9 +39,7 @@ body {
   font-family: PT Sans;
   font-size: 14px;
   font-weight: 300;
-  background-color: #706769;
-  background-color: #C11B3C;
-  color: #656565;
+ 
 }
 #body-bg {
   width: 100%;
@@ -613,6 +611,9 @@ h1.logo-text a {
 }
 .background-gray-lighter {
   background-color: #ebebeb;
+}
+.background-catta {
+  background-color: #a00b2b;
 }
 /* Button Colors */
 .btn {

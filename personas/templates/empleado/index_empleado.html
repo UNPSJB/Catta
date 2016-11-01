@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block contenido %}
-<div class="container background-white" style="opacity: 0.95">
+<div class="container background-catta" style="opacity: 0.85">
     <div class="row margin-vert-30">
         <!-- Menú izquierdo -->
         <div class="col-md-3">
@@ -37,9 +37,9 @@
 
                 {% csrf_token %}
                 <div class="tab-pane fade in" id="clientes">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                    <!--<div id="acordeon-clientes" class="panel-group alternative">
                         <div class="panel panel-default">
-                            <div class="container">
+                            <div class="container"> -->
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <form method="post" class="login-page">
@@ -52,28 +52,32 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            <!--</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="tab-pane fade in" id="turnos">
-                    <div id="acordeon-turnos" class="panel-group alternative">
+                    <!--<div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
-                            <div class="container">
+                            <div class="container"> -->
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <h2><font color="Purple"><font face="arial"> Crear un turno nuevo </font></font></h2>
-                                        {% crispy form_crear_turno %}
+                                        <form method="post" class="login-page">
+                                            <div class="login-header margin-bottom-30">
+                                                <h2><font color="Purple"><font face="arial"> Crear un turno nuevo </font></font></h2>
+                                            </div>
+                                            {% crispy form_crear_turno %}
+                                        </form>
                                     </div>
                                 </div>
-                            </div>
+                            <!--</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="tab-pane fade in" id="modTurnos">
-                    <div id="acordeon-turnos" class="panel-group alternative">
+                    <!--<div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
-                            <div class="container">
+                            <div class="container"> -->
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <form method="post" class="login-page">
@@ -86,9 +90,9 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            <!--</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
