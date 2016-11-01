@@ -7,7 +7,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, Button, Fieldset
 
 
-# Create the form class.
 class SectorForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(SectorForm, self).__init__(*args, **kwargs)
@@ -40,7 +39,6 @@ class ServicioForm(ModelForm):
     class Meta:
         model = Servicio
         fields = {"nombre", "descripcion", "precio", "duracion", "insumos"}
-
 
 class PromoForm(ModelForm):
     servicios = forms.ModelMultipleChoiceField(queryset=Servicio.basicos.all())

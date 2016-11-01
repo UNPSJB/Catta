@@ -10,19 +10,13 @@ from personas.models import Persona, Cliente, Empleado
 from gestion.models import Servicio, Insumo
 
 
-def cuenta(request):
-    usuario = request.user
-    ret = 'cuentaNueva/cuenta_nueva.html'
-
-    if request.method == "POST":
-        form = CuentaNuevaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(usuario.get_vista())
-    else:
-        form = CuentaNuevaForm()
-
-    return render(request, ret, {"form": form})
+"""
+Vistas del Cliente.
+"""
+@login_required(login_url='iniciar_sesion')
+def cliente(request):
+    promociones = Servicio.promociones.all()
+    return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
 
 
 FORMS_EMPLEADO = {
@@ -31,7 +25,9 @@ FORMS_EMPLEADO = {
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
 }
 
-
+"""
+Vistas del Empleado.
+"""
 @login_required(login_url='iniciar_sesion')
 def empleado(request):
     usuario = request.user
@@ -51,7 +47,23 @@ def empleado(request):
 
     return render(request, ret, contexto)
 
+def empleado_lista_clientes(request):
+    clientes = Persona.objects.filter(cliente__isnull=False)
+    return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes})
 
+def empleado_lista_servicios(request):
+    servicios = Servicio.objects.all()
+    insumos = Insumo.objects.all()
+    return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
+                                                            'insumos': insumos})
+
+def empleado_lista_insumos(request):
+    insumos = Insumo.objects.all()
+    return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos})
+
+"""
+Vistas de la Dueña
+"""
 # La clave es el nombre del form, el nombre del input
 FORMS_DUENIO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
@@ -104,25 +116,6 @@ def duenio_lista_insumos(request):
     insumos = Insumo.objects.all()
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
 
-def empleado_lista_clientes(request):
-    clientes = Persona.objects.filter(cliente__isnull=False)
-    return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes})
-
-def empleado_lista_servicios(request):
-    servicios = Servicio.objects.all()
-    insumos = Insumo.objects.all()
-    return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
-                                                            'insumos': insumos})
-
-def empleado_lista_insumos(request):
-    insumos = Insumo.objects.all()
-    return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos})
-
-@login_required(login_url='iniciar_sesion')
-def cliente(request):
-    return render(request, 'cliente/index_cliente.html', {})
-
-
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})
@@ -132,6 +125,22 @@ def nuevo_empleado(request):
 def index_turnos(request):
     return render(request, 'Turnos/index_turnos.html', {})
 
+"""
+Vistas del control de cuentas.
+"""
+def cuenta(request):
+    usuario = request.user
+    ret = 'cuentaNueva/cuenta_nueva.html'
+
+    if request.method == "POST":
+        form = CuentaNuevaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(usuario.get_vista())
+    else:
+        form = CuentaNuevaForm()
+
+    return render(request, ret, {"form": form})
 
 def cerrar_sesion(request):
     logout(request)
