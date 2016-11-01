@@ -21,11 +21,14 @@ def cuenta(request):
 
     return render(request, ret, {"form": form})
 
+
 FORMS_EMPLEADO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
 }
+
+
 def empleado(request):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
@@ -57,6 +60,7 @@ FORMS_DUENIO = {
     ('form_insumo', 'crear_insumo'): InsumoForm
 }
 
+
 @login_required(login_url='iniciar_sesion')
 def duenio(request):
     usuario = request.user
@@ -83,10 +87,6 @@ def cliente(request):
 
 def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})
-
-
-def nuevo_cliente(request):
-    return render(request, 'cliente/nuevo_cliente.html', {})
 
 
 def index_turnos(request):

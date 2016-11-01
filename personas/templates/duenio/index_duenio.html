@@ -21,7 +21,7 @@
                                     <a href="">Configuración</a>
                                 </li>
                                 <li class="">
-                                    <a href="{% url 'index' %}">Cerrar Sesión</a>
+                                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </li>
@@ -129,12 +129,8 @@
                             <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page">
-                                            <div class="login-header margin-bottom-30">
-                                                <h2><font color="Purple"><font face="arial"> Dar de alta un servicio </font></font></h2>
-                                            </div>
-                                            {% crispy form_servicio %}
-                                        </form>
+                                        <h2><font color="Purple"><font face="arial"><center> Dar de alta un servicio </center></font></font></h2>
+                                        {% crispy form_servicio %}
                                     </div>
                                 </div>
                             </div>
