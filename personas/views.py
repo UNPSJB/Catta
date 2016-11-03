@@ -116,6 +116,9 @@ def duenio_lista_insumos(request):
     insumos = Insumo.objects.all()
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
 
+def duenio_lista_turnos(request):
+    return render(request, 'duenio/turnos_duenio.html', {})
+
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})

@@ -4,12 +4,33 @@ from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 from turnos.models import Turno
 from django.core import serializers
 
+import json
+import datetime
+
 def escupoJSON(request):
     turnos = Turno.objects.all()
     data = serializers.serialize("json", turnos)
     return JsonResponse({
         "turnos": data
     })
+
+def manejador_fechas(fecha):
+    if isinstance(fecha, datetime.datetime):
+        return fecha.isoformat()
+    raise TypeError("Tipo desconocido")
+
+def devuelvo_turnos(request):
+    turnos = Turno.objects.all()
+
+    datos = []
+    for turno in turnos:
+        datos_turno = {
+            'id': turno.pk,
+            'start': turno.fecha,
+            'end': turno.get_duracion()
+        }
+        datos.append(datos_turno)
+    return JsonResponse({'turnos': json.dumps(datos, default=manejador_fechas)})
 
 def modificar_turno(request, id_turno=1):
     turno = Turno.objects.get(id=id_turno)
