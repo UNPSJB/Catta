@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, ConfirmarTurnoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 from turnos.models import Turno
 from django.core import serializers
 
