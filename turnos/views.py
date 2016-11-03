@@ -32,6 +32,7 @@ def devuelvo_turnos(request):
         datos.append(datos_turno)
     return JsonResponse({'turnos': json.dumps(datos, default=manejador_fechas)})
 
+#deberia usarse en algun momento
 def modificar_turno(request, id_turno=1):
     turno = Turno.objects.get(id=id_turno)
     #usuario = request.user()

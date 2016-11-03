@@ -18,6 +18,7 @@ class CuentaNuevaForm(forms.ModelForm):
     passwd = forms.CharField(max_length=30, widget=forms.PasswordInput, label='Contraseña')
     passwd_1 = forms.CharField(max_length=30, widget=forms.PasswordInput, label='Repita la contraseña')
 
+
     def __init__(self, *args, **kwargs):
         super(CuentaNuevaForm, self).__init__(*args, **kwargs)
 

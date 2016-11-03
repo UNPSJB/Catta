@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm
 
 from personas.models import Persona, Cliente, Empleado
 from gestion.models import Servicio, Insumo
@@ -24,6 +24,7 @@ FORMS_EMPLEADO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
 }
 
 """
@@ -47,9 +48,12 @@ def empleado(request):
                 redirect(usuario.get_vista())
             contexto[form_name] = _form
         else:
-            if request.method == "GET" and input_name == 'modificar_turno':
+            if input_name == 'modificar_turno':
                 _form = ModificarTurnoForm(instance=turno)
                 print('entre')
+                contexto[form_name] = _form
+            if input_name == 'registrar_turno_realizado':
+                _form = RegistrarTurnoRealizadoForm(instance=turno)
                 contexto[form_name] = _form
             else:
                 contexto[form_name] = klassForm()

@@ -35,3 +35,14 @@ class ConfirmarTurnoForm(ModelForm):
     class Meta:
         model = Turno
         fields={"fecha_confirmacion"}
+
+
+class RegistrarTurnoRealizadoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RegistrarTurnoRealizadoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('confirmar_turno','Confirmar Turno'))
+    class Meta:
+        model = Turno
+        fields = {"fecha", "empleado", "servicios","cliente"}
