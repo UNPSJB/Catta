@@ -34,6 +34,9 @@ def empleado(request):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
     contexto = {}
+    turno = Turno.objects.get(id=1)
+    print(turno.fecha)
+    print('caca')
     for form_name, input_name in FORMS_EMPLEADO:
         klassForm = FORMS_EMPLEADO[(form_name, input_name)]
         if request.method == "POST" and input_name in request.POST:
@@ -44,7 +47,12 @@ def empleado(request):
                 redirect(usuario.get_vista())
             contexto[form_name] = _form
         else:
-            contexto[form_name] = klassForm()
+            if input_name == 'modificar_turno' and input_name in request.GET:
+                _form = ModificarTurnoForm(instance=turno)
+                print('entre')
+                contexto[form_name] = _form
+            else:
+                contexto[form_name] = klassForm()
 
     return render(request, ret, contexto)
 
