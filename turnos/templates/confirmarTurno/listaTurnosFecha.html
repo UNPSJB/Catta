@@ -1,55 +1,24 @@
-{% extends "base/base.html" %}
+<div class="container background-white" style="opacity: 0.95;">
+    <div class="row margin-vert-30">
+        <div class="col-md-12">
+            {% csrf_token %}
 
-{% load staticfiles %}
+            <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
 
-{% block barra %}
-    <div id="hornav" class="container no-padding">
-        <div class="row">
-            <div class="col-md-24 no-padding">
-                <div class="visible-lg">
-                    <ul id="hornavmenu" class="navbar-fixed-top">
-                        <li class="navbar-left">
-                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
-                        </li>
-                        <form class="navbar-form navbar-right">
-                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
-                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
-                        </form>
-                    </ul>
-                </div>
-            </div>
+            <table class="table table-striped">
+                <thread>
+                    <tr>
+                        <th>Fecha</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for turno in turnos %}
+                    <tr>
+                        <td>{{turno.fecha}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-{% endblock %}
-
-{% block contenido %}
-    <div id="content">
-        <div class="container background-transparent">
-            <div class="container">
-                <div class="row margin-vert-30">
-                    <!-- Login Box -->
-                    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-
-                        <form method="post" class="login-page">
-                            {% csrf_token %}
-                            <div class="login-header margin-bottom-30">
-                                <h2>Turnos Catta</h2>
-                            </div>
-                            <!-- -->
-
-                                {% for turno in turnos %}
-                                    <li>
-                                    {{ turno.fecha }}
-                                        <a href="{% url 'confirmarTurno' turno.id %}" class="btn btn-default btn-lg"role="button" onclick="goto_link ('turnos/confirmarTurno/1/2/')">+</a>
-
-                                {% endfor %}
-
-                        </form>
-
-                    </div>
-                    <!-- End Login Box -->
-                </div>
-            </div>
-        </div>
-        </div>
-{% endblock %}
+</div>
