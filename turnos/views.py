@@ -46,4 +46,4 @@ def modificar_turno(request, id_turno=1):
         form = ModificarTurnoForm(instance=turno)
         print('entre')
 
-    return render(request, ret, {"form": form})
+    return render(request, ret, {'form':form})

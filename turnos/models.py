@@ -16,7 +16,7 @@ class Turno(models.Model):
     cliente = models.ForeignKey(Cliente)
 
     def __str__(self):
-        return "{} {}", self.fecha, self.get_duracion()
+        return "{}".format(self.fecha)
 
     def get_duracion(self):
         servicios = self.servicios.all()
