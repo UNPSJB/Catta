@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponse
-from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 from turnos.models import Turno
 from django.core import serializers
@@ -27,18 +26,3 @@ def modificar_turno(request, id_turno=1):
         print('entre')
 
     return render(request, ret, {"form": form})
-
-# TODO pruebas con fullcalendar
-def eventosCalendario(request):
-    turnos = Turno.objects.all()
-
-    json_lista = []
-    for turno in turnos:
-        id_t = turno.id
-        title = turno.cliente.nombre
-        start = turno.fecha
-
-        json_item = {'id': id_t, 'title':title, 'start': start}
-        json_lista.append(json_item)
-
-    return HttpResponse(json.dumps(json_lista), content_type='turnos/json')
