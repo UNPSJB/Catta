@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, ConfirmarTurnoForm
 from turnos.models import Turno
 from django.core import serializers
 
@@ -47,3 +47,16 @@ def modificar_turno(request, id_turno=1):
         print('entre')
 
     return render(request, ret, {"form": form})
+
+def confirmar_turno(request, id_turno=1):
+    turno = Turno.objects.get(id=id_turno)
+    #usuario = request.user()
+    ret = "turnos/confirmarTurno.html"
+    if request.method == "POST":
+        form = ConfirmarTurnoForm(request.POST, instance=turno)
+        if form.is_valid:
+            form.save()
+            return redirect('/turnos/confirmarTurno')
+    else:
+        form = ConfirmarTurnoForm(instance=turno)
+    return render(request, ret, {"turno": turno})
