@@ -1,3 +1,4 @@
+
 import datetime
 from django.db import models
 from gestion.models import *
@@ -39,7 +40,10 @@ class Turno(models.Model):
                     return "Sin Confirmar"
 
     def cancelar_turno(self):
-        fecha_cancelacion = datetime.datetime.now()
+        self.fecha_cancelacion = datetime.datetime.now()
+
+    def confirmar_turno(self):
+        self.fecha_confirmacion = datetime.datetime.now()
 
     def agregar_servicio(self):
         pass
