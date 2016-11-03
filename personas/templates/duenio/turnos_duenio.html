@@ -10,6 +10,31 @@
 
                 <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
 
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
+                            <th>Estado</th>
+                            <th>Servicios</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for turno in turnos %}
+                        <tr>
+                            <td>{{turno.fecha}}</td>
+                            <td>{{turno.cliente}}</td>
+                            <td>{{turno.empleado}}</td>
+                            <td>{{turno.estado}}</td>
+                            <td>
+                                {% for servicio in turno.servicios.all %}
+                                    {{servicio}}
+                                {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
             </div>
         </div>

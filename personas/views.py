@@ -8,6 +8,7 @@ from turnos.forms import CrearTurnoForm, ModificarTurnoForm
 
 from personas.models import Persona, Cliente, Empleado
 from gestion.models import Servicio, Insumo
+from turnos.models import Turno
 
 
 """
@@ -117,7 +118,8 @@ def duenio_lista_insumos(request):
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
 
 def duenio_lista_turnos(request):
-    return render(request, 'duenio/turnos_duenio.html', {})
+    turnos = Turno.objects.all().order_by('fecha')
+    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
 
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
