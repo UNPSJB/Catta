@@ -24,7 +24,7 @@ class ModificarTurnoForm(ModelForm):
         self.helper.add_input(Submit('modificar_turno','Modificar Turno'))
     class Meta:
         model = Turno
-        fields={"fecha","empleado","servicios"}
+        fields = {"fecha", "empleado", "servicios"}
 
 class ConfirmarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -42,7 +42,9 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         super(RegistrarTurnoRealizadoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('confirmar_turno','Confirmar Turno'))
+        self.helper.add_input(Submit('registrar_turno','Registrar Turno'))
     class Meta:
         model = Turno
         fields = {"fecha", "empleado", "servicios","cliente"}
+
+

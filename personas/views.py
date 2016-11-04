@@ -50,7 +50,6 @@ def empleado(request):
         else:
             if input_name == 'modificar_turno':
                 _form = ModificarTurnoForm(instance=turno)
-                print('entre')
                 contexto[form_name] = _form
             if input_name == 'registrar_turno_realizado':
                 _form = RegistrarTurnoRealizadoForm(instance=turno)
