@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 
 from personas.models import Persona
+from gestion.models import Servicio
 
 from catta.forms import LoginForm
 
 
 def index(request):
-    return render(request, 'principal/index.html', {})
+    promociones = Servicio.promociones.all()
+    return render(request, 'principal/index.html', {'promociones': promociones})
 
 
 def iniciar_sesion(request):

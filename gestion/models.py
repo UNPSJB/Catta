@@ -33,12 +33,20 @@ class Servicio(models.Model):
     MODULO = timedelta(minutes=15)
     nombre = models.CharField(primary_key=True, max_length=100)
     descripcion = models.CharField(max_length=100)
-    precio = models.PositiveIntegerField(default=0)
-    duracion = models.PositiveIntegerField(default=0)
+    precio = models.IntegerField(default=0)
+    duracion = models.IntegerField(default=0)
     insumos = models.ManyToManyField(Insumo)
     sector = models.ForeignKey(Sector, null=True, blank=True)
     servicios = models.ManyToManyField('self')
     promocion = models.BooleanField(default=False)
+    imagen = models.ImageField(upload_to='img_promocion',
+                               null=True, blank=True,
+                               width_field="alto_imagen",
+                               height_field="ancho_imagen")
+
+    alto_imagen = models.IntegerField(default=0)
+    ancho_imagen = models.IntegerField(default=0)
+
     objects = models.Manager()
     basicos = ServicioManager(False)
     promociones = ServicioManager(True)

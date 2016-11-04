@@ -93,72 +93,20 @@
             </div>
             <div class="col-md-10">
                 <ul class="portfolio-group">
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInLeft">
-                                <img alt="promo1" src="{% static 'assets/img/promos/promo1.jpg' %}" width='397' height='210'>
-                                <figcaption>
-                                    <h3> SHOCK + BOTOX </h3>
-                                    <span> $550 </span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInRight">
-                                <img alt="promo2" src="{% static 'assets/img/promos/promo2.jpg' %}" width='397' height='210'>
-                                <figcaption>
-                                    <h3> DESGASTE + BUCLES </h3>
-                                    <span>$500</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInLeft">
-                                <img alt="promo3" src="{% static 'assets/img/promos/promo3.jpg' %}" width='397' height='210'>
-                                <figcaption>
-                                    <h3> LIMPIEZA FACIAL </h3>
-                                    <span> $250 </span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInRight">
-                                <img alt="promo4" src="{% static 'assets/img/promos/promo4.jpg' %}" width='397' height='210'>
-                                <figcaption>
-                                    <h3> ALISADO + NUTRICION </h3>
-                                    <span> $600 </span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInLeft">
-                                <img alt="promo5" src="{% static 'assets/img/promos/promo5.jpg' %}" width='397' height='210'>
-                                <figcaption>
-                                    <h3> PEDI YA TU PEINADO !!!</h3>
-                                    <span> DE $250 A $350</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
-                    <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                        <a href="#">
-                            <figure class="animate fadeInRight">
-                                <img alt="promo6" src="{% static 'assets/img/promos/promo6.jpg' %}" width='397' height='210'>
-                                <figcaption>
-                                    <h3> DEJA TUS MANOS BELLAS </h3>
-                                    <span> $200 </span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                    </li>
+                    {% for promocion in promociones %}
+                        <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
+                            <a href="#">
+                                <figure class="animate fadeInLeft">
+                                    <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
+                                    <figcaption>
+                                        <h1> {{promocion.nombre}} </h1>
+                                        <h5> {{promocion.descripcion}} </h5>
+                                        <span> ${{promocion.precio}} </span>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="col-md-1">

@@ -72,9 +72,10 @@
                         <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
                             <a href="#">
                                 <figure class="animate fadeInLeft">
-                                    <img alt="promo1" src="{% static 'assets/img/promos/promo1.jpg' %}" width='397' height='210'>
+                                    <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
                                     <figcaption>
-                                        <h3> {{promocion.nombre}} </h3>
+                                        <h1> {{promocion.nombre}} </h1>
+                                        <h5> {{promocion.descripcion}} </h5>
                                         <span> ${{promocion.precio}} </span>
                                     </figcaption>
                                 </figure>

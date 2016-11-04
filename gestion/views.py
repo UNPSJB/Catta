@@ -30,11 +30,12 @@ def insumo(request):
 
 def servicio(request):
     if request.method == "POST":
-        form = ServicioForm(request.POST)
+        form = ServicioForm(request.POST, request.FILES or None)
         if form.is_valid():
-            form.save()
+            servicio = form.save()
+            servicio.save()
+            # messages.success(request, "Servicio creado")  # from django.contrib import messages
             return redirect('/duenio')
-        print(form)
     else:
         form = ServicioForm()
     return render(request, 'servicio/altaServicio.html', {"form": form})

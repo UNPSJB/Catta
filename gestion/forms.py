@@ -66,4 +66,4 @@ class PromoForm(ModelForm):
 
     class Meta:
         model = Servicio
-        fields = ("nombre", "descripcion", "precio", "sector", "servicios")
+        fields = ("nombre", "descripcion", "precio", "sector", "servicios", "imagen")

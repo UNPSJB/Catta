@@ -97,7 +97,7 @@ def duenio(request):
     for form_name, input_name in FORMS_DUENIO:
         klassForm = FORMS_DUENIO[(form_name, input_name)]
         if request.method == "POST" and input_name in request.POST:
-            _form = klassForm(request.POST)
+            _form = klassForm(request.POST or None, request.FILES or None)
             if _form.is_valid():
                 _form.save()
                 _form = klassForm()
