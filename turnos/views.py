@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, ConfirmarTurnoForm
 from turnos.models import Turno
@@ -32,7 +32,6 @@ def devuelvo_turnos(request):
         datos.append(datos_turno)
     return JsonResponse({'turnos': json.dumps(datos, default=manejador_fechas)})
 
-#deberia usarse en algun momento
 def modificar_turno(request, id_turno=1):
     turno = Turno.objects.get(id=id_turno)
     #usuario = request.user()
@@ -49,15 +48,20 @@ def modificar_turno(request, id_turno=1):
 
     return render(request, ret, {"form": form})
 
-def confirmar_turno(request, id_turno=1):
-    turno = Turno.objects.get(id=id_turno)
-    #usuario = request.user()
-    ret = "turnos/confirmarTurno.html"
+def listaTurnosFecha(request):
+    turnos = Turno.objects.all()
+    return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos':turnos})
+
+def confirmar_turno(request, id):
+    turno = get_object_or_404(Turno, pk=id)
     if request.method == "POST":
-        form = ConfirmarTurnoForm(request.POST, instance=turno)
-        if form.is_valid:
-            form.save()
-            return redirect('/turnos/confirmarTurno')
+        turno.confirmar_turno()
+        turno.save()
+        return redirect('/Turnos/confirmar_turno.html')
     else:
-        form = ConfirmarTurnoForm(instance=turno)
-    return render(request, ret, {"turno": turno})
+        turno = get_object_or_404(Turno, pk=id)
+    return render(request, 'Turnos/confirmar_turno.html', {'turno':turno})
+
+def calendario(request):
+    turnos = Turno.objects.all()
+    return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
