@@ -20,17 +20,18 @@ def manejador_fechas(fecha):
     raise TypeError("Tipo desconocido")
 
 def devuelvo_turnos(request):
-    turnos = Turno.objects.all()
-
+    print(request.GET["start"])
+    print(request.GET["end"])
     datos = []
-    for turno in turnos:
+    for turno in Turno.objects.all():
         datos_turno = {
             'id': turno.pk,
             'start': turno.fecha,
-            'end': turno.get_duracion()
+            'end': turno.get_duracion(),
+            'title': str(turno)
         }
         datos.append(datos_turno)
-    return JsonResponse({'turnos': json.dumps(datos, default=manejador_fechas)})
+    return JsonResponse({'turnos': datos})
 
 def modificar_turno(request, id_turno=1):
     turno = Turno.objects.get(id=id_turno)
