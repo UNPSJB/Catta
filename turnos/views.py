@@ -61,3 +61,7 @@ def confirmar_turno(request, id):
     else:
         turno = get_object_or_404(Turno, pk=id)
     return render(request, 'Turnos/confirmar_turno.html', {'turno':turno})
+
+def calendario(request):
+    turnos = Turno.objects.all()
+    return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})

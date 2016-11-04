@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^devuelvo_turnos/$', views.devuelvo_turnos, name='devuelvo_turnos'),
     url(r'^listaTurnosFecha/$', views.listaTurnosFecha, name='listaTurnosFecha'),
     url(r'^confirmar_turno/$', views.confirmar_turno, name='confirmar_turno'),
+    url(r'^calendario/$', views.calendario, name='calendario')
 ]
