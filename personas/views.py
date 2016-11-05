@@ -68,8 +68,10 @@ def empleado_lista_clientes(request):
 
 def empleado_lista_servicios(request):
     servicios = ServicioBasico.objects.all()
+    promociones = Promocion.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
+                                                                'promociones': promociones,
                                                                 'insumos': insumos})
 
 
@@ -125,8 +127,10 @@ def duenio_lista_clientes(request):
 
 def duenio_lista_servicios(request):
     servicios = ServicioBasico.objects.all()
+    promociones = Promocion.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
+                                                            'promociones': promociones,
                                                             'insumos': insumos})
 
 

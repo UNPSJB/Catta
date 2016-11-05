@@ -22,22 +22,41 @@
                         <td>{{servicio.descripcion}}</td>
                         <td>{{servicio.precio}}</td>
                         <td>{{servicio.duracion}}</td>
-                        <td>{% if servicio.promocion %}
-                                {% for s in servicio.servicios.all %}
-                                    {% for insumo in s.insumos.all %}
-                                        {{insumo}}
-                                    {% endfor %}
-                                {% endfor %}
-                            {% else %}
-                                {% for insumo in servicio.insumos.all %}
-                                    {{insumo}}
-                                {% endfor %}
-                            {% endif %}
+                        <td>{% for insumo in servicio.insumos.all %}
+                                {{insumo}}
+                            {% endfor %}
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+
+            <h2><font color="Purple"><font face="arial"><center> Listado de Promociones </center></font></font></h2>
+
+            <table class="table table-striped">
+                <thread>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Servicios</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for promocion in promociones %}
+                    <tr>
+                        <td>{{promocion.nombre}}</td>
+                        <td>{{promocion.descripcion}}</td>
+                        <td>{{promocion.precio}}</td>
+                        <td>{% for servicio in promocion.servicios.all %}
+                                {{servicio}}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>
