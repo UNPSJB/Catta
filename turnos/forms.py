@@ -1,8 +1,7 @@
 from django.forms import ModelForm
 from turnos.models import Turno
-from turnos.models import TurnoFijo
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Div, Button, Fieldset
+from crispy_forms.layout import Submit
 
 
 class CrearTurnoForm(ModelForm):
@@ -11,9 +10,10 @@ class CrearTurnoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
+
     class Meta:
         model = Turno
-        fields={"fecha","empleado","servicios","cliente"}
+        fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}
 
 
 class ModificarTurnoForm(ModelForm):
@@ -22,9 +22,10 @@ class ModificarTurnoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('modificar_turno','Modificar Turno'))
+
     class Meta:
         model = Turno
-        fields={"fecha","empleado","servicios"}
+        fields = {"fecha", "empleado", "servicios", "promociones"}
 
 
 class ConfirmarTurnoForm(ModelForm):
@@ -33,9 +34,10 @@ class ConfirmarTurnoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('confirmar_turno','Confirmar Turno'))
+
     class Meta:
         model = Turno
-        fields={"fecha_confirmacion"}
+        fields = {"fecha_confirmacion"}
 
 
 class RegistrarTurnoRealizadoForm(ModelForm):
@@ -43,7 +45,8 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         super(RegistrarTurnoRealizadoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('registrar_turno','Registrar Turno'))
+        self.helper.add_input(Submit('registrar_turno', 'Registrar Turno'))
+
     class Meta:
         model = Turno
-        fields = {"fecha", "empleado", "servicios","cliente"}
+        fields = {"fecha", "empleado", "cliente", "servicios", "promociones"}

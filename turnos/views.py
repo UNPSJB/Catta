@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, ConfirmarTurnoForm
+from turnos.forms import ModificarTurnoForm
 from turnos.models import Turno
 from django.core import serializers
 
-import json
 import datetime
+
 
 def escupoJSON(request):
     turnos = Turno.objects.all()
@@ -14,10 +14,12 @@ def escupoJSON(request):
         "turnos": data
     })
 
+
 def manejador_fechas(fecha):
     if isinstance(fecha, datetime.datetime):
         return fecha.isoformat()
     raise TypeError("Tipo desconocido")
+
 
 def devuelvo_turnos(request):
     print(request.GET["start"])
@@ -33,9 +35,10 @@ def devuelvo_turnos(request):
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})
 
+
 def modificar_turno(request, id_turno=1):
     turno = Turno.objects.get(id=id_turno)
-    #usuario = request.user()
+    # usuario = request.user()
     ret = "empleado/index_empleado.html"
     if request.method == "POST":
         print('cagamos')
@@ -49,9 +52,11 @@ def modificar_turno(request, id_turno=1):
 
     return render(request, ret, {"form": form})
 
+
 def listaTurnosFecha(request):
     turnos = Turno.objects.all()
     return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos':turnos})
+
 
 def confirmar_turno(request, id):
     turno = get_object_or_404(Turno, pk=id)
@@ -62,6 +67,7 @@ def confirmar_turno(request, id):
     else:
         turno = get_object_or_404(Turno, pk=id)
     return render(request, 'Turnos/confirmar_turno.html', {'turno':turno})
+
 
 def calendario(request):
     turnos = Turno.objects.all()

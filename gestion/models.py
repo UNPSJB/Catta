@@ -20,36 +20,41 @@ class Insumo (models.Model):
         return "{} {}".format(self.nombre, self.marca)
 
 
-class ServicioManager(models.Manager):
-    def __init__(self, promocion):
-        super().__init__()
-        self.promocion = promocion
-
-    def get_queryset(self):
-        return super().get_queryset().filter(promocion=self.promocion)
-
-
 class Servicio(models.Model):
+    class Meta:
+        abstract = True
+
     MODULO = timedelta(minutes=15)
     nombre = models.CharField(primary_key=True, max_length=100)
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField(default=0)
+    sector = models.ForeignKey(Sector, null=True, blank=True)
+
+    def __str__(self):
+        return "{}".format(self.nombre)
+
+
+class ServicioBasico(Servicio):
     duracion = models.IntegerField(default=0)
     insumos = models.ManyToManyField(Insumo)
-    sector = models.ForeignKey(Sector, null=True, blank=True)
-    servicios = models.ManyToManyField('self')
-    promocion = models.BooleanField(default=False)
+
+    def get_duracion(self):
+        return self.duracion * self.MODULO
+
+
+class Promocion(Servicio):
+    servicios = models.ManyToManyField(ServicioBasico)
     imagen = models.ImageField(upload_to='img_promocion',
                                null=True, blank=True,
                                width_field="alto_imagen",
                                height_field="ancho_imagen")
-
     alto_imagen = models.IntegerField(default=0)
     ancho_imagen = models.IntegerField(default=0)
 
-    objects = models.Manager()
-    basicos = ServicioManager(False)
-    promociones = ServicioManager(True)
+    def get_duracion(self):
+        duracion = 0
 
-    def __str__(self):
-        return "{}".format(self.nombre)
+        for servicio in self.servicios:
+            duracion += servicio.get_duracion()
+
+        return duracion

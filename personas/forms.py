@@ -1,9 +1,7 @@
 from django import forms
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Div, Button, Fieldset, Field
+from crispy_forms.layout import Submit
 
 from personas.models import Persona, Usuario, Cliente, Empleado
 from gestion.models import Sector
@@ -17,7 +15,6 @@ class CuentaNuevaForm(forms.ModelForm):
     usuario = forms.CharField(max_length=30)
     passwd = forms.CharField(max_length=30, widget=forms.PasswordInput, label='Contraseña')
     passwd_1 = forms.CharField(max_length=30, widget=forms.PasswordInput, label='Repita la contraseña')
-
 
     def __init__(self, *args, **kwargs):
         super(CuentaNuevaForm, self).__init__(*args, **kwargs)

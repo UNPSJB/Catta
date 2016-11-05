@@ -2,20 +2,26 @@ from django.contrib import admin
 from personas.models import *
 from django.contrib.auth.models import Permission
 
+
 class UsuarioAdmin(admin.ModelAdmin):
-	pass
+    pass
+
 
 class PersonaAdmin(admin.ModelAdmin):
-	pass
+    pass
+
 
 class EmpleadoAdmin(admin.ModelAdmin):
-	pass
+    pass
+
 
 class DueniaAdmin(admin.ModelAdmin):
-	pass
+    pass
+
 
 class ClienteAdmin(admin.ModelAdmin):
-	pass
+    pass
+
 
 admin.site.register(Usuario,UsuarioAdmin)
 admin.site.register(Persona,PersonaAdmin)

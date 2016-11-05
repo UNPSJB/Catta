@@ -6,8 +6,8 @@ from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm
 
-from personas.models import Persona, Cliente, Empleado
-from gestion.models import Servicio, Insumo
+from personas.models import Persona
+from gestion.models import ServicioBasico, Promocion, Insumo
 from turnos.models import Turno
 
 
@@ -16,7 +16,7 @@ Vistas del Cliente.
 """
 @login_required(login_url='iniciar_sesion')
 def cliente(request):
-    promociones = Servicio.promociones.all()
+    promociones = Promocion.objects.all()
     return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
 
 
@@ -26,6 +26,7 @@ FORMS_EMPLEADO = {
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_registrar_turno_realizado', 'registrar_turno_realizado'):RegistrarTurnoRealizadoForm
 }
+
 
 """
 Vistas del Empleado.
@@ -59,15 +60,18 @@ def empleado(request):
 
     return render(request, ret, contexto)
 
+
 def empleado_lista_clientes(request):
     clientes = Persona.objects.filter(cliente__isnull=False)
     return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes})
 
+
 def empleado_lista_servicios(request):
-    servicios = Servicio.objects.all()
+    servicios = ServicioBasico.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
-                                                            'insumos': insumos})
+                                                                'insumos': insumos})
+
 
 def empleado_lista_insumos(request):
     insumos = Insumo.objects.all()
@@ -118,19 +122,23 @@ def duenio_lista_clientes(request):
     clientes = Persona.objects.filter(cliente__isnull=False)
     return render(request, 'duenio/clientes_duenio.html', {'clientes': clientes})
 
+
 def duenio_lista_servicios(request):
-    servicios = Servicio.objects.all()
+    servicios = ServicioBasico.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
                                                             'insumos': insumos})
+
 
 def duenio_lista_insumos(request):
     insumos = Insumo.objects.all()
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
 
+
 def duenio_lista_turnos(request):
     turnos = Turno.objects.all().order_by('fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
+
 
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
@@ -157,6 +165,7 @@ def cuenta(request):
         form = CuentaNuevaForm()
 
     return render(request, ret, {"form": form})
+
 
 def cerrar_sesion(request):
     logout(request)

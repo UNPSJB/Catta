@@ -1,4 +1,3 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
 from gestion.models import *
 
@@ -10,12 +9,13 @@ class Rol(models.Model):
     def __str__(self):
         return "{} {}".format(self.persona.nombre, self.persona.apellido)
 
+
 class Cliente(Rol):
     email = models.EmailField(max_length=100, default='test@test.com')
     # historial = []  # LISTA DE TURNOS (HISTORIAL)
 
     def sacar_turno(self):
-        print ("sacando el turno")
+        print("sacando el turno")
 
 
 class Empleado(Rol):
@@ -119,10 +119,10 @@ class Persona(models.Model):
     direccion = models.CharField(max_length=100, null=True)
     telefono = models.IntegerField(null=True)
     localidad = models.CharField(max_length=100, null=True)
-    cliente = models.OneToOneField(Cliente, null=True)
-    empleado = models.OneToOneField(Empleado, null=True)
+    cliente = models.OneToOneField(Cliente, null=True, blank=True)
+    empleado = models.OneToOneField(Empleado, null=True, blank=True)
     duenia = models.OneToOneField(Duenia, null=True, blank=True)
-    usuario = models.OneToOneField(Usuario, null=True)
+    usuario = models.OneToOneField(Usuario, null=True, blank=True)
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)

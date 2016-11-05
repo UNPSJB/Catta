@@ -76,14 +76,11 @@
 
 
 {% block scripts %}
-<script src="{% static 'assets/js/lib/moment.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/fullcalendar.min.js' %}"></script>
+<script src="{% static 'assets/js/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/fullcalendar.js' %}"></script>
 <script>
     var URL_EVENTOS = "{% url "devuelvo_turnos" %}";
 </script>
 <script src="{% static 'assets/js/calendario.js' %}"></script>
 {% endblock %}
-
-
-

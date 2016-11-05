@@ -1,18 +1,17 @@
 
 import datetime
-from django.db import models
-from gestion.models import *
 from personas.models import *
-from datetime import timedelta
+
 
 class Turno(models.Model):
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
-   # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
+    # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
     fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
     fecha_cancelacion = models.DateTimeField(null=True, blank=True)
-    servicios = models.ManyToManyField(Servicio)
+    servicios = models.ManyToManyField(ServicioBasico)
+    promociones = models.ManyToManyField(Promocion)
     empleado = models.ForeignKey(Empleado)
     cliente = models.ForeignKey(Cliente)
 
@@ -24,10 +23,10 @@ class Turno(models.Model):
         duracion = self.fecha
 
         for servicio in servicios:
-            duracion += servicio.duracion * servicio.MODULO
+            duracion += servicio.get_duracion()
         return duracion
 
-    def estado (self):
+    def estado(self):
         if self.fecha_realizacion is not None:
             return "Realizado"
         else:
@@ -53,7 +52,7 @@ class Turno(models.Model):
 
 
 class TurnoFijo(Turno):
-    #ATRIBUTO DIA (EJEMPLO: Turno fijo los JUEVES) PUEDE SER ENUMERADO
+    # ATRIBUTO DIA (EJEMPLO: Turno fijo los JUEVES) PUEDE SER ENUMERADO
     turno_siguiente = models.OneToOneField('self', null=True)
     fecha_fin = models.DateTimeField()
 
