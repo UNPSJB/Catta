@@ -1,21 +1,27 @@
-$(function(){
-    /* initialize the calendar
-    -----------------------------------------------------------------*/
-    $('#calendar').fullCalendar({
+$(document).ready(function() {
 
+    $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,listYear'
+            right: 'month,agendaWeek,agendaDay,listWeek'
         },
+        defaultDate: '2016-09-12',
+        navLinks: true, // can click day/week names to navigate views
 
-        displayEventTime: false, // don't show the time column in list view
+        weekNumbers: true,
+        weekNumbersWithinDays: true,
+        weekNumberCalculation: 'ISO',
+
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {
             // opens events in a popup window
             console.log(event);
             return false;
         },
+
         events: function(start, end, timezone, callback) {
             $.ajax({
                 url: URL_EVENTOS,
@@ -37,6 +43,7 @@ $(function(){
         loading: function(bool) {
             $('#loading').toggle(bool);
         }
+
 
     });
 

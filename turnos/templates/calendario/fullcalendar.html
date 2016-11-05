@@ -8,76 +8,30 @@
 <style>
 
 	body {
-		margin-top: 40px;
-		text-align: center;
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		font-size: 14px;
-		font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
-		background-color: #DDDDDD;
-		}
-
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-		}
-
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		text-align: left;
-		}
-
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #3366CC;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		}
-
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
+	}
 
 	#calendar {
-/* 		float: right; */
-        margin: 0 auto;
-		width: 900px;
-		background-color: #FFFFFF;
-		  border-radius: 6px;
-        box-shadow: 0 1px 2px #C3C3C3;
-		}
+		max-width: 900px;
+		margin: 0 auto;
+	}
 
 </style>
 {% endblock %}
 
 {% block contenido %}
-<div id='wrap'>
 
 <div id='calendar'></div>
 
-<div style='clear:both'></div>
-</div>
 {% endblock %}
 
 
 {% block scripts %}
-<script src="{% static 'assets/js/moment.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/fullcalendar.js' %}"></script>
 <script>
     var URL_EVENTOS = "{% url "devuelvo_turnos" %}";
