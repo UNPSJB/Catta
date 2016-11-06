@@ -27,10 +27,8 @@ $(document).ready(function() {
                 url: URL_EVENTOS,
                 dataType: 'json',
                 data: {
-                    // our hypothetical feed requires UNIX timestamps
                     start: start.unix(),
                     end: end.unix(),
-                    empleado: 1
                 },
                 success: function(data) {
                     callback(data.turnos);

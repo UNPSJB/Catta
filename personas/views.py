@@ -143,6 +143,8 @@ def duenio_lista_turnos(request):
     turnos = Turno.objects.all().order_by('fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
 
+def agenda(request):
+    return render(request, 'duenio/agenda_duenio.html', {})
 
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):

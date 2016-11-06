@@ -3,19 +3,17 @@
 {% load staticfiles %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'assets/css/fullcalendar.css' %}">
-<script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}" type="text/javascript"></script>
-<script type="text/javascript" src="{% static 'assets/js/moment.min.js' %}" type="text/javascript"></script>
-<script type="text/javascript" src="{% static 'assets/js/fullcalendar.js' %}"></script>
-<script type='text/javascript'>
-$(document).ready(function() {
-    $('#calendar').fullCalendar({
-        events: "",
-        weekends: false,
-        editable: false,
-    });
-});
-</script>
+{{ block.super }}
+<link href="{% static 'assets/css/fullcalendar.css' %}" rel='stylesheet' />
+<link href="{% static 'assets/css/fullcalendar.print.css' %}" rel='stylesheet' media='print' />
+<style>
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
 {% endblock %}
 
 {% block contenido %}
@@ -31,4 +29,14 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'assets/js/lib/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/fullcalendar.js' %}"></script>
+<script>
+    var URL_EVENTOS = "{% url "devuelvo_turnos" %}";
+</script>
+<script src="{% static 'assets/js/calendario.js' %}"></script>
 {% endblock %}

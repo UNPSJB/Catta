@@ -1,6 +1,6 @@
 
 /* Portfolio */
-$(window).load(function() {
+$(window).on('load',function() {
     var $cont = $('.portfolio-group');
 
 
@@ -126,9 +126,9 @@ $(function () {
 //   }
 // });
 
-  $(window).load(function(){
+  $(window).on('load',function(){
     $("#hornav").sticky({ topSpacing: 120 });
   });
-  $(window).load(function(){
+  $(window).on('load',function(){
     $("#header").sticky({ topSpacing: 0 });
   });

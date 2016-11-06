@@ -83,11 +83,11 @@
     });     
    }
 
-   $(window).load(function(){
+   $(window).on('load',function(){
     checkVisible('.animate');
    });
 
-   $(window).load(function(){
+   $(window).on('load',function(){
     addAnimation('.animate');
    });
 

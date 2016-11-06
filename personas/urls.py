@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^duenio_lista_servicios$', views.duenio_lista_servicios, name='duenio_lista_servicios'),
     url(r'^duenio_lista_insumos$', views.duenio_lista_insumos, name='duenio_lista_insumos'),
     url(r'^duenio_lista_turnos/$', views.duenio_lista_turnos, name='duenio_lista_turnos'),
+    url(r'^duenio_agenda/$', views.agenda, name='agenda'),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 ]

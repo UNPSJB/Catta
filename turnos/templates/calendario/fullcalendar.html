@@ -3,16 +3,10 @@
 {% load staticfiles %}
 
 {% block links %}
+{{ block.super }}
 <link href="{% static 'assets/css/fullcalendar.css' %}" rel='stylesheet' />
 <link href="{% static 'assets/css/fullcalendar.print.css' %}" rel='stylesheet' media='print' />
 <style>
-
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
 
 	#calendar {
 		max-width: 900px;
@@ -30,8 +24,8 @@
 
 
 {% block scripts %}
+{{ block.super }}
 <script src="{% static 'assets/js/lib/moment.min.js' %}"></script>
-<script src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/lib/fullcalendar.js' %}"></script>
 <script>
     var URL_EVENTOS = "{% url "devuelvo_turnos" %}";
