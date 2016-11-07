@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 from turnos.models import Turno
 from crispy_forms.helper import FormHelper
@@ -49,4 +50,24 @@ class RegistrarTurnoRealizadoForm(ModelForm):
 
     class Meta:
         model = Turno
-        fields = {"fecha", "empleado", "cliente", "servicios", "promociones"}
+        fields = [
+            'fecha',
+            'cliente',
+            'servicios',
+            'promociones',
+            'empleado'
+        ]
+        labels = {
+            'fecha': 'Fecha del Turno',
+            'cliente': 'Cliente ',
+            'servicios': 'Servicios',
+            'promociones': 'Promociones',
+            'empleado': 'Empleado'
+        }
+        widgets = {
+            'fecha': forms.TextInput(attrs={'class':'form-control'}),
+            'empleado': forms.Select(attrs={'class':'form-control'}),
+            'cliente': forms.Select(attrs={'class':'form-control'}),
+            'servicios': forms.CheckboxSelectMultiple(),
+            'promociones': forms.CheckboxSelectMultiple(),
+        }
