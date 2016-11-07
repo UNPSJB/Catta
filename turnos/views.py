@@ -32,7 +32,7 @@ def devuelvo_turnos(request):
             'end': turno.get_duracion(),
             'title': turno.get_cliente(),
             'color': "#f984ce",
-            'url': "http:127.0.0.1/turnos/detalle_turno"
+            'url': "http://127.0.0.1:8000/turnos/detalle_turno"
         }
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})
@@ -75,6 +75,6 @@ def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
 
-def detalle_turno(request, id):
+def detalle_turno(request, id=1):
     turno = get_object_or_404(Turno, pk=id)
     return render(request, 'Turnos/detalle_turno.html', {'turno': turno})
