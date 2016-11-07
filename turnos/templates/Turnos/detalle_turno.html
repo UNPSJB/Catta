@@ -30,29 +30,22 @@
                 <!-- Login Box -->
                 <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
 
+                    <form method="post" class="login-page">
+                        {% load crispy_forms_tags %}
 
-                        <form method="post" class="login-page">
-                            {% csrf_token %}
-                            <div class="login-header margin-bottom-30">
-                                <h2>Confirmar Turno</h2>
-                            </div>
-                            <!-- -->
+                        {% csrf_token %}
+                        <div class="login-header margin-bottom-30">
+                            <h2>Turno</h2>
+                        </div>
+                        <!-- -->
+                           <li> Fecha:{{ turno.fecha }}
+                           <li> Fecha de creación:{{ turno.fecha_creacion }}
+                           <li> Fecha de confirmacion:{{ turno.fecha_confirmacion }}
+                           <li> Cliente:{{turno.cliente}}
+                           <li> Empleado: {{turno.empleado}}
 
-                                <li> Fecha: {{ turno.fecha }}
-                                <li> Fecha de creación: {{ turno.fecha_creacion }}
-                                <li> Fecha de confirmacion: {{ turno.fecha_confirmacion }}
-
-
-                                <br>
-
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Confirmar</button>
-                                </div>
-                            </div>
-
-                        </form>
+                           <br>
+                    </form>
 
                 </div>
                 <!-- End Login Box -->

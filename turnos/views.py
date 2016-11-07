@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from turnos.forms import ModificarTurnoForm
+from turnos.forms import ModificarTurnoForm, DetalleTurnoForm
 from turnos.models import Turno
 from django.core import serializers
 
@@ -31,7 +31,8 @@ def devuelvo_turnos(request):
             'start': turno.fecha,
             'end': turno.get_duracion(),
             'title': turno.get_cliente(),
-            'color': "#f984ce"
+            'color': "#f984ce",
+            'url': "http:127.0.0.1/turnos/detalle_turno"
         }
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})
@@ -73,3 +74,7 @@ def confirmar_turno(request, id):
 def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
+
+def detalle_turno(request, id):
+    turno = get_object_or_404(Turno, pk=id)
+    return render(request, 'Turnos/detalle_turno.html', {'turno': turno})

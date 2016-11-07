@@ -17,8 +17,10 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {
-            alert('Event: ' + event.title);
-            return false;
+             if (event.url) {
+                window.open(event.url);
+                return false;
+              }
         },
 
         events: function(start, end, timezone, callback) {

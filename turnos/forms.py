@@ -28,6 +28,16 @@ class ModificarTurnoForm(ModelForm):
         model = Turno
         fields = {"fecha", "empleado", "servicios", "promociones"}
 
+class DetalleTurnoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(DetalleTurnoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('detalle_turno', 'Detalle Turno'))
+
+    class Meta:
+        model = Turno
+        fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}
 
 class ConfirmarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
