@@ -159,14 +159,17 @@ def index_turnos(request):
 Vistas del control de cuentas.
 """
 def cuenta(request):
-    usuario = request.user
     ret = 'cuentaNueva/cuenta_nueva.html'
 
     if request.method == "POST":
         form = CuentaNuevaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(usuario.get_vista())
+            if request.user.is_authenticated():
+                usuario=request.user
+                return redirect(usuario.get_vista())
+            else:
+                return redirect('cliente')
     else:
         form = CuentaNuevaForm()
 
