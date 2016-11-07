@@ -17,8 +17,7 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {
-            // opens events in a popup window
-            console.log(event);
+            alert('Event: ' + event.title);
             return false;
         },
 

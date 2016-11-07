@@ -30,7 +30,7 @@ def devuelvo_turnos(request):
             'id': turno.pk,
             'start': turno.fecha,
             'end': turno.get_duracion(),
-            'title': str(turno)
+            'title': turno.get_cliente(),
         }
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})

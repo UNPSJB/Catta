@@ -18,6 +18,9 @@ class Turno(models.Model):
     def __str__(self):
         return "{}".format(self.fecha)
 
+    def get_cliente(self):
+        return str(self.cliente)
+
     def get_duracion(self):
         servicios = self.servicios.all()
         duracion = self.fecha
@@ -58,3 +61,4 @@ class TurnoFijo(Turno):
 
     def calcular_turno_siguiente(self):
         pass
+
