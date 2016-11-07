@@ -6,36 +6,52 @@
     <div class="container background-white" style="opacity: 0.95;">
         <div class="row margin-vert-30">
             <div class="col-md-12">
-                {% csrf_token %}
+                <form method="post" class="login-page">
+                    {% csrf_token %}
 
-                <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
+                    <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
 
-                <table class="table table-striped">
-                    <thread>
-                        <tr>
-                            <th>Fecha y Hora</th>
-                            <th>Cliente</th>
-                            <th>Empleado</th>
-                            <th>Estado</th>
-                            <th>Servicios</th>
-                        </tr>
-                    </thread>
-                    <tbody>
-                        {% for turno in turnos %}
-                        <tr>
-                            <td>{{turno.fecha}}</td>
-                            <td>{{turno.cliente}}</td>
-                            <td>{{turno.empleado}}</td>
-                            <td>{{turno.estado}}</td>
-                            <td>
-                                {% for servicio in turno.servicios.all %}
-                                    {{servicio}}
-                                {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    Filtrar:
+                    Cliente <input name="nombreCliente">
+                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Filtrar</button>
+                    <br>
+                    <br>
 
+                    <table class="table table-striped">
+                        <thread>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Cliente</th>
+                                <th>Empleado</th>
+                                <th>Estado</th>
+                                <th>Servicios</th>
+                                <th>Servicios</th>
+
+                            </tr>
+                        </thread>
+                        <tbody>
+                            {% for turno in turnos %}
+                            <tr>
+                                <td>{{turno.fecha}}</td>
+                                <td>{{turno.cliente}}</td>
+                                <td>{{turno.empleado}}</td>
+                                <td>{{turno.estado}}</td>
+                                <td>
+                                    {% for servicio in turno.servicios.all %}
+                                        {{servicio}}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if turno.fecha_confirmacion == null %}
+                                        <button a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('turnos/confirmar_turno/1/')">Confirmar</button>
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     </div>

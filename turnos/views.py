@@ -56,19 +56,20 @@ def modificar_turno(request, id_turno=1):
 
 
 def listaTurnosFecha(request):
+
     turnos = Turno.objects.all()
     return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos':turnos})
 
 
 def confirmar_turno(request, id):
-    turno = get_object_or_404(Turno, pk=id)
     if request.method == "POST":
+        turno = get_object_or_404(Turno, pk=id)
         turno.confirmar_turno()
         turno.save()
-        return redirect('/Turnos/confirmar_turno.html')
+        return redirect('/personas/duenio_lista_turnos')
     else:
         turno = get_object_or_404(Turno, pk=id)
-    return render(request, 'Turnos/confirmar_turno.html', {'turno':turno})
+        return render(request, '/turnos/confirmarTurno/confirmar_turno.html', {'turno':turno})
 
 
 def calendario(request):

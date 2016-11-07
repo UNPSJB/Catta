@@ -15,6 +15,7 @@
                     {% for turno in turnos %}
                     <tr>
                         <td>{{turno.fecha}}</td>
+                        <td><a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('turnos/confirmar_turno/1/')">+</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

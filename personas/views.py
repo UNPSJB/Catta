@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
@@ -140,8 +140,22 @@ def duenio_lista_insumos(request):
 
 
 def duenio_lista_turnos(request):
-    turnos = Turno.objects.all().order_by('fecha')
+    if request.method == "POST":
+        dni = 0
+        personas = Persona.objects.all().filter(nombre=request.POST['nombreCliente'])
+        persona = personas.first()
+        try:
+            turnos = Turno.objects.all().filter(cliente=persona.cliente)
+        except AttributeError:
+            turnos = None
+        return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
+    else:
+       turnos = Turno.objects.all().order_by('fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
+
+
+
+
 
 def agenda(request):
     return render(request, 'duenio/agenda_duenio.html', {})
