@@ -1,3 +1,5 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -198,11 +200,10 @@ def cuenta(request):
         form = CuentaNuevaForm(request.POST)
         if form.is_valid():
             form.save()
-            if request.user.is_authenticated():
-                usuario=request.user
-                return redirect(usuario.get_vista())
-            else:
-                return redirect('cliente')
+            usuario = request.user
+            login(request, usuario)
+
+            return redirect(usuario.get_vista())
     else:
         form = CuentaNuevaForm()
 
