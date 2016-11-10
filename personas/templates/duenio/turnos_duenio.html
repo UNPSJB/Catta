@@ -6,16 +6,13 @@
     <div class="container background-white" style="opacity: 0.95;">
         <div class="row margin-vert-30">
             <div class="col-md-12">
-                <form method="post" class="login-page">
-                    {% csrf_token %}
-
-                    <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
-
-                    Filtrar:
-                    Cliente <input name="nombreCliente">
-                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Filtrar</button>
-                    <br>
-                    <br>
+                <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
+                <form method="get" action="">
+                    <input name="cliente" placeholder="Cliente" value="{{ f.cliente }}" class="filtro">
+                    <input name="empleado" placeholder="Empleado" value="{{ f.empleado }}" class="filtro">
+                    <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+                </form>
 
                     <table class="table table-striped">
                         <thread>
@@ -43,7 +40,7 @@
                                 </td>
                                 <td>
                                     {% if turno.fecha_confirmacion == null %}
-                                        <button a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('turnos/confirmar_turno/1/')">Confirmar</button>
+                                        <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
                                     {% endif %}
                                 </td>
 
@@ -51,8 +48,19 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                </form>
+
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+<script>
+    $(".filtro").on("focusout", function(e) {
+        console.log("filtar");
+        $(e.target).parent("form").submit();
+    })
+</script>
 {% endblock %}

@@ -10,6 +10,8 @@ from personas.models import Persona
 from gestion.models import ServicioBasico, Promocion, Insumo
 from turnos.models import Turno
 
+from django.db.models import Q
+
 
 """
 Vistas del Cliente.
@@ -139,20 +141,37 @@ def duenio_lista_insumos(request):
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
 
 
-def duenio_lista_turnos(request):
-    if request.method == "POST":
-        dni = 0
-        personas = Persona.objects.all().filter(nombre=request.POST['nombreCliente'])
-        persona = personas.first()
-        try:
-            turnos = Turno.objects.all().filter(cliente=persona.cliente)
-        except AttributeError:
-            turnos = None
-        return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
-    else:
-       turnos = Turno.objects.all().order_by('fecha')
-    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
+#def duenio_lista_turnos(request):
+#    if request.method == "POST":
+#        dni = 0
+#        personas = Persona.objects.all().filter(nombre=request.POST['nombreCliente'])
+#        persona = personas.first()
+#        try:
+#            turnos = Turno.objects.all().filter(cliente=persona.cliente)
+#        except AttributeError:
+#            turnos = None
+#        return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
+#    else:
+#       turnos = Turno.objects.all().order_by('fecha')
+#    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
 
+
+def get_filtros(modelo, datos):
+    filtros = []
+    valores = {}
+    for key, value in datos.items():
+        if value:
+            valores[key] = value
+            q = Q()
+            for mfilter in modelo.FILTROS[key]:
+                q |= Q(**{mfilter: value})
+            filtros.append(q)
+    return (filtros, valores)
+
+def duenio_lista_turnos(request):
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros).order_by('fecha')
+    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter})
 
 
 

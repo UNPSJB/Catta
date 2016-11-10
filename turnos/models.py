@@ -4,6 +4,11 @@ from personas.models import *
 
 
 class Turno(models.Model):
+    FILTROS = {
+        "cliente": [ "cliente__persona__nombre__icontains", "cliente__persona__apellido__icontains" ],
+        "empleado": [ "empleado__persona__nombre__icontains", "empleado__persona__apellido__icontains" ],
+        "servicio": [ "servicios__nombre__icontains" ]
+    }
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
     # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
     fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
