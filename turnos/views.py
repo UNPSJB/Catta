@@ -70,7 +70,7 @@ def listaTurnosFecha(request):
 #    else:
 #        turno = get_object_or_404(Turno, pk=id)
 #        return render(request, '/turnos/confirmarTurno/confirmar_turno.html', {'turno':turno})
-
+# 
 def confirmar_turno(request, id):
     if request.method == "POST":
         turno = get_object_or_404(Turno, pk=id)
