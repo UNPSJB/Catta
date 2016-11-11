@@ -31,8 +31,7 @@ def devuelvo_turnos(request):
             'start': turno.fecha,
             'end': turno.get_duracion(),
             'title': turno.get_cliente(),
-            'color': "#f984ce",
-            'url': "http://127.0.0.1:8000/turnos/detalle_turno"
+            'color': "#f984ce"
         }
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})

@@ -6,7 +6,7 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay,listWeek'
         },
-        defaultDate: '2016-09-12',
+        defaultDate: '2016-11-07',
         navLinks: true, // can click day/week names to navigate views
 
         weekNumbers: true,
@@ -17,10 +17,7 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {
-             if (event.url) {
-                window.open(event.url);
-                return false;
-              }
+            $("#myModal").modal('show');
         },
 
         events: function(start, end, timezone, callback) {
