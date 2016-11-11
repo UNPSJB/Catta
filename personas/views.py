@@ -14,6 +14,19 @@ from turnos.models import Turno
 
 from django.db.models import Q
 
+"""Metodo de Filtro"""
+
+def get_filtros(modelo, datos):
+    filtros = []
+    valores = {}
+    for key, value in datos.items():
+        if value:
+            valores[key] = value
+            q = Q()
+            for mfilter in modelo.FILTROS[key]:
+                q |= Q(**{mfilter: value})
+            filtros.append(q)
+    return (filtros, valores)
 
 """
 Vistas del Cliente.
@@ -120,13 +133,15 @@ def duenio(request):
 
 
 def duenio_lista_empleados(request):
-    empleados = Persona.objects.filter(empleado__isnull=False)
-    return render(request, 'duenio/empleados_duenio.html', {'empleados': empleados})
+    mfiltros, ffilter = get_filtros(Persona, request.GET)
+    empleados = Persona.objects.filter(empleado__isnull=False, *mfiltros)
+    return render(request, 'duenio/empleados_duenio.html', {'empleados': empleados, "f": ffilter})
 
 
 def duenio_lista_clientes(request):
-    clientes = Persona.objects.filter(cliente__isnull=False)
-    return render(request, 'duenio/clientes_duenio.html', {'clientes': clientes})
+    mfiltros, ffilter = get_filtros(Persona, request.GET)
+    clientes = Persona.objects.filter(cliente__isnull=False, *mfiltros)
+    return render(request, 'duenio/clientes_duenio.html', {'clientes': clientes, "f": ffilter})
 
 
 def duenio_lista_servicios(request):
@@ -137,39 +152,10 @@ def duenio_lista_servicios(request):
                                                             'promociones': promociones,
                                                             'insumos': insumos})
 
-
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
     return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
-
-
-#def duenio_lista_turnos(request):
-#    if request.method == "POST":
-#        dni = 0
-#        personas = Persona.objects.all().filter(nombre=request.POST['nombreCliente'])
-#        persona = personas.first()
-#        try:
-#            turnos = Turno.objects.all().filter(cliente=persona.cliente)
-#        except AttributeError:
-#            turnos = None
-#        return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
-#    else:
-#       turnos = Turno.objects.all().order_by('fecha')
-#    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos})
-
-
-def get_filtros(modelo, datos):
-    filtros = []
-    valores = {}
-    for key, value in datos.items():
-        if value:
-            valores[key] = value
-            q = Q()
-            for mfilter in modelo.FILTROS[key]:
-                q |= Q(**{mfilter: value})
-            filtros.append(q)
-    return (filtros, valores)
 
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)

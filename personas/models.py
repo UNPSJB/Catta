@@ -113,6 +113,10 @@ class Usuario(AbstractUser, Rol):
 
 
 class Persona(models.Model):
+    FILTROS = {
+        "nombre": ["nombre__icontains"],
+        "apellido": ["apellido__icontains"]
+    }
     dni = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)

@@ -11,6 +11,10 @@ class Sector(models.Model):
 
 
 class Insumo (models.Model):
+    FILTROS = {
+        "nombre": ["nombre__icontains"],
+        "marca": ["marca__icontains"]
+    }
     nombre = models.CharField(max_length=100)
     marca = models.CharField(max_length=100)
     contenidoNeto = models.PositiveIntegerField(default=0)
