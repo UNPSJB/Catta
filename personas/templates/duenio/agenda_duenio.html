@@ -26,8 +26,25 @@
                 <h4 class="modal-title">Confirmation</h4>
             </div>
             <div class="modal-body">
-                <p>Do you want to save changes you made to document before closing?</p>
-                <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+
+                <form method="post" class="login-page">
+                        {% load crispy_forms_tags %}
+
+                        {% csrf_token %}
+                        <div class="login-header margin-bottom-30">
+                            <h2>Turno</h2>
+                        </div>
+                        <!-- -->
+                           <li> Fecha:{{ turno.fecha }}
+                           <li> Fecha de creación:{{ turno.fecha_creacion }}
+                           <li> Fecha de confirmacion:{{ turno.fecha_confirmacion }}
+                           <li> Cliente:{{turno.cliente}}
+                           <li> Empleado: {{turno.empleado}}
+
+                           <br>
+                </form>
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

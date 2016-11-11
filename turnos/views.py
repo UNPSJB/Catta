@@ -87,6 +87,7 @@ def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
 
-def detalle_turno(request, id=1):
+"""def detalle_turno(request, id=1):
     turno = get_object_or_404(Turno, pk=id)
     return render(request, 'Turnos/detalle_turno.html', {'turno': turno})
+"""
