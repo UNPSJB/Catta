@@ -17,7 +17,12 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {
-            $("#myModal").modal('show');
+            //$("#myModal").modal('show');
+               $("#myModal").on('show', function(event){
+                // Get button that triggered the modal
+               var button = $(event.id);
+               // Extract value from data-* attributes
+    });
         },
 
         events: function(start, end, timezone, callback) {

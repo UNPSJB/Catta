@@ -214,3 +214,5 @@ def cuenta(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
+
+
