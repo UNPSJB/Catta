@@ -12,7 +12,7 @@ class Sector(models.Model):
 
 class Insumo (models.Model):
     FILTROS = {
-        "nombre": ["nombre__icontains"],
+        "nombre": [ "nombre__icontains" ],
         "marca": ["marca__icontains"]
     }
     nombre = models.CharField(max_length=100)
@@ -25,6 +25,9 @@ class Insumo (models.Model):
 
 
 class Servicio(models.Model):
+    FILTROS = {
+        "nombre": [ "nombre__icontains" ],
+    }
     class Meta:
         abstract = True
 

@@ -40,12 +40,3 @@
         </div>
     </div>
 {% endblock %}
-{% block scripts %}
-    {{ block.super }}
-    <script>
-        $(".filtro").on("focusout", function(e) {
-            console.log("filtar");
-            $(e.target).parent("form").submit();
-        })
-    </script>
-{% endblock %}

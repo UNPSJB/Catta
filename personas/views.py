@@ -9,7 +9,7 @@ from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
 
 from personas.models import Persona
-from gestion.models import ServicioBasico, Promocion, Insumo
+from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
 
 from django.db.models import Q
@@ -49,6 +49,21 @@ FORMS_EMPLEADO = {
 """
 Vistas del Empleado.
 """
+
+def get_filtros(modelo, datos):
+    filtros = []
+    valores = {}
+    for key, value in datos.items():
+        if value:
+            valores[key] = value
+            q = Q()
+            for mfilter in modelo.FILTROS[key]:
+                q |= Q(**{mfilter: value})
+            filtros.append(q)
+    return (filtros, valores)
+
+
+
 @login_required(login_url='iniciar_sesion')
 def empleado(request):
     usuario = request.user
@@ -149,12 +164,13 @@ def duenio_lista_clientes(request):
 
 
 def duenio_lista_servicios(request):
-    servicios = ServicioBasico.objects.all()
-    promociones = Promocion.objects.all()
+    mfiltros, ffilter = get_filtros(Servicio, request.GET)
+    servicios = ServicioBasico.objects.filter(*mfiltros)
+    promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
                                                             'promociones': promociones,
-                                                            'insumos': insumos})
+                                                             'insumos': insumos, "f": ffilter})
 
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
@@ -165,8 +181,6 @@ def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter})
-
-
 
 
 def agenda(request):

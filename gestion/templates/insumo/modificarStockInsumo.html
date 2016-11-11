@@ -2,26 +2,6 @@
 
 {% load staticfiles %}
 
-{% block barra %}
-    <div id="hornav" class="container no-padding">
-        <div class="row">
-            <div class="col-md-24 no-padding">
-                <div class="visible-lg">
-                    <ul id="hornavmenu" class="navbar-fixed-top">
-                        <li class="navbar-left">
-                            <a href="{% url 'index' %}" class="fa-home">Principal</a>
-                        </li>
-                        <form class="navbar-form navbar-right">
-                            <button type="submit" class="btn btn-aqua">Crear Cuenta</button>
-                            <button type="submit" class="btn btn-green">Iniciar Sesión</button>
-                        </form>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
 {% block contenido %}
     <div id="content">
         <div class="container background-transparent">
