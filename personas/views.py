@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
 
 from personas.models import Persona
 from gestion.models import ServicioBasico, Promocion, Insumo
@@ -41,6 +41,7 @@ FORMS_EMPLEADO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
     ('form_registrar_turno_realizado', 'registrar_turno_realizado'):RegistrarTurnoRealizadoForm
 }
 
@@ -71,6 +72,9 @@ def empleado(request):
                 contexto[form_name] = _form
             elif input_name == 'registrar_turno_realizado':
                 _form = RegistrarTurnoRealizadoForm(instance=turno)
+                contexto[form_name] = _form
+            elif input_name == 'eliminar_turno':
+                _form = EliminarTurnoForm(instance=turno)
                 contexto[form_name] = _form
             else:
                 contexto[form_name] = klassForm()
@@ -200,3 +204,5 @@ def cuenta(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
+
+
