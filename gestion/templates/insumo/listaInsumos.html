@@ -1,10 +1,19 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
 <div class="container background-white" style="opacity: 0.95;">
     <div class="row margin-vert-30">
         <div class="col-md-12">
             {% csrf_token %}
 
             <h2><font color="Purple"><font face="arial"><center> Listado de Insumos </center></font></font></h2>
-
+            <form method="get" action="">
+                <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
+                <input name="marca" placeholder="Marca" value="{{ f.marca }}" class="filtro">
+                <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+            </form>    
             <table class="table table-striped">
                 <thread>
                     <tr>
@@ -30,3 +39,15 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        $(".filtro").on("focusout", function(e) {
+            console.log("filtar");
+            $(e.target).parent("form").submit();
+        })
+    </script>
+{% endblock %}

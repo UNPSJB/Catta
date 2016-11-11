@@ -4,6 +4,7 @@ from gestion.forms import InsumoForm
 from gestion.forms import ServicioForm
 from gestion.models import ServicioBasico
 from gestion.models import Insumo
+from django.db.models import Q
 
 
 def sector(request):
@@ -49,13 +50,23 @@ def listaServicios(request):
     return render(request, 'servicio/listaServicios.html', {'servicios': servicios, 'insumos': insumos})
 
 
+def get_filtros(modelo, datos):
+    filtros = []
+    valores = {}
+    for key, value in datos.items():
+        if value:
+            valores[key] = value
+            q = Q()
+            for mfilter in modelo.FILTROS[key]:
+                q |= Q(**{mfilter: value})
+            filtros.append(q)
+    return (filtros, valores)
+
+
 def listaInsumos(request):
-    insumos = Insumo.objects.all()
-
-    # if request.method == "POST":
-    #     return redirect('/insumo/modificarStockInsumo')
-
-    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos})
+    mfiltros, ffilter = get_filtros(Insumo, request.GET)
+    insumos = Insumo.objects.filter(*mfiltros)
+    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
 
 
 def modificarStockInsumo(request, id):

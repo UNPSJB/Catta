@@ -13,7 +13,7 @@ $(document).ready(function() {
         weekNumbersWithinDays: true,
         weekNumberCalculation: 'ISO',
 
-        editable: true,
+        editable: false,
         eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {

@@ -139,8 +139,9 @@ def duenio_lista_servicios(request):
 
 
 def duenio_lista_insumos(request):
-    insumos = Insumo.objects.all()
-    return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos})
+    mfiltros, ffilter = get_filtros(Insumo, request.GET)
+    insumos = Insumo.objects.filter(*mfiltros)
+    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
 
 
 #def duenio_lista_turnos(request):
