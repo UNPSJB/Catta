@@ -9,7 +9,11 @@
                 {% csrf_token %}
 
                 <h2><font color="Purple"><font face="arial"><center> Listado de Clientes </center></font></font></h2>
-
+                    <form method="get" action="">
+                        <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
+                        <input name="apellido" placeholder="Apellido" value="{{ f.apellido }}" class="filtro">
+                        <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+                    </form>
                 <table class="table table-striped">
                     <thread>
                         <tr>
