@@ -5,6 +5,9 @@ from personas.models import *
 
 class Turno(models.Model):
     FILTROS = {
+        "fechaI": ["fecha__date__gte"],
+        "fechaF": ["fecha__date__lte"],
+        "estado": ["estado__icontains"],
         "cliente": [ "cliente__persona__nombre__icontains", "cliente__persona__apellido__icontains" ],
         "empleado": [ "empleado__persona__nombre__icontains", "empleado__persona__apellido__icontains" ],
         "servicio": [ "servicios__nombre__icontains" ]

@@ -8,10 +8,25 @@
             <div class="col-md-12">
                 <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
                 <form method="get" action="">
+                    Desde:
+                    <input name="fechaI" type="date" placeholder="Desde (aaa-mm-dd)" value="{{ f.fechaI }}" class="filtro">
+                    Hasta:
+                    <input name="fechaF" type="date" placeholder="Hasta (aaa-mm-dd)" value="{{ f.fechaF }}" class="filtro">
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+                    <br>
                     <input name="cliente" placeholder="Cliente" value="{{ f.cliente }}" class="filtro">
                     <input name="empleado" placeholder="Empleado" value="{{ f.empleado }}" class="filtro">
+                    <select name="estado">
+                      <option value="">Estado</option>
+                      <option value="Realizado">Realizado</option>
+                      <option value="Confirmado">Confirmado</option>
+                      <option value="Cancelado">Cancelado</option>
+                      <option value="Sin Confirma">Sin Confirma</option>
+                    </select>
                     <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
-                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+
+
+
                 </form>
 
                     <table class="table table-striped">

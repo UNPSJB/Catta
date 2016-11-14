@@ -12,6 +12,8 @@ from personas.models import Persona
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
 
+
+
 from django.db.models import Q
 
 """Metodo de Filtro"""
@@ -177,7 +179,7 @@ def duenio_lista_servicios(request):
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
-    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
+    return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos, "f": ffilter})
 
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
