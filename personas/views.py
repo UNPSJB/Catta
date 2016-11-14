@@ -33,6 +33,12 @@ def get_filtros(modelo, datos):
 """
 Vistas del Cliente.
 """
+FORMS_CLIENTE = {
+    ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
+    ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
+
+}
 @login_required(login_url='iniciar_sesion')
 def cliente(request):
     promociones = Promocion.objects.all()
@@ -187,8 +193,11 @@ def duenio_lista_turnos(request):
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter})
 
 
-def agenda(request):
+def agenda_duenio(request):
     return render(request, 'duenio/agenda_duenio.html', {})
+
+def agenda_cliente(request):
+    return render(request, 'cliente/agenda_cliente.html', {})
 
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
@@ -224,3 +233,5 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
+def crear_turno_cliente(request):
+    return render(request, 'cliente/crear_turno.html', {})
