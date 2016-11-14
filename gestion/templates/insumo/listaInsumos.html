@@ -1,8 +1,3 @@
-{% extends 'duenio/base_duenio.html' %}
-
-{% load staticfiles %}
-
-{% block contenido %}
 <div class="container background-white" style="opacity: 0.95;">
     <div class="row margin-vert-30">
         <div class="col-md-12">
@@ -39,15 +34,3 @@
         </div>
     </div>
 </div>
-
-{% endblock %}
-
-{% block scripts %}
-    {{ block.super }}
-    <script>
-        $(".filtro").on("focusout", function(e) {
-            console.log("filtar");
-            $(e.target).parent("form").submit();
-        })
-    </script>
-{% endblock %}

@@ -108,7 +108,7 @@ def empleado_lista_servicios(request):
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
-    return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
+    return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
                                                             'promociones': promociones,
                                                             'insumos': insumos, "f": ffilter})
 
@@ -116,7 +116,7 @@ def empleado_lista_servicios(request):
 def empleado_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
-    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
+    return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos, "f": ffilter})
 """
 Vistas de la Dueña
 """
