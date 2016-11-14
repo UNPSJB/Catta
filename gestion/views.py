@@ -90,7 +90,7 @@ def eliminarInsumo(request, id):
             return redirect('/personas/duenio_lista_insumos')
         else:
             print('asd')
-            messages.success(request, 'Profile details updated.')
+            messages.warning(request, 'no se puede eliminar el insumo')
     return render(request, 'insumo/eliminarInsumo.html', {'insumo': insumo})
 
 def detalleServicio(request, id):
