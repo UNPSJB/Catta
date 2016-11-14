@@ -27,6 +27,7 @@
                         <td>{{insumo.contenidoNeto}}</td>
                         <td>{{insumo.stock}}</td>
                         <td><a href="{% url 'modificarStockInsumo' insumo.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('gestion/modificarStockInsumo/1/2/')">+</a></td>
+                        <td><a href="{% url 'EliminarInsumo' insumo.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('gestion/modificarStockInsumo/1/2/')">+</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
