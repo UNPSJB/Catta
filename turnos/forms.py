@@ -33,7 +33,7 @@ class EliminarTurnoForm(ModelForm):
         super(EliminarTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('eliminar_turno','Eliminar Turno'))
+        #self.helper.add_input(Submit('eliminar_turno','Eliminar Turno'))
 
     class Meta:
         model = Turno
