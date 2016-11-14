@@ -5,6 +5,8 @@ from gestion.forms import ServicioForm
 from gestion.models import ServicioBasico
 from gestion.models import Insumo
 from django.db.models import Q
+from django.contrib import messages
+
 
 
 def sector(request):
@@ -79,6 +81,17 @@ def modificarStockInsumo(request, id):
         insumo = get_object_or_404(Insumo, pk=id)
     return render(request, 'insumo/modificarStockInsumo.html', {'insumo': insumo})
 
+def eliminarInsumo(request, id):
+    insumo = get_object_or_404(Insumo, pk=id)
+    insumos = insumo.serviciobasico_set.all()
+    if request.method == "POST":
+        if insumos.first == None :
+            insumo.delete()
+            return redirect('/personas/duenio_lista_insumos')
+        else:
+            print('asd')
+            messages.success(request, 'Profile details updated.')
+    return render(request, 'insumo/eliminarInsumo.html', {'insumo': insumo})
 
 def detalleServicio(request, id):
     servicio = get_object_or_404(ServicioBasico, nombre=id)

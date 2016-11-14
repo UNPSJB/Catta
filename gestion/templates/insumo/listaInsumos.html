@@ -17,6 +17,7 @@
                         <th>Contenido Neto</th>
                         <th>Stock</th>
                         <th>Modificar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thread>
                 <tbody>
@@ -26,8 +27,8 @@
                         <td>{{insumo.marca}}</td>
                         <td>{{insumo.contenidoNeto}}</td>
                         <td>{{insumo.stock}}</td>
-                        <td><a href="{% url 'modificarStockInsumo' insumo.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('gestion/modificarStockInsumo/1/2/')">+</a></td>
-                        <td><a href="{% url 'EliminarInsumo' insumo.id %}" class="btn btn-default btn-sm" role="button" onclick="goto_link ('gestion/modificarStockInsumo/1/2/')">+</a></td>
+                        <td><a href="{% url 'modificarStockInsumo' insumo.id %}" button type="button" class="btn btn-warning">Modificar</button onclick="goto_link ('gestion/modificarStockInsumo/1/2/')"></a></td>
+                        <td><a href="{% url 'eliminarInsumo' insumo.id %}" button type="button" class="btn btn-danger">Eliminar</button onclick="goto_link ('gestion/modificarStockInsumo/1/2/')"></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
