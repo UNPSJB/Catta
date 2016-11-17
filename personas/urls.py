@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^duenio_agenda/$', views.agenda_duenio, name='agenda'),
     url(r'^cliente_agenda/$', views.agenda_cliente, name='agenda'),
     url(r'^crear_turno/$', views.crear_turno_cliente, name='crear_turno'),
-
+    url(r'^cliente_lista_servicios$', views.cliente_lista_servicios, name='cliente_lista_servicios'),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 ]
