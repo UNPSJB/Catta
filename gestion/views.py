@@ -88,9 +88,6 @@ def eliminarInsumo(request, id):
         if insumos.first == None :
             insumo.delete()
             return redirect('/personas/duenio_lista_insumos')
-        else:
-            print('asd')
-            messages.success(request, 'Profile details updated.')
     return render(request, 'insumo/eliminarInsumo.html', {'insumo': insumo})
 
 def detalleServicio(request, id):

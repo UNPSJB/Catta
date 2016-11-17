@@ -3,40 +3,5 @@
 {% load staticfiles %}
 
 {% block contenido %}
-    <div class="container background-white" style="opacity: 0.95;">
-        <div class="row margin-vert-30">
-            <div class="col-md-12">
-                {% csrf_token %}
-
-                <h2><font color="Purple"><font face="arial"><center> Listado de Empleados </center></font></font></h2>
-                    <form method="get" action="">
-                        <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
-                        <input name="apellido" placeholder="Apellido" value="{{ f.apellido }}" class="filtro">
-                        <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
-                    </form>
-                <table class="table table-striped">
-                    <thread>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Direccion</th>
-                            <th>Teléfono</th>
-                            <th>Localidad</th>
-                        </tr>
-                    </thread>
-                    <tbody>
-                        {% for empleado in empleados %}
-                        <tr>
-                            <td>{{empleado.nombre}}</td>
-                            <td>{{empleado.apellido}}</td>
-                            <td>{{empleado.direccion}}</td>
-                            <td>{{empleado.telefono}}</td>
-                            <td>{{empleado.localidad}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    {% include 'empleado/listaEmpleados.html' %}
 {% endblock %}

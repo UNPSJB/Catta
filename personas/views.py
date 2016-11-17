@@ -8,7 +8,7 @@ from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
 
-from personas.models import Persona
+from personas.models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
 
@@ -156,8 +156,17 @@ def duenio(request):
 def duenio_lista_empleados(request):
     mfiltros, ffilter = get_filtros(Persona, request.GET)
     empleados = Persona.objects.filter(empleado__isnull=False, *mfiltros)
-    return render(request, 'duenio/empleados_duenio.html', {'empleados': empleados, "f": ffilter})
+    return render(request, 'empleado/listaEmpleados.html', {'empleados': empleados, "f": ffilter})
 
+def modificarComision(request, id):
+    persona = get_object_or_404(Persona, pk=id)
+    if request.method == "POST":
+        persona.empleado.porc_comision = request.POST['NuevaComision']
+        persona.empleado.save()
+        return redirect('/personas/duenio_lista_empleados')
+    else:
+        persona = get_object_or_404(Persona, pk=id)
+    return render(request, 'empleado/modificarComision.html', {'persona': persona})
 
 def duenio_lista_clientes(request):
     mfiltros, ffilter = get_filtros(Persona, request.GET)
