@@ -7,27 +7,36 @@
         <div class="row margin-vert-30">
             <div class="col-md-12">
                 <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
+
+
+                <!-- FILTRADO !-->
                 <form method="get" action="">
+                    Cliente:
+                    <input name="clienteN" placeholder="Nombre" value="{{ f.clienteN }}" class="filtro">
+                    <input name="clienteA" placeholder="Apellido" value="{{ f.clienteA }}" class="filtro">
+
+                    Empleado:
+                    <input name="empleadoN" placeholder="Nombre" value="{{ f.empleadoN }}" class="filtro">
+                    <input name="empleadoA" placeholder="Apellido" value="{{ f.empleadoA }}" class="filtro">
+                    <br>
                     Desde:
                     <input name="fechaI" type="date" placeholder="Desde (aaa-mm-dd)" value="{{ f.fechaI }}" class="filtro">
                     Hasta:
                     <input name="fechaF" type="date" placeholder="Hasta (aaa-mm-dd)" value="{{ f.fechaF }}" class="filtro">
-                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
-                    <br>
-                    <input name="cliente" placeholder="Cliente" value="{{ f.cliente }}" class="filtro">
-                    <input name="empleado" placeholder="Empleado" value="{{ f.empleado }}" class="filtro">
+                    Servicio:
+                    <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
+                    Estado:
                     <select name="estado">
-                      <option value="">Estado</option>
+                      <option value=""></option>
                       <option value="Realizado">Realizado</option>
                       <option value="Confirmado">Confirmado</option>
                       <option value="Cancelado">Cancelado</option>
                       <option value="Sin Confirma">Sin Confirma</option>
                     </select>
-                    <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
-
-
-
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                 </form>
+                <!--FIN FILTRADO!-->
+
 
                     <table class="table table-striped">
                         <thread>
@@ -37,7 +46,7 @@
                                 <th>Empleado</th>
                                 <th>Estado</th>
                                 <th>Servicios</th>
-                                <th>Servicios</th>
+                                <th>Confirmación</th>
 
                             </tr>
                         </thread>

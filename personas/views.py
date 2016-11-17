@@ -113,7 +113,7 @@ def get_filtros(modelo, datos):
     valores = {}
     for key, value in datos.items():
         if value:
-            valores[key] = value
+            valores[key] = value.replace(" ", "")
             q = Q()
             for mfilter in modelo.FILTROS[key]:
                 q |= Q(**{mfilter: value})
