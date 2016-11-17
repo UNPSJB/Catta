@@ -3,10 +3,11 @@ from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django import forms
 
 from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoClienteForm
 
 from personas.models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
@@ -34,7 +35,7 @@ def get_filtros(modelo, datos):
 Vistas del Cliente.
 """
 FORMS_CLIENTE = {
-    ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
+    ('form_crear_turno_cliente', 'crear_turno_cliente'): CrearTurnoClienteForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
 
@@ -71,13 +72,16 @@ def cliente(request):
 
 def crear_turno_cliente(request):
     if request.method == "POST":
-        form = CrearTurnoForm(request.POST)
+        form = CrearTurnoClienteForm(request.POST)
         if form.is_valid():
+            #form.cliente =
+            print(request.user.persona.cliente)
             form.save()
-            return redirect('/cliente')
+            return redirect('/personas/cliente')
         print(form)
     else:
         form = CrearTurnoForm()
+        form.fields['cliente'].widget = forms.HiddenInput()
     return render(request, 'cliente/crear_turno.html', {"form": form})
 
 def agenda_cliente(request):
