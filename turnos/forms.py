@@ -17,6 +17,42 @@ class CrearTurnoForm(ModelForm):
         fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}
 
 
+class CrearTurnoClienteForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CrearTurnoClienteForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('crear_turno_cliente', 'Crear Turno Cliente'))
+
+    class Meta:
+        model = Turno
+        fields = {"fecha", "empleado", "servicios", "promociones"}
+
+    class Meta:
+        model = Turno
+        fields = [
+            'fecha',
+            'cliente',
+            'servicios',
+            'promociones',
+            'empleado'
+        ]
+        labels = {
+            'fecha': 'Fecha del Turno',
+            'cliente': 'Cliente ',
+            'servicios': 'Servicios',
+            'promociones': 'Promociones',
+            'empleado': 'Empleado'
+        }
+        widgets = {
+            'fecha': forms.TextInput(attrs={'class':'form-control'}),
+            'empleado': forms.Select(attrs={'class':'form-control'}),
+            'cliente': forms.Select(attrs={'class':'form-control', 'type':'hidden'}),
+            'servicios': forms.CheckboxSelectMultiple(),
+            'promociones': forms.CheckboxSelectMultiple(),
+        }
+
+
 class ModificarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ModificarTurnoForm, self).__init__(*args, **kwargs)
