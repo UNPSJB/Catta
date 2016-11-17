@@ -11,9 +11,6 @@ from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoReali
 from personas.models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
-
-
-
 from django.db.models import Q
 
 """Metodo de Filtro"""
@@ -25,8 +22,11 @@ def get_filtros(modelo, datos):
         if value:
             valores[key] = value
             q = Q()
-            for mfilter in modelo.FILTROS[key]:
-                q |= Q(**{mfilter: value})
+            if type(modelo.FILTROS[key]) == dict:
+                q |= modelo.FILTROS[key][int(value)]
+            else:
+                for mfilter in modelo.FILTROS[key]:
+                    q |= Q(**{mfilter: value})
             filtros.append(q)
     return (filtros, valores)
 
@@ -107,18 +107,6 @@ FORMS_EMPLEADO = {
 """
 Vistas del Empleado.
 """
-
-def get_filtros(modelo, datos):
-    filtros = []
-    valores = {}
-    for key, value in datos.items():
-        if value:
-            valores[key] = value.replace(" ", "")
-            q = Q()
-            for mfilter in modelo.FILTROS[key]:
-                q |= Q(**{mfilter: value})
-            filtros.append(q)
-    return (filtros, valores)
 
 
 
@@ -243,6 +231,16 @@ def duenio_lista_servicios(request):
                                                             'promociones': promociones,
                                                              'insumos': insumos, "f": ffilter})
 
+def modificar_stock_duenio(request, id):
+    insumo = get_object_or_404(Insumo, pk=id)
+    if request.method == "POST":
+        insumo.stock = request.POST['stockNuevo']
+        insumo.save()
+        return redirect('/personas/duenio_lista_insumos')
+    else:
+        insumo = get_object_or_404(Insumo, pk=id)
+    return render(request, 'duenio/modificar_stock_duenio.html', {'insumo': insumo})
+
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
@@ -251,7 +249,7 @@ def duenio_lista_insumos(request):
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('fecha')
-    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter})
+    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
 
 
 def agenda_duenio(request):

@@ -16,6 +16,7 @@ urlpatterns = [
     # Vista de la dueña.
     url(r'^duenio/$', views.duenio, name='duenio'),
     # Listados de la vista de la dueña.
+    url(r'^modificar_stock_duenio/(\d+)/$', views.modificar_stock_duenio, name='modificar_stock_duenio'),
     url(r'^duenio_lista_empleados/$', views.duenio_lista_empleados, name='duenio_lista_empleados'),
     url(r'^duenio_lista_clientes/$', views.duenio_lista_clientes, name='duenio_lista_clientes'),
     url(r'^duenio_lista_servicios$', views.duenio_lista_servicios, name='duenio_lista_servicios'),

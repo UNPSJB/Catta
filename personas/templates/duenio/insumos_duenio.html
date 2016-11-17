@@ -3,6 +3,43 @@
 {% load staticfiles %}
 
 {% block contenido %}
-    {% include 'insumo/listaInsumos.html' %}
+    <div class="container background-white" style="opacity: 0.95;">
+    <div class="row margin-vert-30">
+        <div class="col-md-12">
+            {% csrf_token %}
+
+            <h2><font color="Purple"><font face="arial"><center> Listado de Insumos </center></font></font></h2>
+            <form method="get" action="">
+                <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
+                <input name="marca" placeholder="Marca" value="{{ f.marca }}" class="filtro">
+                <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+            </form>
+            <table class="table table-striped">
+                <thread>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Marca</th>
+                        <th>Contenido Neto</th>
+                        <th>Stock</th>
+                        <th>Modificar Stock</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for insumo in insumos %}
+                    <tr>
+                        <td>{{insumo.nombre}}</td>
+                        <td>{{insumo.marca}}</td>
+                        <td>{{insumo.contenidoNeto}}</td>
+                        <td>{{insumo.stock}}</td>
+                        <td><a href="{% url 'modificar_stock_duenio' insumo.id %}" button type="button" class="btn btn-warning">Modificar</button onclick="goto_link ('personas/modificar_stock_duenio/1/2/')"></a></td>
+                        <td><a href="{% url 'eliminarInsumo' insumo.id %}" button type="button" class="btn btn-danger">Eliminar</button onclick="goto_link ('gestion/modificarStockInsumo/1/2/')"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
