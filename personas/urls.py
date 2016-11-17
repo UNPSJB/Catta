@@ -21,13 +21,13 @@ urlpatterns = [
     url(r'^duenio_lista_servicios$', views.duenio_lista_servicios, name='duenio_lista_servicios'),
     url(r'^duenio_lista_insumos$', views.duenio_lista_insumos, name='duenio_lista_insumos'),
     url(r'^duenio_lista_turnos/$', views.duenio_lista_turnos, name='duenio_lista_turnos'),
-    url(r'^duenio_agenda/$', views.agenda, name='agenda'),
     url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
     url(r'^duenio_agenda/$', views.agenda_duenio, name='agenda_duenio'),
     url(r'^cliente_agenda/$', views.agenda_cliente, name='agenda_cliente'),
     url(r'^empleado_agenda/$', views.agenda_empleado, name='agenda_empleado'),
     url(r'^crear_turno/$', views.crear_turno_cliente, name='crear_turno'),
     url(r'^cliente_lista_servicios$', views.cliente_lista_servicios, name='cliente_lista_servicios'),
+    url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 ]
