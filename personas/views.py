@@ -12,6 +12,8 @@ from personas.models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
 
+
+
 from django.db.models import Q
 
 """Metodo de Filtro"""
@@ -31,10 +33,66 @@ def get_filtros(modelo, datos):
 """
 Vistas del Cliente.
 """
+FORMS_CLIENTE = {
+    ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
+    ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
+
+}
 @login_required(login_url='iniciar_sesion')
 def cliente(request):
-    promociones = Promocion.objects.all()
-    return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
+    #promociones = Promocion.objects.all()
+    # return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
+
+    usuario = request.user
+    ret = 'cliente/index_cliente.html'
+    contexto = {}
+    turno = Turno.objects.get(id=1)
+    for form_name, input_name in FORMS_CLIENTE:
+        klassForm = FORMS_CLIENTE[(form_name, input_name)]
+        if request.method == "POST" and input_name in request.POST:
+            _form = klassForm(request.POST)
+            if _form.is_valid:
+                _form.save()
+                _form = klassForm()
+                redirect(usuario.get_vista())
+            contexto[form_name] = _form
+        else:
+            if input_name == 'modificar_turno':
+                _form = ModificarTurnoForm(instance=turno)
+                contexto[form_name] = _form
+            elif input_name == 'eliminar_turno':
+                _form = EliminarTurnoForm(instance=turno)
+                contexto[form_name] = _form
+            else:
+                contexto[form_name] = klassForm()
+
+    return render(request, ret, contexto)
+
+def crear_turno_cliente(request):
+    if request.method == "POST":
+        form = CrearTurnoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/cliente')
+        print(form)
+    else:
+        form = CrearTurnoForm()
+    return render(request, 'cliente/crear_turno.html', {"form": form})
+
+def agenda_cliente(request):
+    return render(request, 'cliente/agenda_cliente.html', {})
+
+def cliente_lista_servicios(request):
+    mfiltros, ffilter = get_filtros(Servicio, request.GET)
+    servicios = ServicioBasico.objects.filter(*mfiltros)
+    promociones = Promocion.objects.filter(*mfiltros)
+    insumos = Insumo.objects.all()
+    return render(request, 'cliente/servicios_cliente.html', {'servicios': servicios,
+                                                              'promociones': promociones,
+                                                              'insumos': insumos, "f": ffilter})
+
+
 
 
 FORMS_EMPLEADO = {
@@ -42,7 +100,7 @@ FORMS_EMPLEADO = {
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
-    ('form_registrar_turno_realizado', 'registrar_turno_realizado'):RegistrarTurnoRealizadoForm
+    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm
 }
 
 
@@ -55,7 +113,7 @@ def get_filtros(modelo, datos):
     valores = {}
     for key, value in datos.items():
         if value:
-            valores[key] = value
+            valores[key] = value.replace(" ", "")
             q = Q()
             for mfilter in modelo.FILTROS[key]:
                 q |= Q(**{mfilter: value})
@@ -102,13 +160,15 @@ def empleado_lista_clientes(request):
     clientes = Persona.objects.filter(cliente__isnull=False, *mfiltros)
     return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes, "f":ffilter})
 
+def agenda_empleado(request):
+    return render(request, 'empleado/agenda_empleado.html', {})
 
 def empleado_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
-    return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
+    return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
                                                             'promociones': promociones,
                                                             'insumos': insumos, "f": ffilter})
 
@@ -116,7 +176,7 @@ def empleado_lista_servicios(request):
 def empleado_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
-    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
+    return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos, "f": ffilter})
 """
 Vistas de la Dueña
 """
@@ -186,7 +246,7 @@ def duenio_lista_servicios(request):
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
-    return render(request, 'insumo/listaInsumos.html', {'insumos': insumos, "f": ffilter})
+    return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos, "f": ffilter})
 
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
@@ -194,8 +254,9 @@ def duenio_lista_turnos(request):
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter})
 
 
-def agenda(request):
+def agenda_duenio(request):
     return render(request, 'duenio/agenda_duenio.html', {})
+
 
 # TODO Ver si esto es realmente necesario.
 def nuevo_empleado(request):
@@ -231,3 +292,5 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
+def crear_turno_cliente(request):
+    return render(request, 'cliente/crear_turno.html', {})

@@ -1,67 +1,24 @@
-{% extends "base/base.html" %}
+{% extends "cliente/base_cliente.html" %}
 
 {% load staticfiles %}
 
-{% block barra %}
-    <div id="hornav" class="container no-padding">
-        <div class="row">
-            <div class="col-md-12 no-padding">
-                <div class="visible-lg">
-                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top">
-                        <li class="navbar-left">
-                            <a href="" class="fa-home">Principal</a>
-                        </li>
-                        <li class="navbar-right">
-                            <span class="fa-user-md">Cuenta</span>
-                            <ul>
-                                <li class="parent">
-                                    <a href="#">Información</a>
-                                </li>
-                                <li class="parent">
-                                    <a href="">Configuración</a>
-                                </li>
-                                <li class="parent">
-                                    <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="navbar-left">
-                            <a href="">Turnos</a>
-                        </li>
-
-                        <li class="navbar-left">
-                            <a href="{% url 'listaServicios' %}">Servicios</a>
-                        </li>
-
-                        <li class="navbar-left">
-                            <a href="">Promociones</a>
-                        </li>
-
-                        <li class="navbar-left">
-                            <a href="">Historial</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
 {% block contenido %}
-   <div id="info" class="container background-white">
+   <div id="info" class="container background-catta1" style="opacity: 0.90">
         <div class="row margin-vert-60">
             <div class="col-md-12">
                 <h2 class="text-center">Bienvenidos a Catta</h2>
                 <p class="text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
                     lobortis nisl ut aliquip ex ea commodo consequat.
                 </p>
-                <p class="text-center">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit
-                    augue duis dolore te feugait nulla facilisi. Cras non sem sem, at eleifend mi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Curabitur eget nisl
-                    a risus.
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                    lobortis nisl ut aliquip ex ea commodo consequat.
                 </p>
             </div>
         </div>
     </div>
+    <div id="content-bottom-border" class="container"></div>
+
+
     <div class="container background-transparent-lighter">
         <div class="row padding-vert-20">
             <div class="col-md-1">

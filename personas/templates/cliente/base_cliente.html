@@ -3,46 +3,46 @@
 {% load staticfiles %}
 
 {% block barra %}
-    <div id="hornav" class="container no-padding">
+      <div id="hornav" class="container no-padding">
         <div class="row">
             <div class="col-md-12 no-padding">
                 <div class="visible-lg">
-                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top" style="height: 60px">
+                    <ul id="hornavmenu" class="nav navbar-nav navbar-fixed-top">
                         <li class="navbar-left">
-                            <a href="{% url 'duenio' %}" class="fa-home">Principal</a>
+                            <a href="{% url 'cliente' %}" class="fa-home">Principal</a>
                         </li>
                         <li class="navbar-right">
                             <span class="fa-user-md">Cuenta</span>
                             <ul>
-                                <li class="">
-                                    <a href="">Información</a>
+                                <li class="parent">
+                                    <a href="#">Información</a>
                                 </li>
-                                <li class="">
+                                <li class="parent">
                                     <a href="">Configuración</a>
                                 </li>
-                                <li class="">
+                                <li class="parent">
                                     <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="navbar-left">
-                            <a href="{% url 'duenio_lista_empleados' %}" role="button" onclick="goto_link ('/duenio/duenio_lista_empleados/')">Empleados</a>
+                             <a href="{% url 'crear_turno' %}" role="button" onclick="goto_link ('/cliente/crear_turno/')">Crear Turno</a>
                         </li>
                         <li class="navbar-left">
-                            <a href="{% url 'duenio_lista_clientes' %}" role="button" onclick="goto_link ('/duenio/duenio_lista_clientes/')">Clientes</a>
+                            <a href="">Turnos</a>
                         </li>
+
                         <li class="navbar-left">
-                            <a href="{% url 'duenio_lista_servicios' %}" role="button" onclick="goto_link ('/duenio/duenio_lista_servicios/')">Servicios</a>
+                            <a href="{% url 'cliente_lista_servicios' %}" role="button" onclick="goto_link ('/cliente/cliente_lista_servicios/')">Servicios</a>
                         </li>
+
                         <li class="navbar-left">
-                            <a href="{% url 'duenio_lista_insumos' %}" role="button" onclick="goto_link ('/duenio/duenio_lista_insumos/')">Insumos</a>
+                            <a href="">Historial</a>
                         </li>
-                        <li class="navbar-left">
-                            <a href="{% url 'duenio_lista_turnos' %}" role="button" onclick="goto_link ('/duenio/duenio_lista_turnos/')">Turnos</a>
-                        </li>
+
                         <!-- AGENDA !-->
                         <li class="navbar-right">
-                            <a href="{% url 'agenda_duenio' %}" role="button" onclick="goto_link ('/duenio/agenda/')"><i class="fa fa-calendar-o"></i></a>
+                            <a href="{% url 'agenda_cliente' %}" role="button" onclick="goto_link ('/cliente/agenda/')"><i class="fa fa-calendar-o"></i></a>
                         </li>
                     </ul>
                 </div>

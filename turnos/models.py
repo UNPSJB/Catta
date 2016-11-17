@@ -5,8 +5,13 @@ from personas.models import *
 
 class Turno(models.Model):
     FILTROS = {
-        "cliente": [ "cliente__persona__nombre__icontains", "cliente__persona__apellido__icontains" ],
-        "empleado": [ "empleado__persona__nombre__icontains", "empleado__persona__apellido__icontains" ],
+        "fechaI": ["fecha__date__gte"],
+        "fechaF": ["fecha__date__lte"],
+        "estado": ["estado__icontains"],
+        "clienteN": [ "cliente__persona__nombre__icontains"],
+        "clienteA": ["cliente__persona__apellido__icontains"],
+        "empleadoN": ["empleado__persona__nombre__icontains"],
+        "empleadoA": [ "empleado__persona__apellido__icontains"],
         "servicio": [ "servicios__nombre__icontains" ]
     }
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.

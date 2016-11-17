@@ -88,6 +88,9 @@ def eliminarInsumo(request, id):
         if insumos.first == None :
             insumo.delete()
             return redirect('/personas/duenio_lista_insumos')
+        else:
+            print('asd')
+            messages.warning(request, 'no se puede eliminar el insumo')
     return render(request, 'insumo/eliminarInsumo.html', {'insumo': insumo})
 
 def detalleServicio(request, id):
