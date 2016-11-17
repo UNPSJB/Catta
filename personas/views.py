@@ -160,6 +160,8 @@ def empleado_lista_clientes(request):
     clientes = Persona.objects.filter(cliente__isnull=False, *mfiltros)
     return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes, "f":ffilter})
 
+def agenda_empleado(request):
+    return render(request, 'empleado/agenda_empleado.html', {})
 
 def empleado_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
