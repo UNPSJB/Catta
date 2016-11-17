@@ -292,5 +292,3 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
-def crear_turno_cliente(request):
-    return render(request, 'cliente/crear_turno.html', {})
