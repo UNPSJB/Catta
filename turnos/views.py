@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.http import JsonResponse
 from turnos.forms import ModificarTurnoForm, DetalleTurnoForm
 from turnos.models import Turno
+from gestion.models import ServicioBasico, Promocion
 from django.core import serializers
 
 import datetime
@@ -22,7 +23,10 @@ def manejador_fechas(fecha):
     raise TypeError("Tipo desconocido")
 
 
-def devuelvo_turnos_libres(request, fecha=datetime.datetime(2016, 1, 1, 0, 0, 0)):
+def devuelvo_turnos_libres(request,
+                           fecha=datetime.datetime(2016, 1, 1, 0, 0, 0),
+                           servicios=[1, 2, 3],
+                           promociones=[1, 2, 3]):
     """
     Compone una lista con todos los posibles módulos en un día laboral normal.
 
@@ -45,11 +49,16 @@ def devuelvo_turnos_libres(request, fecha=datetime.datetime(2016, 1, 1, 0, 0, 0)
             modulos.append(fecha)
             fecha = fecha + delta_minutos
 
-    # Compone la respuesta en json..
+    # Obtiene la duración de los servicios elegidos en conjunto.
+    duracion_servicios = 0
+    for i in servicios:
+        servicio = Servicio.objects.all().filter(id=i)
+        duracion_servicios += servicio.get_duracion()
+
+    # Compone la respuesta en json.
     for turno in Turno.objects.all().filter(fecha__day=fecha.day):
         inicio_turno = turno.fecha
         fin_turno = turno.get_duracion()
-
         for m in modulos:
             dato = {}
             if m < fin_turno and m >= inicio_turno:
