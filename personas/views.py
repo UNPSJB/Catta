@@ -74,7 +74,6 @@ def crear_turno_cliente(request):
     if request.method == "POST":
         form = CrearTurnoClienteForm(request.POST)
         if form.is_valid():
-            #form.cliente =
             print(request.user.persona.cliente)
             form.save()
             return redirect('/personas/cliente')
