@@ -17,11 +17,10 @@ $(document).ready(function() {
         eventLimit: true, // allow "more" link when too many events
 
         eventClick: function(event) {
-
             $("#myModal").modal('show');
         },
 
-        events: function(start, end, timezone, callback) {
+        events: function(start, end, timezone callback) {
             $.ajax({
                 url: URL_EVENTOS,
                 dataType: 'json',

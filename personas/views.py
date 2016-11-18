@@ -83,8 +83,9 @@ def crear_turno_cliente(request):
         form.fields['cliente'].widget = forms.HiddenInput()
     return render(request, 'cliente/crear_turno.html', {"form": form})
 
-def agenda_cliente(request):
-    return render(request, 'cliente/agenda_cliente.html', {})
+def agenda_cliente(request,id=1):
+    turno = get_object_or_404(Turno, pk=id)
+    return render(request, 'cliente/agenda_cliente.html', {'turno':turno})
 
 def cliente_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
@@ -256,7 +257,7 @@ def duenio_lista_turnos(request):
 
 
 def agenda_duenio(request):
-    return render(request, 'duenio/agenda_duenio.html', {})
+    return render(request, 'duenio/agenda_duenio.html')
 
 
 # TODO Ver si esto es realmente necesario.
