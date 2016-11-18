@@ -6,6 +6,13 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay,listWeek'
         },
+         eventClick:  function(event, jsEvent, view) {
+            $('#modalTitle').html(event.title);
+            $('#modalBody').html("Empleado: " + event.empleado + "<br>" + "Cliente: " + event.title);
+            //$('#modalBody1').html("Empleado: " + event.empleado);
+            //$('#modalBody2').html("Empleado: " + event.empleado);
+            $('#fullCalModal').modal();
+        },
         defaultDate: '2016-11-07',
         navLinks: true, // can click day/week names to navigate views
 
@@ -15,11 +22,6 @@ $(document).ready(function() {
         lang: 'es',
         editable: false,
         eventLimit: true, // allow "more" link when too many events
-
-        eventClick: function(event) {
-
-            $("#myModal").modal('show');
-        },
 
         events: function(start, end, timezone, callback) {
             $.ajax({
