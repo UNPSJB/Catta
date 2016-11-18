@@ -48,6 +48,9 @@ class ServicioBasico(Servicio):
     def get_duracion(self):
         return self.duracion * self.MODULO
 
+    def get_nombre(self):
+        return str(self.nombre)
+
 
 class Promocion(Servicio):
     servicios = models.ManyToManyField(ServicioBasico)
@@ -65,3 +68,6 @@ class Promocion(Servicio):
             duracion += servicio.get_duracion()
 
         return duracion
+
+    def get_nombre(self):
+        return str(self.nombre)

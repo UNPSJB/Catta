@@ -46,6 +46,25 @@ class Turno(models.Model):
     def get_cliente(self):
         return str(self.cliente)
 
+    def get_empleado(self):
+        return str(self.empleado)
+
+
+    def get_servicios(self):
+        servicios = self.servicios.all()
+        nombres = ""
+        for servicio in servicios:
+            nombres += servicio.get_nombre()
+        return str(nombres)
+
+    def get_promociones(self):
+        promociones = self.promociones.all()
+        nombres = ""
+        for promocion in promociones:
+            nombres += promocion.get_nombre()
+        return str(nombres)
+
+
     def get_duracion(self):
         servicios = self.servicios.all()
         duracion = self.fecha

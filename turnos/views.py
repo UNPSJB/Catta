@@ -89,7 +89,12 @@ def devuelvo_turnos(request):
             'start': turno.fecha,
             'end': turno.get_duracion(),
             'title': turno.get_cliente(),
-            'color': "#f984ce"
+            'color': "#f984ce",
+            'empleado': turno.get_empleado(),
+            'cliente': turno.get_cliente(),
+            'servicios': turno.get_servicios(),
+            'promociones': turno.get_promociones(),
+            'fecha': turno.fecha,
         }
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})
