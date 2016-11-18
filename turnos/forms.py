@@ -17,42 +17,6 @@ class CrearTurnoForm(ModelForm):
         fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}
 
 
-class CrearTurnoClienteForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(CrearTurnoClienteForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('crear_turno_cliente', 'Crear Turno Cliente'))
-
-    class Meta:
-        model = Turno
-        fields = {"fecha", "empleado", "servicios", "promociones"}
-
-    class Meta:
-        model = Turno
-        fields = [
-            'fecha',
-            'cliente',
-            'servicios',
-            'promociones',
-            'empleado'
-        ]
-        labels = {
-            'fecha': 'Fecha del Turno',
-            'cliente': 'Cliente ',
-            'servicios': 'Servicios',
-            'promociones': 'Promociones',
-            'empleado': 'Empleado'
-        }
-        widgets = {
-            'fecha': forms.TextInput(attrs={'class':'form-control'}),
-            'empleado': forms.Select(attrs={'class':'form-control'}),
-            'cliente': forms.Select(attrs={'class':'form-control', 'type':'hidden'}),
-            'servicios': forms.CheckboxSelectMultiple(),
-            'promociones': forms.CheckboxSelectMultiple(),
-        }
-
-
 class ModificarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ModificarTurnoForm, self).__init__(*args, **kwargs)
@@ -108,11 +72,8 @@ class RegistrarTurnoRealizadoForm(ModelForm):
     class Meta:
         model = Turno
         fields = [
-            'fecha',
-            'cliente',
             'servicios',
-            'promociones',
-            'empleado'
+            'promociones'
         ]
         labels = {
             'fecha': 'Fecha del Turno',
@@ -128,3 +89,8 @@ class RegistrarTurnoRealizadoForm(ModelForm):
             'servicios': forms.CheckboxSelectMultiple(),
             'promociones': forms.CheckboxSelectMultiple(),
         }
+
+    def save(self, usuario, commit=True):
+        turno = super().save(commit=False)
+        turno.save()
+        return turno

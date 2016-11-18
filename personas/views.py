@@ -7,7 +7,7 @@ from django import forms
 
 from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoClienteForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
 
 from personas.models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
@@ -35,7 +35,7 @@ def get_filtros(modelo, datos):
 Vistas del Cliente.
 """
 FORMS_CLIENTE = {
-    ('form_crear_turno_cliente', 'crear_turno_cliente'): CrearTurnoClienteForm,
+    ('form_crear_turno_cliente', 'crear_turno_cliente'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
 
@@ -72,7 +72,7 @@ def cliente(request):
 
 def crear_turno_cliente(request):
     if request.method == "POST":
-        form = CrearTurnoClienteForm(request.POST)
+        form = CrearTurnoForm(request.POST)
         if form.is_valid():
             print(request.user.persona.cliente)
             form.save()
@@ -95,7 +95,10 @@ def cliente_lista_servicios(request):
                                                               'promociones': promociones,
                                                               'insumos': insumos, "f": ffilter})
 
-
+def cliente_lista_turnos(request):
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros).order_by('fecha')
+    return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
 
 
 FORMS_EMPLEADO = {
@@ -114,31 +117,29 @@ Vistas del Empleado.
 
 
 @login_required(login_url='iniciar_sesion')
-def empleado(request):
+def empleado(request, id=None):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
     contexto = {}
-    turno = Turno.objects.get(id=1)
-    print(turno)
+    instance = id and get_object_or_404(Turno, id=id)
     for form_name, input_name in FORMS_EMPLEADO:
         klassForm = FORMS_EMPLEADO[(form_name, input_name)]
-        print('estoy')
         if request.method == "POST" and input_name in request.POST:
-            _form = klassForm(request.POST)
+            _form = klassForm(request.POST, instance=instance)
             if _form.is_valid:
-                _form.save()
+                _form.save(usuario)
                 _form = klassForm()
                 redirect(usuario.get_vista())
             contexto[form_name] = _form
         else:
             if input_name == 'modificar_turno':
-                _form = ModificarTurnoForm(instance=turno)
+                _form = ModificarTurnoForm(instance=instance)
                 contexto[form_name] = _form
             elif input_name == 'registrar_turno_realizado':
-                _form = RegistrarTurnoRealizadoForm(instance=turno)
+                _form = RegistrarTurnoRealizadoForm(instance=instance)
                 contexto[form_name] = _form
             elif input_name == 'eliminar_turno':
-                _form = EliminarTurnoForm(instance=turno)
+                _form = EliminarTurnoForm(instance=instance)
                 contexto[form_name] = _form
             else:
                 contexto[form_name] = klassForm()
