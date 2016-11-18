@@ -22,6 +22,7 @@
                             <th>Direccion</th>
                             <th>Teléfono</th>
                             <th>Localidad</th>
+                            <th>E-Mail</th>
                         </tr>
                     </thread>
                     <tbody>
@@ -32,6 +33,7 @@
                             <td>{{cliente.direccion}}</td>
                             <td>{{cliente.telefono}}</td>
                             <td>{{cliente.localidad}}</td>
+                            <td>{{cliente.cliente.email}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

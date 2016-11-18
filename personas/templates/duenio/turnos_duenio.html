@@ -46,7 +46,8 @@
                                 <th>Empleado</th>
                                 <th>Estado</th>
                                 <th>Servicios</th>
-                                <th>Confirmación</th>
+                                <th>Confirmar</th>
+                                <th>Cancelar</th>
 
                             </tr>
                         </thread>
@@ -57,14 +58,23 @@
                                 <td>{{turno.cliente}}</td>
                                 <td>{{turno.empleado}}</td>
                                 <td>{{turno.estado}}</td>
-                                <td>
+                                <td width=200>
                                     {% for servicio in turno.servicios.all %}
                                        <li> {{servicio}}
                                     {% endfor %}
                                 </td>
+
                                 <td>
                                     {% if turno.fecha_confirmacion == null %}
-                                        <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                        {% if turno.fecha_cancelacion == null %}
+                                            <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    {% if turno.fecha_cancelacion == null %}
+                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
                                     {% endif %}
                                 </td>
 

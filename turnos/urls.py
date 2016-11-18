@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^calendario/$', views.calendario, name='calendario'),
   #  url(r'^detalle_turno/$', views.detalle_turno, name='detalle_turno'),
     url(r'^confirmar_turno/(\d+)/$', views.confirmar_turno, name='confirmar_turno'),
+    url(r'^cancelar_turno/(\d+)/$', views.cancelar_turno, name='cancelar_turno'),
     url(r'^calendario/$', views.calendario, name='calendario')
 ]

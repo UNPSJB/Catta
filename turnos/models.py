@@ -58,11 +58,11 @@ class Turno(models.Model):
         if self.fecha_realizacion is not None:
             return "Realizado"
         else:
-            if self.fecha_confirmacion is not None:
-                return "Confirmado"
+            if self.fecha_cancelacion is not None :
+                return "Cancelado"
             else:
-                if self.fecha_cancelacion is not None:
-                    return "Cancelado"
+                if self.fecha_confirmacion is not None:
+                    return "Confirmado"
                 else:
                     return "Sin Confirmar"
 

@@ -112,6 +112,15 @@ def modificar_turno(request, id_turno=1):
     return render(request, ret, {"form": form})
 
 
+def cancelar_turno(request, id):
+        if request.method == "POST":
+            turno = get_object_or_404(Turno, pk=id)
+            turno.cancelar_turno()
+            turno.save()
+            return redirect('/personas/duenio_lista_turnos')
+        else:
+            turno = get_object_or_404(Turno, pk=id)
+        return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno})
 def listaTurnosFecha(request):
 
     turnos = Turno.objects.all()
