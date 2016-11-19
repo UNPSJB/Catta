@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^nuevo_empleado/$', views.nuevo_empleado, name='nuevo_empleado'),  # TODO Ver si esto realmente es necesario.
     # Vista del empleado.
     url(r'^empleado/$', views.empleado, name='empleado'),
+    url(r'^empleado/(\d+)/$', views.empleado, name='empleado'),
     # Listados de la vista del empleado.
     url(r'^empleado_lista_clientes/$', views.empleado_lista_clientes, name='empleado_lista_clientes'),
     url(r'^empleado_lista_servicios$', views.empleado_lista_servicios, name='empleado_lista_servicios'),
@@ -29,6 +30,7 @@ urlpatterns = [
     url(r'^crear_turno/$', views.crear_turno_cliente, name='crear_turno'),
     url(r'^cliente_lista_servicios$', views.cliente_lista_servicios, name='cliente_lista_servicios'),
     url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
+    url(r'^cliente_lista_turnos/$', views.cliente_lista_turnos, name='cliente_lista_turnos'),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 ]

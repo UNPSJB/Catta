@@ -3,7 +3,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
-from personas.models import Persona, Usuario, Cliente, Empleado
+from .models import Persona, Usuario, Cliente, Empleado
 from gestion.models import Sector
 
 
@@ -40,7 +40,7 @@ class CuentaNuevaForm(forms.ModelForm):
             u.save()
             p.save()
 
-        return p
+        return p.usuario
 
     def clean(self):
         datos = super(CuentaNuevaForm, self).clean()

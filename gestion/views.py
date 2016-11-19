@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from gestion.forms import SectorForm
-from gestion.forms import InsumoForm
-from gestion.forms import ServicioForm
-from gestion.models import ServicioBasico
-from gestion.models import Insumo
+from .forms import SectorForm
+from .forms import InsumoForm
+from .forms import ServicioForm
+from .models import ServicioBasico
+from .models import Insumo
 from django.db.models import Q
 from django.contrib import messages
-
 
 
 def sector(request):
@@ -81,6 +80,7 @@ def modificarStockInsumo(request, id):
         insumo = get_object_or_404(Insumo, pk=id)
     return render(request, 'insumo/modificarStockInsumo.html', {'insumo': insumo})
 
+
 def eliminarInsumo(request, id):
     insumo = get_object_or_404(Insumo, pk=id)
     insumos = insumo.serviciobasico_set.all()
@@ -92,6 +92,7 @@ def eliminarInsumo(request, id):
             print('asd')
             messages.warning(request, 'no se puede eliminar el insumo')
     return render(request, 'insumo/eliminarInsumo.html', {'insumo': insumo})
+
 
 def detalleServicio(request, id):
     servicio = get_object_or_404(ServicioBasico, nombre=id)

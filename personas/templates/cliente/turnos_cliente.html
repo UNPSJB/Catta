@@ -1,0 +1,77 @@
+{% extends 'cliente/base_cliente.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+                <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
+
+
+                <!-- FILTRADO !-->
+                <form method="get" action="">
+
+                    Empleado:
+                    <input name="empleadoN" placeholder="Nombre" value="{{ f.empleadoN }}" class="filtro">
+                    <input name="empleadoA" placeholder="Apellido" value="{{ f.empleadoA }}" class="filtro">
+                    <br>
+                    Desde:
+                    <input name="fechaI" type="date" placeholder="Desde (aaa-mm-dd)" value="{{ f.fechaI }}" class="filtro">
+                    Hasta:
+                    <input name="fechaF" type="date" placeholder="Hasta (aaa-mm-dd)" value="{{ f.fechaF }}" class="filtro">
+                    Servicio:
+                    <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
+                    Estado:
+                    <select name="estado">
+                      <option value=""></option>
+                      <option value="Realizado">Realizado</option>
+                      <option value="Confirmado">Confirmado</option>
+                      <option value="Cancelado">Cancelado</option>
+                      <option value="Sin Confirma">Sin Confirma</option>
+                    </select>
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
+                </form>
+                <!--FIN FILTRADO!-->
+
+
+                    <table class="table table-striped">
+                        <thread>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Cliente</th>
+                                <th>Empleado</th>
+                                <th>Estado</th>
+                                <th>Servicios</th>
+                                <th>Confirmación</th>
+
+                            </tr>
+                        </thread>
+                        <tbody>
+                            {% for turno in turnos %}
+                            <tr>
+                                <td>{{turno.fecha}}</td>
+                                <td>{{turno.cliente}}</td>
+                                <td>{{turno.empleado}}</td>
+                                <td>{{turno.estado}}</td>
+                                <td>
+                                    {% for servicio in turno.servicios.all %}
+                                        {{servicio}}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if turno.fecha_confirmacion == null %}
+                                        <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                    {% endif %}
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
