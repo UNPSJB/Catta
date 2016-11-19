@@ -1,8 +1,8 @@
 from django.forms import ModelForm
 from django import forms
-from gestion.models import Sector
-from gestion.models import Insumo
-from gestion.models import ServicioBasico, Promocion
+from .models import Sector
+from .models import Insumo
+from .models import ServicioBasico, Promocion
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 

@@ -1,21 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django import forms
 
-from personas.forms import CuentaNuevaForm, EmpleadoNuevoForm
+from .forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
 
-from personas.models import Persona, Empleado
+from .models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
 from django.db.models import Q
 
-"""Metodo de Filtro"""
 
+"""Metodo de Filtro"""
 def get_filtros(modelo, datos):
     filtros = []
     valores = {}
@@ -70,6 +70,7 @@ def cliente(request):
 
     return render(request, ret, contexto)
 
+
 def crear_turno_cliente(request):
     if request.method == "POST":
         form = CrearTurnoForm(request.POST)
@@ -83,8 +84,10 @@ def crear_turno_cliente(request):
         form.fields['cliente'].widget = forms.HiddenInput()
     return render(request, 'cliente/crear_turno.html', {"form": form})
 
+
 def agenda_cliente(request):
     return render(request, 'cliente/agenda_cliente.html', {})
+
 
 def cliente_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
@@ -94,6 +97,7 @@ def cliente_lista_servicios(request):
     return render(request, 'cliente/servicios_cliente.html', {'servicios': servicios,
                                                               'promociones': promociones,
                                                               'insumos': insumos, "f": ffilter})
+
 
 def cliente_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
@@ -106,7 +110,8 @@ FORMS_EMPLEADO = {
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
-    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm
+    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
+    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
 }
 
 
@@ -152,8 +157,10 @@ def empleado_lista_clientes(request):
     clientes = Persona.objects.filter(cliente__isnull=False, *mfiltros)
     return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes, "f":ffilter})
 
+
 def agenda_empleado(request):
     return render(request, 'empleado/agenda_empleado.html', {})
+
 
 def empleado_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
@@ -210,6 +217,7 @@ def duenio_lista_empleados(request):
     empleados = Persona.objects.filter(empleado__isnull=False, *mfiltros)
     return render(request, 'empleado/listaEmpleados.html', {'empleados': empleados, "f": ffilter})
 
+
 def modificarComision(request, id):
     persona = get_object_or_404(Persona, pk=id)
     if request.method == "POST":
@@ -219,6 +227,7 @@ def modificarComision(request, id):
     else:
         persona = get_object_or_404(Persona, pk=id)
     return render(request, 'empleado/modificarComision.html', {'persona': persona})
+
 
 def duenio_lista_clientes(request):
     mfiltros, ffilter = get_filtros(Persona, request.GET)
@@ -235,6 +244,7 @@ def duenio_lista_servicios(request):
                                                             'promociones': promociones,
                                                              'insumos': insumos, "f": ffilter})
 
+
 def modificar_stock_duenio(request, id):
     insumo = get_object_or_404(Insumo, pk=id)
     if request.method == "POST":
@@ -245,10 +255,12 @@ def modificar_stock_duenio(request, id):
         insumo = get_object_or_404(Insumo, pk=id)
     return render(request, 'duenio/modificar_stock_duenio.html', {'insumo': insumo})
 
+
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos, "f": ffilter})
+
 
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
@@ -278,8 +290,7 @@ def cuenta(request):
     if request.method == "POST":
         form = CuentaNuevaForm(request.POST)
         if form.is_valid():
-            form.save()
-            usuario = request.user
+            usuario = form.save()
             login(request, usuario)
 
             return redirect(usuario.get_vista())
@@ -292,5 +303,3 @@ def cuenta(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
-
-

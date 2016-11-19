@@ -12,7 +12,7 @@ class Sector(models.Model):
 
 class Insumo (models.Model):
     FILTROS = {
-        "nombre": [ "nombre__icontains" ],
+        "nombre": ["nombre__icontains"],
         "marca": ["marca__icontains"]
     }
     nombre = models.CharField(max_length=100)
@@ -26,13 +26,14 @@ class Insumo (models.Model):
 
 class Servicio(models.Model):
     FILTROS = {
-        "nombre": [ "nombre__icontains" ],
+        "nombre": ["nombre__icontains"],
     }
+
     class Meta:
         abstract = True
 
     MODULO = timedelta(minutes=15)
-    nombre = models.CharField(primary_key=True, max_length=100)
+    nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=100)
     precio = models.IntegerField(default=0)
     sector = models.ForeignKey(Sector, null=True, blank=True)
@@ -62,9 +63,9 @@ class Promocion(Servicio):
     ancho_imagen = models.IntegerField(default=0)
 
     def get_duracion(self):
-        duracion = 0
+        duracion = timedelta()
 
-        for servicio in self.servicios:
+        for servicio in self.servicios.all():
             duracion += servicio.get_duracion()
 
         return duracion
