@@ -66,10 +66,17 @@ def devuelvo_turnos_libres(request):
                 horarios.remove(hora)
 
     # Compone el JSON y lo devuelve.
+    datos_json = []
     for hora in horarios:
-        print(hora)
+        dato = {
+            'estado': 'libre',
+            'hora': hora.hour,
+            'mins': hora.minute,
+            'color': '#5cb85c'
+        }
+        datos_json.append(dato)
 
-    return HttpResponse('')
+    return JsonResponse({'modulos': datos_json})
 
     """
     horas_habiles = [9, 10, 11, 12, 16, 17, 18, 19]
