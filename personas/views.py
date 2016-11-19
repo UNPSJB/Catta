@@ -42,7 +42,8 @@ FORMS_CLIENTE = {
 }
 @login_required(login_url='iniciar_sesion')
 def cliente(request):
-    #promociones = Promocion.objects.all()
+
+    promociones = Promocion.objects.all()
     # return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
 
     usuario = request.user
@@ -67,6 +68,7 @@ def cliente(request):
                 contexto[form_name] = _form
             else:
                 contexto[form_name] = klassForm()
+    contexto = {'promociones': promociones}
 
     return render(request, ret, contexto)
 
