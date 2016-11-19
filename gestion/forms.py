@@ -40,7 +40,7 @@ class ServicioForm(ModelForm):
 
     class Meta:
         model = ServicioBasico
-        fields = {"nombre", "descripcion", "precio", "duracion", "insumos"}
+        fields = {"sector", "nombre", "descripcion", "precio", "duracion", "insumos"}
 
 
 class PromoForm(ModelForm):
