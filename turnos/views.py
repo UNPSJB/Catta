@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timedelta
 from django.http import JsonResponse
-from turnos.forms import ModificarTurnoForm, DetalleTurnoForm
-from turnos.models import Turno
-from gestion.models import ServicioBasico, Promocion
+from .forms import ModificarTurnoForm
+from .models import Turno
+from gestion.models import ServicioBasico
 from django.core import serializers
 
 import datetime
@@ -23,16 +23,13 @@ def manejador_fechas(fecha):
     raise TypeError("Tipo desconocido")
 
 
-def devuelvo_turnos_libres(request,
-                           fecha=datetime.datetime(2016, 1, 1, 0, 0, 0),
-                           servicios=[1, 2, 3],
-                           promociones=[1, 2, 3]):
-    """
-    Compone una lista con todos los posibles módulos en un día laboral normal.
+def devuelvo_turnos_libres(request, fecha=datetime.datetime(2016, 1, 1, 0, 0, 0),
+                           servicios=["Lavado de pelo", "Teñida"], promociones=[1, 2, 3]):
+    print(request.GET)
+    print(request.GET["dia"])
+    print(request.GET.getlist("promocion[]"))
+    print(request.GET.getlist("servicio[]"))
 
-    Luego recorre los turnos dados en ese día, quitando de la lista los
-    módulos que ya estan ocupados.
-    """
     horas_habiles = [9, 10, 11, 12, 16, 17, 18, 19]
     fecha = datetime.datetime(fecha.year, fecha.month, fecha.day, 9, 0, 0)
     modulos = []
@@ -50,10 +47,11 @@ def devuelvo_turnos_libres(request,
             fecha = fecha + delta_minutos
 
     # Obtiene la duración de los servicios elegidos en conjunto.
-    duracion_servicios = 0
+    duracion_servicios = timedelta(0)
     for i in servicios:
-        servicio = Servicio.objects.all().filter(id=i)
-        duracion_servicios += servicio.get_duracion()
+        servicio = ServicioBasico.objects.all().filter(pk=i)
+        duracion_servicios += servicio.first().get_duracion()
+    print(duracion_servicios)
 
     # Compone la respuesta en json.
     for turno in Turno.objects.all().filter(fecha__day=fecha.day):
@@ -62,13 +60,13 @@ def devuelvo_turnos_libres(request,
         for m in modulos:
             dato = {}
             if m < fin_turno and m >= inicio_turno:
-                if turno.estado() == "Confirmado":   # Si el turno esta confirmado.
+                if turno.estado() == "Confirmado":  # Si el turno esta confirmado.
                     dato['estado'] = 'confirmado'
                     dato['color'] = '#d9534f'
-                else:   # Si el turno no esta confirmado.
+                else:  # Si el turno no esta confirmado.
                     dato['estado'] = 'no-confirmado'
                     dato['color'] = '#f0ad4e'
-            else:   # Si el módulo esta libre.
+            else:  # Si el módulo esta libre.
                 dato['estado'] = 'libre'
                 dato['color'] = '#5cb85c'
             dato['hora'] = m.hour
@@ -80,8 +78,6 @@ def devuelvo_turnos_libres(request,
 
 
 def devuelvo_turnos(request):
-    print(request.GET["start"])
-    print(request.GET["end"])
     datos = []
     for turno in Turno.objects.all():
         datos_turno = {
@@ -105,25 +101,22 @@ def modificar_turno(request, id_turno=1):
     # usuario = request.user()
     ret = "empleado/index_empleado.html"
     if request.method == "POST":
-        print('cagamos')
         form = ModificarTurnoForm(request.POST, instance=turno)
         if form.is_valid:
             form.save()
             redirect('')
     else:
         form = ModificarTurnoForm(instance=turno)
-        print('entre')
 
     return render(request, ret, {"form": form})
 
 
 def listaTurnosFecha(request):
-
     turnos = Turno.objects.all()
-    return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos':turnos})
+    return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})
 
 
-#def confirmar_turno(request, id):
+# def confirmar_turno(request, id):
 #    if request.method == "POST":
 #        turno = get_object_or_404(Turno, pk=id)
 #        turno.confirmar_turno()
@@ -142,13 +135,13 @@ def confirmar_turno(request, id):
         return redirect('/personas/duenio_lista_turnos')
     else:
         turno = get_object_or_404(Turno, pk=id)
-    return render(request, 'confirmarTurno/confirmar_turno.html', {'turno':turno})
-
+    return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno})
 
 
 def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
+
 
 """def detalle_turno(request, id=1):
     turno = get_object_or_404(Turno, pk=id)

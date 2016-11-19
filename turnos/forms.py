@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from turnos.models import Turno
+from .models import Turno
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -22,22 +22,24 @@ class ModificarTurnoForm(ModelForm):
         super(ModificarTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('modificar_turno','Modificar Turno'))
+        self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
 
     class Meta:
         model = Turno
         fields = {"fecha", "empleado", "servicios", "promociones"}
+
 
 class EliminarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(EliminarTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        #self.helper.add_input(Submit('eliminar_turno','Eliminar Turno'))
+        # self.helper.add_input(Submit('eliminar_turno','Eliminar Turno'))
 
     class Meta:
         model = Turno
         fields = {"fecha", "empleado", "servicios", "promociones"}
+
 
 class DetalleTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -50,12 +52,13 @@ class DetalleTurnoForm(ModelForm):
         model = Turno
         fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}
 
+
 class ConfirmarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ConfirmarTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('confirmar_turno','Confirmar Turno'))
+        self.helper.add_input(Submit('confirmar_turno', 'Confirmar Turno'))
 
     class Meta:
         model = Turno
@@ -83,14 +86,14 @@ class RegistrarTurnoRealizadoForm(ModelForm):
             'empleado': 'Empleado'
         }
         widgets = {
-            'fecha': forms.TextInput(attrs={'class':'form-control'}),
-            'empleado': forms.Select(attrs={'class':'form-control'}),
-            'cliente': forms.Select(attrs={'class':'form-control'}),
+            'fecha': forms.TextInput(attrs={'class': 'form-control'}),
+            'empleado': forms.Select(attrs={'class': 'form-control'}),
+            'cliente': forms.Select(attrs={'class': 'form-control'}),
             'servicios': forms.CheckboxSelectMultiple(),
             'promociones': forms.CheckboxSelectMultiple(),
         }
 
-    def save(self, usuario, commit=True):
+    def save(self, commit=True):
         turno = super().save(commit=False)
         turno.save()
         return turno

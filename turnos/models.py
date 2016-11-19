@@ -1,7 +1,7 @@
-
 import datetime
 from personas.models import *
 from django.db.models import Q
+
 
 class Turno(models.Model):
     CONFIRMADO = 2
@@ -49,7 +49,6 @@ class Turno(models.Model):
     def get_empleado(self):
         return str(self.empleado)
 
-
     def get_servicios(self):
         servicios = self.servicios.all()
         nombres = ""
@@ -63,7 +62,6 @@ class Turno(models.Model):
         for promocion in promociones:
             nombres += promocion.get_nombre()
         return str(nombres)
-
 
     def get_duracion(self):
         servicios = self.servicios.all()

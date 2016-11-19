@@ -12,7 +12,7 @@ class Sector(models.Model):
 
 class Insumo (models.Model):
     FILTROS = {
-        "nombre": [ "nombre__icontains" ],
+        "nombre": ["nombre__icontains"],
         "marca": ["marca__icontains"]
     }
     nombre = models.CharField(max_length=100)
@@ -26,8 +26,9 @@ class Insumo (models.Model):
 
 class Servicio(models.Model):
     FILTROS = {
-        "nombre": [ "nombre__icontains" ],
+        "nombre": ["nombre__icontains"],
     }
+
     class Meta:
         abstract = True
 
@@ -64,7 +65,7 @@ class Promocion(Servicio):
     def get_duracion(self):
         duracion = 0
 
-        for servicio in self.servicios:
+        for servicio in self.servicios.all():
             duracion += servicio.get_duracion()
 
         return duracion
