@@ -10,9 +10,6 @@ $(document).ready(function() {
             $('#modalTitle').html("Turno del dia: " + event.fecha);
             $('#modalBody').html("Empleado: " + event.empleado + "<br>" + "Cliente: " + event.cliente + "<br>" +
                                  "Servicios: " + event.servicios + "<br>" + "Promociones: " + event.promociones);
-                                  //"Servicios: " + event.servicios  );
-            //$('#modalBody1').html("Empleado: " + event.empleado);
-            //$('#modalBody2').html("Empleado: " + event.empleado);
             $('#fullCalModal').modal();
         },
         defaultDate: '2016-11-07',
