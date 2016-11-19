@@ -54,11 +54,20 @@ def devuelvo_turnos_libres(request):
     # Quita de los horarios disponibles del día los que estan ocupados.
     turnos = Turno.objects.all().filter(fecha__day=fecha_ingresada.day)
     if turnos:
-        turno = turnos.first()
-        inicio_turno = turno.fecha
-        fin_turno = turno.get_duracion()
-        print(inicio_turno)
-        print(fin_turno)
+        lista_turnos = []
+        for turno in turnos:
+            info = {
+                'inicio': turno.fecha.time(),
+                'fin': turno.get_duracion().time()
+            }
+            lista_turnos.append(info)
+        for hora in reversed(horarios):
+            if any(hora.time() >= dato['inicio'] and hora.time() < dato['fin'] for dato in lista_turnos):
+                horarios.remove(hora)
+
+    # Compone el JSON y lo devuelve.
+    for hora in horarios:
+        print(hora)
 
     return HttpResponse('')
 
