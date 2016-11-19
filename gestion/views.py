@@ -75,7 +75,7 @@ def modificarStockInsumo(request, id):
     if request.method == "POST":
         insumo.stock = request.POST['stockNuevo']
         insumo.save()
-        return redirect('/personas/duenio_lista_insumos')
+        return redirect('/personas/empleado_lista_insumos')
     else:
         insumo = get_object_or_404(Insumo, pk=id)
     return render(request, 'insumo/modificarStockInsumo.html', {'insumo': insumo})

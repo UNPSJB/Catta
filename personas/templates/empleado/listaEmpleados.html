@@ -17,6 +17,7 @@
             <table class="table table-striped">
                 <thread>
                     <tr>
+                        <th>DNI</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Direccion</th>
@@ -30,6 +31,7 @@
                 <tbody>
                     {% for empleado in empleados %}
                     <tr>
+                        <td>{{empleado.dni}}</td>
                         <td>{{empleado.nombre}}</td>
                         <td>{{empleado.apellido}}</td>
                         <td>{{empleado.direccion}}</td>

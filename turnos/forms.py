@@ -12,6 +12,17 @@ class CrearTurnoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
 
+    def clean(self):
+        datos = super(CrearTurnoForm, self).clean()
+
+        p1 = datos.get('servicios')
+        p2 = datos.get('promociones')
+
+        if ((not p1) and (not p2)):
+            raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
+
+        return datos
+
     class Meta:
         model = Turno
         fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}

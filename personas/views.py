@@ -162,6 +162,13 @@ def agenda_empleado(request):
     return render(request, 'empleado/agenda_empleado.html', {})
 
 
+def empleado_lista_turnos(request):
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    usuario = request.user
+    turnos = Turno.objects.filter(empleado__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
+    return render(request, 'empleado/turnos_empleado.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
+
+
 def empleado_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
     servicios = ServicioBasico.objects.filter(*mfiltros)

@@ -17,6 +17,7 @@
                 <table class="table table-striped">
                     <thread>
                         <tr>
+                            <th>DNI</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Direccion</th>
@@ -28,6 +29,7 @@
                     <tbody>
                         {% for cliente in clientes %}
                         <tr>
+                            <td>{{cliente.dni}}</td>
                             <td>{{cliente.nombre}}</td>
                             <td>{{cliente.apellido}}</td>
                             <td>{{cliente.direccion}}</td>

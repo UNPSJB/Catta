@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^empleado_lista_clientes/$', views.empleado_lista_clientes, name='empleado_lista_clientes'),
     url(r'^empleado_lista_servicios$', views.empleado_lista_servicios, name='empleado_lista_servicios'),
     url(r'^empleado_lista_insumos$', views.empleado_lista_insumos, name='empleado_lista_insumos'),
+    url(r'^empleado_lista_turnos/$', views.empleado_lista_turnos, name='empleado_lista_turnos'),
     # Vista de la dueña.
     url(r'^duenio/$', views.duenio, name='duenio'),
     # Listados de la vista de la dueña.
