@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from datetime import datetime, timedelta
-from django.http import JsonResponse
+from datetime import datetime, timedelta, time
+from django.http import JsonResponse, HttpResponse
 from .forms import ModificarTurnoForm
 from .models import Turno
-from gestion.models import ServicioBasico
+from gestion.models import ServicioBasico, Promocion
 from django.core import serializers
-
-import datetime
 
 
 def escupoJSON(request):
@@ -23,13 +21,40 @@ def manejador_fechas(fecha):
     raise TypeError("Tipo desconocido")
 
 
-def devuelvo_turnos_libres(request, fecha=datetime.datetime(2016, 1, 1, 0, 0, 0),
-                           servicios=["Lavado de pelo", "Teñida"], promociones=[1, 2, 3]):
-    print(request.GET)
-    print(request.GET["dia"])
-    print(request.GET.getlist("promocion[]"))
-    print(request.GET.getlist("servicio[]"))
+def devuelvo_turnos_libres(request):
+    INICIO_TURNO_MAÑANA = time(9, 0)
+    FINAL_TURNO_MAÑANA = time(12, 0)
+    INICIO_TURNO_TARDE = time(16, 0)
+    FINAL_TURNO_TARDE = time(20, 0)
+    MODULO = timedelta(minutes=15)
 
+    fecha_ingresada = datetime.strptime(request.GET['dia'], "%m/%d/%Y").date()
+    inicio_mod = datetime.combine(fecha_ingresada, INICIO_TURNO_MAÑANA)
+    fin_mod = datetime.combine(fecha_ingresada, FINAL_TURNO_TARDE)
+    # Compone la lista con todos los módulos de un día.
+    horarios = []
+    mod = inicio_mod
+    while mod < fin_mod:
+        if mod.time() == FINAL_TURNO_MAÑANA:
+            mod = datetime.combine(mod, INICIO_TURNO_TARDE)
+        horarios.append(mod)
+        mod += MODULO
+
+    servicios = request.GET.getlist('servicio[]')
+    promociones = request.GET.getlist('promocion[]')
+    # Obtiene la duración de los servicios y promociones..
+    duracion_servicios = timedelta(0)
+    for i in servicios:
+        servicio = ServicioBasico.objects.all().filter(pk=i)
+        duracion_servicios += servicio.first().get_duracion()
+    for i in promociones:
+        promo = Promocion.objects.all().filter(pk=i)
+        duracion_servicios += promo.first().get_duracion()
+    print(duracion_servicios)
+
+    return HttpResponse('')
+
+    """
     horas_habiles = [9, 10, 11, 12, 16, 17, 18, 19]
     fecha = datetime.datetime(fecha.year, fecha.month, fecha.day, 9, 0, 0)
     modulos = []
@@ -75,7 +100,7 @@ def devuelvo_turnos_libres(request, fecha=datetime.datetime(2016, 1, 1, 0, 0, 0)
             datos_json.append(dato)
 
     return JsonResponse({'modulos': datos_json})
-
+    """
 
 def devuelvo_turnos(request):
     datos = []
