@@ -7,9 +7,9 @@ $(document).ready(function() {
             right: 'month,agendaWeek,agendaDay,listWeek'
         },
          eventClick:  function(event, jsEvent, view) {
-            $('#modalTitle').html("Turno del dia: " + event.fecha);
-            $('#modalBody').html("Empleado: " + event.empleado + "<br>" + "Cliente: " + event.cliente + "<br>" +
-                                 "Servicios: " + event.servicios + "<br>" + "Promociones: " + event.promociones);
+            $('#modalTitle').html("<font color='purple'><font size=4><b>" + "Turno del dia: " + event.fecha + "</b></font></font>");
+            $('#modalBody').html("<font size=3>" + "Empleado: " + event.empleado + "<br>" + "Cliente: " + event.cliente + "<br>" +
+                                 "Servicios: " + event.servicios + "<br>" + "Promociones: " + event.promociones + "</font>");
             $('#fullCalModal').modal();
         },
         defaultDate: '2016-11-07',
