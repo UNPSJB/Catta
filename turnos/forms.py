@@ -6,11 +6,21 @@ from crispy_forms.layout import Submit
 
 
 class CrearTurnoForm(ModelForm):
+    hora = forms.TimeField()
+
     def __init__(self, *args, **kwargs):
         super(CrearTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
+
+    def save(self, commit=True):
+        datos = super().save()
+
+        hora = self.cleaned_data['hora']
+        print(hora)
+
+        # return datos
 
     def clean(self):
         datos = super(CrearTurnoForm, self).clean()
@@ -25,7 +35,7 @@ class CrearTurnoForm(ModelForm):
 
     class Meta:
         model = Turno
-        fields = {"fecha", "empleado", "servicios", "promociones", "cliente"}
+        fields = ["empleado", "cliente", "fecha", "hora", "promociones", "servicios"]
 
 
 class ModificarTurnoForm(ModelForm):
@@ -118,5 +128,3 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         turno = super.save(commit=False)
         turno.save()
         return turno
-
-

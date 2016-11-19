@@ -44,7 +44,7 @@ class Servicio(models.Model):
 
 class ServicioBasico(Servicio):
     duracion = models.IntegerField(default=0)
-    insumos = models.ManyToManyField(Insumo, blank=True, null=True)
+    insumos = models.ManyToManyField(Insumo, blank=True)
 
     def get_duracion(self):
         return self.duracion * self.MODULO

@@ -1,6 +1,6 @@
 $(function() {
     var turnero = $("<div>", {class:"turnero"});
-    $("#div_id_fecha").append(turnero);
+    $("#div_id_hora").append(turnero);
 
     $("#id_fecha").on("change", function(e) {
         var dia = $(this).val();
@@ -16,9 +16,13 @@ $(function() {
                 servicio: servicios
             },
             success: function(datos, status, req) {
+                $(".turnero").empty();
                 var modulos = $(datos.modulos).map(function(index, modulo) {
                     console.log(modulo);
-                    var m = $("<div>", {"style": "background:" + modulo.color});
+                    var m = $("<div>", {"style": "background:" + modulo.color,
+                                        "id": "div_" + index,
+                                        "onclick": 'eventoHora(' + modulo.hora + ', ' + modulo.mins + ');'
+                    });
                     m.html("<p>" + modulo.estado + " - " + modulo.hora + ":" + modulo.mins + "</p>");
                     return m;
                 });
@@ -29,3 +33,9 @@ $(function() {
         })
     });
 })
+
+function eventoHora(hora, min) {
+    var ret = hora + ":" + min
+    $('#id_hora').val(ret)
+
+}
