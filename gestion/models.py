@@ -66,7 +66,7 @@ class Promocion(Servicio):
         duracion = 0
 
         for servicio in self.servicios.all():
-            duracion += servicio.get_duracion()
+            duracion += servicio.duracion
 
         return duracion * self.MODULO
 
