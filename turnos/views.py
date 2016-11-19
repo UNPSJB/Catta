@@ -78,53 +78,6 @@ def devuelvo_turnos_libres(request):
 
     return JsonResponse({'modulos': datos_json})
 
-    """
-    horas_habiles = [9, 10, 11, 12, 16, 17, 18, 19]
-    fecha = datetime.datetime(fecha.year, fecha.month, fecha.day, 9, 0, 0)
-    modulos = []
-    datos_json = []
-
-    delta_minutos = timedelta(minutes=15)
-
-    # Compone la lista genérica con los horarios disponibles.
-    for hora in horas_habiles:
-        if hora == 12:
-            delta_hora = timedelta(hours=4)
-            fecha = fecha + delta_hora
-        for i in range(4):
-            modulos.append(fecha)
-            fecha = fecha + delta_minutos
-
-    # Obtiene la duración de los servicios elegidos en conjunto.
-    duracion_servicios = timedelta(0)
-    for i in servicios:
-        servicio = ServicioBasico.objects.all().filter(pk=i)
-        duracion_servicios += servicio.first().get_duracion()
-    print(duracion_servicios)
-
-    # Compone la respuesta en json.
-    for turno in Turno.objects.all().filter(fecha__day=fecha.day):
-        inicio_turno = turno.fecha
-        fin_turno = turno.get_duracion()
-        for m in modulos:
-            dato = {}
-            if m < fin_turno and m >= inicio_turno:
-                if turno.estado() == "Confirmado":  # Si el turno esta confirmado.
-                    dato['estado'] = 'confirmado'
-                    dato['color'] = '#d9534f'
-                else:  # Si el turno no esta confirmado.
-                    dato['estado'] = 'no-confirmado'
-                    dato['color'] = '#f0ad4e'
-            else:  # Si el módulo esta libre.
-                dato['estado'] = 'libre'
-                dato['color'] = '#5cb85c'
-            dato['hora'] = m.hour
-            dato['mins'] = m.minute
-
-            datos_json.append(dato)
-
-    return JsonResponse({'modulos': datos_json})
-    """
 
 def devuelvo_turnos(request):
     datos = []
