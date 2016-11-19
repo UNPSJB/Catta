@@ -81,7 +81,15 @@ def devuelvo_turnos_libres(request):
 
 def devuelvo_turnos(request):
     datos = []
+
     for turno in Turno.objects.all():
+
+        vocales = "T"
+        fecha = ""
+        for letra in str(turno.fecha):
+            if letra not in vocales:
+                fecha += letra
+
         datos_turno = {
             'id': turno.pk,
             'start': turno.fecha,
@@ -92,7 +100,7 @@ def devuelvo_turnos(request):
             'cliente': turno.get_cliente(),
             'servicios': turno.get_servicios(),
             'promociones': turno.get_promociones(),
-            'fecha': turno.fecha,
+            'fecha': fecha,
         }
         datos.append(datos_turno)
     return JsonResponse({'turnos': datos})
