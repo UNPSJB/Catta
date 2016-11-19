@@ -604,7 +604,7 @@ h1.logo-text a {
   background-color: #333333;
 }
 .background-gray {
-  background-color: #555555;
+  background-color: #e8dcdc;
 }
 .background-gray-light {
   background-color: #b3b3b3;
@@ -617,6 +617,12 @@ h1.logo-text a {
 }
 .background-catta1 {
   background-color: #a81f3d;
+}
+.background-catta2 {
+  background-color: #af8093;
+}
+.background-catta3 {
+  background-color: #f2d2df;
 }
 /* Button Colors */
 .btn {
