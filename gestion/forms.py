@@ -39,17 +39,8 @@ class ServicioForm(ModelForm):
         self.helper.add_input(Submit('crear_servicio', 'Crear Servicio'))
 
     def clean(self):
-        datos = super(EmpleadoNuevoForm, self).clean()
-
-        p1 = datos.get('passwd')
-        p2 = datos.get('passwd_1')
-
-        if Usuario.objects.filter(username=self.cleaned_data['usuario']).exists():
-            raise forms.ValidationError("Usuario en uso")
-
-        if p1 and p2 and p1 != p2:
-            raise forms.ValidationError("Las contraseñas no coinciden")
-
+        datos = super(ServicioForm, self).clean()
+        
         return datos
 
 
