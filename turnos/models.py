@@ -1,6 +1,7 @@
 import datetime
 from personas.models import *
 from django.db.models import Q
+import  enum
 
 
 class Turno(models.Model):
@@ -104,3 +105,8 @@ class TurnoFijo(Turno):
     def calcular_turno_siguiente(self):
         pass
 
+#class Dia(enum):
+ #   martes=1
+  #  miercoles=2
+   ##viernes=4
+    #sabado=5

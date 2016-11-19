@@ -7,7 +7,7 @@ from django import forms
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
-from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm
+from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
 
 from .models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
@@ -110,7 +110,8 @@ FORMS_EMPLEADO = {
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
-    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm
+    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
+    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
 }
 
 

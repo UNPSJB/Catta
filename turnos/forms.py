@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Turno
+from .models import Turno, TurnoFijo
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -64,6 +64,16 @@ class ConfirmarTurnoForm(ModelForm):
         model = Turno
         fields = {"fecha_confirmacion"}
 
+class CrearTurnoFijoForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno_fijo'))
+
+    class Meta:
+        model = TurnoFijo
+        fields = {"fecha", "empleado", "servicios", "promociones", "cliente","fecha_fin"}
 
 class RegistrarTurnoRealizadoForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -94,6 +104,8 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         }
 
     def save(self, commit=True):
-        turno = super().save(commit=False)
+        turno = super.save(commit=False)
         turno.save()
         return turno
+
+
