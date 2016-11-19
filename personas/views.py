@@ -242,7 +242,8 @@ def duenio_lista_servicios(request):
     insumos = Insumo.objects.all()
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
                                                             'promociones': promociones,
-                                                             'insumos': insumos, "f": ffilter})
+                                                             'insumos': insumos,
+                                                            "f": ffilter})
 
 
 def modificar_stock_duenio(request, id):

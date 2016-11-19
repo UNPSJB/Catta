@@ -23,6 +23,8 @@
                         <th>Teléfono</th>
                         <th>Localidad</th>
                         <th>Comisión</th>
+                        <th>Modificar Comisión</th>
+
                     </tr>
                 </thread>
                 <tbody>
@@ -33,6 +35,7 @@
                         <td>{{empleado.direccion}}</td>
                         <td>{{empleado.telefono}}</td>
                         <td>{{empleado.localidad}}</td>
+                        <td>{{empleado.empleado.porc_comision}}%</td>
                         <td><a href="{% url 'modificarComision' empleado.pk %}" type="button" class="btn btn-warning" >Modificar Comision</a></td>
                     </tr>
                     {% endfor %}

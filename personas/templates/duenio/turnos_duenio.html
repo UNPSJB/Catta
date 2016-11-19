@@ -58,7 +58,13 @@
                                 <td>{{turno.cliente}}</td>
                                 <td>{{turno.empleado}}</td>
                                 <td>{{turno.estado}}</td>
-                                <td width=200>
+                                <td width=250>
+                                    {% for promocion in turno.promociones.all %}
+                                        <li>{{promocion}}
+                                            {% for servicio in promocion.servicios.all %}
+                                                  <li><i>{{servicio}}</i>
+                                            {% endfor %}
+                                    {% endfor %}
                                     {% for servicio in turno.servicios.all %}
                                        <li> {{servicio}}
                                     {% endfor %}

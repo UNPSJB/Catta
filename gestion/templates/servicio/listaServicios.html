@@ -23,9 +23,9 @@
                         <td>{{servicio.nombre}}</td>
                         <td>{{servicio.descripcion}}</td>
                         <td>{{servicio.precio}}</td>
-                        <td>{{servicio.duracion}}</td>
+                        <td>{{servicio.get_duracion}}</td>
                         <td>{% for insumo in servicio.insumos.all %}
-                                {{insumo}}
+                               <li>{{insumo}}
                             {% endfor %}
                         </td>
                     </tr>
@@ -40,6 +40,7 @@
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
+                        <th>Duración</th>
                         <th>Servicios</th>
                     </tr>
                 </thread>
@@ -49,8 +50,9 @@
                         <td>{{promocion.nombre}}</td>
                         <td>{{promocion.descripcion}}</td>
                         <td>{{promocion.precio}}</td>
+                        <td>{{promocion.get_duracion}}</td>
                         <td>{% for servicio in promocion.servicios.all %}
-                                {{servicio}}
+                                <li>{{servicio}}
                             {% endfor %}
                         </td>
                     </tr>

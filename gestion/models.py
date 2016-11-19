@@ -63,12 +63,12 @@ class Promocion(Servicio):
     ancho_imagen = models.IntegerField(default=0)
 
     def get_duracion(self):
-        duracion = timedelta()
+        duracion = 0
 
         for servicio in self.servicios.all():
             duracion += servicio.get_duracion()
 
-        return duracion
+        return duracion * self.MODULO
 
     def get_nombre(self):
         return str(self.nombre)

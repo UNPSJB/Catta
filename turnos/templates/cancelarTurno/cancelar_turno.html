@@ -40,7 +40,7 @@
 
                                 <li> Fecha: {{ turno.fecha }}
                                 <li> Fecha de creación: {{ turno.fecha_creacion }}
-                                <li> Fecha de confirmacion: {{ turno.fecha_confirmacion }}
+                                <li> Fecha de confirmacion:{% if turno.fecha_confirmacion != null %} {{ turno.fecha_confirmacion }} {% else %} No ha sido confirmado. {% endif %}
 
 
                                 <br>
