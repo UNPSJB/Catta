@@ -28,10 +28,10 @@ def devuelvo_turnos_libres(request):
     FINAL_TURNO_TARDE = time(20, 0)
     MODULO = timedelta(minutes=15)
 
+    # Compone la lista con todos los módulos de un día.
     fecha_ingresada = datetime.strptime(request.GET['dia'], "%m/%d/%Y").date()
     inicio_mod = datetime.combine(fecha_ingresada, INICIO_TURNO_MAÑANA)
     fin_mod = datetime.combine(fecha_ingresada, FINAL_TURNO_TARDE)
-    # Compone la lista con todos los módulos de un día.
     horarios = []
     mod = inicio_mod
     while mod < fin_mod:
@@ -40,9 +40,9 @@ def devuelvo_turnos_libres(request):
         horarios.append(mod)
         mod += MODULO
 
+    # Obtiene la duración de los servicios y promociones.
     servicios = request.GET.getlist('servicio[]')
     promociones = request.GET.getlist('promocion[]')
-    # Obtiene la duración de los servicios y promociones..
     duracion_servicios = timedelta(0)
     for i in servicios:
         servicio = ServicioBasico.objects.all().filter(pk=i)
@@ -50,7 +50,15 @@ def devuelvo_turnos_libres(request):
     for i in promociones:
         promo = Promocion.objects.all().filter(pk=i)
         duracion_servicios += promo.first().get_duracion()
-    print(duracion_servicios)
+
+    # Quita de los horarios disponibles del día los que estan ocupados.
+    turnos = Turno.objects.all().filter(fecha__day=fecha_ingresada.day)
+    if turnos:
+        turno = turnos.first()
+        inicio_turno = turno.fecha
+        fin_turno = turno.get_duracion()
+        print(inicio_turno)
+        print(fin_turno)
 
     return HttpResponse('')
 
