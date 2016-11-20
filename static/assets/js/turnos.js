@@ -1,6 +1,6 @@
 $(function() {
     var turnero = $("<div>", {class:"turnero"});
-    $("#div_id_hora").append(turnero);
+    $("#div_id_fecha").append(turnero);
 
     $("#id_fecha").on("change", function(e) {
         var dia = $(this).val();
@@ -19,11 +19,11 @@ $(function() {
                 $(".turnero").empty();
                 var modulos = $(datos.modulos).map(function(index, modulo) {
                     console.log(modulo);
-                    var m = $("<div>", {"style": "background:" + modulo.color,
+                    var m = $("<div>", {"class": "turnos btn",
                                         "id": "div_" + index,
-                                        "onclick": 'eventoHora(' + modulo.hora + ', ' + modulo.mins + ');'
+                                        "onclick": 'eventoHora('+modulo.hora+', '+modulo.mins+', id);'
                     });
-                    m.html("<p>" + modulo.estado + " - " + modulo.hora + ":" + modulo.mins + "</p>");
+                    m.html("<p>" + modulo.hora + ":" + modulo.mins + "</p>");
                     return m;
                 });
                 modulos.each(function(i, m) {
@@ -34,8 +34,12 @@ $(function() {
     });
 })
 
-function eventoHora(hora, min) {
+function eventoHora(hora, min, id) {
+    $('.turnero').children("div").each(function() {
+        $(this).css("background-color", "#5cb85c");
+    });
+    $('#'+id).css("background-color", '#99B898')
+    console.log(id)
     var ret = hora + ":" + min
-    $('#id_hora').val(ret)
-
+    $('#id_hora').val(ret);
 }

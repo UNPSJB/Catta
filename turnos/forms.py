@@ -3,11 +3,10 @@ from django.forms import ModelForm
 from .models import Turno, TurnoFijo
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from datetime import datetime
 
 
 class CrearTurnoForm(ModelForm):
-    hora = forms.TimeField()
-
     def __init__(self, *args, **kwargs):
         super(CrearTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -16,9 +15,6 @@ class CrearTurnoForm(ModelForm):
 
     def save(self, commit=True):
         datos = super(CrearTurnoForm, self).save()
-
-        hora = self.cleaned_data['hora']
-        print(hora)
 
         # return datos
 
@@ -31,14 +27,11 @@ class CrearTurnoForm(ModelForm):
         if ((not p1) and (not p2)):
             raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
 
-        hora = self.cleaned_data['hora']
-        print(hora)
-
         return datos
 
     class Meta:
         model = Turno
-        fields = ["empleado", "cliente", "fecha", "hora", "promociones", "servicios"]
+        fields = {"empleado", "cliente", "fecha", "promociones", "servicios"}
 
 
 class ModificarTurnoForm(ModelForm):
