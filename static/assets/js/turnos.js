@@ -6,7 +6,6 @@ $(function() {
         var dia = $(this).val();
         var promociones = $("#id_promociones").val();
         var servicios = $("#id_servicios").val();
-        console.log(promociones, servicios);
         $.ajax({
             method: "GET",
             url: URL_TURNOS_LIBRES,
@@ -17,8 +16,8 @@ $(function() {
             },
             success: function(datos, status, req) {
                 $(".turnero").empty();
+
                 var modulos = $(datos.modulos).map(function(index, modulo) {
-                    console.log(modulo);
                     var m = $("<div>", {"class": "turnos btn",
                                         "id": "div_" + index,
                                         "onclick": 'eventoHora('+modulo.hora+', '+modulo.mins+', id);'
@@ -38,8 +37,7 @@ function eventoHora(hora, min, id) {
     $('.turnero').children("div").each(function() {
         $(this).css("background-color", "#5cb85c");
     });
-    $('#'+id).css("background-color", '#99B898')
-    console.log(id)
-    var ret = hora + ":" + min
-    $('#id_hora').val(ret);
+    $('#'+id).css("background-color", '#99B898');
+    var fecha = $('#id_fecha').val().slice(0,10);
+    $('#id_fecha').val(fecha + " " + hora + ":" + min);
 }

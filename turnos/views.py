@@ -29,7 +29,7 @@ def devuelvo_turnos_libres(request):
     MODULO = timedelta(minutes=15)
 
     # Compone la lista con todos los módulos de un día.
-    fecha_ingresada = datetime.strptime(request.GET['dia'], "%m/%d/%Y").date()
+    fecha_ingresada = datetime.strptime(request.GET['dia'], "%d/%m/%Y").date()
     inicio_mod = datetime.combine(fecha_ingresada, INICIO_TURNO_MAÑANA)
     fin_mod = datetime.combine(fecha_ingresada, FINAL_TURNO_TARDE)
     horarios = []
