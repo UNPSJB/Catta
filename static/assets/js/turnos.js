@@ -6,18 +6,29 @@ $(function() {
         var dia = $(this).val();
         var promociones = $("#id_promociones").val();
         var servicios = $("#id_servicios").val();
+        // var empleado = $('#id_empleado').val();
         $.ajax({
             method: "GET",
             url: URL_TURNOS_LIBRES,
             data: {
                 dia: dia,
                 promocion: promociones,
+                // empleado: empleado
                 servicio: servicios
             },
             success: function(datos, status, req) {
                 $(".turnero").empty();
 
                 var modulos = $(datos.modulos).map(function(index, modulo) {
+                    /* Agrega un cero adelante de la hora si es un solo digito */
+                    if (/^\d$/.test(modulo.hora))  {
+                        modulo.hora = "0" + modulo.hora
+                    }
+                    /* Agrega un cero adelante de los minutos si es un solo digito */
+                    if (/^\d$/.test(modulo.mins))  {
+                        modulo.mins = "0" + modulo.mins
+                    }
+                    /* Compone el div de la ventana */
                     var m = $("<div>", {"class": "turnos btn",
                                         "id": "div_" + index,
                                         "onclick": 'eventoHora('+modulo.hora+', '+modulo.mins+', id);'
@@ -39,5 +50,13 @@ function eventoHora(hora, min, id) {
     });
     $('#'+id).css("background-color", '#99B898');
     var fecha = $('#id_fecha').val().slice(0,10);
+    /* Agrega un cero adelante de la hora si es un solo digito */
+    if (/^\d$/.test(hora))  {
+        hora = "0" + hora
+    }
+    /* Agrega un cero adelante de los minutos si es un solo digito */
+    if (/^\d$/.test(min))  {
+        min = "0" + min
+    }
     $('#id_fecha').val(fecha + " " + hora + ":" + min);
 }
