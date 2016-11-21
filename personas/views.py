@@ -12,8 +12,7 @@ from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoReali
 from .models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
-from django.db.models import Q
-
+from django.db.models import Q, Count
 
 """Metodo de Filtro"""
 def get_filtros(modelo, datos):
@@ -249,9 +248,13 @@ def duenio_lista_servicios(request):
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
+
+    topServicios = ServicioBasico.objects.annotate(cantidad_de_turnos=Count("turnos")).order_by("-cantidad_de_turnos")[:5]
+
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
                                                             'promociones': promociones,
                                                              'insumos': insumos,
+                                                            'topServicios': topServicios,
                                                             "f": ffilter})
 
 

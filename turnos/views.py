@@ -14,12 +14,10 @@ def escupoJSON(request):
         "turnos": data
     })
 
-
 def manejador_fechas(fecha):
     if isinstance(fecha, datetime.datetime):
         return fecha.isoformat()
     raise TypeError("Tipo desconocido")
-
 
 def devuelvo_turnos_libres(request):
     INICIO_TURNO_MAÑANA = time(9, 0)
@@ -82,8 +80,17 @@ def devuelvo_turnos_libres(request):
 
 def devuelvo_turnos(request):
     datos = []
+    usuario = request.user
 
-    for turno in Turno.objects.all():
+    if usuario.persona.duenia == None:
+        if usuario.persona.empleado == None:
+            turnos = Turno.objects.all().filter(empleado=usuario.persona.empleado)
+        else:
+            turnos = Turno.objects.all().filter(cliente=usuario.persona.empleado)
+    else:
+        turnos = Turno.objects.all()
+
+    for turno in turnos:
 
         vocales = "T"
         fecha = ""
@@ -146,7 +153,6 @@ def listaTurnosFecha(request):
 #        turno = get_object_or_404(Turno, pk=id)
 #        return render(request, '/turnos/confirmarTurno/confirmar_turno.html', {'turno':turno})
 
-
 def confirmar_turno(request, id):
     if request.method == "POST":
         turno = get_object_or_404(Turno, pk=id)
@@ -157,11 +163,9 @@ def confirmar_turno(request, id):
         turno = get_object_or_404(Turno, pk=id)
     return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno})
 
-
 def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
-
 
 """def detalle_turno(request, id=1):
     turno = get_object_or_404(Turno, pk=id)

@@ -13,19 +13,23 @@ class CrearTurnoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
 
+
     def save(self, commit=True):
         datos = super(CrearTurnoForm, self).save()
 
-        # return datos
+        #return datos
 
     def clean(self):
         datos = super(CrearTurnoForm, self).clean()
 
         p1 = datos.get('servicios')
         p2 = datos.get('promociones')
-
-        if ((not p1) and (not p2)):
+        print(p1)
+        print(p2)
+        if not p1 and not p2:
             raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
+
+
 
         return datos
 

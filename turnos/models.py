@@ -36,8 +36,8 @@ class Turno(models.Model):
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
     fecha_cancelacion = models.DateTimeField(null=True, blank=True)
-    servicios = models.ManyToManyField(ServicioBasico)
-    promociones = models.ManyToManyField(Promocion)
+    servicios = models.ManyToManyField(ServicioBasico, related_name="turnos")
+    promociones = models.ManyToManyField(Promocion, related_name="turnos")
     empleado = models.ForeignKey(Empleado)
     cliente = models.ForeignKey(Cliente)
 
