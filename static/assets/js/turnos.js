@@ -52,20 +52,21 @@ $(function() {
         }
     };
 
-    function eventoHora(hora, min, id) {
-        $('.turnero').children("div").each(function() {
-            $(this).css("background-color", "#5cb85c");
-        });
-        $('#'+id).css("background-color", '#99B898');
-        var fecha = $('#id_fecha').val().slice(0,10);
-        /* Agrega un cero adelante de la hora si es un solo digito */
-        if (/^\d$/.test(hora))  {
-            hora = "0" + hora;
-        }
-        /* Agrega un cero adelante de los minutos si es un solo digito */
-        if (/^\d$/.test(min))  {
-            min = "0" + min;
-        }
-        $('#id_fecha').val(fecha + " " + hora + ":" + min);
-    };
 });
+
+function eventoHora(hora, min, id) {
+    $('.turnero').children("div").each(function() {
+        $(this).css("background-color", "#5cb85c");
+    });
+    $('#'+id).css("background-color", '#99B898');
+    var fecha = $('#id_fecha').val().slice(0,10);
+    /* Agrega un cero adelante de la hora si es un solo digito */
+    if (/^\d$/.test(hora))  {
+        hora = "0" + hora;
+    }
+    /* Agrega un cero adelante de los minutos si es un solo digito */
+    if (/^\d$/.test(min))  {
+        min = "0" + min;
+    }
+    $('#id_fecha').val(fecha + " " + hora + ":" + min);
+}
