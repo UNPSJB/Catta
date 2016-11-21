@@ -52,7 +52,8 @@ def devuelvo_turnos_libres(request):
         duracion_servicios += promo.first().get_duracion()
 
     # Quita de los horarios disponibles del día los que estan ocupados.
-    turnos = Turno.objects.all().filter(fecha__day=fecha_ingresada.day)
+    empleado = request.GET['empleado']
+    turnos = Turno.objects.all().filter(fecha__day=fecha_ingresada.day, empleado=empleado)
     if turnos:
         lista_turnos = []
         for turno in turnos:
