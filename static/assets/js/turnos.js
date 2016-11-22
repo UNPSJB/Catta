@@ -6,7 +6,8 @@ $(function() {
     $("#id_empleado").change(function() { funcionAjax(this) });
 
     function funcionAjax(elemento) {
-        var fecha = $("#id_fecha").val();
+        var fecha = $('#id_fecha').val().slice(0,10);
+        $('#id_fecha').val(fecha);
         var empleado = $("#id_empleado").val();
 
         if ((empleado != "")&&(fecha != "")) {
