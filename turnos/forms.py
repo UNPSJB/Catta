@@ -24,8 +24,6 @@ class CrearTurnoForm(ModelForm):
 
         p1 = datos.get('servicios')
         p2 = datos.get('promociones')
-        print(p1)
-        print(p2)
         if not p1 and not p2:
             raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
 
