@@ -27,8 +27,6 @@ class CrearTurnoForm(ModelForm):
         if not p1 and not p2:
             raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
 
-
-
         return datos
 
     class Meta:

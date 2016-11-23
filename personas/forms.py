@@ -127,7 +127,7 @@ class EmpleadoNuevoForm(forms.ModelForm):
 class LiquidarComisionForm(Form):
 
     empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), empty_label=" ")
-    fecha = forms.DateField()
+    fecha = forms.DateField('%Y-$m-$d')
 
     def __init__(self, *args, **kwargs):
         super(LiquidarComisionForm, self).__init__(*args, **kwargs)

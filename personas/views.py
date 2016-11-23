@@ -212,7 +212,25 @@ def duenio(request):
     if request.method == "POST" and 'liquidar_comision' in request.POST:
         _form = LiquidarComisionForm()
         contexto['form_liquidar_Comision'] = _form
-        print('aDASAFAF')
+        _fecha = (request.POST.get('fecha'))
+        _fecha1 = (request.POST.get('fecha'))
+        _fecha += ' 00:00:00'
+        _fecha1 += ' 19:45:00'
+        print(_fecha)
+        id_empleado = (request.POST.get('empleado'))
+        _empleado = Empleado.objects.filter(id=id_empleado).first()
+        _turnos = Turno.objects.filter(empleado=_empleado, fecha__range=[_fecha, _fecha1])
+        print(_turnos)
+        _costo = 0
+        for turno in _turnos:
+            _costo += turno.get_costo()
+
+        _pago = _empleado.get_pago(_costo)
+
+        print(_pago)
+
+
+
     for form_name, input_name in FORMS_DUENIO:
         klassForm = FORMS_DUENIO[(form_name, input_name)]
         if request.method == "POST" and input_name in request.POST and form_name != "form_liquidar_Comision":
