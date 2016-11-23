@@ -114,10 +114,6 @@ def devuelvo_turnos(request):
     return JsonResponse({'turnos': datos})
 
 
-def modificar_turno(request, id_turno):
-
-    turno = get_object_or_404(Turno, pk=id)
-    ret = "empleado/index_empleado.html"
 def modificar_turno(request, id):
     if request.method == "POST":
         turno = get_object_or_404(Turno, pk=id)

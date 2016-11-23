@@ -81,7 +81,7 @@ def crear_turno_cliente(request):
             return redirect('/personas/cliente')
         print(form)
     else:
-        form = CrearTurnoForm()
+        form = CrearTurnoForm(initial={'cliente': request.user.persona.cliente})
         form.fields['cliente'].widget = forms.HiddenInput()
     return render(request, 'cliente/crear_turno.html', {"form": form})
 
