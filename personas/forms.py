@@ -126,7 +126,7 @@ class EmpleadoNuevoForm(forms.ModelForm):
 
 class LiquidarComisionForm(Form):
 
-    Empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), empty_label=" ")
+    empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), empty_label=" ")
     fecha = forms.DateField()
 
     def __init__(self, *args, **kwargs):
@@ -135,18 +135,3 @@ class LiquidarComisionForm(Form):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('liquidar_comision', 'Liquidar Comision'))
 
-    def save(self, commit=True):
-
-        e = Empleado()
-        print(e)
-
-        e.porc_comision = self.cleaned_data['comision']
-        e.save()
-
-
-        '''
-        if commit:
-            u.save()
-            p.save()
-        '''
-        return e

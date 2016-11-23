@@ -202,15 +202,20 @@ FORMS_DUENIO = {
 }
 
 
+
 @login_required(login_url='iniciar_sesion')
 def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
     contexto = {}
     print('estoy')
+    if request.method == "POST" and 'liquidar_comision' in request.POST:
+        _form = LiquidarComisionForm()
+        contexto['form_liquidar_Comision'] = _form
+        print('aDASAFAF')
     for form_name, input_name in FORMS_DUENIO:
         klassForm = FORMS_DUENIO[(form_name, input_name)]
-        if request.method == "POST" and input_name in request.POST:
+        if request.method == "POST" and input_name in request.POST and form_name != "form_liquidar_Comision":
             _form = klassForm(request.POST or None, request.FILES or None)
             if _form.is_valid():
                 _form.save()
@@ -219,7 +224,6 @@ def duenio(request):
             contexto[form_name] = _form
         else:
             contexto[form_name] = klassForm()
-
     return render(request, ret, contexto)
 
 
