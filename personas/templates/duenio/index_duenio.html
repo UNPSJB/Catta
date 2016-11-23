@@ -155,11 +155,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="agenda">
-                    <p>Listado de turnos de la agenda</p>
-                </div>
                 <div class="tab-pane fade in" id="liquidar">
-                    <p>Liquidacion de comisión</p>
+                    <div id="acordeon-clientes" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <h2><font color="Purple" font face="arial"><center> Liquidar Comision </center></font></h2>
+                                        {% crispy form_liquidar_Comision %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
