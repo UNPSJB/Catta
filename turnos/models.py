@@ -96,6 +96,14 @@ class Turno(models.Model):
     def eliminar_servicio(self):
         pass
 
+    def get_costo(self):
+        costo = 0
+        for servicio in  self.servicios:
+            costo += servicio.precio
+        for promociones in self.promociones:
+            costo += promociones.precio
+
+        return costo
 
 class TurnoFijo(Turno):
     # ATRIBUTO DIA (EJEMPLO: Turno fijo los JUEVES) PUEDE SER ENUMERADO
