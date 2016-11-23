@@ -98,9 +98,9 @@ class Turno(models.Model):
 
     def get_costo(self):
         costo = 0
-        for servicio in  self.servicios:
+        for servicio in  self.servicios.all():
             costo += servicio.precio
-        for promociones in self.promociones:
+        for promociones in self.promociones.all():
             costo += promociones.precio
 
         return costo

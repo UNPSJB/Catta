@@ -67,6 +67,10 @@ class Empleado(Rol):
     def listar_historial_cliente(self, cliente):
         pass
 
+    def get_pago(self, costo):
+        comision = self.porc_comision
+        pago = (costo*comision)/100
+        return pago
 
 class Duenia(Rol):
     # agenda = []  # LISTA DE TURNOS (AGENDA)
@@ -91,7 +95,6 @@ class Duenia(Rol):
 
     def servicios_mas_solicitados(self):
         pass
-
 
 class Usuario(AbstractUser, Rol):
 
