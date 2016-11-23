@@ -46,6 +46,7 @@
                                 <th>Empleado</th>
                                 <th>Estado</th>
                                 <th>Servicios</th>
+                                <th>Modificar</th>
                                 <th>Confirmar</th>
                                 <th>Cancelar</th>
 
@@ -54,7 +55,7 @@
                         <tbody>
                             {% for turno in turnos %}
                             <tr>
-                                <td>{{turno.fecha}}</td>
+                                <td width=140>{{turno.fecha}}</td>
                                 <td>{{turno.cliente}}</td>
                                 <td>{{turno.empleado}}</td>
                                 <td>{{turno.estado}}</td>
@@ -70,7 +71,15 @@
                                     {% endfor %}
                                 </td>
 
-                                <td>
+                                <td width=20>
+                                    {% if turno.fecha_confirmacion == null %}
+                                        {% if turno.fecha_cancelacion == null %}
+                                            <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+
+                                <td width=20>
                                     {% if turno.fecha_confirmacion == null %}
                                         {% if turno.fecha_cancelacion == null %}
                                             <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
@@ -78,7 +87,7 @@
                                     {% endif %}
                                 </td>
 
-                                <td>
+                                <td width=20>
                                     {% if turno.fecha_cancelacion == null %}
                                         <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
                                     {% endif %}

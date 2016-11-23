@@ -1,7 +1,6 @@
 from django.db import models
 from datetime import timedelta
 
-
 class Sector(models.Model):
     nombre = models.CharField(primary_key=True, max_length=100)
     descripcion = models.CharField(max_length=100)
@@ -11,13 +10,26 @@ class Sector(models.Model):
 
 
 class Insumo (models.Model):
+    MINILITROS= 'Minilitros'
+    LITROS= 'Litros'
+    GRAMOS = 'Gramos'
+    KILOS = 'Kilos'
+    CC = 'Centimetros Cubicos'
+    UNIDAD_DE_MEDIDA = [
+        (MINILITROS, 'Minilitros'),
+        (LITROS, 'Litros'),
+        (GRAMOS, 'Gramos'),
+        (KILOS, 'Kilos'),
+        (CC, 'Centimetros Cubicos')
+    ]
     FILTROS = {
         "nombre": ["nombre__icontains"],
         "marca": ["marca__icontains"]
     }
     nombre = models.CharField(max_length=100)
     marca = models.CharField(max_length=100)
-    contenidoNeto = models.PositiveIntegerField(default=0)
+    contenidoNeto = models.PositiveIntegerField(default="Centimetros Cubicos")
+    unidadDeMedida = models.CharField(max_length=25, choices=UNIDAD_DE_MEDIDA, default=0)
     stock = models.IntegerField(default=0)
 
     def __str__(self):

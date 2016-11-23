@@ -39,11 +39,10 @@
                         <thread>
                             <tr>
                                 <th>Fecha y Hora</th>
-                                <th>Cliente</th>
                                 <th>Empleado</th>
                                 <th>Estado</th>
                                 <th>Servicios</th>
-                                <th>Confirmación</th>
+                                <th>Cancelar</th>
 
                             </tr>
                         </thread>
@@ -51,17 +50,23 @@
                             {% for turno in turnos %}
                             <tr>
                                 <td>{{turno.fecha}}</td>
-                                <td>{{turno.cliente}}</td>
                                 <td>{{turno.empleado}}</td>
                                 <td>{{turno.estado}}</td>
-                                <td>
+                                <td width=250>
+                                    {% for promocion in turno.promociones.all %}
+                                        <li>{{promocion}}
+                                            {% for servicio in promocion.servicios.all %}
+                                                  <li><i>{{servicio}}</i>
+                                            {% endfor %}
+                                    {% endfor %}
                                     {% for servicio in turno.servicios.all %}
-                                        {{servicio}}
+                                       <li> {{servicio}}
                                     {% endfor %}
                                 </td>
+
                                 <td>
-                                    {% if turno.fecha_confirmacion == null %}
-                                        <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                    {% if turno.fecha_cancelacion == null %}
+                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
                                     {% endif %}
                                 </td>
 

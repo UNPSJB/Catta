@@ -114,20 +114,17 @@ def devuelvo_turnos(request):
     return JsonResponse({'turnos': datos})
 
 
-def modificar_turno(request, id_turno=1):
-    turno = Turno.objects.get(id=id_turno)
-    # usuario = request.user()
-    ret = "empleado/index_empleado.html"
+def modificar_turno(request, id):
     if request.method == "POST":
+        turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(request.POST, instance=turno)
         if form.is_valid:
             form.save()
-            redirect('')
+            return redirect('/personas/duenio_lista_turnos')
     else:
+        turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(instance=turno)
-
-    return render(request, ret, {"form": form})
-
+    return render(request, 'modificarTurno/modificar_turno.html', {'turno': turno, "form_modificar_turno": form})
 
 def cancelar_turno(request, id):
         if request.method == "POST":
@@ -138,6 +135,8 @@ def cancelar_turno(request, id):
         else:
             turno = get_object_or_404(Turno, pk=id)
         return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno})
+
+
 def listaTurnosFecha(request):
     turnos = Turno.objects.all()
     return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})

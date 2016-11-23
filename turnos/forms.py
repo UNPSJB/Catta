@@ -45,7 +45,7 @@ class ModificarTurnoForm(ModelForm):
 
     class Meta:
         model = Turno
-        fields = {"fecha", "empleado", "servicios", "promociones"}
+        fields = {"empleado", "servicios", "promociones"}
 
 
 class EliminarTurnoForm(ModelForm):
@@ -82,6 +82,7 @@ class ConfirmarTurnoForm(ModelForm):
     class Meta:
         model = Turno
         fields = {"fecha_confirmacion"}
+
 
 class CrearTurnoFijoForm(ModelForm):
     def __init__(self, *args, **kwargs):
