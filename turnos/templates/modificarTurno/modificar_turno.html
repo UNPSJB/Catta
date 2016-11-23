@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 
+
 {% block contenido %}
 <div id="content">
     <div class="container background-transparent">
@@ -14,22 +15,20 @@
                         <form method="post" class="login-page">
                             {% csrf_token %}
                             <div class="login-header margin-bottom-30">
-                                <h2>Confirmar Turno</h2>
+                                <h2>Modificar Turno</h2>
                             </div>
                             <!-- -->
 
                                 <li> Fecha: {{ turno.fecha }}
                                 <li> Fecha de creación: {{ turno.fecha_creacion }}
-
+                                <li> Cliente: {{ turno.cliente.persona.nombre }} {{ turno.cliente.persona.apellido }}
 
                                 <br>
 
+                                {% load crispy_forms_tags %}
+                                {% csrf_token %}
+                                {% crispy form_modificar_turno %}
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Confirmar</button>
-                                </div>
-                            </div>
 
                         </form>
 

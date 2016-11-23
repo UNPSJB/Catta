@@ -102,7 +102,8 @@ def cliente_lista_servicios(request):
 
 def cliente_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    turnos = Turno.objects.filter(*mfiltros).order_by('fecha')
+    usuario = request.user
+    turnos = Turno.objects.filter(cliente__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
     return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
 
 
@@ -279,7 +280,7 @@ def duenio_lista_insumos(request):
 
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    turnos = Turno.objects.filter(*mfiltros).order_by('fecha')
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
 
 
