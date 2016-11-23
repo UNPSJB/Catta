@@ -42,6 +42,8 @@
                                 <th>Empleado</th>
                                 <th>Estado</th>
                                 <th>Servicios</th>
+                                <th>Modificar</th>
+                                <th>Confirmar</th>
                                 <th>Cancelar</th>
 
                             </tr>
@@ -49,7 +51,7 @@
                         <tbody>
                             {% for turno in turnos %}
                             <tr>
-                                <td>{{turno.fecha}}</td>
+                                <td width=140>{{turno.fecha}}</td>
                                 <td>{{turno.empleado}}</td>
                                 <td>{{turno.estado}}</td>
                                 <td width=250>
@@ -64,14 +66,25 @@
                                     {% endfor %}
                                 </td>
 
-                                <td>
-                                    {% if turno.fecha_cancelacion == null %}
-                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
+                                <td width=20>
+                                    {% if turno.fecha_confirmacion == null %}
+                                        {% if turno.fecha_cancelacion == null %}
+                                            <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
+                                        {% endif %}
                                     {% endif %}
                                 </td>
-                                 <td>
-                                    {% if turno.fecha_realizacion == null %}
-                                        <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
+
+                                <td width=20>
+                                    {% if turno.fecha_confirmacion == null %}
+                                        {% if turno.fecha_cancelacion == null %}
+                                            <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+
+                                <td width=20>
+                                    {% if turno.fecha_cancelacion == null %}
+                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
                                     {% endif %}
                                 </td>
 

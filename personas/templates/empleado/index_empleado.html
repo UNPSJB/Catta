@@ -65,22 +65,18 @@
                     </div> -->
                 </div>
                 <div class="tab-pane fade in" id="turnos">
-                    <!--<div id="acordeon-turnos" class="panel-group alternative">
+                    <div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
-                            <div class="container"> -->
+                            <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page">
-                                            <div class="login-header margin-bottom-30">
-                                                <h2><font color="Purple"><font face="arial"> Crear un turno nuevo </font></font></h2>
-                                            </div>
-                                            {% crispy form_crear_turno %}
-                                        </form>
+                                        <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
+                                        {% crispy form_crear_turno %}
                                     </div>
                                 </div>
-                            <!--</div>
+                            </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="tab-pane fade in" id="modTurnos">
                     <!--<div id="acordeon-turnos" class="panel-group alternative">
@@ -164,4 +160,12 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    var URL_TURNOS_LIBRES = "{% url "devuelvo_turnos_libres" %}";
+</script>
+<script type="text/javascript" src="{% static 'assets/js/turnos.js' %}"></script>
 {% endblock %}
