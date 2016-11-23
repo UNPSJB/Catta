@@ -92,10 +92,10 @@ def devuelvo_turnos(request):
 
     for turno in turnos:
 
-        vocales = "T"
+        char = "T"
         fecha = ""
         for letra in str(turno.fecha):
-            if letra not in vocales:
+            if letra not in char:
                 fecha += letra
 
         datos_turno = {
@@ -114,9 +114,9 @@ def devuelvo_turnos(request):
     return JsonResponse({'turnos': datos})
 
 
-def modificar_turno(request, id_turno=1):
-    turno = Turno.objects.get(id=id_turno)
-    # usuario = request.user()
+def modificar_turno(request, id_turno):
+
+    turno = get_object_or_404(Turno, pk=id)
     ret = "empleado/index_empleado.html"
     if request.method == "POST":
         form = ModificarTurnoForm(request.POST, instance=turno)
@@ -138,6 +138,7 @@ def cancelar_turno(request, id):
         else:
             turno = get_object_or_404(Turno, pk=id)
         return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno})
+
 def listaTurnosFecha(request):
     turnos = Turno.objects.all()
     return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})

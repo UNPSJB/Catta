@@ -2,6 +2,7 @@ from django import forms
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.forms import ModelForm, Form
 
 from .models import Persona, Usuario, Cliente, Empleado
 from gestion.models import Sector
@@ -121,3 +122,31 @@ class EmpleadoNuevoForm(forms.ModelForm):
         fields = ("dni",
                   "nombre", "apellido",
                   "direccion", "telefono", "localidad")
+
+
+class LiquidarComisionForm(Form):
+
+    Empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), empty_label=" ")
+    fecha = forms.DateField()
+
+    def __init__(self, *args, **kwargs):
+        super(LiquidarComisionForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('liquidar_comision', 'Liquidar Comision'))
+
+    def save(self, commit=True):
+
+        e = Empleado()
+        print(e)
+
+        e.porc_comision = self.cleaned_data['comision']
+        e.save()
+
+
+        '''
+        if commit:
+            u.save()
+            p.save()
+        '''
+        return e

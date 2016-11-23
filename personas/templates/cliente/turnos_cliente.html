@@ -28,7 +28,7 @@
                       <option value="Realizado">Realizado</option>
                       <option value="Confirmado">Confirmado</option>
                       <option value="Cancelado">Cancelado</option>
-                      <option value="Sin Confirma">Sin Confirma</option>
+                      <option value="Sin Confirmar">Sin Confirma</option>
                     </select>
                     <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                 </form>
@@ -62,6 +62,11 @@
                                 <td>
                                     {% if turno.fecha_confirmacion == null %}
                                         <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                    {% endif %}
+                                </td>
+                                 <td>
+                                    {% if turno.fecha_realizacion == null %}
+                                        <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
                                     {% endif %}
                                 </td>
 

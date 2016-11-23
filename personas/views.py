@@ -5,7 +5,7 @@ from django.contrib.auth import logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django import forms
 
-from .forms import CuentaNuevaForm, EmpleadoNuevoForm
+from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
 
@@ -196,7 +196,8 @@ FORMS_DUENIO = {
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_promo', 'crear_promo'): PromoForm,
-    ('form_insumo', 'crear_insumo'): InsumoForm
+    ('form_insumo', 'crear_insumo'): InsumoForm,
+    ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm
 }
 
 
@@ -205,6 +206,7 @@ def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
     contexto = {}
+    print('estoy')
     for form_name, input_name in FORMS_DUENIO:
         klassForm = FORMS_DUENIO[(form_name, input_name)]
         if request.method == "POST" and input_name in request.POST:
