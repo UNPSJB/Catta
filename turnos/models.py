@@ -55,7 +55,7 @@ class Turno(models.Model):
     }
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
     # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
-    fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
+    fecha_creacion = models.DateTimeField(null=True, default=datetime.now)
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
     fecha_cancelacion = models.DateTimeField(null=True, blank=True)
@@ -134,10 +134,10 @@ class Turno(models.Model):
                     return "Sin Confirmar"
 
     def cancelar_turno(self):
-        self.fecha_cancelacion = datetime.datetime.now()
+        self.fecha_cancelacion = datetime.now()
 
     def confirmar_turno(self):
-        self.fecha_confirmacion = datetime.datetime.now()
+        self.fecha_confirmacion = datetime.now()
 
     def agregar_servicio(self):
         pass
