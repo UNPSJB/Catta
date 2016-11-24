@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django import forms
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
@@ -13,6 +13,7 @@ from .models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno
 from django.db.models import Q, Count
+from datetime import datetime
 
 """Metodo de Filtro"""
 def get_filtros(modelo, datos):
@@ -40,6 +41,7 @@ FORMS_CLIENTE = {
 
 }
 @login_required(login_url='iniciar_sesion')
+@permission_required('personas.cliente_puede_ver', raise_exception=True)
 def cliente(request):
 
     promociones = Promocion.objects.all()
@@ -122,8 +124,8 @@ Vistas del Empleado.
 """
 
 
-
 @login_required(login_url='iniciar_sesion')
+@permission_required('personas.empleado_puede_ver', raise_exception=True)
 def empleado(request, id=None):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
@@ -202,13 +204,12 @@ FORMS_DUENIO = {
 }
 
 
-
 @login_required(login_url='iniciar_sesion')
+@permission_required('personas.duenia_puede_ver', raise_exception=True)
 def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
     contexto = {}
-    print('estoy')
     if request.method == "POST" and 'liquidar_comision' in request.POST:
         _form = LiquidarComisionForm()
         contexto['form_liquidar_Comision'] = _form
@@ -216,11 +217,9 @@ def duenio(request):
         _fecha1 = (request.POST.get('fecha'))
         _fecha += ' 00:00:00'
         _fecha1 += ' 19:45:00'
-        print(_fecha)
         id_empleado = (request.POST.get('empleado'))
         _empleado = Empleado.objects.filter(id=id_empleado).first()
         _turnos = Turno.objects.filter(empleado=_empleado, fecha__range=[_fecha, _fecha1])
-        print(_turnos)
         _costo = 0
         for turno in _turnos:
             _costo += turno.get_costo()
@@ -228,8 +227,6 @@ def duenio(request):
         _pago = _empleado.get_pago(_costo)
 
         print(_pago)
-
-
 
     for form_name, input_name in FORMS_DUENIO:
         klassForm = FORMS_DUENIO[(form_name, input_name)]

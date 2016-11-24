@@ -4,60 +4,51 @@ $(function() {
 
     $("#id_fecha").change(function() { funcionAjax(this) });
     $("#id_empleado").change(function() { funcionAjax(this) });
+    $("#id_promociones").change(function() { funcionAjax(this) });
+    $("#id_servicios").change(function() { funcionAjax(this) });
 
     function funcionAjax(elemento) {
         var fecha = $('#id_fecha').val().slice(0,10);
-        $('#id_fecha').val(fecha);
         var empleado = $("#id_empleado").val();
+        var promociones = $("#id_promociones").val();
+        var servicios = $("#id_servicios").val();
+        $('#id_fecha').val(fecha);
 
         if ((empleado != "")&&(fecha != "")) {
-            var hoy = new Date();
-            var ahora = hoy.getHours()+":"+hoy.getMinutes();
-            hoy = hoy.getDate()+"/"+hoy.getMonth()+"/"+hoy.getFullYear();
+            $.ajax({
+                method: "GET",
+                url: URL_TURNOS_LIBRES,
+                data: {
+                    dia: fecha,
+                    promocion: promociones,
+                    empleado: empleado,
+                    servicio: servicios
+                },
+                success: function(datos, status, req) {
+                    $(".turnero").empty();
 
-            if (fecha >= hoy){
-                var promociones = $("#id_promociones").val();
-                var servicios = $("#id_servicios").val();
-                // var empleado = $('#id_empleado').val();
-                $.ajax({
-                    method: "GET",
-                    url: URL_TURNOS_LIBRES,
-                    data: {
-                        dia: fecha,
-                        promocion: promociones,
-                        empleado: empleado,
-                        servicio: servicios
-                    },
-                    success: function(datos, status, req) {
-                        $(".turnero").empty();
-
-                        var modulos = $(datos.modulos).map(function(index, modulo) {
-                            /* Agrega un cero adelante de la hora si es un solo digito */
-                            if (/^\d$/.test(modulo.hora))  {
-                                modulo.hora = "0" + modulo.hora
-                            }
-                            /* Agrega un cero adelante de los minutos si es un solo digito */
-                            if (/^\d$/.test(modulo.mins))  {
-                                modulo.mins = "0" + modulo.mins
-                            }
-                            /* Compone el div de la ventana */
-                            var m = $("<div>", {"class": "turnos btn",
-                                                "id": "div_" + index,
-                                                "onclick": 'eventoHora('+modulo.hora+', '+modulo.mins+', id);'
-                            });
-                            m.html("<p>" + modulo.hora + ":" + modulo.mins + "</p>");
-                            return m;
+                    var modulos = $(datos.modulos).map(function(index, modulo) {
+                        /* Agrega un cero adelante de la hora si es un solo digito */
+                        if (/^\d$/.test(modulo.hora))  {
+                            modulo.hora = "0" + modulo.hora
+                        }
+                        /* Agrega un cero adelante de los minutos si es un solo digito */
+                        if (/^\d$/.test(modulo.mins))  {
+                            modulo.mins = "0" + modulo.mins
+                        }
+                        /* Compone el div de la ventana */
+                        var m = $("<div>", {"class": "turnos btn",
+                                            "id": "div_" + index,
+                                            "onclick": 'eventoHora('+modulo.hora+', '+modulo.mins+', id);'
                         });
-                        modulos.each(function(i, m) {
-                            turnero.append(m);
-                        })
-                    }
-                })
-            } else {
-                alert("El día ingresado debe ser igual o superior al día de hoy");
-                $('#id_fecha').val("");
-                $('.turnero').empty();
-            }
+                        m.html("<p>" + modulo.hora + ":" + modulo.mins + "</p>");
+                        return m;
+                    });
+                    modulos.each(function(i, m) {
+                        turnero.append(m);
+                    })
+                }
+            })
         } else {
             $(".turnero").empty();
         }

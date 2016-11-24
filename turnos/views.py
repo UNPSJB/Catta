@@ -14,57 +14,20 @@ def escupoJSON(request):
         "turnos": data
     })
 
+
 def manejador_fechas(fecha):
     if isinstance(fecha, datetime.datetime):
         return fecha.isoformat()
     raise TypeError("Tipo desconocido")
 
+
 def devuelvo_turnos_libres(request):
-    INICIO_TURNO_MAÑANA = time(9, 0)
-    FINAL_TURNO_MAÑANA = time(12, 0)
-    INICIO_TURNO_TARDE = time(16, 0)
-    FINAL_TURNO_TARDE = time(20, 0)
-    MODULO = timedelta(minutes=15)
-
-    # Compone la lista con todos los módulos de un día.
-    fecha_ingresada = datetime.strptime(request.GET['dia'], "%d/%m/%Y").date()
-    inicio_mod = datetime.combine(fecha_ingresada, INICIO_TURNO_MAÑANA)
-    fin_mod = datetime.combine(fecha_ingresada, FINAL_TURNO_TARDE)
-    horarios = []
-    mod = inicio_mod
-    while mod < fin_mod:
-        if mod.time() == FINAL_TURNO_MAÑANA:
-            mod = datetime.combine(mod, INICIO_TURNO_TARDE)
-        horarios.append(mod)
-        mod += MODULO
-
-    # Obtiene la duración de los servicios y promociones.
+    fecha = datetime.strptime(request.GET['dia'], "%Y-%m-%d").date()
     servicios = request.GET.getlist('servicio[]')
     promociones = request.GET.getlist('promocion[]')
-    duracion_servicios = timedelta(0)
-    for i in servicios:
-        servicio = ServicioBasico.objects.all().filter(pk=i)
-        duracion_servicios += servicio.first().get_duracion()
-    for i in promociones:
-        promo = Promocion.objects.all().filter(pk=i)
-        duracion_servicios += promo.first().get_duracion()
-
-    # Quita de los horarios disponibles del día los que estan ocupados.
     empleado = request.GET['empleado']
-    turnos = Turno.objects.all().filter(fecha__day=fecha_ingresada.day, empleado=empleado)
-    if turnos:
-        lista_turnos = []
-        for turno in turnos:
-            info = {
-                'inicio': turno.fecha.time(),
-                'fin': turno.get_duracion().time()
-            }
-            lista_turnos.append(info)
-        for hora in reversed(horarios):
-            if any(hora.time() >= dato['inicio'] and hora.time() < dato['fin'] for dato in lista_turnos):
-                horarios.remove(hora)
+    horarios = Turno.posibles_turnos(fecha, servicios, promociones, empleado)
 
-    # Compone el JSON y lo devuelve.
     datos_json = []
     for hora in horarios:
         dato = {
@@ -86,7 +49,7 @@ def devuelvo_turnos(request):
         if usuario.persona.empleado == None:
             turnos = Turno.objects.all().filter(empleado=usuario.persona.empleado)
         else:
-            turnos = Turno.objects.all().filter(cliente=usuario.persona.empleado)
+            turnos = Turno.objects.all().filter(cliente=usuario.persona.cliente)
     else:
         turnos = Turno.objects.all()
 
