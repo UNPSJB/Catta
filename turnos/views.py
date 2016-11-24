@@ -49,7 +49,7 @@ def devuelvo_turnos(request):
         if usuario.persona.empleado == None:
             turnos = Turno.objects.all().filter(empleado=usuario.persona.empleado)
         else:
-            turnos = Turno.objects.all().filter(cliente=usuario.persona.empleado)
+            turnos = Turno.objects.all().filter(cliente=usuario.persona.cliente)
     else:
         turnos = Turno.objects.all()
 

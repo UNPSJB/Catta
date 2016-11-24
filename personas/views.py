@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django import forms
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
@@ -41,6 +41,7 @@ FORMS_CLIENTE = {
 
 }
 @login_required(login_url='iniciar_sesion')
+@permission_required('personas.cliente_puede_ver', raise_exception=True)
 def cliente(request):
 
     promociones = Promocion.objects.all()
@@ -123,8 +124,8 @@ Vistas del Empleado.
 """
 
 
-
 @login_required(login_url='iniciar_sesion')
+@permission_required('personas.empleado_puede_ver', raise_exception=True)
 def empleado(request, id=None):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
@@ -203,8 +204,8 @@ FORMS_DUENIO = {
 }
 
 
-
 @login_required(login_url='iniciar_sesion')
+@permission_required('personas.duenia_puede_ver', raise_exception=True)
 def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
