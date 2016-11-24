@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timedelta, time
 from django.http import JsonResponse, HttpResponse
-from .forms import ModificarTurnoForm
+from .forms import ModificarTurnoForm, RegistrarTurnoRealizadoForm
 from .models import Turno
 from gestion.models import ServicioBasico, Promocion
 from django.core import serializers
@@ -120,15 +120,25 @@ def listaTurnosFecha(request):
     return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})
 
 
-# def confirmar_turno(request, id):
-#    if request.method == "POST":
-#        turno = get_object_or_404(Turno, pk=id)
-#        turno.confirmar_turno()
-#        turno.save()
-#        return redirect('/personas/duenio_lista_turnos')
-#    else:
-#        turno = get_object_or_404(Turno, pk=id)
-#        return render(request, '/turnos/confirmarTurno/confirmar_turno.html', {'turno':turno})
+def marcar_realizado(request, id):
+    if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_turnos'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_turnos'
+            else:
+                ret = '/personas/cliente_lista_turnos'
+        turno = get_object_or_404(Turno, pk=id)
+        turno.realizar_turno()
+        form = RegistrarTurnoRealizadoForm(request.POST, instance=turno)
+        if form.is_valid:
+            form.save()
+            return redirect(ret)
+    else:
+        turno = get_object_or_404(Turno, pk=id)
+        form = RegistrarTurnoRealizadoForm(instance=turno)
+    return render(request, 'marcarRealizado/marcar_realizado.html', {'turno': turno, 'form_registrar_turno_realizado': form})
 
 def confirmar_turno(request, id):
     if request.method == "POST":
@@ -151,7 +161,3 @@ def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
 
-"""def detalle_turno(request, id=1):
-    turno = get_object_or_404(Turno, pk=id)
-    return render(request, 'Turnos/detalle_turno.html', {'turno': turno})
-"""

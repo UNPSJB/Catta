@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+
+{% block contenido %}
+<div id="content">
+    <div class="container background-transparent">
+        <div class="container">
+            <div class="row margin-vert-30">
+                <!-- Login Box -->
+                <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+
+                        <form method="post" class="login-page">
+                            {% csrf_token %}
+                            <div class="login-header margin-bottom-30">
+                                <h2>Marcar Turno como Realizado</h2>
+                            </div>
+                            <!-- -->
+
+
+                                {% load crispy_forms_tags %}
+                                {% csrf_token %}
+                                {% crispy form_registrar_turno_realizado %}
+
+
+                        </form>
+
+                </div>
+                <!-- End Login Box -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -109,15 +109,19 @@ def cliente_lista_turnos(request):
     return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
 
 
+
 FORMS_EMPLEADO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
+    ('form_servicio', 'crear_servicio'): ServicioForm,
+    ('form_promo', 'crear_promo'): PromoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
     ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
-    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
+    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm,
+    ('form_servicio', 'crear_servicio'): ServicioForm,
+    ('form_promo', 'crear_promo'): PromoForm
 }
-
 
 """
 Vistas del Empleado.
@@ -198,6 +202,7 @@ FORMS_DUENIO = {
     ('form_servicio', 'crear_servicio'): ServicioForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
     ('form_promo', 'crear_promo'): PromoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm,
     ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm
