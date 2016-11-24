@@ -39,7 +39,7 @@ def servicio(request):
             servicio = form.save()
             servicio.save()
             # messages.success(request, "Servicio creado")  # from django.contrib import messages
-            return redirect('/duenio')
+            return redirect(servicio.get_vista())
     else:
         form = ServicioForm()
     return render(request, 'servicio/altaServicio.html', {"form": form})

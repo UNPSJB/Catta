@@ -119,17 +119,6 @@ def listaTurnosFecha(request):
     turnos = Turno.objects.all()
     return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})
 
-
-# def confirmar_turno(request, id):
-#    if request.method == "POST":
-#        turno = get_object_or_404(Turno, pk=id)
-#        turno.confirmar_turno()
-#        turno.save()
-#        return redirect('/personas/duenio_lista_turnos')
-#    else:
-#        turno = get_object_or_404(Turno, pk=id)
-#        return render(request, '/turnos/confirmarTurno/confirmar_turno.html', {'turno':turno})
-
 def confirmar_turno(request, id):
     if request.method == "POST":
         if (request.user.persona.duenia != None):
@@ -151,7 +140,3 @@ def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
 
-"""def detalle_turno(request, id=1):
-    turno = get_object_or_404(Turno, pk=id)
-    return render(request, 'Turnos/detalle_turno.html', {'turno': turno})
-"""
