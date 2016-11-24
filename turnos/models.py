@@ -80,17 +80,21 @@ class Turno(models.Model):
         if promociones is not None:
             for promocion in promociones:
                 delta += Promocion.objects.all().filter(id=promocion).first().get_duracion()
-        if fecha == datetime.today().date():
-            pass    # Sacar los módulos que hora_mod < hora_actual
-        else:
-            pass    # Poner todos los módulos
+        # Crea el set con todos los horarios del día.
         rango = set(crear_rango(settings.MAÑANA) + crear_rango(settings.TARDE))
+        # Si el día elegido es hoy, elimina los horarios anteriores a la hora actual.
+        if fecha == datetime.today().date():
+            for r in reversed(sorted(rango)):
+                if r <= datetime.today().time():
+                    rango.remove(r)
+        # Saca del set de horarios los que sobrepasan el tamaño del turno a crear.
         rango = rango.difference(crear_rango((
             (datetime.combine(date.today(), settings.TARDE[1]) - delta).time(),
             settings.TARDE[1])))
         for t in turnos:
             r = crear_rango((t.fecha.time(), (t.fecha + t.duracion()).time()))
             rango = rango.difference(r)
+
         return sorted(rango)
 
     def duracion(self):
