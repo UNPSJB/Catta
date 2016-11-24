@@ -80,6 +80,10 @@ class Turno(models.Model):
         if promociones is not None:
             for promocion in promociones:
                 delta += Promocion.objects.all().filter(id=promocion).first().get_duracion()
+        if fecha == datetime.today().date():
+            pass    # Sacar los módulos que hora_mod < hora_actual
+        else:
+            pass    # Poner todos los módulos
         rango = set(crear_rango(settings.MAÑANA) + crear_rango(settings.TARDE))
         rango = rango.difference(crear_rango((
             (datetime.combine(date.today(), settings.TARDE[1]) - delta).time(),

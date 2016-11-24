@@ -26,7 +26,7 @@ def devuelvo_turnos_libres(request):
     servicios = request.GET.getlist('servicio[]')
     promociones = request.GET.getlist('promocion[]')
     empleado = request.GET['empleado']
-    horarios = Turno.posibles_turnos(fecha, servicios, empleado)
+    horarios = Turno.posibles_turnos(fecha, servicios, promociones, empleado)
 
     datos_json = []
     for hora in horarios:
