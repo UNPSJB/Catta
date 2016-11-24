@@ -124,6 +124,7 @@ Vistas del Empleado.
 """
 
 
+
 @login_required(login_url='iniciar_sesion')
 @permission_required('personas.empleado_puede_ver', raise_exception=True)
 def empleado(request, id=None):
@@ -201,6 +202,8 @@ FORMS_DUENIO = {
     ('form_promo', 'crear_promo'): PromoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm,
     ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm
+    ('form_insumo', 'crear_insumo'): InsumoForm,
+    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
 }
 
 

@@ -1,31 +1,8 @@
-from datetime import date, datetime, timedelta
+import datetime
 from personas.models import *
-from django.db.models import Q, Sum, F
-from django.conf import settings
-import enum
-
-class TurnoBaseManager(models.Manager):
-    def get_queryset(self):
-        qs = super().get_queryset().annotate(servicio_modulos=Sum("servicios__duracion"))
-        qs = qs.annotate(promocion_modulos=Sum("promociones__servicios__duracion"))
-        return qs
-
-class TurnoQuerySet(models.QuerySet):
-    def en_dia(self, date):
-        return self.filter(fecha__date = date)
-
-    def en_estado(self, estado):
-        return self.filter(Turno.FILTROS["estado"][estado])
-
-TurnoManager = TurnoBaseManager.from_queryset(TurnoQuerySet)
-
-def crear_rango(turno):
-    r = []
-    base = turno[0]
-    while base <= turno[1]:
-        r.append(base)
-        base = (datetime.combine(date.today(), base) + settings.MODULO).time()
-    return r
+from django.db.models import Q
+import  enum
+from datetime import date, time, timedelta
 
 class Turno(models.Model):
     CONFIRMADO = 2
@@ -142,10 +119,10 @@ class Turno(models.Model):
                     return "Sin Confirmar"
 
     def cancelar_turno(self):
-        self.fecha_cancelacion = datetime.now()
+        self.fecha_cancelacion = datetime.datetime.now()
 
     def confirmar_turno(self):
-        self.fecha_confirmacion = datetime.now()
+        self.fecha_confirmacion = datetime.datetime.now()
 
     def agregar_servicio(self):
         pass
@@ -163,12 +140,35 @@ class Turno(models.Model):
         return costo
 
 class TurnoFijo(Turno):
+    MARTES ='Martes'
+    MIERCOLES ='Miercoles'
+    JUEVES ='Jueves'
+    VIERNES ='Viernes'
+    SABADO ='Sabado'
+    DIA = [
+        (MARTES, 'Martes'),
+        (MIERCOLES, 'Miercoles'),
+        (JUEVES, 'Jueves'),
+        (VIERNES, 'Viernes'),
+        (SABADO, 'Sabado')
+    ]
     # ATRIBUTO DIA (EJEMPLO: Turno fijo los JUEVES) PUEDE SER ENUMERADO
+    #turno_siguiente = models.OneToOneField('self',null=True, blank=True,default=self.calcular_turno_siguiente())
     turno_siguiente = models.OneToOneField('self', null=True)
-    fecha_fin = models.DateTimeField()
+    fecha_fin = models.DateTimeField(null=True,blank=True)
+    #dia = models.CharField(max_length=9, choices=DIA, default='Martes')
 
     def calcular_turno_siguiente(self):
-        pass
+        print(self.fecha_fin)
+        if self.fecha_fin < self.fecha + timedelta(days=7):
+            t = TurnoFijo()
+            t.empleado = self.empleado
+            t.fecha = self.fecha + timedelta(days=7)
+            t.servicios = self.servicios
+            t.promociones = self.promociones
+            t.cliente = self.cliente
+            self.turno_siguiente = t
+            #t.calcular_turno_siguiente()
 
 #class Dia(enum):
  #   martes=1
