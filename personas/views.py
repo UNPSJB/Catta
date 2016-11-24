@@ -41,7 +41,7 @@ FORMS_CLIENTE = {
 
 }
 @login_required(login_url='iniciar_sesion')
-@permission_required('personas.cliente_puede_ver', raise_exception=True)
+#@permission_required('personas.cliente_puede_ver', raise_exception=True)
 def cliente(request):
 
     promociones = Promocion.objects.all()

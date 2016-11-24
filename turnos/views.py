@@ -79,11 +79,18 @@ def devuelvo_turnos(request):
 
 def modificar_turno(request, id):
     if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_turnos'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_turnos'
+            else:
+                ret = '/personas/cliente_lista_turnos'
         turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(request.POST, instance=turno)
         if form.is_valid:
             form.save()
-            return redirect('/personas/duenio_lista_turnos')
+            return redirect(ret)
     else:
         turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(instance=turno)
@@ -91,10 +98,17 @@ def modificar_turno(request, id):
 
 def cancelar_turno(request, id):
         if request.method == "POST":
+            if (request.user.persona.duenia != None):
+                ret = '/personas/duenio_lista_turnos'
+            else:
+                if (request.user.persona.empleado != None):
+                    ret = '/personas/empleado_lista_turnos'
+                else:
+                    ret = '/personas/cliente_lista_turnos'
             turno = get_object_or_404(Turno, pk=id)
             turno.cancelar_turno()
             turno.save()
-            return redirect('/personas/duenio_lista_turnos')
+            return redirect(ret)
         else:
             turno = get_object_or_404(Turno, pk=id)
         return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno})
@@ -118,10 +132,17 @@ def listaTurnosFecha(request):
 
 def confirmar_turno(request, id):
     if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_turnos'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_turnos'
+            else:
+                ret = '/personas/cliente_lista_turnos'
         turno = get_object_or_404(Turno, pk=id)
         turno.confirmar_turno()
         turno.save()
-        return redirect('/personas/duenio_lista_turnos')
+        return redirect(ret)
     else:
         turno = get_object_or_404(Turno, pk=id)
     return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno})
