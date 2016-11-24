@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = []    # TODO
 
 LANGUAGE_CODE = 'es-AR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 USE_I18N = True
 
