@@ -144,6 +144,9 @@ class Turno(models.Model):
     def cancelar_turno(self):
         self.fecha_cancelacion = datetime.now()
 
+    def realizar_turno(self):
+        self.fecha_realizacion = datetime.now()
+
     def confirmar_turno(self):
         self.fecha_confirmacion = datetime.now()
 

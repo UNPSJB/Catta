@@ -49,7 +49,6 @@
                                 <th>Modificar</th>
                                 <th>Confirmar</th>
                                 <th>Cancelar</th>
-
                             </tr>
                         </thread>
                         <tbody>
@@ -80,9 +79,13 @@
                                 </td>
 
                                 <td width=20>
-                                    {% if turno.fecha_confirmacion == null %}
-                                        {% if turno.fecha_cancelacion == null %}
-                                            <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                    {% if turno.fecha_cancelacion == null %}
+                                        {% if turno.fecha_realizacion == null %}
+                                            {% if turno.fecha_confirmacion == null %}
+                                                <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                            {% else %}
+                                                <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 </td>

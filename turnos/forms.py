@@ -93,6 +93,8 @@ class CrearTurnoFijoForm(ModelForm):
         model = TurnoFijo
         fields = {"fecha", "empleado", "servicios", "promociones", "cliente","fecha_fin"}
 
+
+#form_registrar_turno_realizado
 class RegistrarTurnoRealizadoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(RegistrarTurnoRealizadoForm, self).__init__(*args, **kwargs)
@@ -122,6 +124,6 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         }
 
     def save(self, commit=True):
-        turno = super.save(commit=False)
+        turno = super(RegistrarTurnoRealizadoForm, self).save()
         turno.save()
         return turno
