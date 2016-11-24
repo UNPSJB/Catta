@@ -20,9 +20,9 @@
                     <input name="empleadoA" placeholder="Apellido" value="{{ f.empleadoA }}" class="filtro">
                     <br>
                     Desde:
-                    <input name="fechaI" type="date" placeholder="Desde (aaa-mm-dd)" value="{{ f.fechaI }}" class="filtro">
+                    <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
                     Hasta:
-                    <input name="fechaF" type="date" placeholder="Hasta (aaa-mm-dd)" value="{{ f.fechaF }}" class="filtro">
+                    <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
                     Servicio:
                     <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
                     Estado:
@@ -103,3 +103,12 @@
     </div>
 
 {% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker();
+    });
+</script>
+{% endblock%}

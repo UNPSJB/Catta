@@ -133,3 +133,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'personas.Usuario'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+from datetime import time, date, timedelta, datetime
+
+MAÑANA = (time(9, 0), time(12, 0))
+TARDE = (time(16, 0), time(20, 0))
+MODULO = timedelta(minutes=15)
