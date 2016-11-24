@@ -28,3 +28,19 @@
     </div>
 </div>
 {% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    var URL_TURNOS_LIBRES = "{% url "devuelvo_turnos_libres" %}";
+</script>
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker({
+            minDate: new Date(),
+            maxDate: 2050-12-31
+        });
+    });
+</script>
+<script type="text/javascript" src="{% static 'assets/js/turnos.js' %}"></script>
+{% endblock %}
