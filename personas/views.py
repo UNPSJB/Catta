@@ -11,7 +11,7 @@ from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoReali
 
 from .models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
-from turnos.models import Turno
+from turnos.models import Turno, TurnoFijo
 from django.db.models import Q, Count
 from datetime import datetime
 
@@ -206,14 +206,14 @@ FORMS_DUENIO = {
     ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
     ('form_promo', 'crear_promo'): PromoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm,
-    ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm
+    ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm,
     ('form_insumo', 'crear_insumo'): InsumoForm,
     ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
 }
 
 
 @login_required(login_url='iniciar_sesion')
-@permission_required('personas.duenia_puede_ver', raise_exception=True)
+#@permission_required('personas.duenia_puede_ver', raise_exception=True)
 def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
@@ -247,6 +247,10 @@ def duenio(request):
             contexto[form_name] = _form
         else:
             contexto[form_name] = klassForm()
+
+    #_turno = TurnoFijo.objects.latest('id')
+    #t= TurnoFijo.objects.last()
+    print(_turno)
     return render(request, ret, contexto)
 
 

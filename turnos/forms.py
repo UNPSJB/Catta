@@ -92,14 +92,11 @@ class CrearTurnoFijoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno Fijo'))
 
-
-
     def save(self, commit=True):
         datos = super(CrearTurnoFijoForm, self).save()
-        #datos.calcular_siguiente_turno()
-        t=TurnoFijo()
-        t.calcular_turno_siguiente()
-        t.save()
+        #print(datos)
+        #print(self.cleaned_data)
+        #print(datos)
         return datos
 
     def clean(self):

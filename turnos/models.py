@@ -1,8 +1,33 @@
 import datetime
 from personas.models import *
-from django.db.models import Q
+from django.db.models import Q, Sum, F
+from django.conf import settings
 import  enum
 from datetime import date, time, timedelta
+
+
+class TurnoBaseManager(models.Manager):
+    def get_queryset(self):
+        qs = super().get_queryset().annotate(servicio_modulos=Sum("servicios__duracion"))
+        qs = qs.annotate(promocion_modulos=Sum("promociones__servicios__duracion"))
+        return qs
+
+class TurnoQuerySet(models.QuerySet):
+    def en_dia(self, date):
+        return self.filter(fecha__date = date)
+
+    def en_estado(self, estado):
+        return self.filter(Turno.FILTROS["estado"][estado])
+
+TurnoManager = TurnoBaseManager.from_queryset(TurnoQuerySet)
+
+def crear_rango(turno):
+    r = []
+    base = turno[0]
+    while base <= turno[1]:
+        r.append(base)
+        base = (datetime.combine(date.today(), base) + settings.MODULO).time()
+    return r
 
 class Turno(models.Model):
     CONFIRMADO = 2
@@ -32,7 +57,7 @@ class Turno(models.Model):
     }
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
     # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
-    fecha_creacion = models.DateTimeField(null=True, default=datetime.now)
+    fecha_creacion = models.DateTimeField(null=True, default=datetime.datetime.now)
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
     fecha_cancelacion = models.DateTimeField(null=True, blank=True)
@@ -162,8 +187,9 @@ class TurnoFijo(Turno):
     #dia = models.CharField(max_length=9, choices=DIA, default='Martes')
 
     def calcular_turno_siguiente(self):
+        print("feeeeecha")
         print(self.fecha_fin)
-        if self.fecha_fin < self.fecha + timedelta(days=7):
+        if  self.fecha_fin > (self.fecha + timedelta(days=7)):
             t = TurnoFijo()
             t.empleado = self.empleado
             t.fecha = self.fecha + timedelta(days=7)
@@ -171,10 +197,9 @@ class TurnoFijo(Turno):
             t.promociones = self.promociones
             t.cliente = self.cliente
             self.turno_siguiente = t
-            #t.calcular_turno_siguiente()
+            print(t.fecha)
 
-#class Dia(enum):
- #   martes=1
-  #  miercoles=2
-   ##viernes=4
-    #sabado=5
+            t.calcular_turno_siguiente()
+
+
+            #return t
