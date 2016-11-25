@@ -41,7 +41,7 @@ FORMS_CLIENTE = {
 
 }
 @login_required(login_url='iniciar_sesion')
-@permission_required('personas.cliente_puede_ver', raise_exception=True)
+#@permission_required('personas.cliente_puede_ver', raise_exception=True)
 def cliente(request):
 
     promociones = Promocion.objects.all()
@@ -83,7 +83,7 @@ def crear_turno_cliente(request):
             return redirect('/personas/cliente')
         print(form)
     else:
-        form = CrearTurnoForm()
+        form = CrearTurnoForm(initial={'cliente': request.user.persona.cliente})
         form.fields['cliente'].widget = forms.HiddenInput()
     return render(request, 'cliente/crear_turno.html', {"form": form})
 
@@ -109,15 +109,19 @@ def cliente_lista_turnos(request):
     return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
 
 
+
 FORMS_EMPLEADO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
+    ('form_servicio', 'crear_servicio'): ServicioForm,
+    ('form_promo', 'crear_promo'): PromoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
     ('form_eliminar_turno', 'eliminar_turno'): EliminarTurnoForm,
     ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
-    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
+    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm,
+    ('form_servicio', 'crear_servicio'): ServicioForm,
+    ('form_promo', 'crear_promo'): PromoForm
 }
-
 
 """
 Vistas del Empleado.
@@ -199,6 +203,7 @@ FORMS_DUENIO = {
     ('form_servicio', 'crear_servicio'): ServicioForm,
     ('form_crear_turno', 'crear_turno'): CrearTurnoForm,
     ('form_modificar_turno', 'modificar_turno'): ModificarTurnoForm,
+    ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
     ('form_promo', 'crear_promo'): PromoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm,
     ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm
