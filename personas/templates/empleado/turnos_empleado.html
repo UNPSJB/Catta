@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block contenido %}
-    <div class="container background-white" style="opacity: 0.95;">
+    <div class="container background-white" style="opacity: 0.95;" xmlns="http://www.w3.org/1999/html">
         <div class="row margin-vert-30">
             <div class="col-md-12">
                 <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
@@ -43,7 +43,7 @@
                                 <th>Estado</th>
                                 <th>Servicios</th>
                                 <th>Modificar</th>
-                                <th>Confirmar</th>
+                                <th>Conf/Realiz</th>
                                 <th>Cancelar</th>
 
                             </tr>
@@ -57,10 +57,12 @@
                                 <td>{{turno.estado}}</td>
                                 <td width=250>
                                     {% for promocion in turno.promociones.all %}
-                                        <li>{{promocion}}
-                                            {% for servicio in promocion.servicios.all %}
-                                                  <li><i>{{servicio}}</i>
-                                            {% endfor %}
+                                        <details>
+                                            <summary>{{promocion}}</summary>
+                                                {% for servicio in promocion.servicios.all %}
+                                                      <li><i>{{servicio}}</i>
+                                                {% endfor %}
+                                        </details>
                                     {% endfor %}
                                     {% for servicio in turno.servicios.all %}
                                        <li> {{servicio}}

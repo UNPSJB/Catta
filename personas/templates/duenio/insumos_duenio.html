@@ -23,7 +23,6 @@
                         <th>Unidad de Medida</th>
                         <th>Stock</th>
                         <th>Modificar Stock</th>
-                        <th>Eliminar</th>
                     </tr>
                 </thread>
                 <tbody>
@@ -35,7 +34,6 @@
                         <td>{{insumo.unidadDeMedida}}</td>
                         <td>{{insumo.stock}}</td>
                         <td><a href="{% url 'modificar_stock_duenio' insumo.id %}" button type="button" class="btn btn-warning">Modificar</button onclick="goto_link ('personas/modificar_stock_duenio/1/2/')"></a></td>
-                        <td><a href="{% url 'eliminarInsumo' insumo.id %}" button type="button" class="btn btn-danger">Eliminar</button onclick="goto_link ('gestion/modificarStockInsumo/1/2/')"></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

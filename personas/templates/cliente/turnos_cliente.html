@@ -56,10 +56,12 @@
                                 <td>{{turno.estado}}</td>
                                 <td width=250>
                                     {% for promocion in turno.promociones.all %}
-                                        <li>{{promocion}}
-                                            {% for servicio in promocion.servicios.all %}
-                                                  <li><i>{{servicio}}</i>
-                                            {% endfor %}
+                                        <details>
+                                            <summary>{{promocion}}</summary>
+                                                {% for servicio in promocion.servicios.all %}
+                                                      <li><i>{{servicio}}</i>
+                                                {% endfor %}
+                                        </details>
                                     {% endfor %}
                                     {% for servicio in turno.servicios.all %}
                                        <li> {{servicio}}
