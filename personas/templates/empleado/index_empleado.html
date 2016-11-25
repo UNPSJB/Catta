@@ -45,27 +45,22 @@
 
                 {% csrf_token %}
                 <div class="tab-pane fade in" id="clientes">
-                    <!--<div id="acordeon-clientes" class="panel-group alternative">
-                        <div class="panel panel-default">
-                            <div class="container"> -->
+                    <div class="panel panel-default">
+                         <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple"><font face="arial"> Dar de alta un cliente </font></font></h2>
                                             </div>
 
                                             {% crispy form_cliente %}
-
-                                        </form>
                                     </div>
                                 </div>
-                            <!--</div>
-                        </div>
-                    </div> -->
+                         </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade in" id="crearServicio">
-                    <div id="acordeon-turnos" class="panel-group alternative">
+
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -76,10 +71,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                 </div>
                 <div class="tab-pane fade in" id="crearPromocion">
-                    <div id="acordeon-turnos" class="panel-group alternative">
+
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -90,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                 </div>
                 <div class="tab-pane fade in" id="turnos">
                     <div id="acordeon-turnos" class="panel-group alternative">
@@ -107,22 +102,18 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="turnoFijo">
-                    <!--<div id="acordeon-turnos" class="panel-group alternative">
-                        <div class="panel panel-default">
-                            <div class="container"> -->
+                    <div class="panel panel-default">
+                            <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <form method="post" class="login-page">
                                             <div class="login-header margin-bottom-30">
                                                 <h2><font color="Purple"><font face="arial"> Crear un turno Fijo </font></font></h2>
                                             </div>
                                             {% crispy form_crear_turno_fijo %}
-                                        </form>
                                     </div>
                                 </div>
-                            <!--</div>
-                        </div>
-                    </div> -->
+                           </div>
+                    </div>
                 </div>
             </div>
         </div>
