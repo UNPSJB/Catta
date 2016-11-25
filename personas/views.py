@@ -247,10 +247,9 @@ def duenio(request):
             contexto[form_name] = _form
         else:
             contexto[form_name] = klassForm()
-
-    #_turno = TurnoFijo.objects.latest('id')
-    #t= TurnoFijo.objects.last()
-    print(_turno)
+        if form_name == 'form_crear_turno_fijo':
+            id_turno = TurnoFijo.objects.latest('id')
+            id_turno.calcular_turno_siguiente()
     return render(request, ret, contexto)
 
 

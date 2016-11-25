@@ -183,23 +183,27 @@ class TurnoFijo(Turno):
     # ATRIBUTO DIA (EJEMPLO: Turno fijo los JUEVES) PUEDE SER ENUMERADO
     #turno_siguiente = models.OneToOneField('self',null=True, blank=True,default=self.calcular_turno_siguiente())
     turno_siguiente = models.OneToOneField('self', null=True)
-    fecha_fin = models.DateTimeField(null=True,blank=True)
+    fecha_fin = models.DateTimeField()
     #dia = models.CharField(max_length=9, choices=DIA, default='Martes')
 
     def calcular_turno_siguiente(self):
-        print("feeeeecha")
-        print(self.fecha_fin)
-        if  self.fecha_fin > (self.fecha + timedelta(days=7)):
+        print(self.fecha)
+        if  self.fecha_fin > self.fecha + timedelta(days=7):
             t = TurnoFijo()
             t.empleado = self.empleado
             t.fecha = self.fecha + timedelta(days=7)
-            t.servicios = self.servicios
-            t.promociones = self.promociones
+            t.fecha_fin = self.fecha_fin
             t.cliente = self.cliente
+            t.save()
+            serv = self.servicios.all()
+            for s in serv:
+                t.servicios.add(s)
+            prom = self.promociones.all()
+            for p in prom:
+                t.promociones.add(p)
+            t.save()
             self.turno_siguiente = t
-            print(t.fecha)
-
+            print(self.turno_siguiente.fecha)
             t.calcular_turno_siguiente()
 
 
-            #return t
