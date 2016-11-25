@@ -1,32 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.cities {
+    background-color: silver;
+    color: black;
+    margin: 20px 0 20px 150px;
+    padding: 10px;
+    -webkit-border-radius: 5px 10px
+}
+</style>
+</head>
+
+
 {% extends "cliente/base_cliente.html" %}
 
 {% load staticfiles %}
 
 {% block contenido %}
-<div class="container background-catta1" style="opacity: 0.85">
-    <div class="row margin-vert-30">
+    <div class="container background-catta1" style="opacity: 0.95">
+        <div class="row margin-vert-30">
+            <div class="col-md-10">
 
-        <!-- Contenido -->
-        <div class="col-md-10">
-            <div class="tab-content">
                 {% load crispy_forms_tags %}
 
                 {% csrf_token %}
-                <div class="row margin-vert-30">
-                    <div class="col-md-8 col-md-offset-3 col-sm-offset-3">
-                        <form method="post" class="login-page">
-                            <div class="login-header margin-bottom-30">
-                                <h2><font color="Purple"><font face="arial"> Crear Turno </font></font></h2>
+
+                <div class="tab-pane fade in">
+
+
+                            <div class="cities">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
+                                        {% crispy form %}
+                                    </div>
+                                </div>
                             </div>
 
-                                 {% crispy form %}
-                        </form>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block scripts %}

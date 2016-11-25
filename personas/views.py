@@ -245,6 +245,8 @@ def duenio(request):
                 _form = klassForm()
                 redirect(usuario.get_vista())
             contexto[form_name] = _form
+            print('asdsad')
+            print(_form)
         else:
             contexto[form_name] = klassForm()
         if form_name == 'form_crear_turno_fijo':
