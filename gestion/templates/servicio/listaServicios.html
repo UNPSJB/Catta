@@ -15,6 +15,7 @@
                         <th>Precio</th>
                         <th>Duración</th>
                         <th>Insumos</th>
+                        <th>Modificar</th>
                     </tr>
                 </thread>
                 <tbody>
@@ -28,6 +29,7 @@
                                <li>{{insumo}}
                             {% endfor %}
                         </td>
+                        <td><a href="{% url 'modificar_servicio' servicio.id %}" button type="button" class="btn btn-warning" role="button">Modificar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -55,7 +57,6 @@
                                 <li>{{servicio}}
                             {% endfor %}
                         </td>
-                    
                     </tr>
                     {% endfor %}
                 </tbody>

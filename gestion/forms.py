@@ -49,6 +49,18 @@ class ServicioForm(ModelForm):
         fields = {"sector", "nombre", "descripcion", "precio", "duracion", "insumos"}
 
 
+class ModificarServicioForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ModificarServicioForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.add_input(Submit('modificar_servicio', 'Modificar Servicio'))
+
+    class Meta:
+        model = ServicioBasico
+        fields = {"descripcion", "precio", "duracion", "insumos"}
+
+
 class PromoForm(ModelForm):
     servicios = forms.ModelMultipleChoiceField(queryset = ServicioBasico.objects.all())
 

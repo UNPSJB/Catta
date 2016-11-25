@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SectorForm
-from .forms import InsumoForm
-from .forms import ServicioForm
-from .models import ServicioBasico
+from .forms import ServicioForm, ModificarServicioForm, InsumoForm, SectorForm
+from .models import ServicioBasico, Servicio
 from .models import Insumo
 from django.db.models import Q
 from django.contrib import messages
@@ -63,6 +61,24 @@ def get_filtros(modelo, datos):
             filtros.append(q)
     return (filtros, valores)
 
+def modificar_servicio(request, id):
+    if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_servicios'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_servicios'
+            else:
+                ret = '/personas/cliente_lista_servicios'
+        servicio = get_object_or_404(ServicioBasico, pk=id)
+        form = ModificarServicioForm(request.POST, instance=servicio)
+        if form.is_valid:
+            form.save()
+            return redirect(ret)
+    else:
+        servicio = get_object_or_404(ServicioBasico, pk=id)
+        form = ModificarServicioForm(instance=servicio)
+    return render(request, 'servicio/modificar_servicio.html', {'servicio': servicio, "form_modificar_servicio": form})
 
 def listaInsumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
