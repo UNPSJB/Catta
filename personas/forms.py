@@ -10,7 +10,7 @@ from gestion.models import Sector
 
 class CuentaNuevaForm(forms.ModelForm):
     """
-    Para crear clientes desde el formulario de "Cuenta Nueva" de la página principal.
+    Para crear clientes desde el formulario de "Cuenta Nueva" de la página principal, desde la vista de dueña y empleado
     """
     email = forms.EmailField(max_length=100, label="E-Mail")
     usuario = forms.CharField(max_length=30)
@@ -51,6 +51,9 @@ class CuentaNuevaForm(forms.ModelForm):
 
         if Usuario.objects.filter(username=self.cleaned_data['usuario']).exists():
             raise forms.ValidationError("Usuario en uso")
+
+        if Persona.objects.filter(dni=self.cleaned_data['dni']).exists():
+            raise forms.ValidationError("Esta persona ya se encuentra registrada en el sitio")
 
         if p1 and p2 and p1 != p2:
             raise forms.ValidationError("Las contraseñas no coinciden")
