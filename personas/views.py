@@ -129,7 +129,7 @@ Vistas del Empleado.
 
 
 @login_required(login_url='iniciar_sesion')
-@permission_required('personas.empleado_puede_ver', raise_exception=True)
+#@permission_required('personas.empleado_puede_ver', raise_exception=True)
 def empleado(request, id=None):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
@@ -210,7 +210,7 @@ FORMS_DUENIO = {
 
 
 @login_required(login_url='iniciar_sesion')
-@permission_required('personas.duenia_puede_ver', raise_exception=True)
+#@permission_required('personas.duenia_puede_ver', raise_exception=True)
 def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
@@ -244,6 +244,7 @@ def duenio(request):
             contexto[form_name] = _form
         else:
             contexto[form_name] = klassForm()
+            print(form_name)
     return render(request, ret, contexto)
 
 

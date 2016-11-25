@@ -47,10 +47,13 @@ def devuelvo_turnos(request):
 
     if usuario.persona.duenia == None:
         if usuario.persona.empleado == None:
-            turnos = Turno.objects.all().filter(empleado=usuario.persona.empleado)
-        else:
+            print("soy cliente")
             turnos = Turno.objects.all().filter(cliente=usuario.persona.cliente)
+        else:
+            print("soy empleado")
+            turnos = Turno.objects.all().filter(empleado=usuario.persona.empleado)
     else:
+        print("soy dueña")
         turnos = Turno.objects.all()
 
     for turno in turnos:
