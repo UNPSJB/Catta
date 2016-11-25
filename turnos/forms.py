@@ -3,7 +3,8 @@ from django.forms import ModelForm
 from .models import Turno, TurnoFijo
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from datetime import datetime
+import datetime
+from datetime import timedelta
 
 
 class CrearTurnoForm(ModelForm):
@@ -16,6 +17,7 @@ class CrearTurnoForm(ModelForm):
 
     def save(self, commit=True):
         datos = super(CrearTurnoForm, self).save()
+        return datos
 
         #return datos
 
@@ -83,15 +85,31 @@ class ConfirmarTurnoForm(ModelForm):
 
 
 class CrearTurnoFijoForm(ModelForm):
+
     def __init__(self, *args, **kwargs):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno_fijo'))
+        self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno Fijo'))
+
+    def save(self, commit=True):
+        datos = super(CrearTurnoFijoForm, self).save()
+        #print(datos)
+        #print(self.cleaned_data)
+        #print(datos)
+        return datos
+
+    def clean(self):
+        datos = super(CrearTurnoFijoForm, self).clean()
+        p1 = datos.get('servicios')
+        p2 = datos.get('promociones')
+        if not p1 and not p2:
+            raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
+        return datos
 
     class Meta:
         model = TurnoFijo
-        fields = {"fecha", "empleado", "servicios", "promociones", "cliente","fecha_fin"}
+        fields = {"empleado","fecha", "cliente", "promociones", "servicios","fecha_fin"}
 
 
 #form_registrar_turno_realizado

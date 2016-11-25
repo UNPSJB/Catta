@@ -45,6 +45,10 @@
                             <a href="#liquidar" data-toggle="tab">
                                 <i class="fa-money"></i>Liquidar Comision</a>
                         </li>
+                        <li>
+                            <a href="#turnoFijo" data-toggle="tab">
+                                <i class="fa fa-calendar-o"></i>  Crear Turno Fijo</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -84,7 +88,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="promociones">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                    <div id="acordeon-promociones" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -100,7 +104,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="empleados">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                    <div id="acordeon-empleados" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -128,7 +132,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="sector">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                    <div id="acordeon-sector" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -142,13 +146,27 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="insumo">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                    <div id="acordeon-insumo" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple" font face="arial"><center> Dar de alta un insumo </center></font></h2>
                                         {% crispy form_insumo %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="turnoFijo">
+                    <div id="acordeon-turnoFijo" class="panel-group alternative">
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class="row margin-vert-30">
+                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
+                                        <h2><font color="Purple"><font face="arial"><center> Crear turno fijo</center></font></font></h2>
+                                        {% crispy form_crear_turno_fijo %}
                                     </div>
                                 </div>
                             </div>
@@ -212,4 +230,5 @@
     });
 </script>
 <script type="text/javascript" src="{% static 'assets/js/turnos.js' %}"></script>
+
 {% endblock %}

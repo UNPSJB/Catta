@@ -11,7 +11,7 @@ from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoReali
 
 from .models import Persona, Empleado
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
-from turnos.models import Turno
+from turnos.models import Turno, TurnoFijo
 from django.db.models import Q, Count
 from datetime import datetime
 
@@ -128,6 +128,7 @@ Vistas del Empleado.
 """
 
 
+
 @login_required(login_url='iniciar_sesion')
 #@permission_required('personas.empleado_puede_ver', raise_exception=True)
 def empleado(request, id=None):
@@ -205,7 +206,9 @@ FORMS_DUENIO = {
     ('form_registrar_turno_realizado', 'registrar_turno_realizado'): RegistrarTurnoRealizadoForm,
     ('form_promo', 'crear_promo'): PromoForm,
     ('form_insumo', 'crear_insumo'): InsumoForm,
-    ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm
+    ('form_liquidar_Comision', 'liquidar_comision'): LiquidarComisionForm,
+    ('form_insumo', 'crear_insumo'): InsumoForm,
+    ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
 }
 
 
@@ -244,7 +247,9 @@ def duenio(request):
             contexto[form_name] = _form
         else:
             contexto[form_name] = klassForm()
-            print(form_name)
+        if form_name == 'form_crear_turno_fijo':
+            id_turno = TurnoFijo.objects.latest('id')
+            id_turno.calcular_turno_siguiente()
     return render(request, ret, contexto)
 
 
