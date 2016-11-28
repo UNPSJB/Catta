@@ -1,0 +1,38 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+    <div class="container background-white" style="opacity: 0.95;">
+    <div class="row margin-vert-30">
+        <div class="col-md-12">
+            {% csrf_token %}
+
+            <h2><font color="Purple"><font face="arial"><center> Listado de Comisiones </center></font></font></h2>
+            <form method="get" action="">
+                <input name="empleado" placeholder="Empleado" value="{{ f.empleado }}" class="filtro">
+                <input name="fecha" placeholder="Fecha" value="{{ f.fecha}}" class="filtro">
+                <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+            </form>
+            <table class="table table-striped">
+                <thread>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for comision in comisiones %}
+                    <tr>
+                        <td>{{comision.empleado}}</td>
+                        <td>{{comision.fecha}}</td>
+                        <td>{{comision.monto}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -133,3 +133,8 @@ class Persona(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
+
+class Comision(models.Model):
+    empleado= models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    fecha = models.DateField()
+    monto = models.FloatField(null=True)

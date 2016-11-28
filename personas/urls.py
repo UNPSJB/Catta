@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^duenio_lista_servicios$', views.duenio_lista_servicios, name='duenio_lista_servicios'),
     url(r'^duenio_lista_insumos$', views.duenio_lista_insumos, name='duenio_lista_insumos'),
     url(r'^duenio_lista_turnos/$', views.duenio_lista_turnos, name='duenio_lista_turnos'),
+    url(r'^duenio_lista_comisiones/$', views.duenio_lista_comisiones, name='duenio_lista_comisiones'),
     url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
     url(r'^duenio_agenda/$', views.agenda_duenio, name='agenda_duenio'),
     url(r'^cliente_agenda/$', views.agenda_cliente, name='agenda_cliente'),

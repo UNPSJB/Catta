@@ -9,7 +9,7 @@ from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
 
-from .models import Persona, Empleado
+from .models import Persona, Empleado, Comision
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno, TurnoFijo
 from django.db.models import Q, Count
@@ -218,27 +218,9 @@ def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
     contexto = {}
-    if request.method == "POST" and 'liquidar_comision' in request.POST:
-        _form = LiquidarComisionForm()
-        contexto['form_liquidar_Comision'] = _form
-        _fecha = (request.POST.get('fecha'))
-        _fecha1 = (request.POST.get('fecha'))
-        _fecha += ' 00:00:00'
-        _fecha1 += ' 19:45:00'
-        id_empleado = (request.POST.get('empleado'))
-        _empleado = Empleado.objects.filter(id=id_empleado).first()
-        _turnos = Turno.objects.filter(empleado=_empleado, fecha__range=[_fecha, _fecha1])
-        _costo = 0
-        for turno in _turnos:
-            _costo += turno.get_costo()
-
-        _pago = _empleado.get_pago(_costo)
-
-        print(_pago)
-
     for form_name, input_name in FORMS_DUENIO:
         klassForm = FORMS_DUENIO[(form_name, input_name)]
-        if request.method == "POST" and input_name in request.POST and form_name != "form_liquidar_Comision":
+        if request.method == "POST" and input_name in request.POST:
             _form = klassForm(request.POST or None, request.FILES or None)
             if _form.is_valid():
                 _form.save()
@@ -315,6 +297,10 @@ def duenio_lista_turnos(request):
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
 
+def duenio_lista_comisiones(request):
+    mfiltros, ffilter = get_filtros(Comision, request.GET)
+    comisiones = Comision.objects.filter(*mfiltros)
+    return render(request, 'duenio/comisiones_duenio.html', {'comisiones': comisiones, "f": ffilter})
 
 def agenda_duenio(request):
     return render(request, 'duenio/agenda_duenio.html', {})

@@ -4,8 +4,11 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.forms import ModelForm, Form
 
-from .models import Persona, Usuario, Cliente, Empleado
+from .models import Persona, Usuario, Cliente, Empleado, Comision
 from gestion.models import Sector
+from turnos.models import Turno
+from datetime import date, time
+from datetime import datetime
 
 
 class CuentaNuevaForm(forms.ModelForm):
@@ -127,14 +130,41 @@ class EmpleadoNuevoForm(forms.ModelForm):
                   "direccion", "telefono", "localidad")
 
 
-class LiquidarComisionForm(Form):
-
-    empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), empty_label=" ")
-    fecha = forms.DateField('%Y-$m-$d')
+class LiquidarComisionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(LiquidarComisionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('liquidar_comision', 'Liquidar Comision'))
+
+    def save(self, commit=True):
+        comision = super(LiquidarComisionForm, self).save()
+
+        fecha1 = datetime.combine(comision.fecha, time(00, 00, 00))
+        fecha2 = datetime.combine(comision.fecha, time(20, 00, 00))
+        turnos = Turno.objects.filter(empleado=comision.empleado, fecha__range=[fecha1, fecha2])
+        costo = 0
+        for turno in turnos:
+            costo += turno.get_costo()
+
+        comision.monto = comision.empleado.get_pago(costo)
+
+        comision.save()
+
+        return comision
+
+    def clean(self):
+        datos = super(LiquidarComisionForm, self).clean()
+
+        empleado = datos.get('empleado')
+        fecha = datos.get('fecha')
+        fecha1 = datetime.combine(fecha, time(00, 00, 00))
+        fecha2 = datetime.combine(fecha, time(20, 00, 00))
+        if Turno.objects.filter(empleado=empleado, fecha__range=[fecha1, fecha2]).count() == 0:
+            raise forms.ValidationError("No hay turnos para liquidar en esta fecha para este empleado")
+
+    class Meta:
+        model = Comision
+        fields = ("empleado","fecha")
 
