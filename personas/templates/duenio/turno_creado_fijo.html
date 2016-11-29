@@ -1,0 +1,87 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+                <h2><font color="Purple"><font face="arial"><center> Turnos fijos creados </center></font></font></h2>
+
+                    <table class="table table-striped">
+                        <thread>
+                            <tr>
+                                <th>Fecha y Hora</th>
+                                <th>Cliente</th>
+                                <th>Empleado</th>
+                                <th>Estado</th>
+                                <th>Servicios</th>
+                                <th>Modificar</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+
+                            {% for turno in turnos %}
+                            <tr>
+                                <td width=140>{{turno.fecha}}</td>
+                                <td>{{turno.cliente}}</td>
+                                <td>{{turno.empleado}}</td>
+                                <td>{{turno.estado}}</td>
+                                <td width=250>
+                                    {% for promocion in turno.promociones.all %}
+                                        <details>
+                                            <summary>{{promocion}}</summary>
+                                                {% for servicio in promocion.servicios.all %}
+                                                      <li><i>{{servicio}}</i>
+                                                {% endfor %}
+                                        </details>
+                                    {% endfor %}
+                                    {% for servicio in turno.servicios.all %}
+                                       <li> {{servicio}}
+                                    {% endfor %}
+                                </td>
+
+                                <td width=20>
+                                    <a href="{% url 'duenio_lista_turno_creado_fijo' turno.id %}" class="btn btn-default btn-sm" role="button">ver</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+                <h2><font color="Purple"><font face="arial"><center> Turnos no disponibles </center></font></font></h2>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>fecha</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for f in invalidas %}
+                        <tr>
+                            <td>{{f}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker();
+    });
+</script>
+{% endblock%}

@@ -166,6 +166,10 @@ class Turno(models.Model):
 
         return costo
 
+    def get_fecha(self):
+        formato = "%d-%m-%y %I"
+        return self.fecha.strftime(formato)
+
 class TurnoFijo(Turno):
     MARTES ='Martes'
     MIERCOLES ='Miercoles'
@@ -185,24 +189,47 @@ class TurnoFijo(Turno):
     fecha_fin = models.DateTimeField()
     #dia = models.CharField(max_length=9, choices=DIA, default='Martes')
 
-    def calcular_turno_siguiente(self):
-        print(self.fecha)
-        if  self.fecha_fin > self.fecha + timedelta(days=7):
-            t = TurnoFijo()
-            t.empleado = self.empleado
-            t.fecha = self.fecha + timedelta(days=7)
-            t.fecha_fin = self.fecha_fin
-            t.cliente = self.cliente
-            t.save()
-            serv = self.servicios.all()
-            for s in serv:
-                t.servicios.add(s)
-            prom = self.promociones.all()
-            for p in prom:
-                t.promociones.add(p)
-            t.save()
-            self.turno_siguiente = t
-            print(self.turno_siguiente.fecha)
-            t.calcular_turno_siguiente()
-
+    def calcular_turno_siguiente(self,f):
+        print(f)
+        fecha_nueva = f + timedelta(days=7)
+        #fecha_1 = self.get_duracion()
+        #formato = "%d-%m-%y"
+        #fecha_1 = fecha_nueva
+        #fecha_2 = fecha_nueva
+        fecha_1 = fecha_nueva.replace(hour= 00, minute = 00, second = 00)
+        fecha_2 = fecha_nueva.replace(hour = 20, minute = 00, second = 00)
+        existe = Turno.objects.filter(empleado=self.empleado, fecha=fecha_nueva).exists()
+        #existen = Turno.objects.filter(empleado=self.empleado)
+        existen = Turno.objects.filter(empleado=self.empleado, fecha__range=[fecha_1, fecha_2])
+        for e in existen:
+            print ("hay existen")
+            print(e)
+            if e.get_fecha() == fecha_2:
+                if (e.fecha < fecha_nueva and e.get_duracion() > fecha_nueva) or (fecha_nueva < e.fecha and e.fecha < self.get_duracion):
+                    existe = True
+                    break
+        print(existe)
+        if(self.fecha_fin > fecha_nueva):
+            if (not existe):
+                t = TurnoFijo()
+                t.empleado = self.empleado
+                t.fecha = fecha_nueva
+                t.fecha_fin = self.fecha_fin
+                t.cliente = self.cliente
+                t.save()
+                serv = self.servicios.all()
+                for s in serv:
+                    t.servicios.add(s)
+                prom = self.promociones.all()
+                for p in prom:
+                    t.promociones.add(p)
+                t.save()
+                self.turno_siguiente = t
+                print(self.turno_siguiente.fecha)
+                t.calcular_turno_siguiente(t.fecha)
+                self.save()
+            else:
+                print("no se creo turno")
+                print(fecha_nueva)
+                self.calcular_turno_siguiente(fecha_nueva)
 

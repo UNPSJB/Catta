@@ -5,6 +5,8 @@ from .forms import ModificarTurnoForm, RegistrarTurnoRealizadoForm
 from .models import Turno
 from gestion.models import ServicioBasico, Promocion
 from django.core import serializers
+import datetime
+
 
 
 def escupoJSON(request):

@@ -13,7 +13,7 @@ from .models import Persona, Empleado, Comision
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno, TurnoFijo
 from django.db.models import Q, Count
-from datetime import datetime
+from datetime import datetime, date, time, timedelta
 
 """Metodo de Filtro"""
 def get_filtros(modelo, datos):
@@ -229,14 +229,16 @@ def duenio(request):
             contexto[form_name] = _form
             print('asdsad')
             print(_form)
+            if form_name == 'form_crear_turno_fijo':
+                id_turno = TurnoFijo.objects.latest('id')
+                id_turno.calcular_turno_siguiente(id_turno.fecha)
+                turnos =[]
+                turnos.append(id_turno)
+                print(id_turno.id)
+                return render(request,'duenio/turno_creado_fijo.html', {'turnos':turnos})
+                #return redirect('lista_turno_creado_fijo', {'id':id_turno.id})
         else:
             contexto[form_name] = klassForm()
-        if form_name == 'form_crear_turno_fijo':
-       #     try:
-            id_turno = TurnoFijo.objects.latest('id')
-            id_turno.calcular_turno_siguiente()
-        #    except Exception:
-         #       pass
     return render(request, ret, contexto)
 
 
@@ -299,6 +301,31 @@ def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
+
+def duenio_lista_turno_creado_fijo(request, id):
+    primero = get_object_or_404(TurnoFijo, pk=id)
+    turnos = []
+    invalidas =[]
+    turnos.append(primero)
+    fecha = primero.fecha + timedelta(days=7)
+    while fecha < primero.fecha_fin:
+        print(fecha)
+        print("turno siguiente")
+        print(primero.turno_siguiente)
+        if turnos[-1].turno_siguiente != None:
+            if turnos[-1].turno_siguiente.fecha == fecha:
+                turnos.append(turnos[-1].turno_siguiente)
+                fecha = turnos[-1].fecha + timedelta(days=7)
+                print("agrego a turno")
+                print(turnos[-1])
+            else:
+                invalidas.append(fecha)
+                fecha = fecha + timedelta(days=7)
+        else:
+            invalidas.append(fecha)
+            fecha = fecha + timedelta(days=7)
+    return render(request, 'duenio/turno_creado_fijo.html', {'turnos': turnos, 'invalidas': invalidas})
+
 
 def duenio_lista_comisiones(request):
     mfiltros, ffilter = get_filtros(Comision, request.GET)
