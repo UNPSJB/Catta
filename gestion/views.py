@@ -44,9 +44,11 @@ def servicio(request):
 
 
 def listaServicios(request):
+    usuario = request.user
+    print(usuario)
     servicios = ServicioBasico.objects.all()
     insumos = Insumo.objects.all()
-    return render(request, 'servicio/listaServicios.html', {'servicios': servicios, 'insumos': insumos})
+    return render(request, 'servicio/listaServicios.html', {'servicios': servicios, 'insumos': insumos, 'usuario': usuario})
 
 
 def get_filtros(modelo, datos):

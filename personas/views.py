@@ -232,8 +232,11 @@ def duenio(request):
         else:
             contexto[form_name] = klassForm()
         if form_name == 'form_crear_turno_fijo':
+       #     try:
             id_turno = TurnoFijo.objects.latest('id')
             id_turno.calcular_turno_siguiente()
+        #    except Exception:
+         #       pass
     return render(request, ret, contexto)
 
 

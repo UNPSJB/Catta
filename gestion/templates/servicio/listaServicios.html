@@ -15,7 +15,9 @@
                         <th>Precio</th>
                         <th>Duración</th>
                         <th>Insumos</th>
-                        <th>Modificar</th>
+                        {% if request.user.persona.duenio != null %}
+                            <th>Modificar</th>
+                        {% endif %}
                     </tr>
                 </thread>
                 <tbody>
@@ -29,7 +31,9 @@
                                <li>{{insumo}}
                             {% endfor %}
                         </td>
-                        <td><a href="{% url 'modificar_servicio' servicio.id %}" button type="button" class="btn btn-warning" role="button">Modificar</a></td>
+                        {% if usuario.duenio != null %}
+                            <td><a href="{% url 'modificar_servicio' servicio.id %}" button type="button" class="btn btn-warning" role="button">Modificar</a></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
