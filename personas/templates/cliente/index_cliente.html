@@ -26,11 +26,11 @@
         <div class="row padding-vert-20">
             <div class="col-md-1">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10" >
                 <ul class="portfolio-group">
                     {% for promocion in promociones %}
-                        <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                            <a href="#">
+                        <li class="portfolio-item col-sm-6 col-xs-6 padding-20" >
+                            <a id="{{promocion.pk}}" href="{% url 'crear_turno' %}"
                                 <figure class="animated fadeInLeft">
                                     <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
                                     <figcaption>
@@ -42,6 +42,7 @@
                             </a>
                         </li>
                     {% endfor %}
+                    <input name="promocion" placeholder="Promociones" value="{{ promocion.nombre }}">
                 </ul>
             </div>
             <div class="col-md-1">

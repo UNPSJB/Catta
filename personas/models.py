@@ -135,6 +135,10 @@ class Persona(models.Model):
         return "{} {}".format(self.nombre, self.apellido)
 
 class Comision(models.Model):
+    FILTROS = {
+        "empleado": ["empleado__persona__nombre__icontains"],
+        "fecha": ["fecha__icontains"]
+    }
     empleado= models.ForeignKey(Empleado, on_delete=models.CASCADE)
     fecha = models.DateField()
     monto = models.FloatField(null=True)
