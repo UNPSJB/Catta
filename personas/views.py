@@ -232,11 +232,23 @@ def duenio(request):
             if form_name == 'form_crear_turno_fijo':
                 id_turno = TurnoFijo.objects.latest('id')
                 id_turno.calcular_turno_siguiente(id_turno.fecha)
-                turnos =[]
+                turnos = []
+                invalidas = []
                 turnos.append(id_turno)
-                print(id_turno.id)
-                return render(request,'duenio/turno_creado_fijo.html', {'turnos':turnos})
-                #return redirect('lista_turno_creado_fijo', {'id':id_turno.id})
+                fecha = id_turno.fecha + timedelta(days=7)
+                while fecha < id_turno.fecha_fin:
+                    if turnos[-1].turno_siguiente != None:
+                        if turnos[-1].turno_siguiente.fecha == fecha:
+                            turnos.append(turnos[-1].turno_siguiente)
+                            fecha = turnos[-1].fecha + timedelta(days=7)
+                        else:
+                            invalidas.append(fecha)
+                            fecha = fecha + timedelta(days=7)
+                    else:
+                        invalidas.append(fecha)
+                        fecha = fecha + timedelta(days=7)
+                return render(request,'duenio/turno_creado_fijo.html', {'turnos':turnos, 'invalidas':invalidas})
+                #return redirect('lista_turno_creado_fijo')
         else:
             contexto[form_name] = klassForm()
     return render(request, ret, contexto)

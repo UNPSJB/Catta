@@ -16,7 +16,6 @@
                                 <th>Empleado</th>
                                 <th>Estado</th>
                                 <th>Servicios</th>
-                                <th>Modificar</th>
                             </tr>
                         </thread>
                         <tbody>
@@ -40,10 +39,6 @@
                                        <li> {{servicio}}
                                     {% endfor %}
                                 </td>
-
-                                <td width=20>
-                                    <a href="{% url 'duenio_lista_turno_creado_fijo' turno.id %}" class="btn btn-default btn-sm" role="button">ver</a>
-                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -57,16 +52,12 @@
             <div class="col-md-12">
                 <h2><font color="Purple"><font face="arial"><center> Turnos no disponibles </center></font></font></h2>
                 <table class="table table-striped">
-                    <thread>
-                        <tr>
-                            <th>fecha</th>
-                        </tr>
-                    </thread>
+
                     <tbody>
                         {% for f in invalidas %}
-                        <tr>
-                            <td>{{f}}</td>
-                        </tr>
+
+                            <li align="center">{{f}}
+
                         {% endfor %}
                     </tbody>
                 </table>
