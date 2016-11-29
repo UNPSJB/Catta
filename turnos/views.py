@@ -5,7 +5,7 @@ from .forms import ModificarTurnoForm, RegistrarTurnoRealizadoForm
 from .models import Turno
 from gestion.models import ServicioBasico, Promocion
 from django.core import serializers
-import datetime
+from datetime import datetime
 
 
 
@@ -60,10 +60,10 @@ def devuelvo_turnos(request):
 
     for turno in turnos:
 
-        vocales = "T"
+        char = "T"
         fecha = ""
         for letra in str(turno.fecha):
-            if letra not in vocales:
+            if letra not in char:
                 fecha += letra
 
         datos_turno = {
