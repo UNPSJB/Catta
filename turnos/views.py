@@ -60,10 +60,10 @@ def devuelvo_turnos(request):
 
     for turno in turnos:
 
-        vocales = "T"
+        char = "T"
         fecha = ""
         for letra in str(turno.fecha):
-            if letra not in vocales:
+            if letra not in char:
                 fecha += letra
 
         datos_turno = {
