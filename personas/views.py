@@ -133,7 +133,7 @@ def empleado(request, id=None):
         klassForm = FORMS_EMPLEADO[(form_name, input_name)]
         if request.method == "POST" and input_name in request.POST:
             _form = klassForm(request.POST, instance=instance)
-            if _form.is_valid:
+            if _form.is_valid():
                 _form.save(usuario)
                 _form = klassForm()
                 redirect(usuario.get_vista())

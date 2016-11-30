@@ -93,7 +93,7 @@ def modificar_turno(request, id):
                 ret = '/personas/cliente_lista_turnos'
         turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(request.POST, instance=turno)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect(ret)
     else:
