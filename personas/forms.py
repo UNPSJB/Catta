@@ -166,5 +166,5 @@ class LiquidarComisionForm(forms.ModelForm):
 
     class Meta:
         model = Comision
-        fields = ("empleado","fecha")
+        fields = ("empleado","fecha_liquidacion")
 

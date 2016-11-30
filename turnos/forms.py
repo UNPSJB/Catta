@@ -73,6 +73,7 @@ class DetalleTurnoForm(ModelForm):
 
 
 class ConfirmarTurnoForm(ModelForm):
+
     def __init__(self, *args, **kwargs):
         super(ConfirmarTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -86,6 +87,8 @@ class ConfirmarTurnoForm(ModelForm):
 
 class CrearTurnoFijoForm(ModelForm):
 
+    fecha = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'fecha_inicio'}))
+
     def __init__(self, *args, **kwargs):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -94,9 +97,6 @@ class CrearTurnoFijoForm(ModelForm):
 
     def save(self, commit=True):
         datos = super(CrearTurnoFijoForm, self).save()
-        #print(datos)
-        #print(self.cleaned_data)
-        #print(datos)
         return datos
 
     def clean(self):

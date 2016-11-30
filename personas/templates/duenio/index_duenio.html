@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade in" id="servicios">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                    <div id="acordeon-servicios" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -202,14 +202,6 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript" src="jquery.js"></script>
-            <script type="text/javascript">
-            $(document).ready(function(){
-                         $("#submit-id-liquidar_comision").click(function(){
-                                    $('#fullCalModal').modal();
-                          })
-            })
-            </script>
         </div>
         <!-- Fin contenido -->
     </div>
@@ -229,6 +221,13 @@
         });
     });
 </script>
+<script>
+    $(function() {
+        $(".dateinput").datepicker();
+    });
+</script>
+
 <script type="text/javascript" src="{% static 'assets/js/turnos.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/turnos-fijos.js' %}"></script>
 
 {% endblock %}

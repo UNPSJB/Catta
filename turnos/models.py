@@ -4,7 +4,6 @@ from django.conf import settings
 import  enum
 from datetime import date, time, timedelta, datetime
 
-
 class TurnoBaseManager(models.Manager):
     def get_queryset(self):
         qs = super().get_queryset().annotate(servicio_modulos=Sum("servicios__duracion"))
