@@ -141,8 +141,8 @@ class LiquidarComisionForm(forms.ModelForm):
     def save(self, commit=True):
         comision = super(LiquidarComisionForm, self).save()
 
-        fecha1 = datetime.combine(comision.fecha, time(00, 00, 00))
-        fecha2 = datetime.combine(comision.fecha, time(20, 00, 00))
+        fecha1 = datetime.combine(comision.fecha_liquidacion, time(00, 00, 00))
+        fecha2 = datetime.combine(comision.fecha_liquidacion, time(20, 00, 00))
         turnos = Turno.objects.filter(empleado=comision.empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2])
         costo = 0
         for turno in turnos:
@@ -158,7 +158,8 @@ class LiquidarComisionForm(forms.ModelForm):
         datos = super(LiquidarComisionForm, self).clean()
 
         empleado = datos.get('empleado')
-        fecha = datos.get('fecha')
+        print (empleado)
+        fecha = datos.get('fecha_liquidacion')
         fecha1 = datetime.combine(fecha, time(00, 00, 00))
         fecha2 = datetime.combine(fecha, time(20, 00, 00))
         if Turno.objects.filter(empleado=empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2]).count() == 0:
