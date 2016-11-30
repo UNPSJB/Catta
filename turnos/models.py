@@ -130,6 +130,24 @@ class Turno(models.Model):
             duracion += servicio.get_duracion()
         return duracion
 
+    def get_proximo_turno(self, turno, empleado):
+
+        turnos = Turno.objects.filter(empleado=empleado, fecha=fecha)
+        fecha = turno.fecha
+        hora_turno = fecha.time
+        duracion = turno.duracion()
+        hora_turno += duracion
+
+        turnos = Turno.objects.filter(empleado=empleado, fecha=fecha)
+
+        for turno in turnos:
+            fecha = turno.fecha
+            hora = fecha.time
+            if hora_turno < hora:
+                return turno
+
+        return turno
+
     def estado(self):
         if self.fecha_realizacion is not None:
             return "Realizado"
