@@ -28,7 +28,7 @@
                             <td>{{servicio.precio}}</td>
                             <td>{{servicio.duracion}}</td>
                             <td>{% for insumo in servicio.insumos.all %}
-                                    {{insumo}}
+                                   <li>{{insumo}}
                                 {% endfor %}
                             </td>
                             <td>{{servicio.cantidad_de_turnos}}</td>

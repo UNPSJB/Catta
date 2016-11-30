@@ -39,10 +39,44 @@ class CrearTurnoForm(ModelForm):
 class ModificarTurnoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ModificarTurnoForm, self).__init__(*args, **kwargs)
+        #turno = args.
+        #self.auto_id = kwargs.get('auto_id')
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
 
+    #CORREGIR!!
+    '''
+    def clean(self):
+
+        fecha = self.instance
+        turnos = Turno.objects.all().filter(fecha=fecha)
+        turno = turnos.first()
+        print(turno)
+
+
+        turno = super(ModificarTurnoForm, self).clean()
+        print(type(turno))
+        turno1 = Turno.objects.all().filter(id=self.auto_id)
+        print(turno1)
+        id = self.auto_id
+        print(id)
+
+
+        empleado = turno.get_empleado()
+        sig_turno = turno.get_proximo_turno(self, turno, empleado)
+
+        fecha = turno.fecha
+        hora_turno = fecha.time
+        duracion = turno.duracion()
+        hora_turno += duracion
+
+        fecha1 = sig_turno.fecha
+        hora_sig_turno = fecha1.time
+
+        if hora_turno < hora_sig_turno:
+            raise forms.ValidationError("Los nuevos servicios agregados superan el tiempo libre disponibñe")
+    '''
     class Meta:
         model = Turno
         fields = {"empleado", "servicios", "promociones"}

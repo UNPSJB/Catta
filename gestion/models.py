@@ -10,13 +10,13 @@ class Sector(models.Model):
 
 
 class Insumo (models.Model):
-    MINILITROS= 'Minilitros'
+    MILILITROS= 'Minilitros'
     LITROS= 'Litros'
     GRAMOS = 'Gramos'
     KILOS = 'Kilos'
     CC = 'Centimetros Cubicos'
     UNIDAD_DE_MEDIDA = [
-        (MINILITROS, 'Minilitros'),
+        (MILILITROS, 'Mililitros'),
         (LITROS, 'Litros'),
         (GRAMOS, 'Gramos'),
         (KILOS, 'Kilos'),
