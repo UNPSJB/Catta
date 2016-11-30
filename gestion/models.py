@@ -10,7 +10,7 @@ class Sector(models.Model):
 
 
 class Insumo (models.Model):
-    MILILITROS= 'Minilitros'
+    MILILITROS= 'Mililitros'
     LITROS= 'Litros'
     GRAMOS = 'Gramos'
     KILOS = 'Kilos'

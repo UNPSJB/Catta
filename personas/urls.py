@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^cliente_lista_servicios$', views.cliente_lista_servicios, name='cliente_lista_servicios'),
     url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
     url(r'^cliente_lista_turnos/$', views.cliente_lista_turnos, name='cliente_lista_turnos'),
+    url(r'^restringido/$', views.restringido, name='restringido'),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 ]

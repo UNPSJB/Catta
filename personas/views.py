@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, authenticate
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django import forms
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
@@ -14,6 +13,18 @@ from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno, TurnoFijo
 from django.db.models import Q, Count
 from datetime import datetime, date, time, timedelta
+
+
+
+def es_duenio(usuario):
+    return usuario.persona.duenia != None
+
+def es_empleado(usuario):
+    return usuario.persona.empleado != None
+
+def es_cliente(usuario):
+    return usuario.persona.cliente != None
+
 
 """Metodo de Filtro"""
 def get_filtros(modelo, datos):
@@ -41,39 +52,20 @@ FORMS_CLIENTE = {
 
 }
 @login_required(login_url='iniciar_sesion')
-#@permission_required('personas.cliente_puede_ver', raise_exception=True)
+@user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def cliente(request):
 
     promociones = Promocion.objects.all()
     # return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
 
-    usuario = request.user
     ret = 'cliente/index_cliente.html'
-    contexto = {}
-    turno = Turno.objects.get(id=1)
-    for form_name, input_name in FORMS_CLIENTE:
-        klassForm = FORMS_CLIENTE[(form_name, input_name)]
-        if request.method == "POST" and input_name in request.POST:
-            _form = klassForm(request.POST)
-            if _form.is_valid:
-                _form.save()
-                _form = klassForm()
-                redirect(usuario.get_vista())
-            contexto[form_name] = _form
-        else:
-            if input_name == 'modificar_turno':
-                _form = ModificarTurnoForm(instance=turno)
-                contexto[form_name] = _form
-            elif input_name == 'eliminar_turno':
-                _form = EliminarTurnoForm(instance=turno)
-                contexto[form_name] = _form
-            else:
-                contexto[form_name] = klassForm()
+
     contexto = {'promociones': promociones}
 
     return render(request, ret, contexto)
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def crear_turno_cliente(request):
     if request.method == "POST":
         form = CrearTurnoForm(request.POST)
@@ -87,11 +79,13 @@ def crear_turno_cliente(request):
         form.fields['cliente'].widget = forms.HiddenInput()
     return render(request, 'cliente/crear_turno.html', {"form": form})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def agenda_cliente(request):
     return render(request, 'cliente/agenda_cliente.html', {})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def cliente_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
     servicios = ServicioBasico.objects.filter(*mfiltros)
@@ -101,7 +95,8 @@ def cliente_lista_servicios(request):
                                                               'promociones': promociones,
                                                               'insumos': insumos, "f": ffilter})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def cliente_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     usuario = request.user
@@ -127,10 +122,8 @@ FORMS_EMPLEADO = {
 Vistas del Empleado.
 """
 
-
-
 @login_required(login_url='iniciar_sesion')
-#@permission_required('personas.empleado_puede_ver', raise_exception=True)
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def empleado(request, id=None):
     usuario = request.user
     ret = 'empleado/index_empleado.html'
@@ -160,24 +153,28 @@ def empleado(request, id=None):
 
     return render(request, ret, contexto)
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def empleado_lista_clientes(request):
     mfiltros, ffilter = get_filtros(Persona, request.GET)
     clientes = Persona.objects.filter(cliente__isnull=False, *mfiltros)
     return render(request, 'empleado/clientes_empleado.html', {'clientes': clientes, "f":ffilter})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def agenda_empleado(request):
     return render(request, 'empleado/agenda_empleado.html', {})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def empleado_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     usuario = request.user
     turnos = Turno.objects.filter(empleado__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
     return render(request, 'empleado/turnos_empleado.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def empleado_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
     servicios = ServicioBasico.objects.filter(*mfiltros)
@@ -187,11 +184,14 @@ def empleado_lista_servicios(request):
                                                             'promociones': promociones,
                                                             'insumos': insumos, "f": ffilter})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def empleado_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
     return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos, "f": ffilter})
+
+
 """
 Vistas de la Dueña
 """
@@ -211,9 +211,9 @@ FORMS_DUENIO = {
     ('form_crear_turno_fijo', 'crear_turno_fijo'): CrearTurnoFijoForm
 }
 
-
+#@permission_required('personas.puede_ver_duenio', login_url='iniciar_sesion', raise_exception=True)
 @login_required(login_url='iniciar_sesion')
-#@permission_required('personas.duenia_puede_ver', raise_exception=True)
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio(request):
     usuario = request.user
     ret = 'duenio/index_duenio.html'
@@ -253,13 +253,16 @@ def duenio(request):
             contexto[form_name] = klassForm()
     return render(request, ret, contexto)
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_empleados(request):
     mfiltros, ffilter = get_filtros(Persona, request.GET)
     empleados = Persona.objects.filter(empleado__isnull=False, *mfiltros)
     return render(request, 'empleado/listaEmpleados.html', {'empleados': empleados, "f": ffilter})
 
 
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def modificarComision(request, id):
     persona = get_object_or_404(Persona, pk=id)
     if request.method == "POST":
@@ -270,13 +273,15 @@ def modificarComision(request, id):
         persona = get_object_or_404(Persona, pk=id)
     return render(request, 'empleado/modificarComision.html', {'persona': persona})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_clientes(request):
     mfiltros, ffilter = get_filtros(Persona, request.GET)
     clientes = Persona.objects.filter(cliente__isnull=False, *mfiltros)
     return render(request, 'duenio/clientes_duenio.html', {'clientes': clientes, "f": ffilter})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
     servicios = ServicioBasico.objects.filter(*mfiltros)
@@ -291,7 +296,8 @@ def duenio_lista_servicios(request):
                                                             'topServicios': topServicios,
                                                             "f": ffilter})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def modificar_stock_duenio(request, id):
     insumo = get_object_or_404(Insumo, pk=id)
     if request.method == "POST":
@@ -302,18 +308,22 @@ def modificar_stock_duenio(request, id):
         insumo = get_object_or_404(Insumo, pk=id)
     return render(request, 'duenio/modificar_stock_duenio.html', {'insumo': insumo})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_insumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)
     insumos = Insumo.objects.filter(*mfiltros)
     return render(request, 'duenio/insumos_duenio.html', {'insumos': insumos, "f": ffilter})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
 
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_turno_creado_fijo(request, id):
     primero = get_object_or_404(TurnoFijo, pk=id)
     turnos = []
@@ -338,28 +348,39 @@ def duenio_lista_turno_creado_fijo(request, id):
             fecha = fecha + timedelta(days=7)
     return render(request, 'duenio/turno_creado_fijo.html', {'turnos': turnos, 'invalidas': invalidas})
 
-
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_comisiones(request):
     mfiltros, ffilter = get_filtros(Comision, request.GET)
     comisiones = Comision.objects.filter(*mfiltros)
     return render(request, 'duenio/comisiones_duenio.html', {'comisiones': comisiones, "f": ffilter})
 
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def agenda_duenio(request):
     return render(request, 'duenio/agenda_duenio.html', {})
 
 
 # TODO Ver si esto es realmente necesario.
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def nuevo_empleado(request):
     return render(request, 'empleado/nuevo_empleado.html', {})
 
 
 # TODO Ver si esto es realmente necesario.
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def index_turnos(request):
     return render(request, 'Turnos/index_turnos.html', {})
 
 """
 Vistas del control de cuentas.
 """
+
+def restringido(request):
+    return render(request, 'restringido/restringido.html', {})
+
 def cuenta(request):
     ret = 'cuentaNueva/cuenta_nueva.html'
 
