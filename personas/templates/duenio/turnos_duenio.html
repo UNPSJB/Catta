@@ -94,7 +94,9 @@
 
                                 <td width=20>
                                     {% if turno.fecha_cancelacion == null %}
-                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
+                                        {% if turno.fecha_realizacion == null %}
+                                            <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
+                                        {% endif %}
                                     {% endif %}
                                 </td>
 
