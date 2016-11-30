@@ -122,6 +122,7 @@ class ConfirmarTurnoForm(ModelForm):
 class CrearTurnoFijoForm(ModelForm):
 
     fecha = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'fecha_inicio'}))
+    empleado = forms.Select(widget=forms.Select(attrs={'id': 'id_empleado_fijo'}))
 
     def __init__(self, *args, **kwargs):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)

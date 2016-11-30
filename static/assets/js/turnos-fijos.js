@@ -1,6 +1,6 @@
 $(function() {
     var turnero = $("<div>", {class: "turnero"});
-    $("#div_fecha_inicio").append(turnero);
+    $("#div_id_fecha_fin").append(turnero);
 
     $("#fecha_inicio").change(function() { funcionAjax(this) });
     $("#id_empleado").change(function() { funcionAjax(this) });
@@ -13,8 +13,11 @@ $(function() {
         var promociones = $("#id_promociones").val();
         var servicios = $("#id_servicios").val();
         $('#fecha_inicio').val(fecha);
+        console.log(fecha);
+        console.log(empleado);
 
         if ((empleado != "")&&(fecha != "")) {
+            console.log("Entre");
             $.ajax({
                 method: "GET",
                 url: URL_TURNOS_LIBRES,
