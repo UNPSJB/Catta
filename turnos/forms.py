@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Turno, TurnoFijo
+from personas.models import Empleado
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import datetime
@@ -122,7 +123,7 @@ class ConfirmarTurnoForm(ModelForm):
 class CrearTurnoFijoForm(ModelForm):
 
     fecha = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'fecha_inicio'}))
-    empleado = forms.Select(widget=forms.Select(attrs={'id': 'id_empleado_fijo'}))
+    empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(),widget=forms.Select(attrs={'id': 'id_empleado_fijo'}))
 
     def __init__(self, *args, **kwargs):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)

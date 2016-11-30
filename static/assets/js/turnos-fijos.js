@@ -3,13 +3,13 @@ $(function() {
     $("#div_id_fecha_fin").append(turnero);
 
     $("#fecha_inicio").change(function() { funcionAjax(this) });
-    $("#id_empleado").change(function() { funcionAjax(this) });
+    $("#id_empleado_fijo").change(function() { funcionAjax(this) });
     $("#id_promociones").change(function() { funcionAjax(this) });
     $("#id_servicios").change(function() { funcionAjax(this) });
 
     function funcionAjax(elemento) {
         var fecha = $('#fecha_inicio').val().slice(0,10);
-        var empleado = $("#id_empleado").val();
+        var empleado = $("#id_empleado_fijo").val();
         var promociones = $("#id_promociones").val();
         var servicios = $("#id_servicios").val();
         $('#fecha_inicio').val(fecha);
