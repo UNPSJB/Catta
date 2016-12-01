@@ -53,13 +53,44 @@ class ModificarTurnoForm(ModelForm):
 
         turno = self.instance
 
-        duracion = turno.get_duracion()
+        #empleado = tur.get('empleado')
+        #print(empleado)
+
+        servicios = tur.get('servicios')
+        cantidad = tur.get('servicios').count()
+        print(servicios)
+        print(cantidad)
+        promociones = tur.get('promociones')
+        cantidad1 = tur.get('promociones').count()
+        print(promociones)
+        print(cantidad1)
+
+        duracion = turno.fecha
+        print('inicio del turno')
+        print(duracion)
+        # duracion_servicio = timedelta(minutes=0)
+
+        i = 1
+
+        for i in range(cantidad):
+            duracion += servicios[i].get_duracion()
+
+        j=1
+
+        for j in range(cantidad1):
+            duracion += promociones[j].get_duracion()
+
+        print('duracion final')
         print(duracion)
 
+
+
         sig_turno = turno.get_proximo_turno(turno)
-        print(sig_turno)
 
         if sig_turno!=None:
+
+            print('el turno sig es: ')
+            print(sig_turno)
 
             fecha = sig_turno.fecha
 

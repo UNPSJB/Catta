@@ -134,9 +134,6 @@ class Turno(models.Model):
         fecha_turno = turno.fecha
         fecha_1 = fecha_turno.replace(hour=00, minute=00, second=00)
         fecha_2 = fecha_turno.replace(hour=20, minute=00, second=00)
-        #turnos = Turno.objects.filter(empleado=empleado, fecha=fecha)
-        #duracion = turno.duracion()
-        #hora_turno += duracion
 
         empleado = turno.empleado
 
@@ -144,10 +141,12 @@ class Turno(models.Model):
 
         turno_sig = None
 
-        for turno_sig in turnos:
-            fecha = turno_sig.fecha
-            if fecha_turno < fecha:
-                return turno_sig
+        if turnos != None:
+            for turno_siguiente in turnos:
+                fecha = turno_siguiente.fecha
+                if fecha_turno < fecha:
+                    turno_sig = turno_siguiente
+                    return turno_sig
 
         return turno_sig
 
