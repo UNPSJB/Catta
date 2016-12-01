@@ -42,7 +42,7 @@ $(function() {
                         /* Compone el div de la ventana */
                         var m = $("<div>", {"class": "turnos btn",
                                             "id": "div_" + index,
-                                            "onclick": 'eventoHora('+modulo.hora+', '+modulo.mins+', id);'
+                                            "onclick": 'eventoHoraFijo('+modulo.hora+', '+modulo.mins+', id);'
                         });
                         m.html("<p>" + modulo.hora + ":" + modulo.mins + "</p>");
                         return m;
@@ -59,7 +59,7 @@ $(function() {
 
 });
 
-function eventoHora(hora, min, id) {
+function eventoHoraFijo(hora, min, id) {
     $('.turnero').children("div").each(function() {
         $(this).css("background-color", "#5cb85c");
     });
