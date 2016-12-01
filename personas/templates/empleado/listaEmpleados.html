@@ -10,8 +10,10 @@
 
             <h2><font color="Purple"><font face="arial"><center> Listado de Empleados </center></font></font></h2>
             <form method="get" action="">
+                <input name="dni" placeholder="DNI" value="{{ f.dni }}" class="filtro">
                 <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
                 <input name="apellido" placeholder="Apellido" value="{{ f.apellido }}" class="filtro">
+                <input name="localidad" placeholder="Localidad" value="{{ f.localidad }}" class="filtro">
                 <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
             </form>
             <table class="table table-striped">
@@ -23,6 +25,7 @@
                         <th>Direccion</th>
                         <th>Teléfono</th>
                         <th>Localidad</th>
+                        <th>Sector</th>
                         <th>Comisión</th>
                         <th>Modificar Comisión</th>
 
@@ -37,6 +40,7 @@
                         <td>{{empleado.direccion}}</td>
                         <td>{{empleado.telefono}}</td>
                         <td>{{empleado.localidad}}</td>
+                        <td>{{empleado.empleado.sector}}</td>
                         <td>{{empleado.empleado.porc_comision}}%</td>
                         <td><a href="{% url 'modificarComision' empleado.pk %}" type="button" class="btn btn-warning" >Modificar Comision</a></td>
                     </tr>

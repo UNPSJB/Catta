@@ -16,7 +16,7 @@
                         <th>Duración</th>
                         <th>Insumos</th>
                         <th>Sector</th>
-                        {% if request.user.persona.duenio != null %}
+                        {% if request.user.persona.duenia != null %}
                             <th>Modificar</th>
                         {% endif %}
                     </tr>
@@ -33,7 +33,7 @@
                             {% endfor %}
                         </td>
                         <td>{{servicio.sector}}</td>
-                        {% if request.user.persona.duenio != null %}
+                        {% if request.user.persona.duenia != Null %}
                             <td><a href="{% url 'modificar_servicio' servicio.id %}" button type="button" class="btn btn-warning" role="button">Modificar</a></td>
                         {% endif %}
                     </tr>
