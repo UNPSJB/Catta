@@ -46,15 +46,11 @@ class ModificarTurnoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
 
-    #CORREGIR!!
 
     def clean(self):
         tur = super(ModificarTurnoForm, self).clean()
 
         turno = self.instance
-
-        #empleado = tur.get('empleado')
-        #print(empleado)
 
         servicios = tur.get('servicios')
         cantidad = tur.get('servicios').count()
@@ -68,7 +64,6 @@ class ModificarTurnoForm(ModelForm):
         duracion = turno.fecha
         print('inicio del turno')
         print(duracion)
-        # duracion_servicio = timedelta(minutes=0)
 
         i = 1
 
@@ -82,8 +77,6 @@ class ModificarTurnoForm(ModelForm):
 
         print('duracion final')
         print(duracion)
-
-
 
         sig_turno = turno.get_proximo_turno(turno)
 
