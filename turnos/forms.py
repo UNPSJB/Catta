@@ -25,6 +25,14 @@ class CrearTurnoForm(ModelForm):
     def clean(self):
         datos = super(CrearTurnoForm, self).clean()
 
+        fecha = datos.get('fecha')
+        hora = fecha.time()
+        time = datetime.time(00,00,00)
+        print(hora)
+        print(time)
+        if hora == time:
+            raise forms.ValidationError("Debe seleccionar una hora para el turno")
+
         p1 = datos.get('servicios')
         p2 = datos.get('promociones')
         if not p1 and not p2:
