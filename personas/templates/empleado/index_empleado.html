@@ -14,23 +14,23 @@
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
                         <li>
-                            <a href="#clientes" data-toggle="tab">
+                            <a href="#crear_cuenta" data-toggle="tab">
                                 <i class="fa fa-user"></i>   Crear Cliente</a>
                         </li>
                         <li>
-                            <a href="#turnos" data-toggle="tab">
+                            <a href="#crear_turno" data-toggle="tab">
                                 <i class="fa fa-calendar-o"></i>   Crear Turno</a>
                         </li>
                         <li>
-                            <a href="#crearServicio" data-toggle="tab">
+                            <a href="#crear_servicio" data-toggle="tab">
                                 <i class="fa fa-scissors"></i>   Crear Servicio</a>
                         </li>
                         <li>
-                            <a href="#crearPromocion" data-toggle="tab">
+                            <a href="#crear_promo" data-toggle="tab">
                                 <i class="fa fa-scissors"></i>   Crear Promocion</a>
                         </li>
                         <li>
-                            <a href="#turnoFijo" data-toggle="tab">
+                            <a href="#crear_turno_fijo" data-toggle="tab">
                                 <i class="fa fa-calendar-o"></i>   Crear Turno Fijo</a>
                         </li>
                     </ul>
@@ -44,7 +44,7 @@
                 {% load crispy_forms_tags %}
 
                 {% csrf_token %}
-                <div class="tab-pane fade in" id="clientes">
+                <div class="tab-pane fade in" id="crear_cuenta">
                     <div class="panel panel-default">
                          <div class="container">
                                 <div class="row margin-vert-30">
@@ -59,8 +59,7 @@
                          </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="crearServicio">
-
+                <div class="tab-pane fade in" id="crear_servicio">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -73,8 +72,7 @@
                         </div>
 
                 </div>
-                <div class="tab-pane fade in" id="crearPromocion">
-
+                <div class="tab-pane fade in" id="crear_promo">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -87,7 +85,7 @@
                         </div>
 
                 </div>
-                <div class="tab-pane fade in" id="turnos">
+                <div class="tab-pane fade in" id="crear_turno">
                     <div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -101,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="turnoFijo">
+                <div class="tab-pane fade in" id="crear_turno_fijo">
                     <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -133,6 +131,13 @@
             maxDate: 2050-12-31
         });
     });
+</script>
+<script>
+$(function() {
+    {% if formularioError %}
+        $('a[href="#{{formularioError}}"]').tab('show');
+    {% endif %}
+});
 </script>
 <script type="text/javascript" src="{% static 'assets/js/turnos.js' %}"></script>
 {% endblock %}

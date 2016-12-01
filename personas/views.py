@@ -138,6 +138,7 @@ def empleado(request, id=None):
                 _form = klassForm()
                 redirect(usuario.get_vista())
             contexto[form_name] = _form
+            contexto["formularioError"] = input_name
         else:
             if input_name == 'modificar_turno':
                 _form = ModificarTurnoForm(instance=instance)
@@ -227,8 +228,7 @@ def duenio(request):
                 _form = klassForm()
                 redirect(usuario.get_vista())
             contexto[form_name] = _form
-            print('asdsad')
-            print(_form)
+            contexto["formularioError"] = input_name
             if form_name == 'form_crear_turno_fijo':
                 id_turno = TurnoFijo.objects.latest('id')
                 id_turno.calcular_turno_siguiente(id_turno.fecha)

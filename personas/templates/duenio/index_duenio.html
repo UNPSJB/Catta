@@ -14,39 +14,39 @@
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
                         <li>
-                            <a href="#turnos" data-toggle="tab">
+                            <a href="#crear_turno" data-toggle="tab">
                                 <i class="fa fa-calendar-o"></i>  Crear Turno</a>
                         </li>
                         <li>
-                            <a href="#servicios" data-toggle="tab">
+                            <a href="#crear_servicio" data-toggle="tab">
                                 <i class="fa fa-scissors"></i>  Crear Servicio</a>
                         </li>
                          <li>
-                            <a href="#promociones" data-toggle="tab">
+                            <a href="#crear_promo" data-toggle="tab">
                                 <i class="fa fa-scissors"></i> Crear Promoción</a>
                         </li>
                         <li>
-                            <a href="#empleados" data-toggle="tab">
+                            <a href="#crear_empleado" data-toggle="tab">
                                 <i class="fa fa-user"></i>   Crear Empleado</a>
                         </li>
                             <li>
-                            <a href="#clientes" data-toggle="tab">
+                            <a href="#crear_cuenta" data-toggle="tab">
                                 <i class="fa fa-user"></i>   Crear Cliente</a>
                         </li>
                         <li>
-                            <a href="#sector" data-toggle="tab">
+                            <a href="#crear_sector" data-toggle="tab">
                                 <i class="fa fa-tags"></i>  Crear Sector</a>
                         </li>
                         <li>
-                            <a href="#insumo" data-toggle="tab">
+                            <a href="#crear_insumo" data-toggle="tab">
                                 <i class="fa fa-shopping-cart"></i>  Crear Insumo</a>
                         </li>
                         <li>
-                            <a href="#liquidar" data-toggle="tab">
+                            <a href="#liquidar_comision" data-toggle="tab">
                                 <i class="fa-money"></i>Liquidar Comision</a>
                         </li>
                         <li>
-                            <a href="#turnoFijo" data-toggle="tab">
+                            <a href="#crear_turno_fijo" data-toggle="tab">
                                 <i class="fa fa-calendar-o"></i>  Crear Turno Fijo</a>
                         </li>
                     </ul>
@@ -59,7 +59,7 @@
             <div class="tab-content">
                 {% load crispy_forms_tags %}
 
-                <div class="tab-pane fade in" id="turnos">
+                <div class="tab-pane fade in" id="crear_turno">
                     <div id="acordeon-turnos" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="servicios">
+                <div class="tab-pane fade in" id="crear_servicio">
                     <div id="acordeon-servicios" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="promociones">
+                <div class="tab-pane fade in" id="crear_promo">
                     <div id="acordeon-promociones" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="empleados">
+                <div class="tab-pane fade in" id="crear_empleado">
                     <div id="acordeon-empleados" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="clientes">
+                <div class="tab-pane fade in" id="crear_cuenta">
                     <div id="acordeon-clientes" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="sector">
+                <div class="tab-pane fade in" id="crear_sector">
                     <div id="acordeon-sector" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="insumo">
+                <div class="tab-pane fade in" id="crear_insumo">
                     <div id="acordeon-insumo" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="turnoFijo">
+                <div class="tab-pane fade in" id="crear_turno_fijo" >
                     <div id="acordeon-turnoFijo" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
@@ -173,8 +173,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="liquidar">
-                    <div id="acordeon-clientes" class="panel-group alternative">
+                <div class="tab-pane fade in" id="liquidar_comision" >
+                    <div id="acordeon-comision" class="panel-group alternative">
                         <div class="panel panel-default">
                             <div class="container">
                                 <div class="row margin-vert-30">
@@ -184,20 +184,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="fullCalModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content background-catta3">
-                        <div class="modal-header background-catta2">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                            <h4 id="modalTitle" class="modal-title"></h4>
-                        </div>
-                        <div id="modalBody" class="modal-body background-catta3"></div>
-                        <div class="modal-footer background-catta2">
-                            <b><button class="btn btn-violet pull-right" type="submit" data-dismiss="modal">Cerrar</button></b>
                         </div>
                     </div>
                 </div>
@@ -222,11 +208,12 @@
     });
 </script>
 <script>
-    $(function() {
-        $(".dateinput").datepicker();
-    });
+$(function() {
+    {% if formularioError %}
+        $('a[href="#{{formularioError}}"]').tab('show');
+    {% endif %}
+});
 </script>
-
 <script type="text/javascript" src="{% static 'assets/js/turnos.js' %}"></script>
 <script type="text/javascript" src="{% static 'assets/js/turnos-fijos.js' %}"></script>
 
