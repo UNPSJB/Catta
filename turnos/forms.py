@@ -37,6 +37,9 @@ class CrearTurnoForm(ModelForm):
         p2 = datos.get('promociones')
         empleado = datos.get('empleado')
         servicios = datos.get('servicios')
+        for promocion in p2:
+            if (promocion.sector != empleado.sector):
+                raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
         for servicio in servicios:
             if (servicio.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
@@ -169,6 +172,9 @@ class CrearTurnoFijoForm(ModelForm):
         p2 = datos.get('promociones')
         empleado = datos.get('empleado')
         servicios = datos.get('servicios')
+        for promocion in p2:
+            if (promocion.sector != empleado.sector):
+                raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
         for servicio in servicios:
             if (servicio.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
