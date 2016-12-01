@@ -45,7 +45,7 @@ class Turno(models.Model):
         "clienteA": ["cliente__persona__apellido__icontains"],
         "empleadoN": ["empleado__persona__nombre__icontains"],
         "empleadoA": [ "empleado__persona__apellido__icontains"],
-        "servicio": [ "servicios__nombre__icontains" ],
+        "servicio": [ "servicios__nombre__icontains", "promociones__nombre__icontains", "promociones__servicios__nombre__icontains" ],
         "estado": {
             CANCELADO: Q(fecha_cancelacion__isnull = False),
             REALIZADO: Q(fecha_realizacion__isnull = False),
