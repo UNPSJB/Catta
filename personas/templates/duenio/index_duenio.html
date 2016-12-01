@@ -208,6 +208,12 @@
     });
 </script>
 <script>
+    $(function() {
+        $(".dateinput").datepicker({
+        });
+    });
+</script>
+<script>
 $(function() {
     {% if formularioError %}
         $('a[href="#{{formularioError}}"]').tab('show');
