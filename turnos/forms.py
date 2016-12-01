@@ -95,7 +95,7 @@ class ModificarTurnoForm(ModelForm):
 
     class Meta:
         model = Turno
-        fields = {"empleado", "servicios", "promociones"}
+        fields = {"servicios", "promociones"}
 
 
 class EliminarTurnoForm(ModelForm):
