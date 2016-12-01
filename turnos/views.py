@@ -120,9 +120,9 @@ def cancelar_turno(request, id):
 
 
 
-def listaTurnosFecha(request):
-    turnos = Turno.objects.all()
-    return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})
+#def listaTurnosFecha(request):
+#    turnos = Turno.objects.all()
+#    return render(request, 'confirmarTurno/listaTurnosFecha.html', {'turnos': turnos})
 
 
 def marcar_realizado(request, id):
