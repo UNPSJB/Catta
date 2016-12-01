@@ -227,28 +227,29 @@ def duenio(request):
                 _form.save()
                 _form = klassForm()
                 redirect(usuario.get_vista())
-            contexto[form_name] = _form
-            contexto["formularioError"] = input_name
-            if form_name == 'form_crear_turno_fijo':
-                id_turno = TurnoFijo.objects.latest('id')
-                id_turno.calcular_turno_siguiente(id_turno.fecha)
-                turnos = []
-                invalidas = []
-                turnos.append(id_turno)
-                fecha = id_turno.fecha + timedelta(days=7)
-                while fecha < id_turno.fecha_fin:
-                    if turnos[-1].turno_siguiente != None:
-                        if turnos[-1].turno_siguiente.fecha == fecha:
-                            turnos.append(turnos[-1].turno_siguiente)
-                            fecha = turnos[-1].fecha + timedelta(days=7)
+                if form_name == 'form_crear_turno_fijo':
+                    id_turno = TurnoFijo.objects.latest('id')
+                    id_turno.calcular_turno_siguiente(id_turno.fecha)
+                    turnos = []
+                    invalidas = []
+                    turnos.append(id_turno)
+                    fecha = id_turno.fecha + timedelta(days=7)
+                    while fecha < id_turno.fecha_fin:
+                        if turnos[-1].turno_siguiente != None:
+                            if turnos[-1].turno_siguiente.fecha == fecha:
+                                turnos.append(turnos[-1].turno_siguiente)
+                                fecha = turnos[-1].fecha + timedelta(days=7)
+                            else:
+                                invalidas.append(fecha)
+                                fecha = fecha + timedelta(days=7)
                         else:
                             invalidas.append(fecha)
                             fecha = fecha + timedelta(days=7)
-                    else:
-                        invalidas.append(fecha)
-                        fecha = fecha + timedelta(days=7)
-                return render(request,'duenio/turno_creado_fijo.html', {'turnos':turnos, 'invalidas':invalidas})
-                #return redirect('lista_turno_creado_fijo')
+                    return render(request,'duenio/turno_creado_fijo.html', {'turnos':turnos, 'invalidas':invalidas})
+                    #return redirect('lista_turno_creado_fijo')
+            contexto[form_name] = _form
+            contexto["formularioError"] = input_name
+
         else:
             contexto[form_name] = klassForm()
     return render(request, ret, contexto)

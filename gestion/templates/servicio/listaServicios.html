@@ -15,6 +15,7 @@
                         <th>Precio</th>
                         <th>Duración</th>
                         <th>Insumos</th>
+                        <th>Sector</th>
                         {% if request.user.persona.duenio != null %}
                             <th>Modificar</th>
                         {% endif %}
@@ -31,7 +32,8 @@
                                <li>{{insumo}}
                             {% endfor %}
                         </td>
-                        {% if usuario.duenio != null %}
+                        <td>{{servicio.sector}}</td>
+                        {% if request.user.persona.duenio != null %}
                             <td><a href="{% url 'modificar_servicio' servicio.id %}" button type="button" class="btn btn-warning" role="button">Modificar</a></td>
                         {% endif %}
                     </tr>
