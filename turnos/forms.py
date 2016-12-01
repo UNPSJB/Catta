@@ -167,6 +167,7 @@ class CrearTurnoFijoForm(ModelForm):
         return datos
 
     def clean(self):
+
         datos = super(CrearTurnoFijoForm, self).clean()
         p1 = datos.get('servicios')
         p2 = datos.get('promociones')
@@ -180,6 +181,15 @@ class CrearTurnoFijoForm(ModelForm):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
         if not p1 and not p2:
             raise forms.ValidationError("Debe elegir al menos una Promoción o un Servicio")
+
+        fecha = datos.get('fecha')
+        hora = fecha.time()
+        time = datetime.time(00, 00, 00)
+        print(hora)
+        print(time)
+        if hora == time:
+            raise forms.ValidationError("Debe seleccionar una hora para el turno")
+
         return datos
 
     class Meta:
