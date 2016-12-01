@@ -25,10 +25,9 @@
                     Estado:
                     <select name="estado">
                       <option value=""></option>
-                      <option value="Realizado">Realizado</option>
-                      <option value="Confirmado">Confirmado</option>
-                      <option value="Cancelado">Cancelado</option>
-                      <option value="Sin Confirmar">Sin Confirma</option>
+                      {% for id, nombre in Turno.ESTADOS %}
+                         <option value="{{ id }}">{{ nombre }}</option>
+                      {% endfor %}
                     </select>
                     <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                 </form>
