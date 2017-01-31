@@ -19,8 +19,9 @@
 
                                 <br>
                                 <br>
-                                Actualizar porcentaje comision: <br>
-                                <input name="NuevaComision" value={{ persona.empleado.porc_comision }}>
+                                <p id="porc">Actualizar porcentaje comision: {{ persona.empleado.porc_comision }}</p>
+                                <input type="range" id="myRange" name="NuevaComision" min="0" value={{ persona.empleado.porc_comision }} max="100" step="1" onclick="myFunction()">
+
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -34,5 +35,12 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myRange").value;
+            document.getElementById("porc").innerHTML = "Actualizar porcentaje comision: " + x;
+        }
+    </script>
+
 {% endblock %}

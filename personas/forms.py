@@ -114,6 +114,10 @@ class EmpleadoNuevoForm(forms.ModelForm):
 
         p1 = datos.get('passwd')
         p2 = datos.get('passwd_1')
+        c = datos.get('comision')
+
+        if c > 100 or c < 0:
+            raise forms.ValidationError("El valor de la comision debe ser un pocentaje (entre 0 y 100)")
 
         if Usuario.objects.filter(username=self.cleaned_data['usuario']).exists():
             raise forms.ValidationError("Usuario en uso")
