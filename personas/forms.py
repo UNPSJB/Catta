@@ -10,6 +10,7 @@ from turnos.models import Turno
 from datetime import date, time
 from datetime import datetime
 
+import re
 
 class CuentaNuevaForm(forms.ModelForm):
     """
@@ -51,6 +52,10 @@ class CuentaNuevaForm(forms.ModelForm):
 
         p1 = datos.get('passwd')
         p2 = datos.get('passwd_1')
+        d = datos.get('dni')
+
+        if d <= 0:
+            raise forms.ValidationError("El dni ingresado es incorrecto")
 
         if Usuario.objects.filter(username=self.cleaned_data['usuario']).exists():
             raise forms.ValidationError("Usuario en uso")
@@ -115,6 +120,12 @@ class EmpleadoNuevoForm(forms.ModelForm):
         p1 = datos.get('passwd')
         p2 = datos.get('passwd_1')
         c = datos.get('comision')
+        d = datos.get('dni')
+
+        #expresion_documento = "\d{6}"
+        #FLATA VALIDAR DOCUMENTOS
+        if d <= 0:
+            raise forms.ValidationError("El dni ingresado es incorrecto")
 
         if c > 100 or c < 0:
             raise forms.ValidationError("El valor de la comision debe ser un pocentaje (entre 0 y 100)")

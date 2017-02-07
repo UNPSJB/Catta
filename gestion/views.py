@@ -74,7 +74,7 @@ def modificar_servicio(request, id):
                 ret = '/personas/cliente_lista_servicios'
         servicio = get_object_or_404(ServicioBasico, pk=id)
         form = ModificarServicioForm(request.POST, instance=servicio)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect(ret)
     else:

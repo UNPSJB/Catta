@@ -26,6 +26,20 @@ class InsumoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_insumo', 'Crear Insumo'))
 
+    def clean(self):
+        datos = super(InsumoForm, self).clean()
+
+        cn = datos.get('contenidoNeto')
+        s = datos.get('stock')
+
+        if cn <= 0:
+            raise forms.ValidationError("El contenido neto del insumo ingresado es incorrecto")
+
+        if s < 0:
+            raise forms.ValidationError("El stock ingresado no puede ser negativo")
+
+        return datos
+
     class Meta:
         model = Insumo
         fields = {"id", "nombre", "contenidoNeto", "unidadDeMedida", "marca", "stock"}
@@ -38,9 +52,19 @@ class ServicioForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_servicio', 'Crear Servicio'))
 
+
+
     def clean(self):
         datos = super(ServicioForm, self).clean()
-        
+
+        p = datos.get('precio')
+        if p <= 0:
+            raise forms.ValidationError("El precio del servicio no puede ser menor a $0")
+
+        d = datos.get('duracion')
+        if d <= 0:
+            raise forms.ValidationError("La duracion del servicio debe ser como minimo de 1 modulo")
+
         return datos
 
 
@@ -55,6 +79,19 @@ class ModificarServicioForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('modificar_servicio', 'Modificar Servicio'))
+
+    def clean(self):
+        datos = super(ModificarServicioForm, self).clean()
+
+        p = datos.get('precio')
+        if p <= 0:
+            raise forms.ValidationError("El precio del servicio no puede ser menor o igual a $0")
+
+        d = datos.get('duracion')
+        if d <= 0:
+            raise forms.ValidationError("La duracion del servicio debe ser como minimo de 1 modulo")
+
+        return datos
 
     class Meta:
         model = ServicioBasico
@@ -74,6 +111,15 @@ class PromoForm(ModelForm):
         """
         La duracion de la promo y los insumos se sacan de los servicios que la componen.
         """
+
+    def clean(self):
+        datos = super(PromoForm, self).clean()
+
+        p = datos.get('precio')
+        if p <= 0:
+            raise forms.ValidationError("El precio de la promoción no puede ser menor o igual a $0")
+
+        return datos
 
     class Meta:
         model = Promocion

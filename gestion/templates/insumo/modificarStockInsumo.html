@@ -24,7 +24,7 @@
                                     <br>
                                     <br>
                                     Actualizar cantidad en stock: <br>
-                                    <input name="stockNuevo" value={{ insumo.stock }} >
+                                    <input name="stockNuevo" value={{ insumo.stock }} pattern="[0-9]{1,4}" title="El valor no puede ser negativo" required>
 
                                 <div class="row">
                                     <div class="col-md-12">

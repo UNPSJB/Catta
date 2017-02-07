@@ -16,6 +16,7 @@ from datetime import datetime, date, time, timedelta
 
 
 
+
 def es_duenio(usuario):
     return usuario.persona.duenia != None
 
