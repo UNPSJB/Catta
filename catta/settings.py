@@ -139,3 +139,10 @@ from datetime import time, date, timedelta, datetime
 MAÑANA = (time(9, 0), time(12, 0))
 TARDE = (time(16, 0), time(20, 0))
 MODULO = timedelta(minutes=15)
+
+import re
+
+RE_DNI = re.compile(r"[1-9]{1}[0-9]{6,7}")
+RE_LETRAS = re.compile(r"([a-z]|[A-Z])+")
+RE_CARACTERES = re.compile(r"([0-9]|[a-z]|[A-Z])+")
+RE_TELEFONO = re.compile(r"[0-9]{10,13}")
