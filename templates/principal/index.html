@@ -99,7 +99,9 @@
                         <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
                             <a href="#">
                                 <figure class="animate fadeInLeft">
+                                    {% if promocion.imagen.url != null %}
                                     <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
+                                    {% endif %}
                                     <figcaption>
                                         <h1> {{promocion.nombre}} </h1>
                                         <h5> {{promocion.descripcion}} </h5>
