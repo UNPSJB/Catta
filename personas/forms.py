@@ -71,7 +71,7 @@ class CuentaNuevaForm(forms.ModelForm):
             raise forms.ValidationError("Las contraseñas no coinciden")
 
         # Validación de datos del formulario (Tipos y rangos)
-        if re.match(settings.RE_DNI, str(dni)) is None:
+        if re.fullmatch(settings.RE_DNI, str(dni)) is None:
             raise forms.ValidationError("El dni ingresado es incorrecto")
 
         if re.match(settings.RE_LETRAS, nombre) is None:
@@ -80,7 +80,7 @@ class CuentaNuevaForm(forms.ModelForm):
         if re.match(settings.RE_LETRAS, apellido) is None:
             raise forms.ValidationError("El apellido es incorrecto")
 
-        if re.match(settings.RE_TELEFONO, str(telefono)) is None:
+        if re.fullmatch(settings.RE_TELEFONO, str(telefono)) is None:
             raise forms.ValidationError("El teléfono es incorrecto")
 
         if re.match(settings.RE_CARACTERES, str(direccion)) is None:
@@ -159,7 +159,7 @@ class EmpleadoNuevoForm(forms.ModelForm):
         if p1 and p2 and p1 != p2:
             raise forms.ValidationError("Las contraseñas no coinciden")
 
-        if re.match(settings.RE_DNI, str(dni)) is None:
+        if re.fullmatch(settings.RE_DNI, str(dni)) is None:
             raise forms.ValidationError("El dni ingresado es incorrecto")
 
         if re.match(settings.RE_LETRAS, nombre) is None:
@@ -168,7 +168,7 @@ class EmpleadoNuevoForm(forms.ModelForm):
         if re.match(settings.RE_LETRAS, apellido) is None:
             raise forms.ValidationError("El apellido es incorrecto")
 
-        if re.match(settings.RE_TELEFONO, str(telefono)) is None:
+        if re.fullmatch(settings.RE_TELEFONO, str(telefono)) is None:
             raise forms.ValidationError("El teléfono es incorrecto")
 
         if re.match(settings.RE_CARACTERES, str(direccion)) is None:
