@@ -64,6 +64,7 @@ class Turno(models.Model):
     empleado = models.ForeignKey(Empleado)
     cliente = models.ForeignKey(Cliente)
     objects = TurnoManager()
+    comision = models.ForeignKey(Comision, null=True, blank=True)
 
     def __str__(self):
         return "{}".format(self.fecha)

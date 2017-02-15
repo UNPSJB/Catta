@@ -65,10 +65,6 @@ class ServicioBasico(Servicio):
     def get_nombre(self):
         return str(self.nombre)
 
-
-
-
-
 class Promocion(Servicio):
     servicios = models.ManyToManyField(ServicioBasico)
     imagen = models.ImageField(upload_to='img_promocion',

@@ -141,6 +141,6 @@ class Comision(models.Model):
         "empleado": ["empleado__persona__nombre__icontains"],
         "fecha": ["fecha__icontains"]
     }
-    empleado= models.ForeignKey(Empleado, on_delete=models.CASCADE)
+
     fecha_liquidacion = models.DateField()
     monto = models.FloatField(null=True)

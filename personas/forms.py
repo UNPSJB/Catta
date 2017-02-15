@@ -146,7 +146,8 @@ class EmpleadoNuevoForm(forms.ModelForm):
 
 
 class LiquidarComisionForm(forms.ModelForm):
-
+    pass
+"""
     def __init__(self, *args, **kwargs):
         super(LiquidarComisionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -182,5 +183,5 @@ class LiquidarComisionForm(forms.ModelForm):
 
     class Meta:
         model = Comision
-        fields = ("empleado","fecha_liquidacion")
-
+        fields = ("fecha_liquidacion")
+"""
