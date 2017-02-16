@@ -5,6 +5,7 @@ from .models import Insumo
 from .models import ServicioBasico, Promocion
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.conf import settings
 
 
 class SectorForm(ModelForm):
@@ -13,6 +14,16 @@ class SectorForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_sector', 'Crear Sector'))
+
+    def clean(self):
+        datos = super(SectorForm, self).clean()
+
+        nombre = datos.get('nombre')
+
+        if re.match(settings.RE_CARACTERES, nombre) is None:
+            raise forms.ValidationError("El nombre es incorrecto")
+
+        return datos
 
     class Meta:
         model = Sector
@@ -31,12 +42,16 @@ class InsumoForm(ModelForm):
 
         cn = datos.get('contenidoNeto')
         s = datos.get('stock')
+        nombre = datos.get('nombre')
 
         if cn <= 0:
             raise forms.ValidationError("El contenido neto del insumo ingresado es incorrecto")
 
         if s < 0:
             raise forms.ValidationError("El stock ingresado no puede ser negativo")
+
+        if re.match(settings.RE_CARACTERES, nombre) is None:
+            raise forms.ValidationError("El nombre es incorrecto")
 
         return datos
 
@@ -52,12 +67,12 @@ class ServicioForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('crear_servicio', 'Crear Servicio'))
 
-
-
     def clean(self):
         datos = super(ServicioForm, self).clean()
 
         p = datos.get('precio')
+        nombre = datos.get('nombre')
+
         if p <= 0:
             raise forms.ValidationError("El precio del servicio no puede ser menor a $0")
 
@@ -65,8 +80,10 @@ class ServicioForm(ModelForm):
         if d <= 0:
             raise forms.ValidationError("La duracion del servicio debe ser como minimo de 1 modulo")
 
-        return datos
+        if re.match(settings.RE_CARACTERES, nombre) is None:
+            raise forms.ValidationError("El nombre es incorrecto")
 
+        return datos
 
     class Meta:
         model = ServicioBasico
@@ -116,8 +133,13 @@ class PromoForm(ModelForm):
         datos = super(PromoForm, self).clean()
 
         p = datos.get('precio')
+        nombre = datos.get('nombre')
+
         if p <= 0:
             raise forms.ValidationError("El precio de la promoción no puede ser menor o igual a $0")
+
+        if re.match(settings.RE_CARACTERES, nombre) is None:
+            raise forms.ValidationError("El nombre es incorrecto")
 
         return datos
 

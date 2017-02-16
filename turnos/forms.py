@@ -20,8 +20,6 @@ class CrearTurnoForm(ModelForm):
         datos = super(CrearTurnoForm, self).save()
         return datos
 
-        #return datos
-
     def clean(self):
         datos = super(CrearTurnoForm, self).clean()
 
@@ -37,6 +35,7 @@ class CrearTurnoForm(ModelForm):
         p2 = datos.get('promociones')
         empleado = datos.get('empleado')
         servicios = datos.get('servicios')
+        
         for promocion in p2:
             if (promocion.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
