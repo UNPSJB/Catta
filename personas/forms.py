@@ -193,10 +193,15 @@ class LiquidarComisionForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('liquidar_comision', 'Liquidar Comision'))
-    """
+
     def save(self, commit=True):
         comision = super(LiquidarComisionForm, self).save()
+        nombreEmpleado = datos.get('nombre')
+        turnos = Turno.objects.filter(empleado=nombreEmpleado)
+        print(turnos)
+        return comision
 
+    """
         fecha1 = datetime.combine(comision.fecha_liquidacion, time(00, 00, 00))
         fecha2 = datetime.combine(comision.fecha_liquidacion, time(20, 00, 00))
         turnos = Turno.objects.filter(empleado=comision.empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2])
@@ -209,7 +214,8 @@ class LiquidarComisionForm(forms.ModelForm):
         comision.save()
 
         return comision
-
+    """
+    """
     def clean(self):
         datos = super(LiquidarComisionForm, self).clean()
 
@@ -222,5 +228,5 @@ class LiquidarComisionForm(forms.ModelForm):
             raise forms.ValidationError("No hay turnos para liquidar en esta fecha para este empleado")
     """
     class Meta:
-        model = Comision
-        fields = ("fecha_liquidacion",)
+        model = Persona
+        fields = ("nombre",)
