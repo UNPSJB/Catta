@@ -8,45 +8,55 @@
             <div class="col-md-12">
                 {% csrf_token %}
 
-                <h2><font color="Purple"><font face="arial"><center> Listado de Clientes </center></font></font></h2>
+                <div class="row" style="height:60px">
+                  <center>
+                    <h2><font color="Purple" face="arial"> Listado de Clientes </font></h2>
+                  </center>
+                </div>
+                <div class="row" style="height:50px">
+                  <div class="col-md-10">
                     <form method="get" action="">
                         <input name="dni" placeholder="DNI" value="{{ f.dni }}" class="filtro">
                         <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
                         <input name="apellido" placeholder="Apellido" value="{{ f.apellido }}" class="filtro">
                         <input name="localidad" placeholder="Localidad" value="{{ f.localidad }}" class="filtro">
-                        <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+                        <button class="btn btn-violet" type="submit">Filtrar</button>
                     </form>
-                    <!-- asnbxjhavsx -->
-                    <div class="col-lg-1">
-                        <a href="{% url 'reporte_clientes_pdf' %}" target="_blank" class="btn btn-info btn-block"><span class="glyphicon glyphicon-file"></span></a>
-                    </div>
-                    <!-- asnbxjhavsx -->
-                <table class="table table-striped">
-                    <thread>
-                        <tr>
-                            <th>DNI</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Direccion</th>
-                            <th>Teléfono</th>
-                            <th>Localidad</th>
-                            <th>E-Mail</th>
-                        </tr>
-                    </thread>
-                    <tbody>
-                        {% for cliente in clientes %}
-                        <tr>
-                            <td>{{cliente.dni}}</td>
-                            <td>{{cliente.nombre}}</td>
-                            <td>{{cliente.apellido}}</td>
-                            <td>{{cliente.direccion}}</td>
-                            <td>{{cliente.telefono}}</td>
-                            <td>{{cliente.localidad}}</td>
-                            <td>{{cliente.cliente.email}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                  </div>
+                  <div class="col-sm-2">
+                    <a href="{% url 'reporte_clientes_pdf' %}" target="_blank" class="btn btn-violet btn-info">
+                      <span class="glyphicon glyphicon-file"><font face="arial"> Exportar a PDF </font></span>
+                    </a>
+                  </div>
+                </div>
+                <div class="row">
+                  <table class="table table-striped">
+                      <thread>
+                          <tr>
+                              <th>DNI</th>
+                              <th>Nombre</th>
+                              <th>Apellido</th>
+                              <th>Direccion</th>
+                              <th>Teléfono</th>
+                              <th>Localidad</th>
+                              <th>E-Mail</th>
+                          </tr>
+                      </thread>
+                      <tbody>
+                          {% for cliente in clientes %}
+                          <tr>
+                              <td>{{cliente.dni}}</td>
+                              <td>{{cliente.nombre}}</td>
+                              <td>{{cliente.apellido}}</td>
+                              <td>{{cliente.direccion}}</td>
+                              <td>{{cliente.telefono}}</td>
+                              <td>{{cliente.localidad}}</td>
+                              <td>{{cliente.cliente.email}}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
             </div>
         </div>
     </div>
