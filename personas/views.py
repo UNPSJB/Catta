@@ -434,15 +434,15 @@ def cerrar_sesion(request):
 class ReportesPDFClientes(View):
     def cabecera(self, pdf):
         pdf.setFont("Helvetica", 16)
-        pdf.drawString(230, 790, u"Reporte")
+        pdf.drawString(230, 790, u"Reporte de Clientes")
 
     def tabla(self, pdf, y):
-        encabezados = ('DNI', 'Nombre', 'Apellido', 'E-Mail')
+        encabezados = ('DNI', 'Nombre', 'Apellido', 'Localidad', 'Teléfono', 'E-Mail')
 
         clientes = Persona.objects.filter(cliente__isnull=False)
         detalles = []
         for cliente in clientes:
-            c = (cliente.dni, cliente.nombre, cliente.apellido, cliente.cliente.email)
+            c = (cliente.dni, cliente.nombre, cliente.apellido, cliente.localidad, cliente.telefono, cliente.cliente.email)
             detalles.append(c)
 
         detalle_orden = Table([encabezados] + detalles)
@@ -454,7 +454,7 @@ class ReportesPDFClientes(View):
             ]
         ))
         detalle_orden.wrapOn(pdf, 800, 600)
-        detalle_orden.drawOn(pdf, 120, y)
+        detalle_orden.drawOn(pdf, 110, y)
 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='application/pdf')
@@ -462,7 +462,7 @@ class ReportesPDFClientes(View):
         pdf = canvas.Canvas(buffer)
 
         self.cabecera(pdf)
-        y = 700
+        y = 720
         self.tabla(pdf, y)
 
         pdf.showPage()
