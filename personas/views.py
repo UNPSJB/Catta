@@ -1,18 +1,25 @@
+from django import forms
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, authenticate
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
-from django import forms
+from django.db.models import Q, Count
+from django.views.generic import View
+from django.http import HttpResponse
+from datetime import datetime, date, time, timedelta
+from django.conf import settings
+from io import BytesIO
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.platypus import Table, TableStyle
+
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
-
 from .models import Persona, Empleado, Comision
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno, TurnoFijo
-from django.db.models import Q, Count
-from datetime import datetime, date, time, timedelta
 
 
 
@@ -422,3 +429,46 @@ def cuenta(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
+
+
+class ReportesPDFClientes(View):
+    def cabecera(self, pdf):
+        pdf.setFont("Helvetica", 16)
+        pdf.drawString(230, 790, u"Reporte")
+
+    def tabla(self, pdf, y):
+        encabezados = ('DNI', 'Nombre', 'Apellido', 'E-Mail')
+
+        clientes = Persona.objects.filter(cliente__isnull=False)
+        detalles = []
+        for cliente in clientes:
+            c = (cliente.dni, cliente.nombre, cliente.apellido, cliente.cliente.email)
+            detalles.append(c)
+
+        detalle_orden = Table([encabezados] + detalles)
+        detalle_orden.setStyle(TableStyle(
+            [
+                ('ALIGN',(0,0),(3,0),'CENTER'),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ]
+        ))
+        detalle_orden.wrapOn(pdf, 800, 600)
+        detalle_orden.drawOn(pdf, 120, y)
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/pdf')
+        buffer = BytesIO()
+        pdf = canvas.Canvas(buffer)
+
+        self.cabecera(pdf)
+        y = 700
+        self.tabla(pdf, y)
+
+        pdf.showPage()
+        pdf.save()
+        pdf = buffer.getvalue()
+        buffer.close()
+        response.write(pdf)
+
+        return response
