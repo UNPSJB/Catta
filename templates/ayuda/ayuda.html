@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block titulo %}
+<h6>HOLA</h6>
+{% endblock %}
+
+{% block contenido %}
+    <div class="well" style="width:300px; padding: 8px 0;">
+        <ul class="nav nav-list">
+            <li><label class="tree-toggler nav-header">WorkLoad</label>
+                <ul class="nav nav-list tree">
+                    <li><a href="#">DME Report</a></li>
+                    <li><a href="#">CAMB Report</a></li>
+                    <li><a href="#">LMAB Report</a></li>
+                    <li><a href="#">DMF Notification</a></li>
+                    <li><a href="#">LME Forecast Report</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li><label class="tree-toggler nav-header">Performance</label>
+                <ul class="nav nav-list tree">
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="#">Efficiency</a></li>
+                    <li><a href="#">Process Age</a></li>
+                    <li><a href="#">DME Audit</a></li>
+                    <li><a href="#">Condition Detected At DME</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li><label class="tree-toggler nav-header">Customers</label>
+                <ul class="nav nav-list tree">
+                    <li><a href="#">Demography</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li><label class="tree-toggler nav-header">Licensing</label>
+                <ul class="nav nav-list tree">
+                    <li><a href="#">Assessment Status</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li><label class="tree-toggler nav-header">Medical Stats</label>
+                <ul class="nav nav-list tree">
+                    <li><a href="#">Diagnosis Report</a></li>
+                    <li><a href="#">Measurement and Investigation Report</a></li>
+                    <li><a href="#">Health Risk Report</a></li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li><label class="tree-toggler nav-header">Admin</label>
+                <ul class="nav nav-list tree">
+                    <li><a href="#">Revenue Report</a></li>
+                    <li><a href="#">Applicant Activity Report</a></li>
+                    <li><a href="#">Login Activity Report</a></li>
+                </ul>
+            </li>
+    </div>
+{% endblock %}

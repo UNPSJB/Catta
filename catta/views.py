@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.http import HttpResponse
+import datetime
 
 from personas.models import Persona
 from gestion.models import ServicioBasico, Promocion
 
 from catta.forms import LoginForm
 
-
 def index(request):
     promociones = Promocion.objects.all()
     return render(request, 'principal/index.html', {'promociones': promociones})
 
+def ayuda(request):
+    return render(request, 'ayuda/ayuda.html')
 
 def iniciar_sesion(request):
     if request.method == "POST":
