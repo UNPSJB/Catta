@@ -28,7 +28,10 @@ class SectorForm(ModelForm):
 
     class Meta:
         model = Sector
-        fields = {"nombre", "descripcion"}
+        fields = {
+            "nombre",
+            "descripcion"
+        }
 
 
 class InsumoForm(ModelForm):
@@ -58,7 +61,14 @@ class InsumoForm(ModelForm):
 
     class Meta:
         model = Insumo
-        fields = {"id", "nombre", "contenidoNeto", "unidadDeMedida", "marca", "stock"}
+        fields = {
+            "id",
+            "nombre",
+            "contenidoNeto",
+            "unidadDeMedida",
+            "marca",
+            "stock"
+        }
 
 
 class ServicioForm(ModelForm):
@@ -88,7 +98,14 @@ class ServicioForm(ModelForm):
 
     class Meta:
         model = ServicioBasico
-        fields = {"sector", "nombre", "descripcion", "precio", "duracion", "insumos"}
+        fields = {
+            "sector",
+            "nombre",
+            "descripcion",
+            "precio",
+            "duracion",
+            "insumos"
+        }
 
 
 class ModificarServicioForm(ModelForm):
@@ -113,7 +130,12 @@ class ModificarServicioForm(ModelForm):
 
     class Meta:
         model = ServicioBasico
-        fields = {"descripcion", "precio", "duracion", "insumos"}
+        fields = {
+            "descripcion",
+            "precio",
+            "duracion",
+            "insumos"
+        }
 
 
 class PromoForm(ModelForm):
@@ -135,6 +157,7 @@ class PromoForm(ModelForm):
 
         p = datos.get('precio')
         nombre = datos.get('nombre')
+        servicios = datos.get('servicios')
 
         if p <= 0:
             raise forms.ValidationError("El precio de la promoción no puede ser menor o igual a $0")
@@ -142,8 +165,18 @@ class PromoForm(ModelForm):
         if re.match(settings.RE_CARACTERES, nombre) is None:
             raise forms.ValidationError("El nombre es incorrecto")
 
+        if servicios.__len__() < 1:
+            raise forms.ValidationError("Debe elegir por lo menos un servicio")
+
         return datos
 
     class Meta:
         model = Promocion
-        fields = ("nombre", "descripcion", "precio", "sector", "servicios", "imagen")
+        fields = (
+            "nombre",
+            "descripcion",
+            "precio",
+            "sector",
+            "servicios",
+            "imagen"
+        )
