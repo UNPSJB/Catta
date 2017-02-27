@@ -20,9 +20,13 @@ class SectorForm(ModelForm):
         datos = super(SectorForm, self).clean()
 
         nombre = datos.get('nombre')
+        descripcion = datos.get('descripcion')
 
         if re.match(settings.RE_CARACTERES, nombre) is None:
             raise forms.ValidationError("El nombre es incorrecto")
+
+        if re.match(settings.RE_CARACTERES, descripcion) is None:
+            raise forms.ValidationError("La descripcion es incorrecta")
 
         return datos
 
@@ -83,6 +87,8 @@ class ServicioForm(ModelForm):
 
         p = datos.get('precio')
         nombre = datos.get('nombre')
+        descripcion = datos.get('descripcion')
+
 
         if p <= 0:
             raise forms.ValidationError("El precio del servicio no puede ser menor a $0")
@@ -93,6 +99,9 @@ class ServicioForm(ModelForm):
 
         if re.match(settings.RE_CARACTERES, nombre) is None:
             raise forms.ValidationError("El nombre es incorrecto")
+
+        if re.match(settings.RE_CARACTERES, descripcion) is None:
+            raise forms.ValidationError("La descripcion es incorrecta")
 
         return datos
 
@@ -126,6 +135,10 @@ class ModificarServicioForm(ModelForm):
         if d <= 0:
             raise forms.ValidationError("La duracion del servicio debe ser como minimo de 1 modulo")
 
+        descripcion = datos.get('descripcion')
+        if re.match(settings.RE_CARACTERES, descripcion) is None:
+            raise forms.ValidationError("La descripcion es incorrecta")
+
         return datos
 
     class Meta:
@@ -158,6 +171,7 @@ class PromoForm(ModelForm):
         p = datos.get('precio')
         nombre = datos.get('nombre')
         servicios = datos.get('servicios')
+        descripcion = datos.get('descripcion')
 
         if p <= 0:
             raise forms.ValidationError("El precio de la promoción no puede ser menor o igual a $0")
@@ -167,6 +181,9 @@ class PromoForm(ModelForm):
 
         if servicios.__len__() < 1:
             raise forms.ValidationError("Debe elegir por lo menos un servicio")
+
+        if re.match(settings.RE_CARACTERES, descripcion) is None:
+            raise forms.ValidationError("La descripcion es incorrecta")
 
         return datos
 
