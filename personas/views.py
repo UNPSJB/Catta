@@ -472,3 +472,56 @@ class ReportesPDFClientes(View):
         response.write(pdf)
 
         return response
+
+class ReportesPDFTurnos(View):
+    def cabecera(self, pdf):
+        pdf.setFont("Helvetica", 16)
+        pdf.drawString(230, 790, u"Reporte de Turnos")
+
+    def tabla(self, pdf, y):
+        encabezados = ('Fecha y Hora', 'Cliente', 'Empleado', 'Estado', 'Servicios')
+
+        turnos = Turno.objects.all().order_by("-fecha")
+        detalles = []
+
+        for turno in turnos:
+            t_servicios = ""
+
+            servicios = turno.servicios.all()
+            for servicio in servicios:
+                t_servicios += " " + servicio.nombre
+
+            promos = turno.promociones.all()
+            for promo in promos:
+                t_servicios += " " + promo.nombre
+
+            c = (turno.fecha, turno.cliente, turno.empleado, turno.estado(), t_servicios)
+            detalles.append(c)
+
+        detalle_orden = Table([encabezados] + detalles)
+        detalle_orden.setStyle(TableStyle(
+            [
+                ('ALIGN',(0,0),(3,0),'CENTER'),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ]
+        ))
+        detalle_orden.wrapOn(pdf, 800, 600)
+        detalle_orden.drawOn(pdf, 70, y)
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/pdf')
+        buffer = BytesIO()
+        pdf = canvas.Canvas(buffer)
+
+        self.cabecera(pdf)
+        y = 720
+        self.tabla(pdf, y)
+
+        pdf.showPage()
+        pdf.save()
+        pdf = buffer.getvalue()
+        buffer.close()
+        response.write(pdf)
+
+        return response

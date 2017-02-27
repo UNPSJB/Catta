@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from .views import ReportesPDFClientes
+from .views import ReportesPDFClientes, ReportesPDFTurnos
 
 urlpatterns = [
     # Cuenta nueva.
@@ -36,8 +36,9 @@ urlpatterns = [
     url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
     url(r'^cliente_lista_turnos/$', views.cliente_lista_turnos, name='cliente_lista_turnos'),
     url(r'^restringido/$', views.restringido, name='restringido'),
+    url(r'^reporte_personas_pdf/$', ReportesPDFClientes.as_view(), name="reporte_clientes_pdf"),
+    url(r'^reporte_turnos_pdf/$', ReportesPDFTurnos.as_view(), name="reporte_turnos_pdf"),
     # Cerrar Sesión.
-    url(r'^$', views.cerrar_sesion, name='cerrar_sesion'),
+    url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 
-    url(r'^reporte_personas_pdf/$', ReportesPDFClientes.as_view(), name="reporte_clientes_pdf")
 ]

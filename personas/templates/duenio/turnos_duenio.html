@@ -6,9 +6,13 @@
     <div class="container background-white" style="opacity: 0.95;">
         <div class="row margin-vert-30">
             <div class="col-md-12">
-                <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
 
-
+              <div class="row" style="height:60px">
+                <center>
+                  <h2><font color="Purple" face="arial"> Listado de Turnos </font></h2>
+                </center>
+              </div>
+              <div class="row" style="height:80px">
                 <!-- FILTRADO !-->
                 <form method="get" action="">
                     Cliente:
@@ -35,75 +39,80 @@
                     <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                 </form>
                 <!--FIN FILTRADO!-->
+              </div>
+              <div class="row" style="height:50px">
+                <center>
+                  <a href="{% url 'reporte_turnos_pdf' %}" target="_blank" class="btn btn-violet btn-info">
+                    <span class="glyphicon glyphicon-file"><font face="arial"> Exportar a PDF </font></span>
+                  </a>
+                </center>
+              </div>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
+                            <th>Estado</th>
+                            <th>Servicios</th>
+                            <th>Modificar</th>
+                            <th>Conf/Realiz</th>
+                            <th>Cancelar</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for turno in turnos %}
+                        <tr>
+                            <td width=140>{{turno.fecha}}</td>
+                            <td>{{turno.cliente}}</td>
+                            <td>{{turno.empleado}}</td>
+                            <td>{{turno.estado}}</td>
+                            <td width=250>
+                                {% for promocion in turno.promociones.all %}
+                                    <details>
+                                        <summary>{{promocion}}</summary>
+                                            {% for servicio in promocion.servicios.all %}
+                                                  <li><i>{{servicio}}</i>
+                                            {% endfor %}
+                                    </details>
+                                {% endfor %}
+                                {% for servicio in turno.servicios.all %}
+                                   <li> {{servicio}}
+                                {% endfor %}
+                            </td>
 
-
-                    <table class="table table-striped">
-                        <thread>
-                            <tr>
-                                <th>Fecha y Hora</th>
-                                <th>Cliente</th>
-                                <th>Empleado</th>
-                                <th>Estado</th>
-                                <th>Servicios</th>
-                                <th>Modificar</th>
-                                <th>Conf/Realiz</th>
-                                <th>Cancelar</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                            {% for turno in turnos %}
-                            <tr>
-                                <td width=140>{{turno.fecha}}</td>
-                                <td>{{turno.cliente}}</td>
-                                <td>{{turno.empleado}}</td>
-                                <td>{{turno.estado}}</td>
-                                <td width=250>
-                                    {% for promocion in turno.promociones.all %}
-                                        <details>
-                                            <summary>{{promocion}}</summary>
-                                                {% for servicio in promocion.servicios.all %}
-                                                      <li><i>{{servicio}}</i>
-                                                {% endfor %}
-                                        </details>
-                                    {% endfor %}
-                                    {% for servicio in turno.servicios.all %}
-                                       <li> {{servicio}}
-                                    {% endfor %}
-                                </td>
-
-                                <td width=20>
-                                    {% if turno.fecha_confirmacion == null %}
-                                        {% if turno.fecha_cancelacion == null %}
-                                            <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
-                                        {% endif %}
-                                    {% endif %}
-                                </td>
-
-                                <td width=20>
+                            <td width=20>
+                                {% if turno.fecha_confirmacion == null %}
                                     {% if turno.fecha_cancelacion == null %}
-                                        {% if turno.fecha_realizacion == null %}
-                                            {% if turno.fecha_confirmacion == null %}
-                                                <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
-                                            {% else %}
-                                                <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
-                                            {% endif %}
+                                        <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+
+                            <td width=20>
+                                {% if turno.fecha_cancelacion == null %}
+                                    {% if turno.fecha_realizacion == null %}
+                                        {% if turno.fecha_confirmacion == null %}
+                                            <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
+                                        {% else %}
+                                            <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
                                         {% endif %}
                                     {% endif %}
-                                </td>
+                                {% endif %}
+                            </td>
 
-                                <td width=20>
-                                    {% if turno.fecha_cancelacion == null %}
-                                        {% if turno.fecha_realizacion == null %}
-                                            <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
-                                        {% endif %}
+                            <td width=20>
+                                {% if turno.fecha_cancelacion == null %}
+                                    {% if turno.fecha_realizacion == null %}
+                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
                                     {% endif %}
-                                </td>
+                                {% endif %}
+                            </td>
 
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

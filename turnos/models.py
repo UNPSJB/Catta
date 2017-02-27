@@ -253,4 +253,3 @@ class TurnoFijo(Turno):
                 print("no se creo turno")
                 print(fecha_nueva)
                 self.calcular_turno_siguiente(fecha_nueva)
-
