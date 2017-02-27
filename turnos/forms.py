@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from .models import Turno, TurnoFijo
 from personas.models import Empleado
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Div, MultiField
 import datetime
 from datetime import timedelta
 
@@ -13,6 +13,13 @@ class CrearTurnoForm(ModelForm):
         super(CrearTurnoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Div('empleado'),
+            Div('fecha', css_id='fecha_inicio_simple'),
+            Div('cliente'),
+            Div('servicios'),
+            Div('promociones')
+        )
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
 
 
@@ -35,7 +42,7 @@ class CrearTurnoForm(ModelForm):
         p2 = datos.get('promociones')
         empleado = datos.get('empleado')
         servicios = datos.get('servicios')
-        
+
         for promocion in p2:
             if (promocion.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
@@ -159,6 +166,14 @@ class CrearTurnoFijoForm(ModelForm):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
+        self.helper.layout = Layout(
+            Div('empleado'),
+            Div('fecha', css_id='fecha_inicio_fijo'),
+            Div('fecha_fin'),
+            Div('cliente'),
+            Div('servicios'),
+            Div('promociones')
+        )
         self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno Fijo'))
 
     def save(self, commit=True):
@@ -193,7 +208,7 @@ class CrearTurnoFijoForm(ModelForm):
 
     class Meta:
         model = TurnoFijo
-        fields = {"empleado","fecha", "cliente", "promociones", "servicios","fecha_fin"}
+        fields = {"empleado","fecha", "cliente", "promociones", "servicios", "fecha_fin"}
 
 
 #form_registrar_turno_realizado

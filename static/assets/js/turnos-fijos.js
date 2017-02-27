@@ -1,6 +1,6 @@
 $(function() {
     var turnero = $("<div>", {class: "turnero"});
-    $("#div_id_fecha_fin").append(turnero);
+    $("#fecha_inicio_fijo").append(turnero);
 
     $("#fecha_inicio").change(function() { funcionAjax(this) });
     $("#id_empleado_fijo").change(function() { funcionAjax(this) });
