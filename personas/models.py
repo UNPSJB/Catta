@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from gestion.models import *
-
+from datetime import datetime
 
 class Rol(models.Model):
     class Meta:
@@ -142,5 +142,5 @@ class Comision(models.Model):
         "fecha": ["fecha__icontains"]
     }
 
-    fecha_liquidacion = models.DateField()
+    fecha_liquidacion = models.DateField(default=datetime.now)
     monto = models.FloatField(null=True)

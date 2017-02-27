@@ -188,6 +188,8 @@ class EmpleadoNuevoForm(forms.ModelForm):
 
 class LiquidarComisionForm(forms.ModelForm):
 
+    empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), empty_label="---------")
+
     def __init__(self, *args, **kwargs):
         super(LiquidarComisionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -196,37 +198,32 @@ class LiquidarComisionForm(forms.ModelForm):
 
     def save(self, commit=True):
         comision = super(LiquidarComisionForm, self).save()
-        nombreEmpleado = datos.get('nombre')
-        turnos = Turno.objects.filter(empleado=nombreEmpleado)
-        print(turnos)
-        return comision
 
-    """
-        fecha1 = datetime.combine(comision.fecha_liquidacion, time(00, 00, 00))
-        fecha2 = datetime.combine(comision.fecha_liquidacion, time(20, 00, 00))
-        turnos = Turno.objects.filter(empleado=comision.empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2])
-        costo = 0
-        for turno in turnos:
-            costo += turno.get_costo()
+        empleado = Empleado.objects.filter(id=self.data['empleado']).first()
+        turnos = Turno.objects.filter(empleado=empleado,comision=None, fecha_realizacion__isnull=False)
 
-        comision.monto = comision.empleado.get_pago(costo)
+        if turnos.first() != None:
+            monto = 0
+            for turno in turnos:
+                monto = monto + ((turno.get_costo()*empleado.porc_comision)/100)
 
-        comision.save()
+            comision.monto = monto
 
-        return comision
-    """
-    """
+            for turno in  turnos:
+                turno.comision = comision
+
+            comision.save()
+            print(comision.monto)
+            return comision
+
     def clean(self):
         datos = super(LiquidarComisionForm, self).clean()
 
         empleado = datos.get('empleado')
-        print (empleado)
-        fecha = datos.get('fecha_liquidacion')
-        fecha1 = datetime.combine(fecha, time(00, 00, 00))
-        fecha2 = datetime.combine(fecha, time(20, 00, 00))
-        if Turno.objects.filter(empleado=empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2])  == 0:
-            raise forms.ValidationError("No hay turnos para liquidar en esta fecha para este empleado")
-    """
+
+        if Turno.objects.filter(empleado=empleado,comision=None, fecha_realizacion__isnull=False).count() == 0:
+            raise forms.ValidationError("No hay turnos para liquidar  para este empleado")
+
     class Meta:
-        model = Persona
-        fields = ("nombre",)
+        model = Comision
+        fields = ()
