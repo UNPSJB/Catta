@@ -224,7 +224,7 @@ class LiquidarComisionForm(forms.ModelForm):
         fecha = datos.get('fecha_liquidacion')
         fecha1 = datetime.combine(fecha, time(00, 00, 00))
         fecha2 = datetime.combine(fecha, time(20, 00, 00))
-        if Turno.objects.filter(empleado=empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2]).count() == 0:
+        if Turno.objects.filter(empleado=empleado, fecha__range=[fecha1, fecha2], fecha_realizacion__range=[fecha1, fecha2])  == 0:
             raise forms.ValidationError("No hay turnos para liquidar en esta fecha para este empleado")
     """
     class Meta:
