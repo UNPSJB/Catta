@@ -170,7 +170,6 @@ class PromoForm(ModelForm):
 
         p = datos.get('precio')
         nombre = datos.get('nombre')
-        servicios = datos.get('servicios')
         descripcion = datos.get('descripcion')
 
         if p <= 0:
@@ -178,9 +177,6 @@ class PromoForm(ModelForm):
 
         if re.match(settings.RE_CARACTERES, nombre) is None:
             raise forms.ValidationError("El nombre es incorrecto")
-
-        if servicios.__len__() < 1:
-            raise forms.ValidationError("Debe elegir por lo menos un servicio")
 
         if re.match(settings.RE_CARACTERES, descripcion) is None:
             raise forms.ValidationError("La descripcion es incorrecta")
