@@ -19,14 +19,20 @@
                     <tr>
                         <th>Empleado</th>
                         <th>Fecha</th>
+                        <th>Turnos</th>
                         <th>Monto</th>
                     </tr>
                 </thread>
                 <tbody>
                     {% for comision in comisiones %}
                     <tr>
-                        <td>{{comision.empleado}}</td>
+                        <td>{{comision.turno_set.first.empleado}}</td>
                         <td>{{comision.fecha_liquidacion}}</td>
+                        <td>{% for turno in comision.turno_set.all %}
+                            <details>
+                                <li><i>{{turno}}</i>
+                            </details>
+                            {% endfor %}</td>
                         <td>{{comision.monto}}</td>
                         </tr>
                     {% endfor %}

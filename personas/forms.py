@@ -209,11 +209,13 @@ class LiquidarComisionForm(forms.ModelForm):
 
             comision.monto = monto
 
-            for turno in  turnos:
-                turno.comision = comision
 
             comision.save()
-            print(comision.monto)
+
+            for turno in turnos:
+                turno.comision = comision
+                turno.save()
+
             return comision
 
     def clean(self):
