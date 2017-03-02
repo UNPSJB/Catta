@@ -97,7 +97,6 @@
                 <ul class="portfolio-group">
                     {% for promocion in promociones %}
                         <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
-                            <a href="#">
                                 <figure class="animate fadeInLeft">
                                     {% if promocion.imagen.url != null %}
                                     <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
@@ -108,7 +107,6 @@
                                         <span> ${{promocion.precio}} </span>
                                     </figcaption>
                                 </figure>
-                            </a>
                         </li>
                     {% endfor %}
                 </ul>
