@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from gestion.models import *
 from datetime import datetime
+from _datetime import date
 
 class Rol(models.Model):
     class Meta:
@@ -138,8 +139,14 @@ class Persona(models.Model):
 
 class Comision(models.Model):
     FILTROS = {
-        "empleado": ["empleado__persona__nombre__icontains"],
-        "fecha": ["fecha__icontains"]
+        "empleadoN": ["turno__empleado__persona__nombre__icontains"],
+        "empleadoA": [ "turno__empleado__persona__apellido__icontains"],
+        "fechaI": ["fecha_liquidacion__gte"],
+        "fechaF": ["fecha_liquidacion__lte"],
+        "montoD": ["monto__gte"],
+        "montoH": ["monto__lte"],
+        "servicio": ["turno__servicios__nombre__icontains", "turno__promociones__nombre__icontains",
+                     "turno__promociones__servicios__nombre__icontains"]
     }
 
     fecha_liquidacion = models.DateField(default=datetime.now)

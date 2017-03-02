@@ -4,41 +4,74 @@
 
 {% block contenido %}
     <div class="container background-white" style="opacity: 0.95;">
-    <div class="row margin-vert-30">
-        <div class="col-md-12">
-            {% csrf_token %}
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+                {% csrf_token %}
 
-            <h2><font color="Purple"><font face="arial"><center> Listado de Comisiones </center></font></font></h2>
-            <form method="get" action="">
-                <input name="empleado" placeholder="Empleado" value="{{ f.empleado }}" class="filtro">
-                <input name="fecha" placeholder="Fecha" value="{{ f.fecha}}" class="filtro">
-                <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
-            </form>
-            <table class="table table-striped">
-                <thread>
-                    <tr>
-                        <th>Empleado</th>
-                        <th>Fecha</th>
-                        <th>Turnos</th>
-                        <th>Monto</th>
-                    </tr>
-                </thread>
-                <tbody>
-                    {% for comision in comisiones %}
-                    <tr>
-                        <td>{{comision.turno_set.first.empleado}}</td>
-                        <td>{{comision.fecha_liquidacion}}</td>
-                        <td>{% for turno in comision.turno_set.all %}
-                            <details>
-                                <li><i>{{turno}}</i>
-                            </details>
-                            {% endfor %}</td>
-                        <td>{{comision.monto}}</td>
+                <h2><font color="Purple"><font face="arial"><center> Listado de Comisiones </center></font></font></h2>
+                <form method="get" action="">
+                    Empleado:
+                    <input name="empleadoN" placeholder="Nombre" value="{{ f.empleadoN }}" class="filtro">
+                    <input name="empleadoA" placeholder="Apellido" value="{{ f.empleadoA }}" class="filtro">
+                    Desde:
+                    <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
+                    Hasta:
+                    <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
+                    <br>
+                    Servicio:
+                    <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
+                    Entre
+                    <input name="montoD" placeholder="Monto min" value="{{ f.montoD }}" class="filtro">
+                    y
+                    <input name="montoH" placeholder="Monto max" value="{{ f.montoH }}" class="filtro">
+
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
+                </form>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Empleado</th>
+                            <th>Fecha</th>
+                            <th>Turnos</th>
+                            <th>Monto</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thread>
+                    <tbody>
+                        {% for comision in comisiones %}
+                        <tr>
+                            <td>{{comision.turno_set.first.empleado}}</td>
+                            <td>{{comision.fecha_liquidacion}}</td>
+                            <td>{% for turno in comision.turno_set.all %}
+                                    <details>
+                                        <summary> {{turno}} </summary>
+                                        {% for servicio in turno.servicios.all %}
+                                            <li><i>{{servicio}}</i>
+                                        {% endfor %}
+                                    </details>
+                                    {% for promocion in turno.promociones.all %}
+                                        <details>
+                                            <summary>{{promocion}}</summary>
+                                            {% for servicio in promocion.servicios.all %}
+                                                  <li><i>{{servicio}}</i>
+                                            {% endfor %}
+                                        </details>
+                                    {% endfor %}
+                                {% endfor %}</td>
+                            <td>{{comision.monto}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 </div>
 {% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker();
+    });
+</script>
+{% endblock%}
