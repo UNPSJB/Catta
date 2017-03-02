@@ -3,6 +3,11 @@
 {% load staticfiles %}
 
 {% block contenido %}
+
+{% block borde_arriba %}
+<div id="content-top-border" class="container"></div>
+{% endblock %}
+
 <div class="container background-catta1" style="opacity: 1">
     <h1 class="text-center"><font color="white"><font size=7><b> GUÍA DE AYUDA </b></font></font></h1>
 </div>
@@ -10,52 +15,31 @@
     <div class="row margin-vert-30">
         <div class="col-md-3">
             <div class="nav nav-list">
-                <li><label class="tree-toggler nav-header">Cliente</label>
+                <li><label class="tree-toggler nav-header">Ingreso al Sistema</label>
                     <ul class="nav nav-list tree">
-                        <li><a href="#Turno" data-toggle="tab" >Pedí tu turno</a></li>
-                        <li><a href="#Servicios" data-toggle="tab" >Nuestros Servicios</a></li>
-                        <li><a href="#ListadoTurnos" data-toggle="tab" >Mis Turnos</a></li>
+                        <li><a href="#Turno" data-toggle="tab" >Logueo al sistema</a></li>
+                        <li><a href="#Servicios" data-toggle="tab" >Cerrar Sesion</a></li>
                     </ul>
                 </li>
                 <li class="divider"></li>
                 <li><label class="tree-toggler nav-header">Empleado</label>
                     <ul class="nav nav-list tree">
-                        <li><a href="#">Calendar</a></li>
-                        <li><a href="#">Efficiency</a></li>
-                        <li><a href="#">Process Age</a></li>
-                        <li><a href="#">DME Audit</a></li>
-                        <li><a href="#">Condition Detected At DME</a></li>
+                        <li><a href="#">Pantalla principal</a></li>
+                        <li><a href="#">Listado de servicios y promociones</a></li>
+                        <li><a href="#">Alta de servicio</a></li>
+                        <li><a href="#">Alta de promocion</a></li>
+                        <li><a href="#">Listado de insumos</a></li>
+                        <li><a href="#">Modificar stock de insumos</a></li>
+                        <li><a href="#">Alta de insumo</a></li>
+                        <li><a href="#">Listado de clientes</a></li>
+                        <li><a href="#">Alta de cliente</a></li>
+                        <li><a href="#">Listado de turno y turno fijo</a></li>
+                        <li><a href="#">Modificar turno</a></li>
+                        <li><a href="#">Confirmar/Realizar turno</a></li>
+                        <li><a href="#">Cancelar turno</a></li>
                     </ul>
                 </li>
                 <li class="divider"></li>
-                <li><label class="tree-toggler nav-header">Dueño</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Demography</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
-                </li>
-                <li class="divider"></li>
-                <li><label class="tree-toggler nav-header">Licensing</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Assessment Status</a></li>
-                    </ul>
-                </li>
-                <li class="divider"></li>
-                <li><label class="tree-toggler nav-header">Medical Stats</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Diagnosis Report</a></li>
-                        <li><a href="#">Measurement and Investigation Report</a></li>
-                        <li><a href="#">Health Risk Report</a></li>
-                    </ul>
-                </li>
-                <li class="divider"></li>
-                <li><label class="tree-toggler nav-header">Admin</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Revenue Report</a></li>
-                        <li><a href="#">Applicant Activity Report</a></li>
-                        <li><a href="#">Login Activity Report</a></li>
-                    </ul>
-                </li>
             </div>
         </div>
         <div class="col-md-9">
@@ -95,4 +79,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block borde_abajo %}
+<div id="content-bottom-border" class="container"></div>
 {% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+
+{% block borde_arriba %}
+<div id="content-top-border" class="container"></div>
+{% endblock %}
+
+<div class="container background-catta1" style="opacity: 1">
+    <h1 class="text-center"><font color="white"><font size=7><b> GUÍA DE AYUDA </b></font></font></h1>
+</div>
+<div class="container background-white" style="opacity: 0.95">
+    <div class="row margin-vert-30">
+        <div class="col-md-3">
+            <div class="nav nav-list">
+                <li><label class="tree-toggler nav-header">Ingreso al Sistema</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#Turno" data-toggle="tab" >Logueo al sistema</a></li>
+                        <li><a href="#Servicios" data-toggle="tab" >Cerrar Sesion</a></li>
+                    </ul>
+                </li>
+                <li><label class="tree-toggler nav-header">Dueño</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#">Pantalla principal</a></li>
+                        <li><a href="#">Listado de empleado</a></li>
+                        <li><a href="#">Modificar comision de empleados</a></li>
+                        <li><a href="#">Alta de empleado</a></li>
+                        <li><a href="#">Listado de clientes</a></li>
+                        <li><a href="#">Alta de cliente</a></li>
+                        <li><a href="#">Listado de serivicios y promociones</a></li>
+                        <li><a href="#">Modificar servicio</a></li>
+                        <li><a href="#">Alta de servicio</a></li>
+                        <li><a href="#">Alta de promoción</a></li>
+                        <li><a href="#">Listado de insumos</a></li>
+                        <li><a href="#">Modificar stock de insumo</a></li>
+                        <li><a href="#">Alta de insumo</a></li>
+                        <li><a href="#">Listado de turno y turno fijo</a></li>
+                        <li><a href="#">Modificar turno</a></li>
+                        <li><a href="#">Confirmar/Realizar turno</a></li>
+                        <li><a href="#">Cancelar turno</a></li>
+                        <li><a href="#">Listado de comisiones</a></li>
+                        <li><a href="#">Liquidar comision</a></li>
+                        <li><a href="#">Alta de sector</a></li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content">
+                <div class="tab-pane fade in" id="Turno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Como crear un turno </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="Servicios">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Servicios </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoTurnos">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block borde_abajo %}
+<div id="content-bottom-border" class="container"></div>
+{% endblock %}

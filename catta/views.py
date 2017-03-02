@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'principal/index.html', {'promociones': promociones})
 
 def ayuda(request):
-    return render(request, 'ayuda/ayuda.html')
+    return render(request, 'ayuda/ayudaCliente.html')
 
 def iniciar_sesion(request):
     if request.method == "POST":
