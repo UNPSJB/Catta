@@ -47,15 +47,16 @@
                                         {% for servicio in turno.servicios.all %}
                                             <li><i>{{servicio}}</i>
                                         {% endfor %}
+                                        {% for promocion in turno.promociones.all %}
+                                            <details>
+                                                <summary>{{promocion}}</summary>
+                                                {% for servicio in promocion.servicios.all %}
+                                                      <li><i>{{servicio}}</i>
+                                                {% endfor %}
+                                            </details>
+                                        {% endfor %}
                                     </details>
-                                    {% for promocion in turno.promociones.all %}
-                                        <details>
-                                            <summary>{{promocion}}</summary>
-                                            {% for servicio in promocion.servicios.all %}
-                                                  <li><i>{{servicio}}</i>
-                                            {% endfor %}
-                                        </details>
-                                    {% endfor %}
+
                                 {% endfor %}</td>
                             <td>{{comision.monto}}</td>
                             </tr>
