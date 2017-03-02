@@ -6,11 +6,13 @@ urlpatterns = [
     # Cuenta nueva.
     url(r'^cuenta/$', views.cuenta, name='cuenta'),
     # Vista del cliente.
+    url(r'^ayuda_cliente/', views.ayuda_cliente, name='ayuda_cliente'),
     url(r'^cliente/$', views.cliente, name='cliente'),
     url(r'^nuevo_empleado/$', views.nuevo_empleado, name='nuevo_empleado'),  # TODO Ver si esto realmente es necesario.
     # Vista del empleado.
     url(r'^empleado/$', views.empleado, name='empleado'),
     url(r'^empleado/(\d+)/$', views.empleado, name='empleado'),
+    url(r'^ayuda_empleado/', views.ayuda_empleado, name='ayuda_empleado'),
     # Listados de la vista del empleado.
     url(r'^empleado_lista_clientes/$', views.empleado_lista_clientes, name='empleado_lista_clientes'),
     url(r'^empleado_lista_servicios$', views.empleado_lista_servicios, name='empleado_lista_servicios'),
@@ -18,6 +20,7 @@ urlpatterns = [
     url(r'^empleado_lista_turnos/$', views.empleado_lista_turnos, name='empleado_lista_turnos'),
     # Vista de la dueña.
     url(r'^duenio/$', views.duenio, name='duenio'),
+    url(r'^ayuda_duenio/', views.ayuda_duenio, name='ayuda'),
     # Listados de la vista de la dueña.
     url(r'^modificar_stock_duenio/(\d+)/$', views.modificar_stock_duenio, name='modificar_stock_duenio'),
     url(r'^duenio_lista_empleados/$', views.duenio_lista_empleados, name='duenio_lista_empleados'),

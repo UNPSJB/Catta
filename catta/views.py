@@ -12,9 +12,6 @@ def index(request):
     promociones = Promocion.objects.all()
     return render(request, 'principal/index.html', {'promociones': promociones})
 
-def ayuda(request):
-    return render(request, 'ayuda/ayudaCliente.html')
-
 def iniciar_sesion(request):
     if request.method == "POST":
         form = LoginForm(None, request.POST)

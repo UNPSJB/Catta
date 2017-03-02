@@ -27,5 +27,4 @@ urlpatterns = [
     url(r'^turnos/', include('turnos.urls')),
     url(r'^gestion/', include('gestion.urls')),
     url(r'^personas/', include('personas.urls')),
-    url(r'^ayuda/', views.ayuda, name='ayuda')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

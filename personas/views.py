@@ -112,6 +112,11 @@ def cliente_lista_turnos(request):
     return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
 
 
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
+def ayuda_cliente(request):
+    return render(request, 'ayuda/ayudaCliente.html')
+
 
 FORMS_EMPLEADO = {
     ('form_cliente', 'crear_cuenta'): CuentaNuevaForm,
@@ -220,6 +225,10 @@ def empleado_lista_insumos(request):
     insumos = Insumo.objects.filter(*mfiltros)
     return render(request, 'empleado/insumos_empleado.html', {'insumos': insumos, "f": ffilter})
 
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
+def ayuda_empleado(request):
+    return render(request, 'ayuda/ayudaEmpleado.html')
 
 """
 Vistas de la Dueña
@@ -402,6 +411,11 @@ def nuevo_empleado(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def index_turnos(request):
     return render(request, 'Turnos/index_turnos.html', {})
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def ayuda_duenio(request):
+    return render(request, 'ayuda/ayudaDueño.html')
 
 """
 Vistas del control de cuentas.
