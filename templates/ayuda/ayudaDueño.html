@@ -25,11 +25,11 @@
                     <ul class="nav nav-list tree">
                         <li><a href="#pantallaPrincipal" data-toggle="tab" >Pantalla principal</a></li>
                         <li><a href="#listadoEmpleados" data-toggle="tab" >Listado de empleados</a></li>
-                        <li><a href="#" data-toggle="tab" >Modificar comision de empleado</a></li>
-                        <li><a href="#" data-toggle="tab" >Alta de empleado</a></li>
-                        <li><a href="#" data-toggle="tab" >Listado de clientes</a></li>
-                        <li><a href="#" data-toggle="tab" >Alta de cliente</a></li>
-                        <li><a href="#" data-toggle="tab" >Listado de serivicios y promociones</a></li>
+                        <li><a href="#modificarComisión" data-toggle="tab" >Modificar comisión de empleado</a></li>
+                        <li><a href="#altaEmpleado" data-toggle="tab" >Alta de empleado</a></li>
+                        <li><a href="#listadoClientes" data-toggle="tab" >Listado de clientes</a></li>
+                        <li><a href="#altaCliente" data-toggle="tab" >Alta de cliente</a></li>
+                        <li><a href="#listadoServYPromo" data-toggle="tab" >Listado de serivicios y promociones</a></li>
                         <li><a href="#" data-toggle="tab" >Modificar servicio</a></li>
                         <li><a href="#" data-toggle="tab" >Alta de servicio</a></li>
                         <li><a href="#" data-toggle="tab" >Alta de promoción</a></li>
@@ -92,8 +92,8 @@
                             <div class="row margin-vert-30">
                                 <h2 class="text-center"><font color="#ce2323"><font size=6.9> Listado de Empleados </font></font></h2><br>
                                 <p>Para acceder a la opción de listado de  empleados o para modificar el porcentaje de comisión de un
-                                    empleado, debe hacer click en el botón “Empleados”. Para acceder a la opción de dar de alta a un
-                                    empleado debe hacer click sobre “Crear Empleado”.</p>
+                                   empleado, debe hacer click en el botón “Empleados”. Para acceder a la opción de dar de alta a un
+                                   empleado debe hacer click sobre “Crear Empleado”.</p>
                                 <img src="/media/ayuda/dueño_listadoEmpleados.jpg"  class="imgcenter">
                                 <p> &nbsp;</p>
                                 <p>Dentro de Empleados aparecerá la siguiente pantalla</p>
@@ -109,7 +109,183 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="ListadoTurnos">
+                <div class="tab-pane fade in" id="modificarComisión">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Modificar  Porcentaje de Comisión </font></font></h2><br>
+                                <p>Para modificar el porcentaje de comisión de un empleado debe hacer click en el botón “Modificar Comision” del empleado seleccionado.</p>
+                                <img src="/media/ayuda/dueño_modificarComision.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> Luego aparecerá la siguiente pantalla </p>
+                                <img src="/media/ayuda/dueño_modificarComision2.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> En (1) vemos el nombre de la sección donde estamos ubicados, en
+                                (2) está la descripción del empleado, en
+                                (3) modificar el porcentaje de comisión y en
+                                (4) guardar los cambios del nuevo porcentaje de comisión. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="altaEmpleado">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Alta de Empleado </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_altaDeEmpleado.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> En (1) está el nombre de la sección en donde nos ubicamos. (2) Datos del nuevo empleado. (3) Guardar el nuevo empleado. </p>
+                                <p><u> Observaciones: </u></p>
+                                <ul>
+                                <li>No se podrá crear un empleado si ese empleado ya existe.</li>
+                                <li>Un empleado pude pertenecer únicamente a un sector.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="listadoClientes">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Listado de Clientes </font></font></h2><br>
+                                <p>Para acceder a la opción de listado de los clientes debe hacer click sobre el botón “Clientes”.
+                                   Para dar de alta a un nuevo cliente hacer click sobre el botón “Crear Cliente” del Menú lateral.</p>
+                                <img src="/media/ayuda/dueño_listadoClientes.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> Luego aparecerá la siguiente pantalla </p>
+                                <img src="/media/ayuda/dueño_listadoClientes2.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Sector de filtrado, se puede filtrar
+                                   por DNI, Nombre y Apellido y localidad. Al hacer click sobre el botón “Filtrar” muestra el resultado
+                                   del filtrado. (3)  Sección de  resultado de filtro donde se mostrará DNI, Nombre, Apellido, Dirección,
+                                   Teléfono y Localidad. De no hacerse realizado ningún filtro se mostrará todos los clientes existentes.
+                                   (4) Exportar listado a PDF.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="altaCliente">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Alta de Cliente </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_altaCliente.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> En  (1) está el nombre de la sección donde estamos ubicados. (2) Datos del nuevo cliente. (3)Guardar el nuevo cliente. </p>
+                                <p><u> Observaciones: </u></p>
+                                <ul>
+                                <li>No se podrá dar de alta a un cliente que ya existe.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="listadoServYPromo">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Servicios y Promociones </font></font></h2><br>
+                                <p>Para acceder a la opción de listado de servicios y promociones debe hacer click sobre el botón “Servicios”.
+                                   Para dar de alta a un nuevo servicio debe hacer click sobre el botón “Crear Servicio”  o para dar de alta a
+                                   una nueva promoción debe hacer click sobre el botón “Crear Promocion” del menú lateral.</p>
+                                <img src="/media/ayuda/dueño_listaServyPromo.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> Luego aparecerá la siguiente pantalla </p>
+                                <img src="/media/ayuda/dueño_listaServyPromo2.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> En (1) está el sector de filtrado, se puede filtrar por Nombre.  Al hacer click sobre el botón “Filtrar”
+                                    muestra el resultado del filtrado. (2) Nombre del listado. (3) Sección de resultado de filtro donde se
+                                    muestra  el Nombre, Descripción, Precio, Duración, Insumos, Sector. (4) Modificar servicio. (5) Nombre
+                                    del listado. (6) Sección de resultado de filtro donde se muestra Nombre, Descripción, Precio, Duración y
+                                    Servicios. (7) Nombre del listado. (8) Sección de resultado de los cinco servicios más utilizados donde
+                                    se muestra Nombre, Descripción, Precio, Duración, Insumos y Cantidad. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Turnos </font></font></h2><br>
+                                <h6>hola asdfsaf</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="asd">
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
