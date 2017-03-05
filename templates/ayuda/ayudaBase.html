@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+{% block borde_arriba %}
+<div id="content-top-border" class="container"></div>
+{% endblock %}
+
+{% block contenido %}
+<div class="tab-pane fade in" id="Logueo">
+    <div class="panel panel-default">
+        <div class="container">
+            <div class="row margin-vert-30">
+                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Iniciar Sesión</font></font></h2><br>
+                <p>Para ingresar el sistema solicita:</p>
+                <ul>
+                    <li>Usuario asignado</li>
+                    <li>Contraseña</li>
+                </ul>
+                <p>Una vez ingresados los datos solicitados, presionar "Enter" o click en iniciar sesión.</p>
+                <img src="/media/ayuda/ayuda_iniciarSesion.jpg"  class="imgcenter">
+                <p> &nbsp;</p>
+                <p><b>Nota:</b> En caso de no tener usuario y contraseña un cliente puede crear una cuenta de inmediato, en caso de ser un empleado debe solicitarse al administrador.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane fade in" id="CerrarSesion">
+    <div class="panel panel-default">
+        <div class="container">
+            <div class="row margin-vert-30">
+                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Cerrar Sesión</font></font></h2><br>
+                <p>En la pantalla principal, hacer click en el botón “CUENTA”. Se desplegará la opción “Cerrar Sesión”, hacer click sobre dicha opción.</p>
+                <img src="/media/ayuda/ayuda_cerrarSesion.jpg"  class="imgcenter">
+                <p> &nbsp;</p>
+                <p>Luego se mostrará la pantalla de login.</p>
+                <img src="/media/ayuda/ayuda_iniciarSesion.jpg"  class="imgcenter">
+                <p> &nbsp;</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block borde_abajo %}
+<div id="content-bottom-border" class="container"></div>
+{% endblock %}

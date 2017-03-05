@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^empleado_lista_turnos/$', views.empleado_lista_turnos, name='empleado_lista_turnos'),
     # Vista de la dueña.
     url(r'^duenio/$', views.duenio, name='duenio'),
-    url(r'^ayuda_duenio/', views.ayuda_duenio, name='ayuda'),
+    url(r'^ayuda_duenio/', views.ayuda_duenio, name='ayuda_duenio'),
     # Listados de la vista de la dueña.
     url(r'^modificar_stock_duenio/(\d+)/$', views.modificar_stock_duenio, name='modificar_stock_duenio'),
     url(r'^duenio_lista_empleados/$', views.duenio_lista_empleados, name='duenio_lista_empleados'),

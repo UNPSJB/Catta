@@ -1,0 +1,295 @@
+{% extends "ayuda/ayudaBase.html" %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+
+<div class="container background-catta1" style="opacity: 1">
+    <h1 class="text-center"><font color="white"><font size=7><b> GUÍA DE AYUDA </b></font></font></h1>
+</div>
+<div class="container background-white" style="opacity: 0.95">
+    <div class="row margin-vert-30">
+        <div class="col-md-3">
+            <div class="nav nav-list">
+                <li><label class="tree-toggler nav-header">Ingreso al Sistema</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#Logueo" data-toggle="tab" >Iniciar Sesión</a></li>
+                        <li><a href="#CerrarSesion" data-toggle="tab" >Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li><label class="tree-toggler nav-header">Empleado</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#PantallaPrincipal" data-toggle="tab">Pantalla principal</a></li>
+                        <li><a href="#ListadoServiciosPromociones" data-toggle="tab">Listado de servicios y promociones</a></li>
+                        <li><a href="#AltaServicio" data-toggle="tab">Alta de servicio</a></li>
+                        <li><a href="#AltaPromocion" data-toggle="tab">Alta de promocion</a></li>
+                        <li><a href="#ListadoInsumos" data-toggle="tab">Listado de insumos</a></li>
+                        <li><a href="#ModificarStockInsumos" data-toggle="tab">Modificar stock de insumos</a></li>
+                        <li><a href="#AltaCliente" data-toggle="tab">Alta de cliente</a></li>
+                        <li><a href="#ListadoClientes" data-toggle="tab">Listado de clientes</a></li>
+                        <li><a href="#CrearTurno" data-toggle="tab">Crear turno</a></li>
+                        <li><a href="#CrearTurnoFijo" data-toggle="tab">Crear un turno fijo</a></li>
+                        <li><a href="#ModificarTurno" data-toggle="tab">Modificar turno</a></li>
+                        <li><a href="#ConfirmarRealizarTurno" data-toggle="tab">Confirmar/Realizar turno</a></li>
+                        <li><a href="#CancelarTurno" data-toggle="tab">Cancelar turno</a></li>
+                        <li><a href="#ListadoTurnoFijo" data-toggle="tab">Listado de turnos y turnos fijos</a></li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content">
+                {{ block.super }}
+                <div class="tab-pane fade in" id="PantallaPrincipal">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Pantalla Principal</font></font></h2><br>
+                                <p>La pantalla principal de un empleado se divide en tres zonas donde se muestra prácticamente la funcionalidad completa del sistema.</p>
+                                <img src="/media/ayuda/empleado_pantallaPrincipal.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Menú Principal (1)  donde se muestran los botones:</p>
+                                <ul>
+                                    <li><b>Principal:</b> Permite redirigirse a la pantalla principal.</li>
+                                    <li><b>Servicios:</b>Listado de los servicios.</li>
+                                    <li><b>Insumos:</b>Listado de insumos. Modificar stock de insumo.</li>
+                                    <li><b>Clientes:</b>Listado de los clientes.</li>
+                                    <li><b>Turnos:</b>Listado de turnos. Modificar Turno. Confirmar Turno. Realizar Turno. Cancelar Turno.</li>
+                                    <li><b>Ayuda:</b>Accede a la documentación de ayuda de manera contextual.</li>
+                                    <li><b>Calendario:</b>Muestra gráficamente un calendario con los turnos correspondientes a cada día y horario.</li>
+                                    <li><b>Cuenta:</b>Permite acceder a la opción de cerrar sesión.</li>
+                                </ul>
+                                <p>Menú Lateral (2) muestra algunas de las funcionalidades del sistema más utilizadas por un empleado:</p>
+                                <ul>
+                                    <li><b>Crear Cliente:</b>Permite crear un nuevo cliente.</li>
+                                    <li><b>Crear Turno:</b>Permite crear un nuevo turno.</li>
+                                    <li><b>Crear Servicio:</b>Permite crear un nuevo servicio.</li>
+                                    <li><b>Crear Promoción:</b>Permite crear una nueva promoción.</li>
+                                    <li><b>Crear Turno Fijo:</b>Permite crear una serie de turnos fijos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoServiciosPromociones">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Listado de servicios y promociones</font></font></h2><br>
+                                <p>Para acceder a la opción de listado de servicios y promociones debe hacer click sobre el botón “Servicios”. Para dar de alta a un nuevo servicio debe
+                                    hacer click sobre el botón “Crear Servicio”  o para dar de alta a una nueva promoción debe hacer click sobre el botón “Crear Promocion” del menú lateral.</p>
+                                <img src="/media/ayuda/empleado_listarServiciosPromociones.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <img src="/media/ayuda/empleado_listarServiciosPromociones1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el sector de filtrado, se puede filtrar por Nombre.  Al hacer click sobre el botón “Filtrar” muestra el resultado del filtrado. (2) Nombre del listado. (3)
+                                    Sección de resultado de filtro donde se muestra  el Nombre, Descripción, Precio, Duración, Insumos, Sector. (4) Nombre del listado. (5) Sección de resultado de filtro
+                                    donde se muestra Nombre, Descripción, Precio, Duración y Servicios.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="AltaServicio">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Alta de Servicio</font></font></h2><br>
+                                <img src="/media/ayuda/empleado_altaServicio.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Datos del nuevo servicio.
+                                    (3 Guardar nuevo servicio.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="AltaPromocion">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Alta de promocion</font></font></h2><br>
+                                <img src="/media/ayuda/empleado_altaPromocion.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Datos de la nueva promoción,
+                                    donde si se quiere se puede anexar una imagen. (3)Guardar nueva promoción.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoInsumos">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Listado de Insumos</font></font></h2><br>
+                                <p>Para acceder a la opción de listado de insumos o modificar Stock de un insumo debe hacer click sobre el botón “Insumos”.</p>
+                                <img src="/media/ayuda/empleado_listarInsumos.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <img src="/media/ayuda/empleado_listarInsumos1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Sector de filtrado, se puede filtrar por Nombre y Marca.
+                                    Al hacer click sobre el botón “Filtrar” muestra el resultado del filtrado. (3) Sección de resultado de filtro donde se muestra  el Nombre, Marca, Contenido Neto,
+                                    Unidad de medida y Stock. (4) Modificar Stock del insumo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ModificarStockInsumos">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Modificar Stock de Insumos</font></font></h2><br>
+                                <p>Para modificar el stock de un insumo debe hacer click sobre el botón “Modificar” del insumo seleccionado.</p>
+                                <img src="/media/ayuda/empleado_modificarInsumo.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá la siguiente pantalla</p>
+                                <img src="/media/ayuda/empleado_modificarInsumo1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) vemos el nombre de la sección donde estamos ubicados, en (2) está la descripción del insumo,
+                                    en (3) modificar el stock del insumo y en (4) guardar los cambios del nuevo stock del insumo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoClientes">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Listado de Clientes</font></font></h2><br>
+                                <p>Para acceder a la opción de listado de los clientes debe hacer click sobre el botón “Clientes”.</p>
+                                <img src="/media/ayuda/empleado_listarClientes.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <img src="/media/ayuda/empleado_listarClientes1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Sector de filtrado, se puede filtrar por DNI, Nombre y Apellido y localidad.
+                                    Al hacer click sobre el botón “Filtrar” muestra el resultado del filtrado.
+                                    (3)  Sección de  resultado de filtro donde se mostrará DNI, Nombre, Apellido, Dirección, Teléfono y Localidad.
+                                    De no hacerse realizado ningún filtro se mostrará todos los clientes existentes. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="AltaCliente">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Alta de Cliente</font></font></h2><br>
+                                <p>Para dar de alta a un nuevo cliente hacer click sobre el botón “Crear Cliente” del Menú lateral.</p>
+                                <img src="/media/ayuda/empleado_altaCliente.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <img src="/media/ayuda/empleado_altaCliente1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En  (1) está el nombre de la sección donde estamos ubicados. (2) Datos del nuevo cliente.
+                                    (3) Guardar el nuevo cliente.</p>
+                                <p>Observaciones:</p>
+                                <ul>
+                                    <li>No se podrá dar de alta a un cliente que ya existe.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoTurnoFijo">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Listado de turnos y turnos fijos</font></font></h2><br>
+                                <p>Para acceder a la opción de listado, modificar, confirmar/realizar o cancelar un turno/turno fijo debe hacer click sobre el botón “Turnos”.
+                                    Para crear un nuevo turno debe hacer click sobre el botón “Crear Turno”.
+                                    Para crear un nuevo turno fijo debe hacer click sobre el botón “Crear Turno Fijo”.</p>
+                                <img src="/media/ayuda/empleado_listarTurnos.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En el listado se muestran los turnos y los turnos fijos sin hacer distinción.</p>
+                                <img src="/media/ayuda/empleado_listarTurnos1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados.
+                                    (2) Sector de filtrado, se puede filtrar por Cliente, Empleado, Fecha desde/hasta, Servicio y Estado.
+                                    Al hacer click sobre el botón “Filtrar” muestra el resultado del filtrado.
+                                    (3) Sección de resultado de filtro donde se muestra Fecha y Hora, Cliente, Empleado, Estado y Servicios (4) Modificar turno.
+                                    (5) Confirmar/Realizar turno. (6) Cancelar turno.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ModificarTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Modificar un Turno</font></font></h2><br>
+                                <p>Para modificar un turno debemos hacer click sobre el botón “Modificar” del turno seleccionado. Luego aparecerá la siguiente pantalla.</p>
+                                <img src="/media/ayuda/empleado_modificarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Datos no modificables de turno.
+                                    (3) Datos modificables del turno. (4) Guarda cambios del turno.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ConfirmarRealizarTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Confirmar/Realizar un turno</font></font></h2><br>
+                                <p>Para confirmar o realizar un turno debemos hacer click sobre el botón “Confirmar” o “Realizar” del turno seleccionado.
+                                    Dependiendo de lo elegido aparecerán alguna de las siguientes pantallas.</p>
+                                <img src="/media/ayuda/empleado_confirmarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados.
+                                    (2) datos del turno. (3) Confirmar Turno.</p>
+                                <img src="/media/ayuda/empleado_realizarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados.
+                                    (2) Servicios del turno. (3) Marcar Turno como Realizado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="CancelarTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Cancelar un Turno</font></font></h2><br>
+                                <p>Para cancelar un turno debemos hacer click sobre el botón “Cancelar” del turno seleccionado.
+                                    Luego aparecerá la siguiente pantalla.</p>
+                                <img src="/media/ayuda/empleado_cancelarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados.
+                                    (2) datos del turno. (3) Cancelar Turno.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="CrearTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Crear un Turno</font></font></h2><br>
+                                <img src="/media/ayuda/empleado_crearTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados.
+                                    (2) Datos del nuevo turno. (3 Guardar nuevo turno.</p>
+                                <p>Observaciones:</p>
+                                <ul>
+                                    <li>No se puede crear un turno que ya tenga esa fecha, hora y empleado.</li>
+                                    <li>No se puede crear un turno que se superponga con otro ya existente.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="CrearTurnoFijo">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Crear un Turno Fijo</font></font></h2><br>
+                                <img src="/media/ayuda/empleado_crearTurnoFijo.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados.
+                                    (2) Datos del nuevo turno fijo. (3 Guardar nuevo turno fijo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
