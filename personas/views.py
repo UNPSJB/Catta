@@ -548,6 +548,14 @@ class ReportesPDFTurnos(Reporte):
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 70, y)
 
+class ReporteGanancias(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Ganancias"
+        super().cabecera(pdf, texto)
+
+    def contenido(self, pdf, y):
+        pass
+
 class ReportesServiciosSolicitados(Reporte):
     def cabecera(self, pdf):
         texto = u"Servicios Más Solicitados"
