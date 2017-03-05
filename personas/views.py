@@ -456,6 +456,7 @@ class ReportesPDFClientes(View):
         clientes = Persona.objects.filter(cliente__isnull=False)
         detalles = []
         for cliente in clientes:
+            y -= 20
             c = (cliente.dni, cliente.nombre, cliente.apellido, cliente.localidad, cliente.telefono, cliente.cliente.email)
             detalles.append(c)
 
@@ -468,7 +469,7 @@ class ReportesPDFClientes(View):
             ]
         ))
         detalle_orden.wrapOn(pdf, 800, 600)
-        detalle_orden.drawOn(pdf, 110, y)
+        detalle_orden.drawOn(pdf, 90, y)
 
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='application/pdf')
@@ -476,7 +477,7 @@ class ReportesPDFClientes(View):
         pdf = canvas.Canvas(buffer)
 
         self.cabecera(pdf)
-        y = 720
+        y = 760
         self.tabla(pdf, y)
 
         pdf.showPage()
