@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 from .views import ReportesPDFClientes, ReportesPDFTurnos, \
-                   ReportesClientesMorosos, ReportesServiciosSolicitados, \
+                   ReporteGanancias, ReportesServiciosSolicitados, \
                    ReportesServiciosCancelados, ReportesEmpleadosSolicitados, \
                    ReportesTurnosHoy, ReportesTodos
 
@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'^reporte_personas_pdf/$', ReportesPDFClientes.as_view(), name="reporte_clientes_pdf"),
     url(r'^reporte_turnos_pdf/$', ReportesPDFTurnos.as_view(), name="reporte_turnos_pdf"),
     # Reportes
-    url(r'^reporte_clientes_morosos/$', ReportesClientesMorosos.as_view(), name='reporte_clientes_morosos'),
+    url(r'^reporte_ganancias/$', ReporteGanancias.as_view(), name='reporte_ganancias'),
     url(r'^reporte_servicios_solicitados/$', ReportesServiciosSolicitados.as_view(), name='reporte_servicios_solicitados'),
     url(r'^reporte_servicios_cancelados/$', ReportesServiciosCancelados.as_view(), name='reporte_servicios_cancelados'),
     url(r'^reporte_empleados_solicitados/$', ReportesEmpleadosSolicitados.as_view(), name='reporte_empleados_solicitados'),
