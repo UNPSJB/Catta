@@ -499,15 +499,24 @@ class ReportesPDFTurnos(View):
         detalles = []
 
         for turno in turnos:
+            y -= 10
             t_servicios = ""
 
             servicios = turno.servicios.all()
-            for servicio in servicios:
-                t_servicios += " " + servicio.nombre
+            for i in range(servicios.__len__()):
+                y -= 10
+                if i == 0 or i == servicios.__len__():
+                    t_servicios += servicios[i].nombre
+                else:
+                    t_servicios += "\n" + servicios[i].nombre
 
             promos = turno.promociones.all()
-            for promo in promos:
-                t_servicios += " " + promo.nombre
+            for i in range(promos.__len__()):
+                y -= 10
+                if i == 0 or i == promos.__len__():
+                    t_servicios += promos[i].nombre
+                else:
+                    t_servicios += "\n" + promos[i].nombre
 
             c = (turno.fecha, turno.cliente, turno.empleado, turno.estado(), t_servicios)
             detalles.append(c)
@@ -516,8 +525,9 @@ class ReportesPDFTurnos(View):
         detalle_orden.setStyle(TableStyle(
             [
                 ('ALIGN',(0,0),(3,0),'CENTER'),
-                ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                ('FONTSIZE', (0, 0), (-1, -1), 10),
+                ('VALIGN',(0,0),(-1,-1),'TOP'),
+                ('GRID', (0,0), (-1,-1), 1, colors.black),
+                ('FONTSIZE', (0,0), (-1,-1), 10),
             ]
         ))
         detalle_orden.wrapOn(pdf, 800, 600)
@@ -529,7 +539,7 @@ class ReportesPDFTurnos(View):
         pdf = canvas.Canvas(buffer)
 
         self.cabecera(pdf)
-        y = 720
+        y = 760
         self.tabla(pdf, y)
 
         pdf.showPage()
