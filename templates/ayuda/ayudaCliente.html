@@ -1,11 +1,6 @@
-{% extends "base/base.html" %}
+{% extends "ayuda/ayudaBase.html" %}
 
 {% load staticfiles %}
-
-{% block borde_arriba %}
-<div id="content-top-border" class="container"></div>
-{% endblock %}
-
 
 {% block contenido %}
 
@@ -18,19 +13,20 @@
             <div class="nav nav-list">
                 <li><label class="tree-toggler nav-header">Ingreso al Sistema</label>
                     <ul class="nav nav-list tree">
-                        <li><a href="#Turno" data-toggle="tab" >Logueo al sistema</a></li>
-                        <li><a href="#Servicios" data-toggle="tab" >Cerrar Sesion</a></li>
+                        <li><a href="#CrearCuenta" data-toggle="tab">Crear una Cuenta</a></li>
+                        <li><a href="#Logueo" data-toggle="tab" >Iniciar Sesión</a></li>
+                        <li><a href="#CerrarSesion" data-toggle="tab" >Cerrar Sesión</a></li>
                     </ul>
                 </li>
                 <li class="divider"></li>
                 <li><label class="tree-toggler nav-header">Cliente</label>
                     <ul class="nav nav-list tree">
-                        <li><a href="#Turno" data-toggle="tab" >Pantalla Principal</a></li>
-                        <li><a href="#Servicios" data-toggle="tab" >Listado de servicios y promociones</a></li>
-                        <li><a href="#ListadoTurnos" data-toggle="tab" >Crear un turno</a></li>
-                        <li><a href="#ListadoTurnos" data-toggle="tab" >Listado de turnos</a></li>
-                        <li><a href="#ListadoTurnos" data-toggle="tab" >Modificar turno</a></li>
-                        <li><a href="#ListadoTurnos" data-toggle="tab" >Confirmar turno</a></li>
+                        <li><a href="#PantallaPrincipal" data-toggle="tab" >Pantalla Principal</a></li>
+                        <li><a href="#ListadoServiciosPromociones" data-toggle="tab" >Listado de servicios y promociones</a></li>
+                        <li><a href="#CrearTurno" data-toggle="tab" >Crear un turno</a></li>
+                        <li><a href="#ListadoTurno" data-toggle="tab" >Listado de turnos</a></li>
+                        <li><a href="#ModificarTurno" data-toggle="tab" >Modificar turno</a></li>
+                        <li><a href="#ConfirmarTurno" data-toggle="tab" >Confirmar turno</a></li>
                         <li><a href="#CancelarTurno" data-toggle="tab" >Cancelar turno</a></li>
                     </ul>
                 </li>
@@ -38,22 +34,133 @@
         </div>
         <div class="col-md-9">
             <div class="tab-content">
-                <div class="tab-pane fade in" id="Turno">
+                {{ block.super }}
+                <div class="tab-pane fade in" id="CrearCuenta">
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
-                                <h2 class="text-center"><font color="black"><font size=6.9> Como crear un turno </font></font></h2><br>
-                                <h6>hola asdfsaf</h6>
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Crear una Cuenta</font></font></h2><br>
+                                <p>Para crear una cuenta debe hacer click en el botón “Crear Cuenta” de la página de Inicio de Catta.</p>
+                                <img src="/media/ayuda/cliente_crearCuenta.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá el siguiente formulario.</p>
+                                <img src="/media/ayuda/cliente_crearCuenta1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) se encuentra el nombre del formulario. En (2) están los datos a completar para crear la cuenta. En (3) Crear cuenta con los datos indicados.</p>
+                                <p>Observaciones</p>
+                                <ul>
+                                    <li>Si el Dni ya fue utilizado para una cuenta, no se podrá volver a utilizar para la creación de una nueva.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="Servicios">
+                <div class="tab-pane fade in" id="PantallaPrincipal">
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
-                                <h2 class="text-center"><font color="black"><font size=6.9> Listado de Servicios </font></font></h2><br>
-                                <h6>hola asdfsaf</h6>
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Pantalla Principal</font></font></h2><br>
+                                <p>La pantalla principal del dueño se divide en tres zonas donde se muestra prácticamente la funcionalidad completa del sistema.</p>
+                                <img src="/media/ayuda/cliente_pantallaPrincipal.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Menú Principal (1) donde se muestran los botones:</p>
+                                <ul>
+                                    <li><b>PRINCIPAL:</b> Permite redirigirse a la pantalla principal.</li>
+                                    <li><b>PEDI TU TURNO:</b> Permite crear un nuevo turno.</li>
+                                    <li><b>NUESTROS SERVICIOS:</b> Permite listar todos los servicios.</li>
+                                    <li><b>AYUDA:</b> Permite abrir la ayuda online para el cliente.</li>
+                                    <li><b>MIS TURNOS:</b> Permite listar todos los turnos.</li>
+                                    <li><b>CUENTA:</b> Permite acceder a la opción de cerrar sesión.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoServiciosPromociones">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Listados de Servicios y Promociones</font></font></h2><br>
+                                <p>Para acceder a la opción de ver todos los servicios y promociones que ofrece el Centro de Estética, debe hacer click sobre el botón “NUESTROS SERVICIOS”.</p>
+                                <img src="/media/ayuda/cliente_listarServiciosPromociones.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Listado de servicios</p>
+                                <img src="/media/ayuda/cliente_listarServiciosPromociones1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el sector de filtrado, se puede filtrar por Nombre.  Al hacer click sobre el botón “Filtrar” muestra el resultado del filtrado. (2) Nombre del listado. (3) Sección de resultado de filtro donde se muestra  el Nombre, Descripción, Precio, Duración, Insumos, Sector. (4) Nombre del listado. (5) Sección de resultado de filtro donde se muestra Nombre, Descripción, Precio, Duración y Servicios.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="CrearTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Crear un Turno</font></font></h2><br>
+                                <p>Para acceder a la opción de crear un nuevo turno, debe hacer click en el botón “PEDI TU TURNO”. </p>
+                                <img src="/media/ayuda/cliente_crearTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá la siguiente pantalla</p>
+                                <img src="/media/ayuda/cliente_crearTurno1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Datos del nuevo turno. (3 Guardar nuevo turno.</p>
+                                <p>Observaciones</p>
+                                <ul>
+                                    <li>No se puede crear un turno que ya tenga esa fecha, hora y empleado.</li>
+                                    <li>No se puede crear un turno que se superponga con otro ya existente.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ListadoTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Listado de Turnos</font></font></h2><br>
+                                <p>Para acceder a la opción de ver todos sus turnos, debe hacer click sobre el botón “MIS TURNOS”.</p>
+                                <img src="/media/ayuda/cliente_listarTurnos.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá la siguiente pantalla</p>
+                                <img src="/media/ayuda/cliente_listarTurnos1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p> En (1) está el nombre de la sección donde estamos ubicados. (2) Sector de filtrado,
+                                    se puede filtrar por Cliente, Empleado, Fecha desde/hasta, Servicio y Estado.
+                                    Al hacer click sobre el botón “Filtrar” muestra el resultado del filtrado. (3)
+                                    Sección de resultado de filtro donde se muestra Fecha y Hora, Cliente, Empleado, Estado y Servicios
+                                    (4) Modificar turno. (5) Confirmar turno. (6) Cancelar turno.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ModificarTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Modificar Turno</font></font></h2><br>
+                                <p>Para modificar un turno debe hacer click sobre el botón modificar del turno seleccionado.</p>
+                                <img src="/media/ayuda/cliente_modificarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá la siguiente pantalla</p>
+                                <img src="/media/ayuda/cliente_modificarTurno1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Datos no modificables de turno. (3) Datos modificables del turno. (4) Guarda cambios del turno..</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade in" id="ConfirmarTurno">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Confirmar Turno</font></font></h2><br>
+                                <p>Para confirmar un turno debe hacer click sobre el botón confirmar del turno seleccionado.</p>
+                                <img src="/media/ayuda/cliente_confirmarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá la siguiente pantalla</p>
+                                <img src="/media/ayuda/cliente_confirmarTurno1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) Datos  del turno. (3) Confirmar turno.</p>
                             </div>
                         </div>
                     </div>
@@ -62,20 +169,20 @@
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
-                                <h2 class="text-center"><font color="black"><font size=6.9> Cancelar Turno </font></font></h2><br>
-                                <h6 class="text-center" align="center">hola</h6>
-                                <img src="/media/ayuda/cancelar_turno_1.jpeg"  class="imgcenter">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Cancelar Turno</font></font></h2><br>
+                                <p>Para cancelar un turno debemos hacer click sobre el botón cancelar  del turno seleccionado.</p>
+                                <img src="/media/ayuda/cliente_cancelarTurno.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá la siguiente pantalla</p>
+                                <img src="/media/ayuda/cliente_cancelarTurno1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) está el nombre de la sección donde estamos ubicados. (2) datos del turno. (3) Cancelar Turno.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block borde_abajo %}
-<div id="content-bottom-border" class="container"></div>
 {% endblock %}

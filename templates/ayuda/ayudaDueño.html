@@ -1,10 +1,6 @@
-{% extends "base/base.html" %}
+{% extends "ayuda/ayudaBase.html" %}
 
 {% load staticfiles %}
-
-{% block borde_arriba %}
-<div id="content-top-border" class="container"></div>
-{% endblock %}
 
 {% block contenido %}
 
@@ -17,15 +13,15 @@
             <div class="nav nav-list">
                 <li><label class="tree-toggler nav-header">Ingreso al Sistema</label>
                     <ul class="nav nav-list tree">
-                        <li><a href="#Turno" data-toggle="tab" >Logueo al sistema</a></li>
-                        <li><a href="#Servicios" data-toggle="tab" >Cerrar Sesion</a></li>
+                        <li><a href="#Logueo" data-toggle="tab" >Iniciar Sesión</a></li>
+                        <li><a href="#CerrarSesion" data-toggle="tab" >Cerrar Sesión</a></li>
                     </ul>
                 </li>
                 <li><label class="tree-toggler nav-header">Dueño</label>
                     <ul class="nav nav-list tree">
                         <li><a href="#pantallaPrincipal" data-toggle="tab" >Pantalla principal</a></li>
                         <li><a href="#listadoEmpleados" data-toggle="tab" >Listado de empleados</a></li>
-                        <li><a href="#modificarComisión" data-toggle="tab" >Modificar comisión de empleado</a></li>
+                        <li><a href="#modificarComisión" data-toggle="tab" >Modificar comisión de <emple></emple>ado</a></li>
                         <li><a href="#altaEmpleado" data-toggle="tab" >Alta de empleado</a></li>
                         <li><a href="#listadoClientes" data-toggle="tab" >Listado de clientes</a></li>
                         <li><a href="#altaCliente" data-toggle="tab" >Alta de cliente</a></li>
@@ -51,6 +47,7 @@
         </div>
         <div class="col-md-9">
             <div class="tab-content">
+                {{ block.super }}
                 <div class="tab-pane fade in" id="pantallaPrincipal">
                     <div class="panel panel-default">
                         <div class="container">
@@ -441,8 +438,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block borde_abajo %}
-<div id="content-bottom-border" class="container"></div>
 {% endblock %}
