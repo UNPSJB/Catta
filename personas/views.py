@@ -12,6 +12,8 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from reportlab.platypus import Table, TableStyle
+from reportlab.rl_config import defaultPageSize
+from reportlab.pdfbase.pdfmetrics import stringWidth
 
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
@@ -445,12 +447,41 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
-class ReportesPDFClientes(View):
-    def cabecera(self, pdf):
-        pdf.setFont("Helvetica", 16)
-        pdf.drawString(230, 790, u"Reporte de Clientes")
+class Reporte(View):
+    PAGE_WIDTH  = defaultPageSize[0]
+    PAGE_HEIGHT = defaultPageSize[1]
 
-    def tabla(self, pdf, y):
+    def cabecera(self, pdf, texto):
+        pdf.setFont("Helvetica", 16)
+        ancho_texto = stringWidth(texto, "Helvetica", 16)
+        pdf.drawString((Reporte.PAGE_WIDTH - ancho_texto) / 2.0, 790, texto)
+
+    def contenido(self, pdf, y):
+        pass
+
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/pdf')
+        buffer = BytesIO()
+        pdf = canvas.Canvas(buffer)
+
+        self.cabecera(pdf)
+        y = 760
+        self.contenido(pdf, y)
+
+        pdf.showPage()
+        pdf.save()
+        pdf = buffer.getvalue()
+        buffer.close()
+        response.write(pdf)
+
+        return response
+
+class ReportesPDFClientes(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Reporte de Clientes"
+        super().cabecera(pdf, texto)
+
+    def contenido(self, pdf, y):
         encabezados = ('DNI', 'Nombre', 'Apellido', 'Localidad', 'Teléfono', 'E-Mail')
 
         clientes = Persona.objects.filter(cliente__isnull=False)
@@ -471,29 +502,12 @@ class ReportesPDFClientes(View):
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 90, y)
 
-    def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='application/pdf')
-        buffer = BytesIO()
-        pdf = canvas.Canvas(buffer)
-
-        self.cabecera(pdf)
-        y = 760
-        self.tabla(pdf, y)
-
-        pdf.showPage()
-        pdf.save()
-        pdf = buffer.getvalue()
-        buffer.close()
-        response.write(pdf)
-
-        return response
-
-class ReportesPDFTurnos(View):
+class ReportesPDFTurnos(Reporte):
     def cabecera(self, pdf):
-        pdf.setFont("Helvetica", 16)
-        pdf.drawString(230, 790, u"Reporte de Turnos")
+        texto = u"Reporte de Turnos"
+        super().cabecera(pdf, texto)
 
-    def tabla(self, pdf, y):
+    def contenido(self, pdf, y):
         encabezados = ('Fecha y Hora', 'Cliente', 'Empleado', 'Estado', 'Servicios')
 
         turnos = Turno.objects.all().order_by("-fecha")
@@ -534,19 +548,50 @@ class ReportesPDFTurnos(View):
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 70, y)
 
-    def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='application/pdf')
-        buffer = BytesIO()
-        pdf = canvas.Canvas(buffer)
+class ReportesClientesMorosos(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Clientes Morosos"
+        super().cabecera(pdf, texto)
 
-        self.cabecera(pdf)
-        y = 760
-        self.tabla(pdf, y)
+    def contenido(self, pdf, y):
+        pass
 
-        pdf.showPage()
-        pdf.save()
-        pdf = buffer.getvalue()
-        buffer.close()
-        response.write(pdf)
+class ReportesServiciosSolicitados(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Servicios Más Solicitados"
+        super().cabecera(pdf, texto)
 
-        return response
+    def contenido(self, pdf, y):
+        pass
+
+class ReportesServiciosCancelados(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Servicios Más Cancelados"
+        super().cabecera(pdf, texto)
+
+    def contenido(self, pdf, y):
+        pass
+
+class ReportesEmpleadosSolicitados(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Empleados Más Solicitados"
+        super().cabecera(pdf, texto)
+
+    def contenido(self, pdf, y):
+        pass
+
+class ReportesTurnosHoy(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Turnos de Hoy"
+        super().cabecera(pdf, texto)
+
+    def contenido(self, pdf, y):
+        pass
+
+class ReportesTodos(Reporte):
+    def cabecera(self, pdf):
+        texto = u"Reportes de Catta"
+        super().cabecera(pdf, texto)
+
+    def contenido(self, pdf, y):
+        pass
