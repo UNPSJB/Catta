@@ -33,9 +33,8 @@
                             <a id="{{promocion.pk}}" href="{% url 'crear_turno' %}"
                                 <figure class="animated fadeInLeft">
                                     {% if promocion.imagen.url != null %}
-                                        <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
+                                            <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
                                     {% endif %}
-                                    <img alt="promo1" src="{{promocion.imagen.url}}" width='397' height='210'>
                                     <figcaption>
                                         <h1> {{promocion.nombre}} </h1>
                                         <h5> {{promocion.descripcion}} </h5>
