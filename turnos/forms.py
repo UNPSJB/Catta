@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Turno, TurnoFijo
 from personas.models import Empleado
+from gestion.models import ServicioBasico
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, MultiField
 import datetime
@@ -158,12 +159,28 @@ class ConfirmarTurnoForm(ModelForm):
         model = Turno
         fields = {"fecha_confirmacion"}
 
-
+#No Funciona el listado de servicios hay que terminarlo
 class CrearTurnoFijoForm(ModelForm):
+    query_servicios = ServicioBasico.objects.all()
+    servicios1 = []
+    for servicio in query_servicios:
+        nombre = servicio.nombre
+        esta = False
+        for serviox in servicios1:
+            if serviox.nombre == nombre:
+                esta = True
+        if not esta:
+            servicios1.append(servicio)
+            for servicio2 in query_servicios:
+                nombre1 = servicio2.nombre
+                if nombre == nombre1:
+                    if servicio.id < servicio2.id:
+                        long = len(servicios1)
+                        servicios1[long - 1] = servicio2
 
     fecha = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'fecha_inicio'}))
-    empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(),widget=forms.Select(attrs={'id': 'id_empleado_fijo'}))
-
+    empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), widget=forms.Select(attrs={'id': 'id_empleado_fijo'}))
+    servicios = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, choices=servicios1,)
     def __init__(self, *args, **kwargs):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()

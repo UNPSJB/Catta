@@ -325,12 +325,27 @@ def duenio_lista_clientes(request):
 def duenio_lista_servicios(request):
     mfiltros, ffilter = get_filtros(Servicio, request.GET)
     servicios = ServicioBasico.objects.filter(*mfiltros)
+    servicios1 = []
+    for servicio in servicios:
+        nombre = servicio.nombre
+        esta = False
+        for serviox in servicios1:
+            if serviox.nombre == nombre:
+                esta = True
+        if not esta:
+            servicios1.append(servicio)
+            for servicio2 in servicios:
+                nombre1 = servicio2.nombre
+                if nombre == nombre1:
+                    if servicio.id < servicio2.id:
+                        long = len(servicios1)
+                        servicios1[long - 1] = servicio2
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
 
     topServicios = ServicioBasico.objects.annotate(cantidad_de_turnos=Count("turnos")).order_by("-cantidad_de_turnos")[:5]
 
-    return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios,
+    return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios1,
                                                             'promociones': promociones,
                                                              'insumos': insumos,
                                                             'topServicios': topServicios,

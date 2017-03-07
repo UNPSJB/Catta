@@ -73,7 +73,10 @@ def modificar_servicio(request, id):
             else:
                 ret = '/personas/cliente_lista_servicios'
         servicio = get_object_or_404(ServicioBasico, pk=id)
-        form = ModificarServicioForm(request.POST, instance=servicio)
+        servicio_nuevo = ServicioBasico()
+        servicio_nuevo.nombre = servicio.nombre
+        servicio_nuevo.sector = servicio.sector
+        form = ModificarServicioForm(request.POST, instance=servicio_nuevo)
         if form.is_valid():
             form.save()
             return redirect(ret)
