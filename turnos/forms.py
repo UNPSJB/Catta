@@ -112,6 +112,8 @@ class ModificarTurnoForm(ModelForm):
             if duracion > fecha:
                 print('entre')
                 raise forms.ValidationError("Los nuevos servicios agregados superan el tiempo libre disponible")
+        if not servicios and not promociones:
+            raise forms.ValidationError("El turno debe tener al menos un servicio o una promocion")
 
         return tur
 
