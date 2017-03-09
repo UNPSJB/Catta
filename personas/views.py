@@ -52,6 +52,9 @@ def get_filtros(modelo, datos):
             filtros.append(q)
     return (filtros, valores)
 
+def ayuda_externa(request):
+    return render(request, 'ayuda/ayudaExterna.html')
+
 """
 Vistas del Cliente.
 """

@@ -6,6 +6,7 @@ from .views import ReportesPDFClientes, ReportesPDFTurnos, \
                    ReportesTurnosHoy, ReportesTodos
 
 urlpatterns = [
+    url(r'^ayuda_externa/', views.ayuda_externa, name='ayuda_externa'),
     # Cuenta nueva.
     url(r'^cuenta/$', views.cuenta, name='cuenta'),
     # Vista del cliente.

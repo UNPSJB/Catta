@@ -1,0 +1,50 @@
+{% extends "ayuda/ayudaBase.html" %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+
+<div class="container background-catta1" style="opacity: 1">
+    <h1 class="text-center"><font color="white"><font size=7><b> GUÍA DE AYUDA </b></font></font></h1>
+</div>
+<div class="container background-white" style="opacity: 0.95">
+    <div class="row margin-vert-30">
+        <div class="col-md-3">
+            <div class="nav nav-list">
+                <li><label class="tree-toggler nav-header">Ingreso al Sistema</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#CrearCuenta" data-toggle="tab">Crear una Cuenta</a></li>
+                        <li><a href="#Logueo" data-toggle="tab" >Iniciar Sesión</a></li>
+                        <li><a href="#CerrarSesion" data-toggle="tab" >Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content">
+                {{ block.super }}
+                <div class="tab-pane fade in" id="CrearCuenta">
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9>Crear una Cuenta</font></font></h2><br>
+                                <p>Para crear una cuenta debe hacer click en el botón “Crear Cuenta” de la página de Inicio de Catta.</p>
+                                <img src="/media/ayuda/cliente_crearCuenta.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Luego aparecerá el siguiente formulario.</p>
+                                <img src="/media/ayuda/cliente_crearCuenta1.jpg"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En (1) se encuentra el nombre del formulario. En (2) están los datos a completar para crear la cuenta. En (3) Crear cuenta con los datos indicados.</p>
+                                <p>Observaciones</p>
+                                <ul>
+                                    <li>Si el Dni ya fue utilizado para una cuenta, no se podrá volver a utilizar para la creación de una nueva.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
