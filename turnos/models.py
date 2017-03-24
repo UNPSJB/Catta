@@ -53,9 +53,13 @@ class Turno(models.Model):
             SIN_CONFIRMAR: Q(fecha_confirmacion__isnull = True) & Q(fecha_realizacion__isnull = True) & Q(fecha_cancelacion__isnull = True)
         }
     }
+    #fecha se deja como esta pero a su vez se divide en dos atributos mas fecha sola y hora,
+    #fecha creacion se le quita la hora. que dia se sacan mas turnos
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
+    dia = models.DateField(null=True)
+    hora = models.TimeField(null=True)
     # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
-    fecha_creacion = models.DateTimeField(null=True, default=datetime.now)
+    fecha_creacion = models.DateField(null=True, default=date.today)
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
     fecha_cancelacion = models.DateTimeField(null=True, blank=True)
