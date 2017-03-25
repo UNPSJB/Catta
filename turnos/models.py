@@ -1,6 +1,7 @@
 from personas.models import *
 from django.db.models import Q, Sum, F
 from django.conf import settings
+from django.utils import timezone
 import  enum
 from datetime import date, time, timedelta, datetime
 
@@ -56,10 +57,10 @@ class Turno(models.Model):
     #fecha se deja como esta pero a su vez se divide en dos atributos mas fecha sola y hora,
     #fecha creacion se le quita la hora. que dia se sacan mas turnos
     fecha = models.DateTimeField()  # Fecha en la que se realizara el turno.
-    dia = models.CharField(max_length=8,null=True)
-    hora = models.CharField(max_length=5,null=True)
+    dia = models.DateField(default=date.today)
+    hora = models.TimeField(default=timezone.now)
     # TIEMPO_MAX_CONFIRMACION = fecha - timedelta(days=2)  # Tiempo maximo de confirmación
-    fecha_creacion = models.DateField(null=True, default=date.today)
+    fecha_creacion = models.DateField(default=date.today)
     fecha_confirmacion = models.DateTimeField(null=True, blank=True)
     fecha_realizacion = models.DateTimeField(null=True, blank=True)
     fecha_cancelacion = models.DateTimeField(null=True, blank=True)
