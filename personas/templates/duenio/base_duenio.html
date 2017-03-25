@@ -41,25 +41,28 @@
                             <span>Reportes</span>
                             <ul>
                                 <li class="">
-                                    <a href="#">Ingreso Neto</a>
+                                    <a href="{% url 'ingreso_neto' %}">Ingreso Neto</a>
                                 </li>
                                 <li class="">
-                                    <a href="#">Servicios/Promociones más Solicitados</a>
+                                    <a href="{% url 'servicios_mas_solicitados' %}">Servicios/Promociones más Solicitados</a>
                                 </li>
                                 <li class="">
-                                    <a href="#">Mes con Mayor Trabajo</a>
+                                    <a href="{% url 'mes_mayor_trabajo' %}">Mes con Mayor Trabajo</a>
                                 </li>
                                 <li class="">
-                                    <a href="#">Días con mayor creaciones de turnos</a>
+                                    <a href="{% url 'dia_mayor_trabajo' %}">Dias con Mayor Trabajo</a>
                                 </li>
                                 <li class="">
-                                    <a href="#">Clientes con más ausencias</a>
+                                    <a href="{% url 'dias_mayor_creaciones_turnos' %}">Días con mayor creaciones de turnos</a>
                                 </li>
                                 <li class="">
-                                    <a href="#">Empleados Más Solicitados</a>
+                                    <a href="{% url 'clientes_con_mas_ausencias' %}">Clientes con más ausencias</a>
                                 </li>
                                 <li class="">
-                                    <a href="#">Horarios Más Solicitados</a>
+                                    <a href="{% url 'empleados_mas_solicitados' %}">Empleados Más Solicitados</a>
+                                </li>
+                                <li class="">
+                                    <a href="{% url 'horarios_mas_solicitados' %}">Horarios Más Solicitados</a>
                                 </li>
                             </ul>
                         </li>
