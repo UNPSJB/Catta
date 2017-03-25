@@ -454,6 +454,12 @@ def mes_mayor_trabajo(request):
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def dia_mayor_trabajo(request):
+    pass
+
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dias_mayor_creaciones_turnos(request):
     pass
 
