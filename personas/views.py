@@ -16,6 +16,7 @@ from reportlab.rl_config import defaultPageSize
 from reportlab.pdfbase.pdfmetrics import stringWidth
 
 
+
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
@@ -455,7 +456,12 @@ def mes_mayor_trabajo(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dia_mayor_trabajo(request):
-    pass
+
+    dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
+    turnos = Turno.objects.values("dia").annotate(cant_Dias=Count("dia"))
+
+    for turno in turnos:
+        dias[turno['dia'].strftime('%A')] += turno['cant_Dias']
 
 
 @login_required(login_url='iniciar_sesion')
