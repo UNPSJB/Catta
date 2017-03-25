@@ -43,6 +43,13 @@ urlpatterns = [
     url(r'^modificarComision/(\d+)/$', views.modificarComision, name='modificarComision'),
     url(r'^cliente_lista_turnos/$', views.cliente_lista_turnos, name='cliente_lista_turnos'),
     url(r'^restringido/$', views.restringido, name='restringido'),
+    url(r'^ingreso_neto/$', views.ingreso_neto, name='ingreso_neto'),
+    url(r'^servicios_mas_solicitados/$', views.servicios_mas_solicitados, name='servicios_mas_solicitados'),
+    url(r'^mes_mayor_trabajo/$', views.mes_mayor_trabajo, name='mes_mayor_trabajo'),
+    url(r'^dias_mayor_creaciones_turnos/$', views.dias_mayor_creaciones_turnos, name='dias_mayor_creaciones_turnos'),
+    url(r'^clientes_con_mas_ausencias/$', views.clientes_con_mas_ausencias, name='clientes_con_mas_ausencias'),
+    url(r'^empleados_mas_solicitados/$', views.empleados_mas_solicitados, name='empleados_mas_solicitados'),
+    url(r'^horarios_mas_solicitados/$', views.horarios_mas_solicitados, name='horarios_mas_solicitados'),
     # Listados PDF
     url(r'^reporte_personas_pdf/$', ReportesPDFClientes.as_view(), name="reporte_clientes_pdf"),
     url(r'^reporte_turnos_pdf/$', ReportesPDFTurnos.as_view(), name="reporte_turnos_pdf"),

@@ -49,10 +49,6 @@
                             <a href="#crear_turno_fijo" data-toggle="tab">
                                 <i class="fa fa-calendar-o"></i>  Crear Turno Fijo</a>
                         </li>
-                        <li>
-                            <a href="#reportes" data-toggle="tab">
-                                <i class="fa fa-file-text-o"></i>  Reportes</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -185,55 +181,6 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple" font face="arial"><center> Liquidar Comision </center></font></h2>
                                         {% crispy form_liquidar_Comision %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade in" id="reportes">
-                    <div id="acordeon-turnos" class="panel-group alternative">
-                        <div class="panel panel-default">
-                            <div class="container">
-                                <div class="row margin-vert-30">
-                                    <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <center>
-                                            <div class="row"  style="height:60px">
-                                                <h2>
-                                                    <font color="Purple" face="arial"> Reportes </font>
-                                                </h2>
-                                            </div>
-                                            <div class="row"  style="height:40px">
-                                                <a href="{% url 'reporte_ganancias' %}" target="_blank" class="btn btn-violet btn-info">
-                                                    <span class="glyphicon glyphicon-file"><font face="arial"> Ganancias </font></span>
-                                                </a>
-                                            </div>
-                                            <div class="row"  style="height:40px">
-                                                <a href="{% url 'reporte_servicios_solicitados' %}" target="_blank" class="btn btn-violet btn-info">
-                                                    <span class="glyphicon glyphicon-file"><font face="arial"> Servicios más Solicitados </font></span>
-                                                </a>
-                                            </div>
-                                            <div class="row"  style="height:40px">
-                                                <a href="{% url 'reporte_servicios_cancelados' %}" target="_blank" class="btn btn-violet btn-info">
-                                                    <span class="glyphicon glyphicon-file"><font face="arial"> Servicios más Cancelados </font></span>
-                                                </a>
-                                            </div>
-                                            <div class="row"  style="height:40px">
-                                                <a href="{% url 'reporte_empleados_solicitados' %}" target="_blank" class="btn btn-violet btn-info">
-                                                    <span class="glyphicon glyphicon-file"><font face="arial"> Empleados más Solicitados </font></span>
-                                                </a>
-                                            </div>
-                                            <div class="row"  style="height:50px">
-                                                <a href="{% url 'reporte_turnos_hoy' %}" target="_blank" class="btn btn-violet btn-info">
-                                                    <span class="glyphicon glyphicon-file"><font face="arial"> Turnos de Hoy </font></span>
-                                                </a>
-                                            </div>
-                                            <div class="row"  style="height:40px">
-                                                <a href="{% url 'reportes_todos' %}" target="_blank" class="btn btn-aqua btn-info">
-                                                    <span class="glyphicon glyphicon-file"><font face="arial"> Todos los Reportes </font></span>
-                                                </a>
-                                            </div>
-                                        </center>
                                     </div>
                                 </div>
                             </div>

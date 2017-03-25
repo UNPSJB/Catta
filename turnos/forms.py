@@ -29,7 +29,9 @@ class CrearTurnoForm(ModelForm):
         turno.dia = turno.fecha.date()
         turno.hora = turno.fecha.time()
 
-        turno.save()
+        if commit:
+            turno.save()
+
         return turno
 
     def clean(self):
@@ -267,3 +269,5 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         turno = super(RegistrarTurnoRealizadoForm, self).save()
         turno.save()
         return turno
+
+

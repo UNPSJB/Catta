@@ -437,6 +437,41 @@ def index_turnos(request):
 def ayuda_duenio(request):
     return render(request, 'ayuda/ayudaDueño.html')
 
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def ingreso_neto(request):
+    pass
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def servicios_mas_solicitados(request):
+    pass
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def mes_mayor_trabajo(request):
+    pass
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def dias_mayor_creaciones_turnos(request):
+    pass
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def clientes_con_mas_ausencias(request):
+    pass
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def empleados_mas_solicitados(request):
+    pass
+
+@login_required(login_url='iniciar_sesion')
+@user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
+def horarios_mas_solicitados(request):
+    pass
+
 """
 Vistas del control de cuentas.
 """
