@@ -26,8 +26,8 @@ class CrearTurnoForm(ModelForm):
 
     def save(self, commit=True):
         turno = super(CrearTurnoForm, self).save(commit=False)
-        turno.dia = turno.fecha.day()
-        turno.hora = turno.fecha.hour()
+        turno.dia = turno.fecha.date().strftime("%d/%m/%Y")
+        turno.hora = turno.fecha.time().strftime("%H:%M")
 
         turno.save()
         return turno
