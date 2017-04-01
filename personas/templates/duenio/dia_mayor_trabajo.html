@@ -29,13 +29,6 @@
                     <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
                     Servicio:
                     <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
-                    Estado:
-                    <select name="estado">
-                      <option value=""></option>
-                      {% for id, nombre in Turno.ESTADOS %}
-                         <option value="{{ id }}">{{ nombre }}</option>
-                      {% endfor %}
-                    </select>
                     <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                 </form>
                 <!--FIN FILTRADO!-->
@@ -53,7 +46,7 @@
                             <th>Domingo </th>
                             <th>Lunes</th>
                             <th>Martes</th>
-                            <th>Miercoles</th>
+                            <th>Miércoles</th>
                             <th>Jueves</th>
                             <th>Viernes</th>
                             <th>Sabado</th>
@@ -62,7 +55,7 @@
                     <tbody>
                         {% for turno in turnos %}
                         <tr>
-                            <td width=140>{{turno.fecha}}</td>
+                            <td {{turno.domingo}</td>
                             <td>{{turno.cliente}}</td>
                             <td>{{turno.empleado}}</td>
                             <td>{{turno.estado}}</td>
@@ -79,35 +72,6 @@
                                    <li> {{servicio}}
                                 {% endfor %}
                             </td>
-
-                            <td width=20>
-                                {% if turno.fecha_confirmacion == null %}
-                                    {% if turno.fecha_cancelacion == null %}
-                                        <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-
-                            <td width=20>
-                                {% if turno.fecha_cancelacion == null %}
-                                    {% if turno.fecha_realizacion == null %}
-                                        {% if turno.fecha_confirmacion == null %}
-                                            <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
-                                        {% else %}
-                                            <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-
-                            <td width=20>
-                                {% if turno.fecha_cancelacion == null %}
-                                    {% if turno.fecha_realizacion == null %}
-                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -524,7 +524,7 @@ class ListadoPDF(View):
     def cabecera(self, pdf, texto):
         pdf.setFont("Helvetica", 16)
         ancho_texto = stringWidth(texto, "Helvetica", 16)
-        pdf.drawString((Reporte.PAGE_WIDTH - ancho_texto) / 2.0, 790, texto)
+        pdf.drawString((ListadoPDF.PAGE_WIDTH - ancho_texto) / 2.0, 790, texto)
 
     def contenido(self, pdf, y):
         pass
