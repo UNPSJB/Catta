@@ -456,13 +456,15 @@ def mes_mayor_trabajo(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dia_mayor_trabajo(request):
-
     dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
-    turnos = Turno.objects.values("dia").annotate(cant_Dias=Count("dia"))
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    #return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno': Turno})
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha').values("dia").annotate(cant_Dias=Count("dia"))
 
     for turno in turnos:
         dias[turno['dia'].strftime('%A')] += turno['cant_Dias']
 
+    return render(request,"duenio/dia_mayor_trabajo.html",{'dias':dias,'f':ffilter})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -482,7 +484,10 @@ def empleados_mas_solicitados(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def horarios_mas_solicitados(request):
-    pass
+
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
+    return render(request, 'duenio/horarios_mas_solicitados.html', {})
 
 """
 Vistas del control de cuentas.
@@ -512,7 +517,7 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
-class Reporte(View):
+class ListadoPDF(View):
     PAGE_WIDTH  = defaultPageSize[0]
     PAGE_HEIGHT = defaultPageSize[1]
 
@@ -541,7 +546,7 @@ class Reporte(View):
 
         return response
 
-class ReportesPDFClientes(Reporte):
+class ListadoPDFClientes(ListadoPDF):
     def cabecera(self, pdf):
         texto = u"Reporte de Clientes"
         super().cabecera(pdf, texto)
@@ -567,7 +572,7 @@ class ReportesPDFClientes(Reporte):
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 90, y)
 
-class ReportesPDFTurnos(Reporte):
+class ListadoPDFTurnos(ListadoPDF):
     def cabecera(self, pdf):
         texto = u"Reporte de Turnos"
         super().cabecera(pdf, texto)
@@ -612,51 +617,3 @@ class ReportesPDFTurnos(Reporte):
         ))
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 70, y)
-
-class ReporteGanancias(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Ganancias"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesServiciosSolicitados(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Servicios Más Solicitados"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesServiciosCancelados(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Servicios Más Cancelados"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesEmpleadosSolicitados(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Empleados Más Solicitados"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesTurnosHoy(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Turnos de Hoy"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesTodos(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Reportes de Catta"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
