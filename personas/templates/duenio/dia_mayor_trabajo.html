@@ -43,7 +43,7 @@
                 <table class="table table-striped">
                     <thread>
                         <tr>
-                            <th>Domingo </th>
+                            <th>Domingo</th>
                             <th>Lunes</th>
                             <th>Martes</th>
                             <th>Miércoles</th>
@@ -53,32 +53,17 @@
                         </tr>
                     </thread>
                     <tbody>
-                        {% for turno in turnos %}
                         <tr>
-                            <td {{turno.domingo}</td>
-                            <td>{{turno.cliente}}</td>
-                            <td>{{turno.empleado}}</td>
-                            <td>{{turno.estado}}</td>
-                            <td width=250>
-                                {% for promocion in turno.promociones.all %}
-                                    <details>
-                                        <summary>{{promocion}}</summary>
-                                            {% for servicio in promocion.servicios.all %}
-                                                  <li><i>{{servicio}}</i>
-                                            {% endfor %}
-                                    </details>
-                                {% endfor %}
-                                {% for servicio in turno.servicios.all %}
-                                   <li> {{servicio}}
-                                {% endfor %}
-                            </td>
+                        <td>{{dias.Sunday}}</td>
+                        <td>{{dias.Monday}}</td>
+                        <td>{{dias.Tuesday}}</td>
+                        <td>{{dias.Wednesday}}</td>
+                        <td>{{dias.Thursday}}</td>
+                        <td>{{dias.Friday}}</td>
+                        <td>{{dias.Saturday}}</td>
                         </tr>
-                        {% endfor %}
                     </tbody>
                 </table>
-                {% for key, value in dias.items %}
-                    {{ key }}: {{ value }}
-                {% endfor %}
             </div>
         </div>
     </div>
