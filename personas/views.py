@@ -456,13 +456,15 @@ def mes_mayor_trabajo(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dia_mayor_trabajo(request):
-
     dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
-    turnos = Turno.objects.values("dia").annotate(cant_Dias=Count("dia"))
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    #return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno': Turno})
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha').values("dia").annotate(cant_Dias=Count("dia"))
 
     for turno in turnos:
         dias[turno['dia'].strftime('%A')] += turno['cant_Dias']
 
+    return render(request,"duenio/dia_mayor_trabajo.html",{'dias':dias,'f':ffilter})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -482,7 +484,10 @@ def empleados_mas_solicitados(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def horarios_mas_solicitados(request):
-    pass
+
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
+    return render(request, 'duenio/horarios_mas_solicitados.html', {})
 
 """
 Vistas del control de cuentas.
