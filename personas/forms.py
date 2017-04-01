@@ -15,7 +15,7 @@ from django.conf import settings
 
 class CuentaNuevaForm(forms.ModelForm):
     """
-    Para crear clientes desde el formulario de "Cuenta Nueva" de la página principal, desde la vista de dueña y empleado
+    Para crear clientes desde el formulario  de "Cuenta Nueva" de la página principal, desde la vista de dueña y empleado
     """
     email = forms.EmailField(max_length=100, label="E-Mail")
     usuario = forms.CharField(max_length=30)
