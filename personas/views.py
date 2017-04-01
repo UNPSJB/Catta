@@ -517,7 +517,7 @@ def cerrar_sesion(request):
     return redirect('index')
 
 
-class Reporte(View):
+class ListadoPDF(View):
     PAGE_WIDTH  = defaultPageSize[0]
     PAGE_HEIGHT = defaultPageSize[1]
 
@@ -546,7 +546,7 @@ class Reporte(View):
 
         return response
 
-class ReportesPDFClientes(Reporte):
+class ListadoPDFClientes(ListadoPDF):
     def cabecera(self, pdf):
         texto = u"Reporte de Clientes"
         super().cabecera(pdf, texto)
@@ -572,7 +572,7 @@ class ReportesPDFClientes(Reporte):
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 90, y)
 
-class ReportesPDFTurnos(Reporte):
+class ListadoPDFTurnos(ListadoPDF):
     def cabecera(self, pdf):
         texto = u"Reporte de Turnos"
         super().cabecera(pdf, texto)
@@ -617,51 +617,3 @@ class ReportesPDFTurnos(Reporte):
         ))
         detalle_orden.wrapOn(pdf, 800, 600)
         detalle_orden.drawOn(pdf, 70, y)
-
-class ReporteGanancias(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Ganancias"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesServiciosSolicitados(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Servicios Más Solicitados"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesServiciosCancelados(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Servicios Más Cancelados"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesEmpleadosSolicitados(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Empleados Más Solicitados"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesTurnosHoy(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Turnos de Hoy"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-class ReportesTodos(Reporte):
-    def cabecera(self, pdf):
-        texto = u"Reportes de Catta"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        pass

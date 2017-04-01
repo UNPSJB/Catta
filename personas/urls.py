@@ -1,9 +1,6 @@
 from django.conf.urls import url
 from . import views
-from .views import ReportesPDFClientes, ReportesPDFTurnos, \
-                   ReporteGanancias, ReportesServiciosSolicitados, \
-                   ReportesServiciosCancelados, ReportesEmpleadosSolicitados, \
-                   ReportesTurnosHoy, ReportesTodos
+from .views import ListadoPDFClientes, ListadoPDFTurnos
 
 urlpatterns = [
     url(r'^ayuda_externa/', views.ayuda_externa, name='ayuda_externa'),
@@ -52,15 +49,8 @@ urlpatterns = [
     url(r'^empleados_mas_solicitados/$', views.empleados_mas_solicitados, name='empleados_mas_solicitados'),
     url(r'^horarios_mas_solicitados/$', views.horarios_mas_solicitados, name='horarios_mas_solicitados'),
     # Listados PDF
-    url(r'^reporte_personas_pdf/$', ReportesPDFClientes.as_view(), name="reporte_clientes_pdf"),
-    url(r'^reporte_turnos_pdf/$', ReportesPDFTurnos.as_view(), name="reporte_turnos_pdf"),
-    # Reportes
-    url(r'^reporte_ganancias/$', ReporteGanancias.as_view(), name='reporte_ganancias'),
-    url(r'^reporte_servicios_solicitados/$', ReportesServiciosSolicitados.as_view(), name='reporte_servicios_solicitados'),
-    url(r'^reporte_servicios_cancelados/$', ReportesServiciosCancelados.as_view(), name='reporte_servicios_cancelados'),
-    url(r'^reporte_empleados_solicitados/$', ReportesEmpleadosSolicitados.as_view(), name='reporte_empleados_solicitados'),
-    url(r'^reporte_turnos_hoy/$', ReportesTurnosHoy.as_view(), name='reporte_turnos_hoy'),
-    url(r'^reportes_todos/$', ReportesTodos.as_view(), name='reportes_todos'),
+    url(r'^reporte_personas_pdf/$', ListadoPDFClientes.as_view(), name="reporte_clientes_pdf"),
+    url(r'^reporte_turnos_pdf/$', ListadoPDFTurnos.as_view(), name="reporte_turnos_pdf"),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 
