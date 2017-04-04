@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^horarios_mas_solicitados/$', views.horarios_mas_solicitados, name='horarios_mas_solicitados'),
     # Listados PDF
     url(r'^reporte_personas_pdf/$', ListadoPDFClientes.as_view(), name="reporte_clientes_pdf"),
-    url(r'^reporte_turnos_pdf/$', ListadoPDFTurnos.as_view(), name="reporte_turnos_pdf"),
+    url(r'^reporte_turnos_pdf/(\S+)/$', ListadoPDFTurnos.as_view(), name="reporte_turnos_pdf"),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 

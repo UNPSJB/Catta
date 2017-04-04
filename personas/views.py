@@ -379,7 +379,9 @@ def duenio_lista_insumos(request):
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
-    return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
+    query = 'Turno.objects.filter(*mfiltros).order_by(\'-fecha\'))'
+    query1 = str(mfiltros)
+    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -441,7 +443,10 @@ def ayuda_duenio(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def ingreso_neto(request):
-    pass
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros)
+    return render(request, "duenio/ingreso_neto.html", {'turnos': turnos, "f": ffilter})
+
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -485,9 +490,12 @@ def empleados_mas_solicitados(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def horarios_mas_solicitados(request):
 
+
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/horarios_mas_solicitados.html', {})
+    turnos = Turno.objects.values("hora").annotate(horas=Count("hora"))
+
 
 """
 Vistas del control de cuentas.
@@ -550,6 +558,10 @@ class ListadoPDFClientes(ListadoPDF):
     def cabecera(self, pdf):
         texto = u"Reporte de Clientes"
         super().cabecera(pdf, texto)
+
+    def get(self, request, query, query1):
+        print(query)
+        print(query1)
 
     def contenido(self, pdf, y):
         encabezados = ('DNI', 'Nombre', 'Apellido', 'Localidad', 'Teléfono', 'E-Mail')
