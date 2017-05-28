@@ -1,0 +1,56 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
+
+              <div class="row" style="height:60px">
+                <center>
+                  <h2><font color="Purple" face="arial"> Clientes Con Mas Ausencias</font></h2>
+                </center>
+              </div>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Direccion</th>
+                            <th>Teléfono</th>
+                            <th>Localidad</th>
+                            <th>E-Mail</th>
+                            <th>ausencias</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for c in clientes %}
+                        <tr>
+                            <td>{{c.dni}}</td>
+                            <td>{{c.nombre}}</td>
+                            <td>{{c.apellido}}</td>
+                            <td>{{c.direccion}}</td>
+                            <td>{{c.telefono}}</td>
+                            <td>{{c.localidad}}</td>
+                            <td>{{c.cliente.email}}</td>
+                            <td>{{c.ausencias_turnos}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker();
+    });
+</script>
+{% endblock%}

@@ -14,13 +14,13 @@ from reportlab.lib import colors
 from reportlab.platypus import Table, TableStyle
 from reportlab.rl_config import defaultPageSize
 from reportlab.pdfbase.pdfmetrics import stringWidth
-
+from django.db.models import Case, When
 
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
-from .models import Persona, Empleado, Comision
+from .models import Persona, Empleado, Comision, Cliente
 from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
 from turnos.models import Turno, TurnoFijo
 
@@ -479,7 +479,13 @@ def dias_mayor_creaciones_turnos(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def clientes_con_mas_ausencias(request):
-    pass
+    clientes_ausencias = Cliente.objects.annotate(ausencias_turnos = Count(
+        Case(
+            When (turno__fecha_cancelacion__isnull = False, then =1),
+        )
+    )).order_by("-ausencias_turnos")
+    return render(request, "duenio/clientes_con_mas_ausencias.html", {'clientes' : clientes_ausencias})
+    #pass
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
