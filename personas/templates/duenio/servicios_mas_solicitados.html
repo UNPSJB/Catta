@@ -1,0 +1,72 @@
+{% extends 'duenio/base_duenio.html' %}
+
+{% load staticfiles %}
+
+{% block contenido %}
+        <div class="container background-white" style="opacity: 0.95;">
+            <div class="row margin-vert-30">
+                <div class="col-md-12">
+
+                  <div class="row" style="height:60px">
+                    <center>
+                      <h2><font color="Purple" face="arial"> Servicios Más Solicitados</font></h2>
+                    </center>
+                  </div>
+                  <div class="row" style="height:80px">
+                    <!-- FILTRADO !-->
+                    <form method="get" action="">
+                        Desde:
+                        <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
+                        Hasta:
+                        <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
+                        <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
+                    </form>
+                    <!--FIN FILTRADO!-->
+                  </div>
+                  <div class="row" style="height:50px">
+                    <center>
+                      <a href="" target="_blank" class="btn btn-violet btn-info">
+                        <span class="glyphicon glyphicon-file"><font face="arial"> Exportar a PDF </font></span>
+                      </a>
+                    </center>
+                  </div>
+                  <table class="table table-striped">
+                      <thread>
+                          <tr>
+                              <th>Nombre</th>
+                              <th>Descripción</th>
+                              <th>Precio</th>
+                              <th>Duración</th>
+                              <th>Insumos</th>
+                              <th>Cantidad</th>
+                          </tr>
+                      </thread>
+                      <tbody>
+                          {% for servicio in servicios %}
+                          <tr>
+                              <td>{{servicio.nombre}}</td>
+                              <td>{{servicio.descripcion}}</td>
+                              <td>{{servicio.precio}}</td>
+                              <td>{{servicio.duracion}}</td>
+                              <td>{% for insumo in servicio.insumos.all %}
+                                     <li>{{insumo}}
+                                  {% endfor %}
+                              </td>
+                              <td>{{servicio.cantidad_de_turnos}}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker();
+    });
+</script>
+{% endblock%}
