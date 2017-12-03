@@ -9,8 +9,14 @@ from gestion.models import ServicioBasico, Promocion
 from catta.forms import LoginForm
 
 def index(request):
-    promociones = Promocion.objects.all()
-    return render(request, 'principal/index.html', {'promociones': promociones})
+    contexto = {}
+    contexto["promociones"] = Promocion.objects.all()
+    contexto["logeado"] = True
+    try:
+        request.user.persona
+    except AttributeError:
+        contexto["logeado"] = False
+    return render(request, 'principal/index.html', contexto)
 
 def iniciar_sesion(request):
     if request.method == "POST":

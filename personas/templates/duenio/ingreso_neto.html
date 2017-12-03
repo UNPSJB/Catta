@@ -8,44 +8,72 @@
         <div class="row margin-vert-30">
             <div class="col-md-12">
 
-              <div class="row" style="height:60px">
-                <center>
-                  <h2><font color="Purple" face="arial">Ingreso Neto</font></h2>
-                </center>
-              </div>
-              <div class="row" style="height:80px">
+                <div class="row" style="height:60px">
+                    <center>
+                        <h2><font color="Purple" face="arial">Ingreso Neto</font></h2>
+                    </center>
+                </div>
+                <div class="row" style="height:80px">
                 <!-- FILTRADO !-->
-                <form method="get" action="">
-                    Desde:
-                    <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
-                    Hasta:
-                    <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
-                    Servicio:
-                    <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
-                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
-                </form>
+                    <form method="get" action="">
+                        Desde:
+                        <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
+                        Hasta:
+                        <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
+                        Servicio:
+                        <input list="servicios" name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
+                        <datalist id="servicios">
+                            {% for servicio in servicios %}
+                                <option value="{{servicio.nombre}}">
+                            {% endfor %}
+                        </datalist>
+                        <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
+                    </form>
                 <!--FIN FILTRADO!-->
-              </div>
-
-
+                    <form method="post" action="">
+                        <button class="btn btn-violet pull-right" type="submit">PDF</button><br><br>
+                    </form>
+                </div>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Cliente</th>
+                            <th>Empleado</th>
+                            <th>Servicios</th>
+                            <th>Ganancia Bruta</th>
+                            <th>Porcentaje de Comision del empleado</th>
+                            <th>Ganancia del empleado</th>
+                            <th>Ingreso neto por turno</th>
+                        </tr>
+                    </thread>
+                    <tbody>
                         {% for turno in turnos %}
-                            <li>{{turno.fecha}}<br>
+                        <tr>
+                            <td width=140>{{turno.fecha}}</td>
+                            <td>{{turno.cliente}}</td>
+                            <td>{{turno.empleado}}</td>
+                            <td width=250>
                                 {% for promocion in turno.promociones.all %}
-                                        {{promocion}}
+                                    <details>
+                                        <summary>{{promocion}}</summary>
                                             {% for servicio in promocion.servicios.all %}
-                                                  **{{servicio.precio}}<br>
+                                                  <li><i>{{servicio}}</i>
                                             {% endfor %}
+                                    </details>
                                 {% endfor %}
-
-
                                 {% for servicio in turno.servicios.all %}
-                                    {{ truno.servicios.all|totalizar }}
-                                   **{{servicio.precio}}<br>
+                                   <li> {{servicio}}
                                 {% endfor %}
+                            </td>
+                            <td width=20>${{turno.get_costo}}</td>
+                            <td width=20>{{turno.empleado.porc_comision }}%</td>
+                            <td width=20>${{turno.get_perdida_neta}}</td>
+                            <td width=20>${{turno.get_ganancia_neta}}</td>
+                        </tr>
                         {% endfor %}
-
-
-
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

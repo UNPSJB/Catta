@@ -7,7 +7,11 @@
     <div class="navbar-right" style="margin-top: 12px;">
         <a class="btn btn-red" href="{%url 'ayuda_externa' %}" target="_blank" role="button">AYUDA</a>
         <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
-        <a class="btn btn-green" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+        {% if logeado %}
+            <a class="btn btn-green" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+        {% else %}
+            <a class="btn btn-green" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+        {% endif%}
     </div>
 </ul>
 {% endblock %}

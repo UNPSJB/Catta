@@ -234,7 +234,7 @@ class CrearTurnoFijoForm(ModelForm):
     class Meta:
         model = TurnoFijo
         fields = {"empleado","fecha", "cliente", "promociones", "servicios", "fecha_fin"}
-
+    
 
 #form_registrar_turno_realizado
 class RegistrarTurnoRealizadoForm(ModelForm):

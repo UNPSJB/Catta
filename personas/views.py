@@ -121,7 +121,10 @@ def cliente_lista_turnos(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def ayuda_cliente(request):
-    return render(request, 'ayuda/ayudaCliente.html')
+    contexto = {}
+    contexto['cliente'] = True
+    contexto['logeado'] = True
+    return render(request, 'ayuda/ayudaCliente.html', contexto)
 
 
 FORMS_EMPLEADO = {
@@ -234,7 +237,10 @@ def empleado_lista_insumos(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
 def ayuda_empleado(request):
-    return render(request, 'ayuda/ayudaEmpleado.html')
+    contexto = {}
+    contexto['empleado'] = True
+    contexto['logeado'] = True
+    return render(request, 'ayuda/ayudaEmpleado.html',contexto)
 
 """
 Vistas de la Dueña
@@ -438,14 +444,23 @@ def index_turnos(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def ayuda_duenio(request):
-    return render(request, 'ayuda/ayudaDueño.html')
+    contexto = {}
+    contexto['dueño'] = True
+    contexto['logeado'] = True
+    return render(request, 'ayuda/ayudaDueño.html',contexto)
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def ingreso_neto(request):
+    contexto = {}
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros)
-    return render(request, "duenio/ingreso_neto.html", {'turnos': turnos, "f": ffilter})
+    #FALTA SABER COMO FILTRAR LOS TURNOS SEGUN EL ESTADO
+    servicios = ServicioBasico.objects.all()
+    contexto['turnos'] = turnos
+    contexto['servicios'] = servicios
+    contexto['f'] = ffilter
+    return render(request, "duenio/ingreso_neto.html", contexto)
 
 
 @login_required(login_url='iniciar_sesion')
@@ -510,7 +525,13 @@ def clientes_con_mas_ausencias(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def empleados_mas_solicitados(request):
-    pass
+    topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
+        Case(
+            When(turno__fecha_realizacion__isnull=False, then=1),
+        )
+    )).order_by("-cantidad_de_turnos")[:5]
+    return render(request, "duenio/empleados_mas_solicitados.html", {'empleados': topEmplados})
+
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)

@@ -6,6 +6,38 @@
 <div id="content-top-border" class="container"></div>
 {% endblock %}
 
+{% block barra %}
+    <div id="hornav" class="container no-padding">
+        <div class="row">
+            <div class="col-md-24 no-padding">
+                <div class="visible-lg">
+                    <ul id="hornavmenu" class="navbar-fixed-top" style="height: 60px">
+                        <li class="navbar-left">
+                            {% if dueño %} 
+                                <a href="{% url 'duenio' %}" class="fa-home">Principal</a>
+                            {% elif empleado %}
+                                <a href="{% url 'empleado' %}" class="fa-home">Principal</a>
+                            {% elif cliente %}
+                                <a href="{% url 'cliente' %}" class="fa-home">Principal</a>
+                            {% else %}
+                                <a href="{% url 'index' %}" class="fa-home">Principal</a>
+                            {% endif %}
+                        </li>
+                        <div class="navbar-right" style="margin-top: 12px;">
+                            <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
+                            {% if logeado %}
+                                <a class="btn btn-green" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+                            {% else %}
+                                <a class="btn btn-green" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+                            {% endif%}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block contenido %}
 <div class="tab-pane fade in" id="Logueo">
     <div class="panel panel-default">

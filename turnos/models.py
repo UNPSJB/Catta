@@ -193,6 +193,15 @@ class Turno(models.Model):
 
         return costo
 
+    def get_ganancia_neta(self):
+        ganancia = self.get_costo()
+        ganancia = ganancia - ((self.empleado.porc_comision * ganancia)/100)
+        return ganancia
+
+    def get_perdida_neta(self):
+        ganancia = self.get_costo() - self.get_ganancia_neta()
+        return ganancia
+
     def get_fecha(self):
         formato = "%d-%m-%y %I"
         return self.fecha.strftime(formato)
