@@ -1,3 +1,5 @@
 *.py[co]
 .*.swp
 /.idea
+/.vscode
+.sqlite3
