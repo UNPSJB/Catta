@@ -20,7 +20,7 @@ class Cliente(Rol):
 
 
 class Empleado(Rol):
-    porc_comision = models.IntegerField()
+    porc_comision = models.PositiveIntegerField()
     sector = models.ForeignKey(Sector, null=True, blank=True)
     # agenda = []  # LISTA DE TURNOS (AGENDA)
 
@@ -123,11 +123,11 @@ class Persona(models.Model):
         "apellido": ["apellido__icontains"],
         "localidad": ["localidad__icontains"]
     }
-    dni = models.IntegerField(primary_key=True)
+    dni = models.PositiveIntegerField(primary_key=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     direccion = models.CharField(max_length=100, null=True)
-    telefono = models.IntegerField(null=True)
+    telefono = models.PositiveIntegerField(null=True)
     localidad = models.CharField(max_length=100, null=True)
     cliente = models.OneToOneField(Cliente, null=True, blank=True)
     empleado = models.OneToOneField(Empleado, null=True, blank=True)

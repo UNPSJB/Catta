@@ -30,7 +30,7 @@ class Insumo (models.Model):
     marca = models.CharField(max_length=100)
     contenidoNeto = models.PositiveIntegerField(default="Centimetros Cubicos")
     unidadDeMedida = models.CharField(max_length=25, choices=UNIDAD_DE_MEDIDA, default=0)
-    stock = models.IntegerField(default=0)
+    stock = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return "{} {}".format(self.nombre, self.marca)
@@ -47,7 +47,7 @@ class Servicio(models.Model):
     MODULO = timedelta(minutes=15)
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=100)
-    precio = models.IntegerField(default=0)
+    precio = models.PositiveIntegerField(default=0)
     sector = models.ForeignKey(Sector)
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Servicio(models.Model):
 
 
 class ServicioBasico(Servicio):
-    duracion = models.IntegerField(default=0)
+    duracion = models.PositiveIntegerField(default=0)
     insumos = models.ManyToManyField(Insumo, blank=True)
 
 
