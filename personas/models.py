@@ -7,17 +7,12 @@ class Rol(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return "{} {}".format(self.persona.nombre, self.persona.apellido)
-
-
 class Cliente(Rol):
     email = models.EmailField(max_length=100, default='test@test.com')
     # historial = []  # LISTA DE TURNOS (HISTORIAL)
 
     def sacar_turno(self):
         print("sacando el turno")
-
 
 class Empleado(Rol):
     porc_comision = models.PositiveIntegerField()

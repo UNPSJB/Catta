@@ -1,0 +1,161 @@
+[
+    {
+        "model": "personas.Duenia",
+        "pk": 1,
+        "fields":{
+
+        }
+    },
+    {
+        "model": "personas.Empleado",
+        "pk": 1,
+        "fields":{
+            "porc_comision": 100,
+            "sector": "Peluqueria"
+        }
+    },
+    {
+        "model": "personas.Empleado",
+        "pk": 2,
+        "fields":{
+            "porc_comision": 50,
+            "sector": "Peluqueria"
+        }
+    },
+    {
+        "model": "personas.Empleado",
+        "pk": 3,
+        "fields":{
+            "porc_comision": 20,
+            "sector": "Esteticista"
+        }
+    },
+    {
+        "model": "personas.Cliente",
+        "pk": 1,
+        "fields":{
+            "email": "matias@gmail.com"
+        }
+    },
+    {
+        "model": "personas.Cliente",
+        "pk": 2,
+        "fields":{
+            "email": "diego@gmail.com"
+        }
+    },
+    {
+        "model": "personas.Cliente",
+        "pk": 3,
+        "fields":{
+            "email": "marta@gmail.com"
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 2,
+        "fields":{
+            "username": "tania",
+            "password": "desarrollo"
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 3,
+        "fields":{
+            "username": "german",
+            "password": "desarrollo"
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 4,
+        "fields":{
+            "username": "matias",
+            "password": "desarrollo"
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 5,
+        "fields":{
+            "username": "diego",
+            "password": "desarrollo"
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 6,
+        "fields":{
+            "username": "marta",
+            "password": "desarrollo"
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 1,
+            "nombre": "Tania",
+            "apellido": "Aranda",
+            "direccion": "Calle 1",
+            "telefono": 28041,
+            "localidad": "Rawson",
+            "duenia": 1,
+            "empleado": 1,
+            "usuario": 2
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 2,
+            "nombre": "German",
+            "apellido": "Bianchini",
+            "direccion": "Calle 2",
+            "telefono": 28042,
+            "localidad": "Trelew",
+            "empleado": 2,
+            "usuario": 3
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 3,
+            "nombre": "Matias",
+            "apellido": "Acosta",
+            "direccion": "Calle 3",
+            "telefono": 28043,
+            "localidad": "Trelew",
+            "empleado": 3,
+            "cliente": 1,
+            "usuario": 4
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 4,
+            "nombre": "Diego",
+            "apellido": "Van Haaster",
+            "direccion": "Calle 4",
+            "telefono": 28044,
+            "localidad": "Trelew",
+            "cliente": 2,
+            "usuario": 5
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 5,
+            "nombre": "Marta",
+            "apellido": "Saenz",
+            "direccion": "Calle 5",
+            "telefono": 28045,
+            "localidad": "Trelew",
+            "cliente": 3,
+            "usuario": 6
+        }
+    }
+]

@@ -1,11 +1,7 @@
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import Permission
-
-
-class UsuarioAdmin(admin.ModelAdmin):
-    pass
-
+from django.contrib.auth.admin import UserAdmin
 
 class PersonaAdmin(admin.ModelAdmin):
     pass
@@ -23,7 +19,7 @@ class ClienteAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(Usuario, UserAdmin)
 admin.site.register(Persona, PersonaAdmin)
 admin.site.register(Empleado, EmpleadoAdmin)
 admin.site.register(Duenia, DueniaAdmin)
