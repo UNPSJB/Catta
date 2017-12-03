@@ -1,0 +1,102 @@
+[
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Tintura Pelo Negro",
+            "marca": "Loreal",
+            "contenidoNeto": 250,
+            "unidadDeMedida": "Mililitros",
+            "stock": 10
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Crema de Enjuague",
+            "marca": "Loreal",
+            "contenidoNeto": 200,
+            "unidadDeMedida": "Centimetros Cubicos",
+            "stock": 100
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Shampoo Reparador",
+            "marca": "Pantene",
+            "contenidoNeto": 100,
+            "unidadDeMedida": "Mililitros",
+            "stock": 60
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Agua Oxigenada",
+            "marca": "AguaBell",
+            "contenidoNeto": 5,
+            "unidadDeMedida": "Litros",
+            "stock": 20
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Tintura Pelo Rubio",
+            "marca": "ALFAPARF",
+            "contenidoNeto": 100,
+            "unidadDeMedida": "Mililitros",
+            "stock": 20
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Apollas",
+            "marca": "Btx",
+            "contenidoNeto": 30,
+            "unidadDeMedida": "Mililitros",
+            "stock": 15
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Alisador",
+            "marca": "Luminescense",
+            "contenidoNeto": 950,
+            "unidadDeMedida": "Mililitros",
+            "stock": 5
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Cera Capilar",
+            "marca": "Issue",
+            "contenidoNeto": 75,
+            "unidadDeMedida": "Mililitros",
+            "stock": 0
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Crema Para Peinar",
+            "marca": "Loreal",
+            "contenidoNeto": 350,
+            "unidadDeMedida": "Mililitros",
+            "stock": 50
+        }
+    },
+    {
+        "model": "gestion.insumo",
+        "fields": {
+            "nombre": "Botox Capilar",
+            "marca": "Rebella",
+            "contenidoNeto": 5,
+            "unidadDeMedida": "Litros",
+            "stock": 2
+        }
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "model": "gestion.sector",
+        "fields": {
+            "nombre": "Peluqueria",
+            "descripcion": "Sector de Corte,Tintura,Alizado,etc."
+        }
+    },
+    {
+        "model": "gestion.sector",
+        "fields": {
+            "nombre": "Esteticista",
+            "descripcion": "Sector de Masajes, Depilación y Maquillaje."
+        }
+    }
+]
