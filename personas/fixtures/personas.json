@@ -56,7 +56,7 @@
         "pk": 2,
         "fields":{
             "username": "tania",
-            "password": "desarrollo"
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
         }
     },
     {
@@ -64,7 +64,7 @@
         "pk": 3,
         "fields":{
             "username": "german",
-            "password": "desarrollo"
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
         }
     },
     {
@@ -72,7 +72,7 @@
         "pk": 4,
         "fields":{
             "username": "matias",
-            "password": "desarrollo"
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
         }
     },
     {
@@ -80,7 +80,7 @@
         "pk": 5,
         "fields":{
             "username": "diego",
-            "password": "desarrollo"
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
         }
     },
     {
@@ -88,7 +88,7 @@
         "pk": 6,
         "fields":{
             "username": "marta",
-            "password": "desarrollo"
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
         }
     },
     {

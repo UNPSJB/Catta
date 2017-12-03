@@ -3,9 +3,16 @@ from gestion.models import *
 from datetime import datetime
 from _datetime import date
 
+
 class Rol(models.Model):
     class Meta:
         abstract = True
+
+    def __str__(self):
+        try:
+            return '{} {}'.format(self.persona.nombre, self.persona.apellido)
+        except AttributeError:
+            return 'Rol no asignado'
 
 class Cliente(Rol):
     email = models.EmailField(max_length=100, default='test@test.com')
