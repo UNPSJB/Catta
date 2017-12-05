@@ -52,6 +52,27 @@
         }
     },
     {
+        "model": "personas.Cliente",
+        "pk": 4,
+        "fields":{
+            "email": "ian@gmail.com"
+        }
+    },
+    {
+        "model": "personas.Cliente",
+        "pk": 5,
+        "fields":{
+            "email": "maximiliano@gmail.com"
+        }
+    },
+    {
+        "model": "personas.Cliente",
+        "pk": 6,
+        "fields":{
+            "email": "emiliano@gmail.com"
+        }
+    },
+    {
         "model": "personas.Usuario",
         "pk": 2,
         "fields":{
@@ -88,6 +109,30 @@
         "pk": 6,
         "fields":{
             "username": "marta",
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 7,
+        "fields":{
+            "username": "ian",
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 8,
+        "fields":{
+            "username": "maximiliano",
+            "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
+        }
+    },
+    {
+        "model": "personas.Usuario",
+        "pk": 9,
+        "fields":{
+            "username": "emiliano",
             "password": "pbkdf2_sha256$30000$QAqqVLtykOOI$8LRhjbaL2/Y7MOoiFoJvjpaw5rvfmpiKuWydqEZ4998="
         }
     },
@@ -156,6 +201,45 @@
             "localidad": "Trelew",
             "cliente": 3,
             "usuario": 6
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 6,
+            "nombre": "Ian",
+            "apellido": "Mazzaglia",
+            "direccion": "Calle 6",
+            "telefono": 28046,
+            "localidad": "Trelew",
+            "cliente": 4,
+            "usuario": 7
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 7,
+            "nombre": "Maximiliano",
+            "apellido": "Aguila",
+            "direccion": "Calle 7",
+            "telefono": 28047,
+            "localidad": "Gaiman",
+            "cliente": 5,
+            "usuario": 8
+        }
+    },
+    {
+        "model": "personas.Persona",
+        "fields":{
+            "dni": 8,
+            "nombre": "Emiliano",
+            "apellido": "De Marco",
+            "direccion": "Calle 8",
+            "telefono": 28048,
+            "localidad": "Trelew",
+            "cliente": 6,
+            "usuario": 9
         }
     }
 ]
