@@ -525,13 +525,16 @@ def clientes_con_mas_ausencias(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def empleados_mas_solicitados(request):
+    contexto = {}
+#    mfiltros, ffilter = get_filtros(Empleado, request.GET)
     topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
         Case(
             When(turno__fecha_realizacion__isnull=False, then=1),
         )
     )).order_by("-cantidad_de_turnos")[:5]
-    return render(request, "duenio/empleados_mas_solicitados.html", {'empleados': topEmplados})
-
+ #   contexto['f'] = ffilter
+    contexto['empleados'] = topEmplados
+    return render(request, "duenio/empleados_mas_solicitados.html", contexto)
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
