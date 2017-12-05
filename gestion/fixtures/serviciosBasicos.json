@@ -1,0 +1,194 @@
+[
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":1,
+        "fields": {
+            "nombre": "Corte de Pelo",
+            "descripcion": "Corte de Pelo Unisex",
+            "precio": 200,
+            "sector": "Peluqueria",
+            "duracion": 2,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":2,
+        "fields": {
+            "nombre": "Peinado",
+            "descripcion": "Peinado de 15, Egreso o Casamiento",
+            "precio": 300,
+            "sector": "Peluqueria",
+            "duracion": 3,
+            "insumos":[9]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":3,
+        "fields": {
+            "nombre": "Alisado",
+            "descripcion": "Alisado de Pelo",
+            "precio": 400,
+            "sector": "Peluqueria",
+            "duracion": 3,
+            "insumos":[7]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":4,
+        "fields": {
+            "nombre": "Permanente de Rulos",
+            "descripcion": "Los mejores rulos",
+            "precio": 500,
+            "sector": "Peluqueria",
+            "duracion": 3,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":5,
+        "fields": {
+            "nombre": "Mechitas",
+            "descripcion": "El mejor color para tu pelo",
+            "precio": 100,
+            "sector": "Peluqueria",
+            "duracion": 2,
+            "insumos":[4,5]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":6,
+        "fields": {
+            "nombre": "Tintura",
+            "descripcion": "Decile chau a las canas",
+            "precio": 300,
+            "sector": "Peluqueria",
+            "duracion": 2,
+            "insumos":[1,5]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":7,
+        "fields": {
+            "nombre": "Baño de Crema",
+            "descripcion": "Dale vida a tu pelo",
+            "precio": 250,
+            "sector": "Peluqueria",
+            "duracion": 3,
+            "insumos":[6,8,10]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":8,
+        "fields": {
+            "nombre": "Lavado de Pelo",
+            "descripcion": "Deja tu pelo brillante",
+            "precio": 100,
+            "sector": "Peluqueria",
+            "duracion": 1,
+            "insumos":[2,3]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":9,
+        "fields": {
+            "nombre": "Depilación",
+            "descripcion": "Tu cuerpo más suave",
+            "precio": 250,
+            "sector": "Esteticista",
+            "duracion": 1,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":10,
+        "fields": {
+            "nombre": "Masajes",
+            "descripcion": "Sentite como nueva",
+            "precio": 300,
+            "sector": "Esteticista",
+            "duracion": 4,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":11,
+        "fields": {
+            "nombre": "Mascarilla Facial",
+            "descripcion": "El mejor cuidado para tu rostro",
+            "precio": 200,
+            "sector": "Esteticista",
+            "duracion": 4,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":12,
+        "fields": {
+            "nombre": "Manicura",
+            "descripcion": "Tus uñas perfectas",
+            "precio": 50,
+            "sector": "Esteticista",
+            "duracion": 1,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":13,
+        "fields": {
+            "nombre": "Pedicura",
+            "descripcion": "El mejor cuidado para las uñas de tus pies",
+            "precio": 100,
+            "sector": "Esteticista",
+            "duracion": 1,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":14,
+        "fields": {
+            "nombre": "Maquillaje",
+            "descripcion": "Tu rosto lleno de luz",
+            "precio": 100,
+            "sector": "Esteticista",
+            "duracion": 2,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":15,
+        "fields": {
+            "nombre": "Depilación eléctrica",
+            "descripcion": "La depilación del futuro",
+            "precio": 200,
+            "sector": "Esteticista",
+            "duracion": 4,
+            "insumos":[]
+        }
+    },
+    {
+        "model": "gestion.ServicioBasico",
+        "pk":16,
+        "fields": {
+            "nombre": "Tratamiento con Barro",
+            "descripcion": "Tu cuerpo conectado con la naturaleza",
+            "precio": 1000,
+            "sector": "Esteticista",
+            "duracion": 8,
+            "insumos":[]
+        }
+    }
+]

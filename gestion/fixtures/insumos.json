@@ -1,6 +1,7 @@
 [
     {
         "model": "gestion.insumo",
+        "pk": 1,
         "fields": {
             "nombre": "Tintura Pelo Negro",
             "marca": "Loreal",
@@ -11,6 +12,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 2,
         "fields": {
             "nombre": "Crema de Enjuague",
             "marca": "Loreal",
@@ -21,6 +23,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 3,
         "fields": {
             "nombre": "Shampoo Reparador",
             "marca": "Pantene",
@@ -31,6 +34,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 4,
         "fields": {
             "nombre": "Agua Oxigenada",
             "marca": "AguaBell",
@@ -41,6 +45,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 5,
         "fields": {
             "nombre": "Tintura Pelo Rubio",
             "marca": "ALFAPARF",
@@ -51,6 +56,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 6,
         "fields": {
             "nombre": "Apollas",
             "marca": "Btx",
@@ -61,6 +67,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 7,
         "fields": {
             "nombre": "Alisador",
             "marca": "Luminescense",
@@ -71,6 +78,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 8,
         "fields": {
             "nombre": "Cera Capilar",
             "marca": "Issue",
@@ -81,6 +89,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 9,
         "fields": {
             "nombre": "Crema Para Peinar",
             "marca": "Loreal",
@@ -91,6 +100,7 @@
     },
     {
         "model": "gestion.insumo",
+        "pk": 10,
         "fields": {
             "nombre": "Botox Capilar",
             "marca": "Rebella",
