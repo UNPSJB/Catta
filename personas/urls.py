@@ -53,6 +53,8 @@ urlpatterns = [
     # Listados PDF
     url(r'^reporte_personas_pdf/$', ListadoPDFClientes.as_view(), name="reporte_clientes_pdf"),
     url(r'^reporte_turnos_pdf/(\S+)/$', ListadoPDFTurnos.as_view(), name="reporte_turnos_pdf"),
+    # Reportes PDF
+    url(r'^empleados_mas_solicitados_pdf/', views.EmpleadosMasSolicitadosPDF.as_view(), name="empleados_mas_solicitados_pdf"),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 

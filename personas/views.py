@@ -15,6 +15,7 @@ from reportlab.platypus import Table, TableStyle
 from reportlab.rl_config import defaultPageSize
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from django.db.models import Case, When
+from easy_pdf.views import PDFTemplateView
 
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
@@ -534,6 +535,7 @@ def empleados_mas_solicitados(request):
     )).order_by("-cantidad_de_turnos")[:5]
  #   contexto['f'] = ffilter
     contexto['empleados'] = topEmplados
+    request.session['empleados'] = "caca"
     return render(request, "duenio/empleados_mas_solicitados.html", contexto)
 
 @login_required(login_url='iniciar_sesion')
@@ -546,9 +548,20 @@ def horarios_mas_solicitados(request):
     return render(request, 'duenio/horarios_mas_solicitados.html', {})
     turnos = Turno.objects.values("hora").annotate(horas=Count("hora"))
 
-
+"""
+Vistas de Reportes para convertir a PDF
 """
 
+class EmpleadosMasSolicitadosPDF(PDFTemplateView):
+    template_name = 'reportesPDF/empleados_mas_solicitados_pdf.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(EmpleadosMasSolicitadosPDF, self).get_context_data(**kwargs)
+        context['empleados'] = self.request.session['empleados']
+        return context
+
+
+"""
 Vistas del control de cuentas.
 """
 
