@@ -491,7 +491,12 @@ def servicios_mas_solicitados(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def mes_mayor_trabajo(request):
-    pass
+    meses ={'January': 0, 'February': 0, 'March':0, 'April': 0, 'May': 0, 'June': 0, 'July': 0, 'August': 0, 'September': 0, 'October': 0, 'November': 0, 'December': 0}
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha').values("dia").annotate(cant_Meses=Count("dia"))
+    for turno in turnos:
+        meses[turno['dia'].strftime('%B')] += turno ['cant_Meses']
+    return render(request,"duenio/mes_mayor_trabajo.html", {'meses': meses, 'f': ffilter})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -509,7 +514,12 @@ def dia_mayor_trabajo(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dias_mayor_creaciones_turnos(request):
-    pass
+    dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha_creacion').values("dia").annotate(cant_Dias=Count("dia"))
+    for turno in turnos:
+        dias[turno['dia'].strftime('%A')] += turno['cant_Dias']
+    return render(request,"duenio/dias_mayor_creaciones_turnos.html",{'dias':dias,'f':ffilter})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -545,6 +555,7 @@ def horarios_mas_solicitados(request):
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/horarios_mas_solicitados.html', {})
     turnos = Turno.objects.values("hora").annotate(horas=Count("hora"))
+
 
 
 """
