@@ -21,7 +21,7 @@ from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
 from turnos.forms import CrearTurnoForm, ModificarTurnoForm, RegistrarTurnoRealizadoForm, EliminarTurnoForm, CrearTurnoFijoForm
 from .models import Persona, Empleado, Comision, Cliente
-from gestion.models import ServicioBasico, Promocion, Insumo, Servicio
+from gestion.models import ServicioBasico, Promocion, Insumo, Servicio, Sector
 from turnos.models import Turno, TurnoFijo
 
 
@@ -491,12 +491,7 @@ def servicios_mas_solicitados(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def mes_mayor_trabajo(request):
-    meses ={'January': 0, 'February': 0, 'March':0, 'April': 0, 'May': 0, 'June': 0, 'July': 0, 'August': 0, 'September': 0, 'October': 0, 'November': 0, 'December': 0}
-    mfiltros, ffilter = get_filtros(Turno, request.GET)
-    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha').values("dia").annotate(cant_Meses=Count("dia"))
-    for turno in turnos:
-        meses[turno['dia'].strftime('%B')] += turno ['cant_Meses']
-    return render(request,"duenio/mes_mayor_trabajo.html", {'meses': meses, 'f': ffilter})
+    pass
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -514,12 +509,7 @@ def dia_mayor_trabajo(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dias_mayor_creaciones_turnos(request):
-    dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
-    mfiltros, ffilter = get_filtros(Turno, request.GET)
-    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha_creacion').values("dia").annotate(cant_Dias=Count("dia"))
-    for turno in turnos:
-        dias[turno['dia'].strftime('%A')] += turno['cant_Dias']
-    return render(request,"duenio/dias_mayor_creaciones_turnos.html",{'dias':dias,'f':ffilter})
+    pass
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -536,15 +526,53 @@ def clientes_con_mas_ausencias(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def empleados_mas_solicitados(request):
     contexto = {}
-#    mfiltros, ffilter = get_filtros(Empleado, request.GET)
-    topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
-        Case(
-            When(turno__fecha_realizacion__isnull=False, then=1),
-        )
-    )).order_by("-cantidad_de_turnos")[:5]
- #   contexto['f'] = ffilter
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    try:
+        sector = ffilter['sector.nombre']
+    except KeyError:
+        sector = "*"
+    try:
+        fecha_inicio = ffilter['fechaI']
+    except KeyError:
+        fecha_inicio = "2000-01-01"
+    try:
+        fecha_fin = ffilter['fechaF']
+    except KeyError:
+        fecha_fin = "9999-01-01"
+    if sector=="*":
+        topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
+            Case(
+                When(turno__fecha_realizacion__isnull=False,
+                        turno__fecha_realizacion__gt=fecha_inicio,
+                        turno__fecha_realizacion__lt=fecha_fin,
+                        then=1),
+            )
+        )).order_by("-cantidad_de_turnos")[:5]
+    else:
+        topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
+            Case(
+                When(turno__fecha_realizacion__isnull=False,
+                        turno__fecha_realizacion__gt=fecha_inicio,
+                        turno__fecha_realizacion__lt=fecha_fin,
+                        sector=sector,
+                        then=1),
+            )
+        )).order_by("-cantidad_de_turnos")[:5]
+    todos_los_sectores = Sector.objects.all()
     contexto['empleados'] = topEmplados
+    contexto['sectores'] = todos_los_sectores
     return render(request, "duenio/empleados_mas_solicitados.html", contexto)
+
+"""
+def cliente_lista_servicios(request):
+    mfiltros, ffilter = get_filtros(Servicio, request.GET)
+    servicios = ServicioBasico.objects.filter(*mfiltros)
+    promociones = Promocion.objects.filter(*mfiltros)
+    insumos = Insumo.objects.all()
+    return render(request, 'cliente/servicios_cliente.html', {'servicios': servicios,
+                                                              'promociones': promociones,
+                                                              'insumos': insumos, "f": ffilter})
+"""
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -555,7 +583,6 @@ def horarios_mas_solicitados(request):
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     return render(request, 'duenio/horarios_mas_solicitados.html', {})
     turnos = Turno.objects.values("hora").annotate(horas=Count("hora"))
-
 
 
 """
