@@ -2,6 +2,24 @@
 
 {% load staticfiles %}
 
+{% block links %}
+{{block.super}}
+<style>
+.chart-container1 {
+    position: relative;
+    margin: auto;
+    height: 60vh;
+    width: 50vw;
+}
+.chart-container2 {
+    position: relative;
+    margin: auto;
+    height: 50vh;
+    width: 20vw;
+}
+</style>
+{% endblock %}
+
 {% block contenido %}
         <div class="container background-white" style="opacity: 0.95;">
             <div class="row margin-vert-30">
@@ -60,9 +78,13 @@
                           
                       </tbody>
                   </table>
-                  <div id="canvas1" sytle="width:50%"><canvas id="myChart" width="2" height="2"></canvas></div>                  
-                  <div id="canvas2" sytle="width:50%"><canvas id="myChart2" width="2" height="2"></canvas></div>                  
-                  <div id="canvas3" sytle="width:50%"><canvas id="myChart3" width="2" height="2"></canvas></div>                  
+                  <div class="chart-container1"><canvas id="myChart1"></canvas></div>  
+                  <table style="width:100%">
+                    <tr>
+                    <th><div class="chart-container2"><canvas id="myChart2"></canvas></div></th>
+                    <th><div class="chart-container2"><canvas id="myChart3"></canvas></div></th>
+                    <tr>    
+                  </table>                              
                 </div>
             </div>
         </div>
@@ -73,7 +95,7 @@
 
 <script src="\static\assets\js\Chart.min.js"></script>
 <script>
-    var ctx = document.getElementById("myChart").getContext('2d');
+    var ctx = document.getElementById("myChart1").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -109,6 +131,7 @@
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -156,6 +179,7 @@
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -203,6 +227,7 @@
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
