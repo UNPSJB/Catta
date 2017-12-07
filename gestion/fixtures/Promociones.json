@@ -3,19 +3,19 @@
         "model": "gestion.Promocion",
         "pk": 1,
         "fields": {
-            "nombre": "Verano Con Catta - Peluqueria",
-            "descripcion": "Prepara tu pelo para brillar este verano.",
+            "nombre": "Alisado permanente y nutricion - Peluqueria",
+            "descripcion": "Busca tu look preferido sin dañar tu pelo",
             "precio": 450,
             "sector": "Peluqueria",
-            "servicios": [1,7,8]
+            "servicios": [1,3,7]
         }
     },
     {
         "model": "gestion.Promocion",
         "pk": 2,
         "fields": {
-            "nombre": "Otoño Con Catta - Peluqueria",
-            "descripcion": "Se caen las hojas, tu pelo no",
+            "nombre": "Suavidad y fortaleza - Peluqueria",
+            "descripcion": "Tu cabello fuerte como el acero y suave como la seda",
             "precio": 300,
             "sector": "Peluqueria",
             "servicios": [1,7,8]
@@ -25,8 +25,8 @@
         "model": "gestion.Promocion",
         "pk": 3,
         "fields": {
-            "nombre": "Invierno Con Catta - Peluqueria",
-            "descripcion": "Cuida tu pelo en esta etapa del año.",
+            "nombre": "Cambia tu look con Catta - Peluqueria",
+            "descripcion": "Queres cambiar tu look? nosotras te ayudamos !",
             "precio": 450,
             "sector": "Peluqueria",
             "servicios": [1,6]
@@ -36,8 +36,8 @@
         "model": "gestion.Promocion",
         "pk": 4,
         "fields": {
-            "nombre": "Primavera Con Catta - Peluqueria",
-            "descripcion": "Que tu pelo brille en esta primavera.",
+            "nombre": "Brillando Con Catta - Peluqueria",
+            "descripcion": "Prepara tu pelo para brillar como la estrella que sos.",
             "precio": 350,
             "sector": "Peluqueria",
             "servicios": [5,7,8]
@@ -47,8 +47,8 @@
         "model": "gestion.Promocion",
         "pk": 5,
         "fields": {
-            "nombre": "Promo de los enamorados - Peluqueria",
-            "descripcion": "Enamora a tu amor con está promo",
+            "nombre": "Se una estrella - Peluqueria",
+            "descripcion": "Que tu pelo no sea excusa, se la estrella que mas brille",
             "precio": 150,
             "sector": "Peluqueria",
             "servicios": [2]
@@ -58,8 +58,8 @@
         "model": "gestion.Promocion",
         "pk": 6,
         "fields": {
-            "nombre": "Cumple de Catta - Peluqueria",
-            "descripcion": "Veni a festejar nuestro cumpleaños",
+            "nombre": "La mas hermosa - Peluqueria",
+            "descripcion": "Saca el brillo que hay en vos",
             "precio": 400,
             "sector": "Peluqueria",
             "servicios": [1,7,8]
@@ -69,19 +69,19 @@
         "model": "gestion.Promocion",
         "pk": 7,
         "fields": {
-            "nombre": "Navidad de Catta - Peluqueria",
-            "descripcion": "Disfruta de este momento magico junto a Catta",
+            "nombre": " !Feliz Cumple! - Peluqueria",
+            "descripcion": "Festeja tu dia con Catta! Feliz cumple !!!",
             "precio": 500,
             "sector": "Peluqueria",
-            "servicios": [2,6]
+            "servicios": [1,2,6,7,8]
         }
     },
     {
         "model": "gestion.Promocion",
         "pk": 8,
         "fields": {
-            "nombre": "Año Nuevo con Catta - Peluqueria",
-            "descripcion": "Empeza el año con todo",
+            "nombre": "Un dia diferente - Peluqueria",
+            "descripcion": "Un dia diferente para tu pelo",
             "precio": 500,
             "sector": "Peluqueria",
             "servicios": [2,6]
@@ -91,8 +91,8 @@
         "model": "gestion.Promocion",
         "pk": 9,
         "fields": {
-            "nombre": "Promo de Fin De Semana - Peluqueria",
-            "descripcion": "Un finde diferente",
+            "nombre": "Promo Corte de Pelo - Peluqueria",
+            "descripcion": "Un corte de cabello al alcance tuyo",
             "precio": 100,
             "sector": "Peluqueria",
             "servicios": [1]
@@ -102,19 +102,19 @@
         "model": "gestion.Promocion",
         "pk": 10,
         "fields": {
-            "nombre": "Promo ¡Feliz Cumple! - Peluqueria",
-            "descripcion": "Catta te regala la mejor atención",
+            "nombre": "Mi pelo es saludable - Peluqueria",
+            "descripcion": "Catta te brinda el mejor servicio para que tu pelo crezca sano y fuerte",
             "precio": 700,
             "sector": "Peluqueria",
-            "servicios": [1.2,7.8]
+            "servicios": [1,7,8]
         }
     },
     {
         "model": "gestion.Promocion",
         "pk": 11,
         "fields": {
-            "nombre": "Verano Con Catta - Esteticista",
-            "descripcion": "Prepara tu cuerpo para brillar este verano.",
+            "nombre": "Luci tu cuerpo - Esteticista",
+            "descripcion": "Prepara tu cuerpo para brillar mas que nunca.",
             "precio": 350,
             "sector": "Esteticista",
             "servicios": [9,12,13]
@@ -124,8 +124,8 @@
         "model": "gestion.Promocion",
         "pk": 12,
         "fields": {
-            "nombre": "Otoño Con Catta - Esteticista",
-            "descripcion": "Cuida tu Rostro en esta parte del año.",
+            "nombre": "Piel de seda - Esteticista",
+            "descripcion": "Cuida tu Rostro que lo vale.",
             "precio": 150,
             "sector": "Esteticista",
             "servicios": [11]
@@ -135,8 +135,8 @@
         "model": "gestion.Promocion",
         "pk": 13,
         "fields": {
-            "nombre": "Invierno Con Catta - Esteticista",
-            "descripcion": "Cuida tu cuerpo en esta parte del año.",
+            "nombre": "Nutri tu piel con Catta - Esteticista",
+            "descripcion": "Para una piel nutrida y sana.",
             "precio": 800,
             "sector": "Esteticista",
             "servicios": [16]
@@ -146,8 +146,8 @@
         "model": "gestion.Promocion",
         "pk": 14,
         "fields": {
-            "nombre": "Primavera Con Catta - Esteticista",
-            "descripcion": "Que tu cuerpo sea una flor en primavera.",
+            "nombre": "Suavidad total - Esteticista",
+            "descripcion": "Que toda tu piel sea suave como una seda.",
             "precio": 300,
             "sector": "Esteticista",
             "servicios": [9,14]
@@ -157,8 +157,8 @@
         "model": "gestion.Promocion",
         "pk": 15,
         "fields": {
-            "nombre": "Promo de los enamorados - Esteticista",
-            "descripcion": "El mejor rostro para sorprende a tu amor.",
+            "nombre": "Billando con Catta - Esteticista",
+            "descripcion": "saca la princesa que hay en vos.",
             "precio": 200,
             "sector": "Esteticista",
             "servicios": [11,14]
@@ -168,19 +168,19 @@
         "model": "gestion.Promocion",
         "pk": 16,
         "fields": {
-            "nombre": "Cumple de Catta - Esteticista",
-            "descripcion": "Veni a festejar nuestro cumpleaños",
+            "nombre": "Descontracturate y relajate con Catta - Esteticista",
+            "descripcion": "Basta de tanto estres! descontracturate y relajate con los mejores masajes de Catta",
             "precio": 1000,
             "sector": "Esteticista",
-            "servicios": [10,16]
+            "servicios": [10]
         }
     },
     {
         "model": "gestion.Promocion",
         "pk": 17,
         "fields": {
-            "nombre": "Navidad de Catta - Esteticista",
-            "descripcion": "Disfruta de este momento magico junto a Catta",
+            "nombre": "Manos y Pies - Esteticista",
+            "descripcion": "Que tus manos y pies sean los de una princesa",
             "precio": 100,
             "sector": "Esteticista",
             "servicios": [12,13]
@@ -190,8 +190,8 @@
         "model": "gestion.Promocion",
         "pk": 18,
         "fields": {
-            "nombre": "Año Nuevo con Catta - Esteticista",
-            "descripcion": "Empeza el año con todo",
+            "nombre": "Se una estrella con Catta - Esteticista",
+            "descripcion": "Saca todo el brillo que hay en vos",
             "precio": 200,
             "sector": "Esteticista",
             "servicios": [12,13,14]
@@ -201,8 +201,8 @@
         "model": "gestion.Promocion",
         "pk": 19,
         "fields": {
-            "nombre": "Promo de Fin De Semana - Esteticista",
-            "descripcion": "Un finde diferente",
+            "nombre": "Un dia diferente - Esteticista",
+            "descripcion": "Un dia diferente, para salir de la rutina",
             "precio": 200,
             "sector": "Esteticista",
             "servicios": [9]

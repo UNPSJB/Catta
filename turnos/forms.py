@@ -235,6 +235,7 @@ class CrearTurnoFijoForm(ModelForm):
         model = TurnoFijo
         fields = {"empleado","fecha", "cliente", "promociones", "servicios", "fecha_fin"}
 
+
 #form_registrar_turno_realizado
 class RegistrarTurnoRealizadoForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -256,7 +257,7 @@ class RegistrarTurnoRealizadoForm(ModelForm):
             'promociones': 'Promociones',
             'empleado': 'Empleado'
         }
-        widgets = {
+        widgets = { 
             'fecha': forms.TextInput(attrs={'class': 'form-control'}),
             'empleado': forms.Select(attrs={'class': 'form-control'}),
             'cliente': forms.Select(attrs={'class': 'form-control'}),

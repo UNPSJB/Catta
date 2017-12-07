@@ -532,7 +532,7 @@ def empleados_mas_solicitados(request):
     contexto = {}
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     try:
-        sector = ffilter['sector.nombre']
+        sector = ffilter['sector']
     except KeyError:
         sector = "*"
     try:
@@ -547,8 +547,8 @@ def empleados_mas_solicitados(request):
         topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
             Case(
                 When(turno__fecha_realizacion__isnull=False,
-                        turno__fecha_realizacion__gt=fecha_inicio,
-                        turno__fecha_realizacion__lt=fecha_fin,
+                        turno__fecha__gt=fecha_inicio,
+                        turno__fecha__lt=fecha_fin,
                         then=1),
             )
         )).order_by("-cantidad_de_turnos")[:5]
@@ -556,8 +556,8 @@ def empleados_mas_solicitados(request):
         topEmplados = Empleado.objects.annotate(cantidad_de_turnos=Count(
             Case(
                 When(turno__fecha_realizacion__isnull=False,
-                        turno__fecha_realizacion__gt=fecha_inicio,
-                        turno__fecha_realizacion__lt=fecha_fin,
+                        turno__fecha__gt=fecha_inicio,
+                        turno__fecha__lt=fecha_fin,
                         sector=sector,
                         then=1),
             )
