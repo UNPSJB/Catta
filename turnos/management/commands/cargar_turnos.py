@@ -21,7 +21,7 @@ def cliente_random():
 
 def get_servicios_random(empleado):
     servicios = ServicioBasico.objects.filter(sector=empleado.sector)
-    indice = random.randint(0,len(servicios))
+    indice = random.randint(0,len(servicios)-1)
     return servicios[indice]
 
 def get_promociones(dia, empleado):
@@ -35,7 +35,7 @@ def get_promociones(dia, empleado):
 def get_fecha(dia, servicios):
     opcion = random.randint(0,1)
     if opcion == 0:
-        return None, dia + timedelta(days=1)
+        return None, dia
     else:
         return dia + servicios.get_duracion, None
 
@@ -71,7 +71,7 @@ class Command(BaseCommand):
     #9-13 y de 16-20
     def handle(self, *args, **options):        
         fecha_inicio = datetime(2017, 1, 1)
-        fecha_fin = datetime(2017, 12, 7)
+        fecha_fin = datetime.today()
         for dia_actual in rango_de_fechas(fecha_inicio, fecha_fin):
             if es_laborable(dia_actual):
                 for empleado in Empleado.objects.all():
