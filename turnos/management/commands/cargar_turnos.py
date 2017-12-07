@@ -46,18 +46,18 @@ def generar_turno(dia, empleado):
         dia_realizacion = dia + timedelta(days=2)
     else:
         dia_realizacion = dia + timedelta(days=1)
-        
-    turno.fecha = dia + timedelta(days=1) #Esto me puede dejar el lunes como dia de realización del turno
-    turno.dia = dia.date()
-    turno.hora = dia.time()
+
+    turno.fecha = dia_realizacion #Esto me puede dejar el lunes como dia de realización del turno
+    turno.dia = dia_realizacion.date()
+    turno.hora = dia_realizacion.time()
     turno.fecha_creacion = dia
     fecha_confirmacion = dia
-    turno.save()
-    turno.servicios = get_servicios_random(empleado)
-    turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia, turno.servicios)
-    #turno.promociones = get_promociones(dia, empleado)
     turno.empleado = empleado
     turno.cliente = cliente_random()#Pueden repetirse ¡Ojo!
+    turno.save()
+    turno.servicios = get_servicios_random(empleado)
+    turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia_realizacion, turno.servicios)
+    #turno.promociones = get_promociones(dia, empleado)
     turno.comision = None
     turno.save()
     
