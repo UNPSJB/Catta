@@ -2,6 +2,23 @@
 
 {% load staticfiles %}
 
+{% block layout_style %}
+
+  <style>
+      
+      table{
+        background-color: #ffffff;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+      th, tr{
+          padding-top: 5px;
+      }
+  </style>
+
+{%endblock%}
+
 {% block content %}
 
     <!-- SCRIPTS -->
@@ -15,7 +32,7 @@
 
           <div class="row" style="height:60px">
             <center>
-              <h2><font color="Purple" face="arial"> Empleados Más Solicitados</font></h2>
+              <h2><font color="Purple" face="arial"> Empleados Mas Solicitados</font></h2>
             </center>
           </div>
 
@@ -30,18 +47,12 @@
                   </tr>
               </thread>
               <tbody>
-                  <tr>
-                    <td>ASFASFASFASF</td>
-                    <td>ASFASFASFASF</td>
-                    <td>ASFASFASFASF</td>
-                    <td>{{empleados}}</td>
-                  </tr>
-                  {% for empleado in empleados %}
+                  {% for empleado, cantidad in datos %}
                   <tr>
                       <td>{{empleado.persona.nombre}}</td>
                       <td>{{empleado.persona.apellido}}</td>
                       <td>{{empleado.sector}}</td>
-                      <td>{{empleado.cantidad_de_turnos}}</td>
+                      <td>{{cantidad}}</td>
                   </tr>
                   {% endfor %}
               </tbody>

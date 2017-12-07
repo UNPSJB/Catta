@@ -16,6 +16,9 @@ from reportlab.rl_config import defaultPageSize
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from django.db.models import Case, When
 from easy_pdf.views import PDFTemplateView
+from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
@@ -560,9 +563,12 @@ def empleados_mas_solicitados(request):
             )
         )).order_by("-cantidad_de_turnos")[:5]
     todos_los_sectores = Sector.objects.all()
-    contexto['empleados'] = topEmplados
-    request.session['empleados'] = "caca"
     contexto['sectores'] = todos_los_sectores
+    contexto['empleados'] = topEmplados
+    data = serializers.serialize("json", topEmplados)
+    request.session['empleados'] = data
+    datos = json.dumps(list(topEmplados.values()), cls=DjangoJSONEncoder)
+    request.session['datos'] = datos
     return render(request, "duenio/empleados_mas_solicitados.html", contexto)
 
 """
@@ -595,7 +601,20 @@ class EmpleadosMasSolicitadosPDF(PDFTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(EmpleadosMasSolicitadosPDF, self).get_context_data(**kwargs)
-        context['empleados'] = self.request.session['empleados']
+        empleados=[]
+        for obj in serializers.deserialize("json", self.request.session['empleados']):
+            empleados.append(obj.object)
+
+        cantidad_de_turnos=[]
+        datos = json.loads(self.request.session['datos'])
+        for dato in datos:
+            cantidad_de_turnos.append(dato['cantidad_de_turnos'])
+
+        datos=[]
+
+        for empleado,cantidad in zip(empleados, cantidad_de_turnos):
+            datos.append((empleado, cantidad))
+        context['datos'] = datos
         return context
 
 
