@@ -32,32 +32,40 @@ def get_promociones(dia, empleado):
     else:
         return promocion[random]
 
-def get_fecha(dia, servicios):
+def get_fecha(dia, servicio):
     opcion = random.randint(0,1)
     if opcion == 0:
         return None, dia
     else:
-        return dia + servicios.get_duracion, None
+        return dia + servicio.get_duracion(), None
 
 
-def generar_turno(dia, empleado):
+def generar_turno(dia, empleado, cargados):
     turno = Turno()
     if not es_laborable(dia + timedelta(days=1)):
         dia_realizacion = dia + timedelta(days=2)
     else:
         dia_realizacion = dia + timedelta(days=1)
 
-    turno.fecha = dia_realizacion #Esto me puede dejar el lunes como dia de realización del turno
+    turno.fecha = dia_realizacion
     turno.dia = dia_realizacion.date()
     turno.hora = dia_realizacion.time()
     turno.fecha_creacion = dia
     fecha_confirmacion = dia
     turno.empleado = empleado
-    turno.cliente = cliente_random()#Pueden repetirse ¡Ojo!
+    cliente_valido = False
+    while cliente_valido == False:
+        cliente_tentativo = cliente_random()
+        if cliente_tentativo in cargados:
+            cliente_valido = False
+        else:
+            turno.cliente = cliente_tentativo
+            cargados.append(cliente_tentativo)
+            cliente_valido = True
     turno.save()
-    turno.servicios = get_servicios_random(empleado)
-    turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia_realizacion, turno.servicios)
-    #turno.promociones = get_promociones(dia, empleado)
+    servicioX = get_servicios_random(empleado)
+    turno.servicios.add(servicioX)
+    turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia_realizacion, servicioX)
     turno.comision = None
     turno.save()
     
@@ -72,12 +80,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):        
         fecha_inicio = datetime(2017, 1, 1)
         fecha_fin = datetime.today()
+        cargados = []
         for dia_actual in rango_de_fechas(fecha_inicio, fecha_fin):
             if es_laborable(dia_actual):
                 for empleado in Empleado.objects.all():
                     #Un Turno a la mañana
-                    generar_turno(dia_actual.replace(hour=9),empleado)
+                    generar_turno(dia_actual.replace(hour=9),empleado,cargados)
                     #Uno a la tarde
-                    generar_turno(dia_actual.replace(hour=16),empleado)
-
-                    
+                    generar_turno(dia_actual.replace(hour=16),empleado,cargados)
+                cargados.clear()
