@@ -21,7 +21,7 @@ def cliente_random():
 
 def get_servicios_random(empleado):
     servicios = ServicioBasico.objects.filter(sector=empleado.sector)
-    indice = random.randint(0,len(servicios))
+    indice = random.randint(0,len(servicios)-1)
     return servicios[indice]
 
 def get_promociones(dia, empleado):
@@ -35,7 +35,7 @@ def get_promociones(dia, empleado):
 def get_fecha(dia, servicios):
     opcion = random.randint(0,1)
     if opcion == 0:
-        return None, dia + timedelta(days=1)
+        return None, dia
     else:
         return dia + servicios.get_duracion, None
 
@@ -46,18 +46,18 @@ def generar_turno(dia, empleado):
         dia_realizacion = dia + timedelta(days=2)
     else:
         dia_realizacion = dia + timedelta(days=1)
-        
-    turno.fecha = dia + timedelta(days=1) #Esto me puede dejar el lunes como dia de realización del turno
-    turno.dia = dia.date()
-    turno.hora = dia.time()
+
+    turno.fecha = dia_realizacion #Esto me puede dejar el lunes como dia de realización del turno
+    turno.dia = dia_realizacion.date()
+    turno.hora = dia_realizacion.time()
     turno.fecha_creacion = dia
     fecha_confirmacion = dia
-    turno.save()
-    turno.servicios = get_servicios_random(empleado)
-    turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia, turno.servicios)
-    #turno.promociones = get_promociones(dia, empleado)
     turno.empleado = empleado
     turno.cliente = cliente_random()#Pueden repetirse ¡Ojo!
+    turno.save()
+    turno.servicios = get_servicios_random(empleado)
+    turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia_realizacion, turno.servicios)
+    #turno.promociones = get_promociones(dia, empleado)
     turno.comision = None
     turno.save()
     
@@ -71,7 +71,7 @@ class Command(BaseCommand):
     #9-13 y de 16-20
     def handle(self, *args, **options):        
         fecha_inicio = datetime(2017, 1, 1)
-        fecha_fin = datetime(2017, 12, 7)
+        fecha_fin = datetime.today()
         for dia_actual in rango_de_fechas(fecha_inicio, fecha_fin):
             if es_laborable(dia_actual):
                 for empleado in Empleado.objects.all():
