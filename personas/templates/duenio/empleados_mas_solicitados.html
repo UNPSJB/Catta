@@ -53,9 +53,10 @@
                       <a href="{% url 'empleados_mas_solicitados_pdf' %}" target="_blank" class="btn btn-violet btn-info">
                         <span class="glyphicon glyphicon-file"><font face="arial"> Exportar a PDF </font></span>
                       </a>
+                        <button type="button" class="btn-success" id="boton_excel"> Descargar Planilla Excel</button>
                     </center>
                   </div>
-                  <table class="table table-striped">
+                  <table class="table table-striped table2excel" data-tableName="Empleados mas Solicitados">
                       <thread>
                           <tr>
                               <th>Nombre</th>
@@ -244,4 +245,16 @@
     });
 </script>
 
+<script src="{%static 'assets/js/jquery.table2excel.js'%}"></script>>
+
+<script>
+    $("#boton_excel").click(function(){
+        $(".table2excel").table2excel({
+            exclude:".noExl",
+            name:"Excel Document Name",
+            filename:"Empleados mas Solicitados",
+            fileext:".xls",
+            });
+        });
+</script>
 {% endblock%}
