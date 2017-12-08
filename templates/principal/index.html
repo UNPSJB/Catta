@@ -4,6 +4,15 @@
 
 {% block barra %}
 <ul id="hornavmenu" class="navbar-fixed-top" style="height: 60px">
+    <li class="navbar-left">
+        {% if rol == "duenio" %}
+            <a href="{% url 'duenio' %}" class="fa-home">Principal</a>
+        {% elif rol == "empleado" %}
+            <a href="{% url 'empleado' %}" class="fa-home">Principal</a>
+        {% elif rol == "cliente" %}
+            <a href="{% url 'cliente' %}" class="fa-home">Principal</a>
+        {% endif%}
+    </li>
     <div class="navbar-right" style="margin-top: 12px;">
         <a class="btn btn-red" href="{%url 'ayuda_externa' %}" target="_blank" role="button">AYUDA</a>
         <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>

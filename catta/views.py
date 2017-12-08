@@ -13,7 +13,9 @@ def index(request):
     contexto["promociones"] = Promocion.objects.all()
     contexto["logeado"] = True
     try:
-        request.user.persona
+        persona = request.user.persona
+        rol = persona.get_rol_url()
+        contexto['rol'] = rol
     except AttributeError:
         contexto["logeado"] = False
     return render(request, 'principal/index.html', contexto)

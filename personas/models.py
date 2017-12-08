@@ -139,6 +139,16 @@ class Persona(models.Model):
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
 
+    def get_rol_url(self):
+        if self.cliente:
+            rol = 'cliente'
+        if self.empleado:
+            rol = 'empleado'
+        if self.duenia:
+            rol = 'duenio'
+        return rol
+
+
 class Comision(models.Model):
     FILTROS = {
         "empleadoN": ["turno__empleado__persona__nombre__icontains"],
