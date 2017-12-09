@@ -6,7 +6,7 @@ CD:
     Todo el Codigo.
     Manual de Usuario.
     Manual Tecnico.
-Los asteriscos en formularios.. decir que indican obligatoriedad
+Los asteriscos en formularios.. decir que indican obligatoriedad.HECHO
 Cuando confirmas el turno si tenia filtros.. que los use
 bug en turnos fijos.
 Te falta Feedback de exito. (Flash Messages).HECHO

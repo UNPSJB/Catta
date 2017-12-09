@@ -77,6 +77,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
                                         {% crispy form_crear_turno %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -91,6 +92,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple"><font face="arial"><center> Dar de alta un servicio </center></font></font></h2>
                                         {% crispy form_servicio %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -107,6 +109,7 @@
                                         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
                                             {% crispy form_promo %}
                                         </form>
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +124,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple"><font face="arial"><center> Dar de alta un empleado </center></font></font></h2>
                                         {% crispy form_empleado %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +139,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple"><font face="arial"><center> Dar de alta un cliente </center></font></font></h2>
                                         {% crispy form_cliente %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +154,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple"><font face="arial"><center> Dar de alta un sector </center></font></font></h2>
                                         {% crispy form_sector %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -163,6 +169,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple" font face="arial"><center> Dar de alta un insumo </center></font></h2>
                                         {% crispy form_insumo %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -177,6 +184,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple"><font face="arial"><center> Crear turno fijo</center></font></font></h2>
                                         {% crispy form_crear_turno_fijo %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
@@ -191,6 +199,7 @@
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
                                         <h2><font color="Purple" font face="arial"><center> Liquidar Comision </center></font></h2>
                                         {% crispy form_liquidar_Comision %}
+                                        <h5>Los campos que contienen asteriscos(*) son obligatorios.</h5>
                                     </div>
                                 </div>
                             </div>
