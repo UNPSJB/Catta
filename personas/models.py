@@ -26,6 +26,9 @@ class Empleado(Rol):
     sector = models.ForeignKey(Sector, null=True, blank=True)
     # agenda = []  # LISTA DE TURNOS (AGENDA)
 
+    def __str__(self):
+        return "{} {} {}".format(self.persona.nombre, self.persona.apellido, self.sector)
+
     def alta_cliente(self):
         pass
 
@@ -137,7 +140,7 @@ class Persona(models.Model):
     usuario = models.OneToOneField(Usuario, null=True, blank=True)
 
     def __str__(self):
-        return "{} {}".format(self.nombre, self.apellido)
+        return "{} {} ".format(self.nombre, self.apellido)
 
     def get_rol_url(self):
         if self.cliente:

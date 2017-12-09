@@ -186,7 +186,6 @@ class CrearTurnoFijoForm(ModelForm):
 
     fecha = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'id': 'fecha_inicio'}))
     empleado = forms.ModelChoiceField(queryset=Empleado.objects.all(), widget=forms.Select(attrs={'id': 'id_empleado_fijo'}))
-    servicios = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, choices=servicios1,)
     def __init__(self, *args, **kwargs):
         super(CrearTurnoFijoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()

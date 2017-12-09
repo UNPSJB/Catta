@@ -58,7 +58,6 @@ class ServicioBasico(Servicio):
     duracion = models.PositiveIntegerField(default=0)
     insumos = models.ManyToManyField(Insumo, blank=True)
 
-
     def get_duracion(self):
         return self.duracion * self.MODULO
 

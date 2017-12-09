@@ -57,6 +57,16 @@
         <!-- Contenido -->
         <div class="col-md-9">
             <div class="tab-content">
+                    {% if messages %}
+                    <div class="alert alert-success alert-dismissable">
+                            <a class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
                 {% load crispy_forms_tags %}
 
                 <div class="tab-pane fade in" id="crear_turno">

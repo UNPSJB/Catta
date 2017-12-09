@@ -9,7 +9,6 @@ CD:
 Los asteriscos en formularios.. decir que indican obligatoriedad
 Cuando confirmas el turno si tenia filtros.. que los use
 bug en turnos fijos.
-Te falta Feedback de exito. (Flash Messages).
-FAlta boton para ir al home del rol desde el index.
+Te falta Feedback de exito. (Flash Messages).HECHO
 Bug en crear turno
 

@@ -19,7 +19,7 @@ from easy_pdf.views import PDFTemplateView
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 import json
-
+from django.contrib import messages
 
 from .forms import CuentaNuevaForm, EmpleadoNuevoForm, LiquidarComisionForm
 from gestion.forms import SectorForm, InsumoForm, ServicioForm, PromoForm
@@ -90,7 +90,8 @@ def crear_turno_cliente(request):
         if form.is_valid():
             print(request.user.persona.cliente)
             form.save()
-            return redirect('/personas/cliente')
+            messages.add_message(request, messages.SUCCESS, 'La operación se realizó con exito!')
+            return redirect('/personas/crear_turno/')
         print(form)
     else:
         form = CrearTurnoForm(initial={'cliente': request.user.persona.cliente})
@@ -161,6 +162,7 @@ def empleado(request, id=None):
             _form = klassForm(request.POST, instance=instance)
             if _form.is_valid():
                 _form.save(usuario)
+                messages.add_message(request, messages.SUCCESS, 'La operación se realizó con exito!')
                 _form = klassForm()
                 if form_name == 'form_crear_turno_fijo':
                     id_turno = TurnoFijo.objects.latest('id')
@@ -278,6 +280,7 @@ def duenio(request):
             _form = klassForm(request.POST or None, request.FILES or None)
             if _form.is_valid():
                 _form.save()
+                messages.add_message(request, messages.SUCCESS, 'La operación se realizó con exito!')
                 _form = klassForm()
                 redirect(usuario.get_vista())
                 if form_name == 'form_crear_turno_fijo':
@@ -299,7 +302,6 @@ def duenio(request):
                             invalidas.append(fecha)
                             fecha = fecha + timedelta(days=7)
                     return render(request,'duenio/turno_creado_fijo.html', {'turnos':turnos, 'invalidas':invalidas})
-                    #return redirect('lista_turno_creado_fijo')
             contexto[form_name] = _form
             contexto["formularioError"] = input_name
 
@@ -499,15 +501,13 @@ def mes_mayor_trabajo(request):
     meses = {'January': 0, 'Februry': 0, 'March': 0, 'April': 0,
              'May': 0, 'June': 0, 'July': 0, 'August':0,
              'September':0, 'Octuber':0, 'November':0, 'December':0}
-    #FALTA FIJARSE QUE EL TURNO REALMENTE SE HAYA REALIZADO
     turnos = Turno.objects.all()
     for turno in turnos:
         try:
             meses[turno.fecha_realizacion.strftime('%B')] += 1
         except AttributeError:
             pass                        
-        except KeyError:
-            meses[turno.fecha_realizacion.strftime('%B')] = 1                        
+
     contexto['meses'] = meses
     return render(request, 'duenio/mes_mayor_trabajo.html', contexto)
 
@@ -515,12 +515,13 @@ def mes_mayor_trabajo(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dia_mayor_trabajo(request):
     dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
-    #FALTA FIJARSE QUE EL TURNO REALMENTE SE HAYA REALIZADO
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha').values("dia").annotate(cant_Dias=Count("dia"))
-
+    turnos = Turno.objects.filter(*mfiltros)
     for turno in turnos:
-        dias[turno['dia'].strftime('%A')] += turno['cant_Dias']
+        try:
+            dias[turno.fecha_realizacion.strftime('%A')] += 1
+        except AttributeError:
+            pass                                               
 
     return render(request,"duenio/dia_mayor_trabajo.html",{'dias':dias,'f':ffilter})
 
@@ -537,6 +538,7 @@ def dias_mayor_creaciones_turnos(request):
         except KeyError:
             dias[turno.fecha_creacion.strftime('%A')] = 1                        
     contexto['dias'] = dias
+    contexto['f'] = ffilter
     return render(request, 'duenio/dias_mayor_creaciones_turnos.html', contexto)
 
 @login_required(login_url='iniciar_sesion')
@@ -591,6 +593,7 @@ def empleados_mas_solicitados(request):
     todos_los_sectores = Sector.objects.all()
     contexto['sectores'] = todos_los_sectores
     contexto['empleados'] = topEmplados
+    contexto['f'] = ffilter
     data = serializers.serialize("json", topEmplados)
     request.session['empleados'] = data
     datos = json.dumps(list(topEmplados.values()), cls=DjangoJSONEncoder)
@@ -604,6 +607,7 @@ def horarios_mas_solicitados(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     horarios_mas_solicitados = Turno.objects.filter(*mfiltros).values("hora").annotate(cantidad_de_turnos=Count("hora"))
     contexto['horarios'] = horarios_mas_solicitados
+    contexto['f'] = ffilter
     return render(request, 'duenio/horarios_mas_solicitados.html', contexto)
 
 """
