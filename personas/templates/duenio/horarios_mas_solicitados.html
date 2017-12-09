@@ -6,7 +6,6 @@
     <div class="container background-white" style="opacity: 0.95;">
         <div class="row margin-vert-30">
             <div class="col-md-12">
-
               <div class="row" style="height:60px">
                 <center>
                   <h2><font color="Purple" face="arial"> Horarios Más Solicitados</font></h2>
@@ -45,69 +44,20 @@
                 <table class="table table-striped">
                     <thread>
                         <tr>
-                            <th>Fecha y Hora</th>
-                            <th>Cliente</th>
-                            <th>Empleado</th>
-                            <th>Estado</th>
-                            <th>Servicios</th>
-                            <th>Modificar</th>
-                            <th>Conf/Realiz</th>
-                            <th>Cancelar</th>
+                            <th>Horario</th>
+                            <th>Cantidad de Turnos</th>
                         </tr>
                     </thread>
                     <tbody>
-                        {% for turno in turnos %}
+                        {% for horario in horarios %}
                         <tr>
-                            <td width=140>{{turno.fecha}}</td>
-                            <td>{{turno.cliente}}</td>
-                            <td>{{turno.empleado}}</td>
-                            <td>{{turno.estado}}</td>
-                            <td width=250>
-                                {% for promocion in turno.promociones.all %}
-                                    <details>
-                                        <summary>{{promocion}}</summary>
-                                            {% for servicio in promocion.servicios.all %}
-                                                  <li><i>{{servicio}}</i>
-                                            {% endfor %}
-                                    </details>
-                                {% endfor %}
-                                {% for servicio in turno.servicios.all %}
-                                   <li> {{servicio}}
-                                {% endfor %}
-                            </td>
-
-                            <td width=20>
-                                {% if turno.fecha_confirmacion == null %}
-                                    {% if turno.fecha_cancelacion == null %}
-                                        <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Modificar</a>
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-
-                            <td width=20>
-                                {% if turno.fecha_cancelacion == null %}
-                                    {% if turno.fecha_realizacion == null %}
-                                        {% if turno.fecha_confirmacion == null %}
-                                            <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
-                                        {% else %}
-                                            <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-
-                            <td width=20>
-                                {% if turno.fecha_cancelacion == null %}
-                                    {% if turno.fecha_realizacion == null %}
-                                        <a href="{% url 'cancelar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Cancelar</a>
-                                    {% endif %}
-                                {% endif %}
-                            </td>
-
+                            <td >{{horario.hora}}</td>
+                            <td>{{horario.cantidad_de_turnos}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="chart-container1"><canvas id="myChart1"></canvas></div>
             </div>
         </div>
     </div>
@@ -116,6 +66,55 @@
 
 {% block scripts %}
 {{ block.super }}
+<script src="\static\assets\js\Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart1").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                    {% for horario in horarios %}
+                            "{{horario.hora}}",
+                    {% endfor %}
+                    ],
+            datasets: [{
+                label: 'Cantidad de Turnos',
+                data: [
+                        {% for horario in horarios %}
+                                {{horario.cantidad_de_turnos}},
+                        {% endfor %}
+                    ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 <script>
     $(function() {
         $(".datetimeinput").datepicker();

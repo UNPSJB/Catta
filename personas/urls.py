@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from . import views
-from .views import ListadoPDFClientes, ListadoPDFTurnos
 
 urlpatterns = [
     url(r'^ayuda_externa/', views.ayuda_externa, name='ayuda_externa'),
@@ -50,9 +49,6 @@ urlpatterns = [
     url(r'^horarios_mas_solicitados/$', views.horarios_mas_solicitados, name='horarios_mas_solicitados'),
     url(r'^servicios_mas_solicitados/$', views.servicios_mas_solicitados, name='servicios_mas_solicitados'),
     url(r'^empleados_mas_solicitados/$', views.empleados_mas_solicitados, name='empleados_mas_solicitados'),
-    # Listados PDF
-    url(r'^reporte_personas_pdf/$', ListadoPDFClientes.as_view(), name="reporte_clientes_pdf"),
-    url(r'^reporte_turnos_pdf/(\S+)/$', ListadoPDFTurnos.as_view(), name="reporte_turnos_pdf"),
     # Reportes PDF
     url(r'^empleados_mas_solicitados_pdf/', views.EmpleadosMasSolicitadosPDF.as_view(), name="empleados_mas_solicitados_pdf"),
     # Cerrar Sesión.

@@ -26,20 +26,21 @@
                         </tr>
                     </thread>
                     <tbody>
-                        {% for c in clientes %}
+                        {% for cliente in clientes %}
                         <tr>
-                            <td>{{c.dni}}</td>
-                            <td>{{c.nombre}}</td>
-                            <td>{{c.apellido}}</td>
-                            <td>{{c.direccion}}</td>
-                            <td>{{c.telefono}}</td>
-                            <td>{{c.localidad}}</td>
-                            <td>{{c.cliente.email}}</td>
-                            <td>{{c.ausencias_turnos}}</td>
+                            <td>{{cliente.persona.dni}}</td>
+                            <td>{{cliente.persona.nombre}}</td>
+                            <td>{{cliente.persona.apellido}}</td>
+                            <td>{{cliente.persona.direccion}}</td>
+                            <td>{{cliente.persona.telefono}}</td>
+                            <td>{{cliente.persona.localidad}}</td>
+                            <td>{{cliente.persona.cliente.email}}</td>
+                            <td>{{cliente.ausencias_turnos}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="chart-container1"><canvas id="myChart1"></canvas></div>
             </div>
         </div>
     </div>
@@ -48,6 +49,55 @@
 
 {% block scripts %}
 {{ block.super }}
+<script src="\static\assets\js\Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart1").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                    {% for cliente in clientes %}
+                            "{{cliente.persona.nombre}} {{cliente.persona.apellido}}",
+                    {% endfor %}
+                    ],
+            datasets: [{
+                label: 'Cantidad De Ausencias',
+                data: [
+                        {% for cliente in clientes %}
+                                {{cliente.ausencias_turnos}},
+                        {% endfor %}
+                    ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 <script>
     $(function() {
         $(".datetimeinput").datepicker();

@@ -495,14 +495,28 @@ def servicios_mas_solicitados(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def mes_mayor_trabajo(request):
-    pass
+    contexto = {}
+    meses = {'January': 0, 'Februry': 0, 'March': 0, 'April': 0,
+             'May': 0, 'June': 0, 'July': 0, 'August':0,
+             'September':0, 'Octuber':0, 'November':0, 'December':0}
+    #FALTA FIJARSE QUE EL TURNO REALMENTE SE HAYA REALIZADO
+    turnos = Turno.objects.all()
+    for turno in turnos:
+        try:
+            meses[turno.fecha_realizacion.strftime('%B')] += 1
+        except AttributeError:
+            pass                        
+        except KeyError:
+            meses[turno.fecha_realizacion.strftime('%B')] = 1                        
+    contexto['meses'] = meses
+    return render(request, 'duenio/mes_mayor_trabajo.html', contexto)
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dia_mayor_trabajo(request):
     dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
+    #FALTA FIJARSE QUE EL TURNO REALMENTE SE HAYA REALIZADO
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    # return render(request, 'duenio/turnos_duenio.html', {'turnos': turnos, "f": ffilter, 'Turno': Turno})
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha').values("dia").annotate(cant_Dias=Count("dia"))
 
     for turno in turnos:
@@ -513,17 +527,29 @@ def dia_mayor_trabajo(request):
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def dias_mayor_creaciones_turnos(request):
-    pass
+    contexto = {}
+    dias = {'Sunday': 0, 'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0}
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros)
+    for turno in turnos:
+        try:
+            dias[turno.fecha_creacion.strftime('%A')] += 1
+        except KeyError:
+            dias[turno.fecha_creacion.strftime('%A')] = 1                        
+    contexto['dias'] = dias
+    return render(request, 'duenio/dias_mayor_creaciones_turnos.html', contexto)
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def clientes_con_mas_ausencias(request):
+    contexto = {}
     clientes_ausencias = Cliente.objects.annotate(ausencias_turnos = Count(
         Case(
-            When (turno__fecha_cancelacion__isnull = False, then =1),
+            When (turno__fecha_cancelacion__isnull = False, then = 1),
         )
-    )).order_by("-ausencias_turnos")
-    return render(request, "duenio/clientes_con_mas_ausencias.html", {'clientes' : clientes_ausencias})
+    )).order_by("-ausencias_turnos")[:5]
+    contexto['clientes'] = clientes_ausencias
+    return render(request, "duenio/clientes_con_mas_ausencias.html", contexto)
     #pass
 
 @login_required(login_url='iniciar_sesion')
@@ -571,26 +597,14 @@ def empleados_mas_solicitados(request):
     request.session['datos'] = datos
     return render(request, "duenio/empleados_mas_solicitados.html", contexto)
 
-"""
-def cliente_lista_servicios(request):
-    mfiltros, ffilter = get_filtros(Servicio, request.GET)
-    servicios = ServicioBasico.objects.filter(*mfiltros)
-    promociones = Promocion.objects.filter(*mfiltros)
-    insumos = Insumo.objects.all()
-    return render(request, 'cliente/servicios_cliente.html', {'servicios': servicios,
-                                                              'promociones': promociones,
-                                                              'insumos': insumos, "f": ffilter})
-"""
-
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def horarios_mas_solicitados(request):
-
-
+    contexto = {}
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
-    return render(request, 'duenio/horarios_mas_solicitados.html', {})
-    turnos = Turno.objects.values("hora").annotate(horas=Count("hora"))
+    horarios_mas_solicitados = Turno.objects.filter(*mfiltros).values("hora").annotate(cantidad_de_turnos=Count("hora"))
+    contexto['horarios'] = horarios_mas_solicitados
+    return render(request, 'duenio/horarios_mas_solicitados.html', contexto)
 
 """
 Vistas de Reportes para convertir a PDF
@@ -644,109 +658,3 @@ def cuenta(request):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
-
-
-class ListadoPDF(View):
-    PAGE_WIDTH  = defaultPageSize[0]
-    PAGE_HEIGHT = defaultPageSize[1]
-
-    def cabecera(self, pdf, texto):
-        pdf.setFont("Helvetica", 16)
-        ancho_texto = stringWidth(texto, "Helvetica", 16)
-        pdf.drawString((ListadoPDF.PAGE_WIDTH - ancho_texto) / 2.0, 790, texto)
-
-    def contenido(self, pdf, y):
-        pass
-
-    def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='application/pdf')
-        buffer = BytesIO()
-        pdf = canvas.Canvas(buffer)
-
-        self.cabecera(pdf)
-        y = 760
-        self.contenido(pdf, y)
-
-        pdf.showPage()
-        pdf.save()
-        pdf = buffer.getvalue()
-        buffer.close()
-        response.write(pdf)
-
-        return response
-
-class ListadoPDFClientes(ListadoPDF):
-    def cabecera(self, pdf):
-        texto = u"Reporte de Clientes"
-        super().cabecera(pdf, texto)
-
-    def get(self, request, query, query1):
-        print(query)
-        print(query1)
-
-    def contenido(self, pdf, y):
-        encabezados = ('DNI', 'Nombre', 'Apellido', 'Localidad', 'Teléfono', 'E-Mail')
-
-        clientes = Persona.objects.filter(cliente__isnull=False)
-        detalles = []
-        for cliente in clientes:
-            y -= 20
-            c = (cliente.dni, cliente.nombre, cliente.apellido, cliente.localidad, cliente.telefono, cliente.cliente.email)
-            detalles.append(c)
-
-        detalle_orden = Table([encabezados] + detalles)
-        detalle_orden.setStyle(TableStyle(
-            [
-                ('ALIGN',(0,0),(3,0),'CENTER'),
-                ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                ('FONTSIZE', (0, 0), (-1, -1), 10),
-            ]
-        ))
-        detalle_orden.wrapOn(pdf, 800, 600)
-        detalle_orden.drawOn(pdf, 90, y)
-
-class ListadoPDFTurnos(ListadoPDF):
-    def cabecera(self, pdf):
-        texto = u"Reporte de Turnos"
-        super().cabecera(pdf, texto)
-
-    def contenido(self, pdf, y):
-        encabezados = ('Fecha y Hora', 'Cliente', 'Empleado', 'Estado', 'Servicios')
-
-        turnos = Turno.objects.all().order_by("-fecha")
-        detalles = []
-
-        for turno in turnos:
-            y -= 10
-            t_servicios = ""
-
-            servicios = turno.servicios.all()
-            for i in range(servicios.__len__()):
-                y -= 10
-                if i == 0 or i == servicios.__len__():
-                    t_servicios += servicios[i].nombre
-                else:
-                    t_servicios += "\n" + servicios[i].nombre
-
-            promos = turno.promociones.all()
-            for i in range(promos.__len__()):
-                y -= 10
-                if i == 0 or i == promos.__len__():
-                    t_servicios += promos[i].nombre
-                else:
-                    t_servicios += "\n" + promos[i].nombre
-
-            c = (turno.fecha, turno.cliente, turno.empleado, turno.estado(), t_servicios)
-            detalles.append(c)
-
-        detalle_orden = Table([encabezados] + detalles)
-        detalle_orden.setStyle(TableStyle(
-            [
-                ('ALIGN',(0,0),(3,0),'CENTER'),
-                ('VALIGN',(0,0),(-1,-1),'TOP'),
-                ('GRID', (0,0), (-1,-1), 1, colors.black),
-                ('FONTSIZE', (0,0), (-1,-1), 10),
-            ]
-        ))
-        detalle_orden.wrapOn(pdf, 800, 600)
-        detalle_orden.drawOn(pdf, 70, y)

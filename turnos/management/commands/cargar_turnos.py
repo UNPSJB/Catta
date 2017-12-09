@@ -76,7 +76,7 @@ class Command(BaseCommand):
     Modo de utilización python manage.py cargar_turnos
     """
     help = 'Carga los turnos duarente el año 2016 utilizando los clientes y los servicios actuales'
-    #9-13 y de 16-20
+    #9-12 y de 16-20
     def handle(self, *args, **options):        
         fecha_inicio = datetime(2017, 1, 1)
         fecha_fin = datetime.today()
