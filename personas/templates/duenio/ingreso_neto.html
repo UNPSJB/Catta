@@ -16,6 +16,14 @@
                 <div class="row" style="height:80px">
                 <!-- FILTRADO !-->
                     <form method="get" action="">
+                        Cliente:
+                        <input name="clienteN" placeholder="Nombre" value="{{ f.clienteN }}" class="filtro">
+                        <input name="clienteA" placeholder="Apellido" value="{{ f.clienteA }}" class="filtro">
+    
+                        Empleado:
+                        <input name="empleadoN" placeholder="Nombre" value="{{ f.empleadoN }}" class="filtro">
+                        <input name="empleadoA" placeholder="Apellido" value="{{ f.empleadoA }}" class="filtro">
+                        <br>
                         Desde:
                         <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
                         Hasta:

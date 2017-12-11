@@ -3,67 +3,221 @@
 {% load staticfiles %}
 
 {% block contenido %}
-        <div class="container background-white" style="opacity: 0.95;">
-            <div class="row margin-vert-30">
-                <div class="col-md-12">
+    <div class="container background-white" style="opacity: 0.95;">
+        <div class="row margin-vert-30">
+            <div class="col-md-12">
 
-                  <div class="row" style="height:60px">
-                    <center>
-                      <h2><font color="Purple" face="arial"> Servicios Más Solicitados</font></h2>
-                    </center>
-                  </div>
-                  <div class="row" style="height:80px">
-                    <!-- FILTRADO !-->
-                    <form method="get" action="">
-                        Desde:
-                        <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
-                        Hasta:
-                        <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
-                        <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
-                    </form>
-                    <!--FIN FILTRADO!-->
-                  </div>
-                  <div class="row" style="height:50px">
-                    <center>
-                      <a href="" target="_blank" class="btn btn-violet btn-info">
-                        <span class="glyphicon glyphicon-file"><font face="arial"> Exportar a PDF </font></span>
-                      </a>
-                    </center>
-                  </div>
-                  <table class="table table-striped">
-                      <thread>
-                          <tr>
-                              <th>Nombre</th>
-                              <th>Descripción</th>
-                              <th>Precio</th>
-                              <th>Duración</th>
-                              <th>Insumos</th>
-                              <th>Cantidad</th>
-                          </tr>
-                      </thread>
-                      <tbody>
-                          {% for servicio in servicios %}
-                          <tr>
-                              <td>{{servicio.nombre}}</td>
-                              <td>{{servicio.descripcion}}</td>
-                              <td>{{servicio.precio}}</td>
-                              <td>{{servicio.duracion}}</td>
-                              <td>{% for insumo in servicio.insumos.all %}
-                                     <li>{{insumo}}
-                                  {% endfor %}
-                              </td>
-                              <td>{{servicio.cantidad_de_turnos}}</td>
-                          </tr>
-                          {% endfor %}
-                      </tbody>
-                  </table>
+                <div class="row" style="height:60px">
+                <center>
+                    <h2><font color="Purple" face="arial"> Servicios Más Solicitados</font></h2>
+                </center>
                 </div>
+                <div class="row" style="height:80px">
+                <!-- FILTRADO !-->
+                <form method="get" action="">
+                    Desde:
+                    <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
+                    Hasta:
+                    <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
+                </form>
+                <!--FIN FILTRADO!-->
+                </div>
+                <div class="row" style="height:50px">
+                <center>
+                    <a href="" target="_blank" class="btn btn-violet btn-info">
+                    <span class="glyphicon glyphicon-file"><font face="arial"> Exportar a PDF </font></span>
+                    </a>
+                </center>
+                </div>
+                <table class="table table-striped">
+                    <thread>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Duración</th>
+                            <th>Insumos</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        {% for servicio in servicios %}
+                        <tr>
+                            <td>{{servicio.nombre}}</td>
+                            <td>{{servicio.descripcion}}</td>
+                            <td>{{servicio.precio}}</td>
+                            <td>{{servicio.duracion}}</td>
+                            <td>{% for insumo in servicio.insumos.all %}
+                                    <li>{{insumo}}
+                                {% endfor %}
+                            </td>
+                            <td>{{servicio.cantidad_de_turnos}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="chart-container1"><canvas id="myChart1"></canvas></div>  
+                <table style="width:100%">
+                  <tr>
+                  <th><div class="chart-container2"><canvas id="myChart2"></canvas></div></th>
+                  <th><div class="chart-container2"><canvas id="myChart3"></canvas></div></th>
+                  <tr>    
+                </table> 
             </div>
         </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
 {{ block.super }}
+
+<script src="\static\assets\js\Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart1").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                    {% for servicio in servicios %}
+                            "{{servicio.nombre}}",
+                    {% endfor %}
+                    ],
+            datasets: [{
+                label: 'Turnos Realizados',
+                data: [
+                        {% for servicio in servicios %}
+                                {{servicio.cantidad_de_turnos}},
+                        {% endfor %}
+                    ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById("myChart2").getContext('2d');
+    var myChart2 = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            labels: [
+                {% for servicio in servicios %}
+                        "{{servicio.nombre}}",
+                {% endfor %}
+                ],
+            datasets: [{
+                label: 'Turnos Realizados',
+                data: [
+                        {% for servicio in servicios %}
+                                {{servicio.cantidad_de_turnos}},
+                        {% endfor %}
+                    ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById("myChart3").getContext('2d');
+    var myChart2 = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                    {% for servicio in servicios %}
+                            "{{servicio.nombre}}",
+                    {% endfor %}
+                    ],
+            datasets: [{
+                label: 'Turnos Realizados',
+                data: [
+                        {% for servicio in servicios %}
+                                {{servicio.cantidad_de_turnos}},
+                        {% endfor %}
+                    ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
 <script>
     $(function() {
         $(".datetimeinput").datepicker();
