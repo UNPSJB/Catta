@@ -498,9 +498,9 @@ def servicios_mas_solicitados(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def mes_mayor_trabajo(request):
     contexto = {}
-    meses = {'January': 0, 'Februry': 0, 'March': 0, 'April': 0,
+    meses = {'January': 0, 'February': 0, 'March': 0, 'April': 0,
              'May': 0, 'June': 0, 'July': 0, 'August':0,
-             'September':0, 'Octuber':0, 'November':0, 'December':0}
+             'September':0, 'October':0, 'November':0, 'December':0}
     turnos = Turno.objects.all()
     for turno in turnos:
         try:
