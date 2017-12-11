@@ -43,6 +43,8 @@ class Turno(models.Model):
     FILTROS = {
         "fechaI": ["fecha__date__gte"],
         "fechaF": ["fecha__date__lte"],
+        "fechaCI": ["fecha_creacion__gte"],
+        "fechaCF": ["fecha_creacion__lte"],
         "sector": ["empleado__sector__icontains"],
         "clienteN": [ "cliente__persona__nombre__icontains"],
         "clienteA": ["cliente__persona__apellido__icontains"],
