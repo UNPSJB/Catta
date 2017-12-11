@@ -501,7 +501,8 @@ def mes_mayor_trabajo(request):
     meses = {'January': 0, 'February': 0, 'March': 0, 'April': 0,
              'May': 0, 'June': 0, 'July': 0, 'August':0,
              'September':0, 'October':0, 'November':0, 'December':0}
-    turnos = Turno.objects.all()
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    turnos = Turno.objects.filter(*mfiltros)
     for turno in turnos:
         try:
             meses[turno.fecha_realizacion.strftime('%B')] += 1
@@ -509,6 +510,7 @@ def mes_mayor_trabajo(request):
             pass                        
 
     contexto['meses'] = meses
+    contexto['f'] = ffilter
     return render(request, 'duenio/mes_mayor_trabajo.html', contexto)
 
 @login_required(login_url='iniciar_sesion')
@@ -545,9 +547,31 @@ def dias_mayor_creaciones_turnos(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def clientes_con_mas_ausencias(request):
     contexto = {}
+    mfiltros, ffilter = get_filtros(Turno, request.GET)
+    try:
+        nombre = ffilter['clienteN']
+    except KeyError:
+        nombre = ""
+    try:
+        apellido = ffilter['clienteA']
+    except KeyError:
+        apellido = ""
+    try:
+        fecha_inicio = ffilter['fechaI']
+    except KeyError:
+        fecha_inicio = "2000-01-01"
+    try:
+        fecha_fin = ffilter['fechaF']
+    except KeyError:
+        fecha_fin = "9999-01-01"
     clientes_ausencias = Cliente.objects.annotate(ausencias_turnos = Count(
         Case(
-            When (turno__fecha_cancelacion__isnull = False, then = 1),
+            When (turno__fecha_cancelacion__isnull = False,
+                    turno__cliente__persona__nombre__icontains = nombre,
+                    turno__cliente__persona__apellido__icontains = apellido,
+                    turno__fecha__gt = fecha_inicio,
+                    turno__fecha__lt = fecha_fin,                    
+                    then = 1),
         )
     )).order_by("-ausencias_turnos")[:5]
     contexto['clientes'] = clientes_ausencias
@@ -586,7 +610,7 @@ def empleados_mas_solicitados(request):
                 When(turno__fecha_realizacion__isnull=False,
                         turno__fecha__gt=fecha_inicio,
                         turno__fecha__lt=fecha_fin,
-                        sector=sector,
+                        sector__nombre__icontains=sector,
                         then=1),
             )
         )).order_by("-cantidad_de_turnos")[:5]

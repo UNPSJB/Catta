@@ -12,6 +12,13 @@
                   <h2><font color="Purple" face="arial"> Mes con Mayor Trabajo</font></h2>
                 </center>
               </div>
+              <form method="get" action="">
+                    Desde:
+                    <input name="fechaI" placeholder="Desde (aaaa-mm-dd)" value="{{ f.fechaCI }}" class="datetimeinput">
+                    Hasta:
+                    <input name="fechaF" placeholder="Hasta (aaaa-mm-dd)" value="{{ f.fechaCF }}" class="datetimeinput">
+                    <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
+                </form>
                 <table class="table table-striped">
                     <thread>
                         <tr>
