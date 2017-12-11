@@ -72,6 +72,7 @@ class Promocion(Servicio):
                                height_field="ancho_imagen")
     alto_imagen = models.IntegerField(default=0)
     ancho_imagen = models.IntegerField(default=0)
+    activa = models.BooleanField(default=True)
 
     def get_duracion(self):
         duracion = 0

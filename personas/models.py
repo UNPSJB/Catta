@@ -29,50 +29,6 @@ class Empleado(Rol):
     def __str__(self):
         return "{} {} {}".format(self.persona.nombre, self.persona.apellido, self.sector)
 
-    def alta_cliente(self):
-        pass
-
-    def reg_turno(self):
-        pass
-
-    def cancel_turno(self):
-        pass
-
-    def reg_turno_realizado(self):
-        pass
-
-    # TODOS LOS EMPLEADOS VAN A PODER MANEJAR TURNOS FIJOS? SINO HAY
-    # QUE CREEAR EL ROL ESTETICISTA
-
-    def reg_turno_fijo(self):
-        pass
-
-    def cancel_turno_fijo(self):
-        pass
-
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    def confirmar_turno(self):
-        pass
-
-    def modificar_turno(self, Turno):
-        pass
-
-    def modificar_stock_insumo(self):
-        pass
-
-    def horarios_disponibles(self):
-        pass
-
-    def reporte_turnos(self):
-        pass
-
-    def listar_servicios(self):
-        pass
-
-    def listar_historial_cliente(self, cliente):
-        pass
-
     def get_pago(self, costo):
         comision = self.porc_comision
         pago = (costo*comision)/100
