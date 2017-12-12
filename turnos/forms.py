@@ -167,6 +167,7 @@ class ConfirmarTurnoForm(ModelForm):
 
 #No Funciona el listado de servicios hay que terminarlo
 class CrearTurnoFijoForm(ModelForm):
+
     query_servicios = ServicioBasico.objects.all()
     servicios1 = []
     for servicio in query_servicios:
