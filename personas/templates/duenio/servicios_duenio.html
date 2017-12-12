@@ -2,40 +2,4 @@
 {% load staticfiles %}
 {% block contenido %}
     {% include 'servicio/listaServicios.html' %}
-
-    <div class="container background-white" style="opacity: 0.95;">
-        <div class="row margin-vert-30">
-            <div class="col-md-12">
-                <h2><font color="Purple"><font face="arial"><center> Top 5 Servicios Realizados </center></font></font></h2>
-                <table class="table table-striped">
-                    <thread>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Duración</th>
-                            <th>Insumos</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thread>
-                    <tbody>
-                        {% for servicio in topServicios %}
-                        <tr>
-                            <td>{{servicio.nombre}}</td>
-                            <td>{{servicio.descripcion}}</td>
-                            <td>{{servicio.precio}}</td>
-                            <td>{{servicio.duracion}}</td>
-                            <td>{% for insumo in servicio.insumos.all %}
-                                   <li>{{insumo}}
-                                {% endfor %}
-                            </td>
-                            <td>{{servicio.cantidad_de_turnos}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-    </div>
 {% endblock %}
