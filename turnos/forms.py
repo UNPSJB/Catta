@@ -81,6 +81,7 @@ class ModificarTurnoForm(ModelForm):
 
         turno = self.instance
 
+
         servicios = tur.get('servicios')
         cantidad = tur.get('servicios').count()
         print(servicios)

@@ -138,7 +138,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 from datetime import time, date, timedelta, datetime
 
 MAÑANA = (time(9, 0), time(12, 0))
-TARDE = (time(16, 0), time(20, 0))
+TARDE = [time(16, 0), time(20, 0)]
 MODULO = timedelta(minutes=15)
 
 import re

@@ -191,5 +191,6 @@ class PromoForm(ModelForm):
             "precio",
             "sector",
             "servicios",
-            "imagen"
+            "imagen",
+            "activa"
         )
