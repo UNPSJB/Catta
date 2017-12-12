@@ -492,7 +492,15 @@ def servicios_mas_solicitados(request):
             )
     )).order_by("-cantidad_de_turnos")[:5]
 
-    return render(request, "duenio/servicios_mas_solicitados.html", {'servicios': servicios, "f": ffilter})
+    promociones = Promocion.objects.annotate(cantidad_de_turnos=Count(
+            Case(
+                When(turnos__fecha__gt=fecha_inicio,
+                        turnos__fecha__lt=fecha_fin,
+                        then=1)
+            )
+    )).order_by("-cantidad_de_turnos")[:5]
+
+    return render(request, "duenio/servicios_mas_solicitados.html", {'servicios': servicios, "f": ffilter, 'promociones': promociones})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
