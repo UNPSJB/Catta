@@ -43,17 +43,19 @@
                     </thread>
                     <tbody>
                         {% for servicio in servicios %}
-                        <tr>
-                            <td>{{servicio.nombre}}</td>
-                            <td>{{servicio.descripcion}}</td>
-                            <td>{{servicio.precio}}</td>
-                            <td>{{servicio.duracion}}</td>
-                            <td>{% for insumo in servicio.insumos.all %}
-                                    <li>{{insumo}}
-                                {% endfor %}
-                            </td>
-                            <td>{{servicio.cantidad_de_turnos}}</td>
-                        </tr>
+                            {% if servicio.cantidad_de_turnos != 0 %}
+                                <tr>
+                                    <td>{{servicio.nombre}}</td>
+                                    <td>{{servicio.descripcion}}</td>
+                                    <td>{{servicio.precio}}</td>
+                                    <td>{{servicio.duracion}}</td>
+                                    <td>{% for insumo in servicio.insumos.all %}
+                                            <li>{{insumo}}
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{servicio.cantidad_de_turnos}}</td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>

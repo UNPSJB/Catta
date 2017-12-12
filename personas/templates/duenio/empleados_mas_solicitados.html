@@ -69,10 +69,12 @@
                       <tbody>
                           {% for empleado in empleados %}
                           <tr>
-                              <td>{{empleado.persona.nombre}}</td>
-                              <td>{{empleado.persona.apellido}}</td>
-                              <td>{{empleado.sector}}</td>
-                              <td>{{empleado.cantidad_de_turnos}}</td>
+                                {% if empleado.cantidad_de_turnos != 0 %}
+                                    <td>{{empleado.persona.nombre}}</td>
+                                    <td>{{empleado.persona.apellido}}</td>
+                                    <td>{{empleado.sector}}</td>
+                                    <td>{{empleado.cantidad_de_turnos}}</td>
+                                {% endif %}
                           </tr>
                           {% endfor %}
 

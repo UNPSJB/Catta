@@ -507,11 +507,9 @@ def mes_mayor_trabajo(request):
         try:
             meses[turno.fecha_realizacion.strftime('%B')] += 1
         except AttributeError:
-            pass                        
-
+            pass
     contexto['meses'] = meses
-    contexto['f'] = ffilter
-    return render(request, 'duenio/mes_mayor_trabajo.html', contexto)
+    return render(request, 'duenio/mes_mayor_trabajo.html', contexto, {"f": ffilter})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
