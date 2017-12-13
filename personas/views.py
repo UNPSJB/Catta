@@ -377,7 +377,8 @@ def modificar_stock_duenio(request, id):
         return redirect('/personas/duenio_lista_insumos')
     else:
         insumo = get_object_or_404(Insumo, pk=id)
-    return render(request, 'duenio/modificar_stock_duenio.html', {'insumo': insumo})
+        user = 'duenia'
+    return render(request, 'duenio/modificar_stock_duenio.html', {'insumo': insumo, 'user':user})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)

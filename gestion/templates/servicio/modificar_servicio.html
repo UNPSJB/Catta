@@ -15,10 +15,10 @@
                         <form method="post" class="login-page">
                             {% csrf_token %}
                             <div class="login-header margin-bottom-30">
-                                <h2>Modificar Servicio</h2>
+                                <h2><font color="Purple"> Modificar Servicio </font></h2>
                             </div>
                             <!-- -->
-
+                            <div>
                                 Nombre: {{ servicio.nombre }}
                                 <br>
                                 <br>
@@ -26,9 +26,9 @@
                                 {% csrf_token %}
                                 {% crispy form_modificar_servicio %}
 
-
+                                <a href="{% url 'duenio_lista_servicios' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                            </div>
                         </form>
-
                 </div>
                 <!-- End Login Box -->
             </div>

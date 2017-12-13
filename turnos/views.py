@@ -99,7 +99,11 @@ def modificar_turno(request, id):
     else:
         turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(instance=turno)
-    return render(request, 'modificarTurno/modificar_turno.html', {'turno': turno, "form_modificar_turno": form})
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        else:
+            user = 'empleado'
+    return render(request, 'modificarTurno/modificar_turno.html', {'turno': turno, "form_modificar_turno": form, 'user':user})
 
 def cancelar_turno(request, id):
         if request.method == "POST":
@@ -116,7 +120,11 @@ def cancelar_turno(request, id):
             return redirect(ret)
         else:
             turno = get_object_or_404(Turno, pk=id)
-        return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno})
+            if (request.user.persona.duenia != None):
+                user = 'duenia'
+            else:
+                user = 'empleado'
+        return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno, 'user':user})
 
 
 
@@ -143,7 +151,11 @@ def marcar_realizado(request, id):
     else:
         turno = get_object_or_404(Turno, pk=id)
         form = RegistrarTurnoRealizadoForm(instance=turno)
-    return render(request, 'marcarRealizado/marcar_realizado.html', {'turno': turno, 'form_registrar_turno_realizado': form})
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        else:
+            user = 'empleado'
+    return render(request, 'marcarRealizado/marcar_realizado.html', {'turno': turno, 'form_registrar_turno_realizado': form, 'user':user})
 
 def confirmar_turno(request, id):
     if request.method == "POST":
@@ -160,7 +172,11 @@ def confirmar_turno(request, id):
         return redirect(ret)
     else:
         turno = get_object_or_404(Turno, pk=id)
-    return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno})
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        else:
+            user = 'empleado'
+    return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno, 'user':user})
 
 def calendario(request):
     turnos = Turno.objects.all()

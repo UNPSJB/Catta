@@ -23,13 +23,18 @@
                                 <li> Fecha de creación: {{ turno.fecha_creacion }}
                                 <li> Fecha de confirmacion:{% if turno.fecha_confirmacion != null %} {{ turno.fecha_confirmacion }} {% else %} No ha sido confirmado. {% endif %}
 
-
-                                <br>
-
+                                <br><br>
 
                             <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Cancelar</button>
+                                <div class="col-md-3">
+                                    {% if user == 'duenia' %}
+                                        <a href="{% url 'duenio_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                    {% else %}
+                                        <a href="{% url 'empleado_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Aceptar</button>
                                 </div>
                             </div>
 

@@ -18,11 +18,11 @@ div.cities {
 {% load staticfiles %}
 
 {% block contenido %}
-    <div class="container background-catta1" style="opacity: 0.95">
+    <div class="container background-white" style="opacity: 0.95">
         <div class="row margin-vert-30">
             <div class="col-md-10">
                 {% if messages %}
-                <div class="alert alert-danger">
+                <div class="alert alert-success alert-dismissable">
                         <a class="close" data-dismiss="alert" aria-label="close">×</a>
                     <ul class="messages">
                         {% for message in messages %}

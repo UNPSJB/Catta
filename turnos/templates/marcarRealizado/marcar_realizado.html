@@ -18,13 +18,18 @@
                                 <h2>Marcar Turno como Realizado</h2>
                             </div>
                             <!-- -->
-
+                            <div>
 
                                 {% load crispy_forms_tags %}
                                 {% csrf_token %}
                                 {% crispy form_registrar_turno_realizado %}
 
-
+                                {% if user == 'duenia' %}
+                                    <a href="{% url 'duenio_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                {% else %}
+                                    <a href="{% url 'empleado_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                {% endif %}
+                            </div>
                         </form>
 
                 </div>

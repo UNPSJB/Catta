@@ -18,7 +18,7 @@
                                 <h2>Modificar Turno</h2>
                             </div>
                             <!-- -->
-
+                            <div>
                                 <li> Fecha: {{ turno.fecha }}
                                 <li> Fecha de creación: {{ turno.fecha_creacion }}
                                 <li> Cliente: {{ turno.cliente.persona.nombre }} {{ turno.cliente.persona.apellido }}
@@ -29,8 +29,14 @@
                                 {% load crispy_forms_tags %}
                                 {% csrf_token %}
                                 {% crispy form_modificar_turno %}
-
-
+                                
+                                {% if user == 'duenia' %}
+                                    <a href="{% url 'duenio_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                {% else %}
+                                    <a href="{% url 'empleado_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                {% endif %}
+                                
+                            </div>
                         </form>
 
                 </div>
