@@ -120,7 +120,12 @@ def cliente_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     usuario = request.user
     turnos = Turno.objects.filter(cliente__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
-    return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
+    try:
+        estado_filtrado = ffilter['estado']
+        estado_filtrado = int(estado_filtrado)
+    except KeyError:
+        estado_filtrado = ""
+    return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado})
 
 
 @login_required(login_url='iniciar_sesion')
@@ -220,7 +225,12 @@ def empleado_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     usuario = request.user
     turnos = Turno.objects.filter(empleado__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
-    return render(request, 'empleado/turnos_empleado.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
+    try:
+        estado_filtrado = ffilter['estado']
+        estado_filtrado = int(estado_filtrado)
+    except KeyError:
+        estado_filtrado = ""
+    return render(request, 'empleado/turnos_empleado.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado': estado_filtrado})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
@@ -394,7 +404,12 @@ def duenio_lista_turnos(request):
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     query = 'Turno.objects.filter(*mfiltros).order_by(\'-fecha\'))'
     query1 = str(mfiltros)
-    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno})
+    try:
+        estado_filtrado = ffilter['estado']
+        estado_filtrado = int(estado_filtrado)
+    except KeyError:
+        estado_filtrado = ""
+    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -493,12 +508,19 @@ def servicios_mas_solicitados(request):
             )
     )).order_by("-cantidad_de_turnos")[:5]
 
-    return render(request, "duenio/servicios_mas_solicitados.html", {'servicios': servicios, "f": ffilter})
+    promociones = Promocion.objects.annotate(cantidad_de_turnos=Count(
+            Case(
+                When(turnos__fecha__gt=fecha_inicio,
+                        turnos__fecha__lt=fecha_fin,
+                        then=1)
+            )
+    )).order_by("-cantidad_de_turnos")[:5]
+
+    return render(request, "duenio/servicios_mas_solicitados.html", {'servicios': servicios, "f": ffilter, 'promociones': promociones})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def mes_mayor_trabajo(request):
-    contexto = {}
     meses = {'January': 0, 'February': 0, 'March': 0, 'April': 0,
              'May': 0, 'June': 0, 'July': 0, 'August':0,
              'September':0, 'October':0, 'November':0, 'December':0}
@@ -508,11 +530,8 @@ def mes_mayor_trabajo(request):
         try:
             meses[turno.fecha_realizacion.strftime('%B')] += 1
         except AttributeError:
-            pass                        
-
-    contexto['meses'] = meses
-    contexto['f'] = ffilter
-    return render(request, 'duenio/mes_mayor_trabajo.html', contexto)
+            pass
+    return render(request, 'duenio/mes_mayor_trabajo.html',{'meses':meses,'f': ffilter})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -525,7 +544,6 @@ def dia_mayor_trabajo(request):
             dias[turno.fecha_realizacion.strftime('%A')] += 1
         except AttributeError:
             pass                                               
-
     return render(request,"duenio/dia_mayor_trabajo.html",{'dias':dias,'f':ffilter})
 
 @login_required(login_url='iniciar_sesion')
@@ -576,6 +594,7 @@ def clientes_con_mas_ausencias(request):
         )
     )).order_by("-ausencias_turnos")[:5]
     contexto['clientes'] = clientes_ausencias
+    contexto['f'] = ffilter
     return render(request, "duenio/clientes_con_mas_ausencias.html", contexto)
     #pass
 

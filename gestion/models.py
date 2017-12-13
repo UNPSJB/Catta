@@ -51,7 +51,7 @@ class Servicio(models.Model):
     sector = models.ForeignKey(Sector)
 
     def __str__(self):
-        return "{}".format(self.nombre)
+        return "{} - {}".format(self.nombre, self.sector)
 
 
 class ServicioBasico(Servicio):
@@ -83,4 +83,4 @@ class Promocion(Servicio):
         return duracion * self.MODULO
 
     def get_nombre(self):
-        return str(self.nombre)
+        return "{} - {}".format(self.nombre, self.sector)

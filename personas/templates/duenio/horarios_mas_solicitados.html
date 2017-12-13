@@ -43,10 +43,12 @@
                     </thread>
                     <tbody>
                         {% for horario in horarios %}
-                        <tr>
-                            <td >{{horario.hora}}</td>
-                            <td>{{horario.cantidad_de_turnos}}</td>
-                        </tr>
+                            {% if horario.cantidad_de_turnos != 0 %}
+                                <tr>
+                                    <td >{{horario.hora}}</td>
+                                    <td>{{horario.cantidad_de_turnos}}</td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>

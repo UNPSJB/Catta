@@ -81,6 +81,7 @@ class ModificarTurnoForm(ModelForm):
 
         turno = self.instance
 
+
         servicios = tur.get('servicios')
         cantidad = tur.get('servicios').count()
         print(servicios)
@@ -167,6 +168,7 @@ class ConfirmarTurnoForm(ModelForm):
 
 #No Funciona el listado de servicios hay que terminarlo
 class CrearTurnoFijoForm(ModelForm):
+
     query_servicios = ServicioBasico.objects.all()
     servicios1 = []
     for servicio in query_servicios:
