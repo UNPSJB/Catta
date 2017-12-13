@@ -120,7 +120,12 @@ def cliente_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     usuario = request.user
     turnos = Turno.objects.filter(cliente__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
-    return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter})
+    try:
+        estado_filtrado = ffilter['estado']
+        estado_filtrado = int(estado_filtrado)
+    except KeyError:
+        estado_filtrado = ""
+    return render(request, 'cliente/turnos_cliente.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado})
 
 
 @login_required(login_url='iniciar_sesion')
@@ -220,7 +225,12 @@ def empleado_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     usuario = request.user
     turnos = Turno.objects.filter(empleado__persona__dni__exact=usuario.persona.dni, *mfiltros).order_by('-fecha')
-    return render(request, 'empleado/turnos_empleado.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno})
+    try:
+        estado_filtrado = ffilter['estado']
+        estado_filtrado = int(estado_filtrado)
+    except KeyError:
+        estado_filtrado = ""
+    return render(request, 'empleado/turnos_empleado.html', {'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado': estado_filtrado})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
@@ -393,7 +403,12 @@ def duenio_lista_turnos(request):
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     query = 'Turno.objects.filter(*mfiltros).order_by(\'-fecha\'))'
     query1 = str(mfiltros)
-    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno})
+    try:
+        estado_filtrado = ffilter['estado']
+        estado_filtrado = int(estado_filtrado)
+    except KeyError:
+        estado_filtrado = ""
+    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)

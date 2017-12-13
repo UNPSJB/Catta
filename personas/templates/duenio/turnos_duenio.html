@@ -31,7 +31,13 @@
                     <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
                     Estado:
                     <select name="estado">
-                      <option value=""></option>
+                      <option value="">
+                        {% for id, nombre in Turno.ESTADOS %}
+                            {% if id == estado_filtrado %}
+                                {{nombre}}
+                            {% endif %}
+                        {% endfor %}
+                      </option>
                       {% for id, nombre in Turno.ESTADOS %}
                          <option value="{{ id }}">{{ nombre }}</option>
                       {% endfor %}
