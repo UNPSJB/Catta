@@ -151,7 +151,7 @@ class ModificarServicioForm(ModelForm):
         )
 
         labels = {
-            'duracion': '(Duracion en modulos de 15 min)'
+            'duracion': 'Duracion (En modulos de 15 min)'
         }
 
 class PromoForm(ModelForm):
