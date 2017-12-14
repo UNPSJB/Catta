@@ -96,6 +96,10 @@ class CuentaNuevaForm(forms.ModelForm):
         fields = ("dni",
                   "nombre", "apellido",
                   "direccion", "telefono", "localidad")
+        labels = {  
+            'direccion': 'Dirección',
+            'telefono': 'Teléfono'
+        }
 
 
 class EmpleadoNuevoForm(forms.ModelForm):
@@ -184,6 +188,10 @@ class EmpleadoNuevoForm(forms.ModelForm):
         fields = ("dni",
                   "nombre", "apellido",
                   "direccion", "telefono", "localidad")
+        labels = {  
+            'direccion': 'Dirección',
+            'telefono': 'Teléfono'
+        }
 
 
 class LiquidarComisionForm(forms.ModelForm):
@@ -194,7 +202,7 @@ class LiquidarComisionForm(forms.ModelForm):
         super(LiquidarComisionForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
-        self.helper.add_input(Submit('liquidar_comision', 'Liquidar Comision'))
+        self.helper.add_input(Submit('liquidar_comision', 'Liquidar Comisión'))
 
     def save(self, commit=True):
         comision = super(LiquidarComisionForm, self).save()
