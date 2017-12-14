@@ -99,7 +99,11 @@ def modificarStockInsumo(request, id):
         return redirect('/personas/empleado_lista_insumos')
     else:
         insumo = get_object_or_404(Insumo, pk=id)
-    return render(request, 'insumo/modificarStockInsumo.html', {'insumo': insumo})
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        else:
+            user = 'empleado'
+    return render(request, 'insumo/modificarStockInsumo.html', {'insumo': insumo, 'user':user})
 
 
 def eliminarInsumo(request, id):

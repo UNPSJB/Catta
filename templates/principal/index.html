@@ -110,6 +110,7 @@
             <div class="col-md-10">
                 <ul class="portfolio-group">
                     {% for promocion in promociones %}
+                        {% if promocion.activa == True %}
                         <li class="portfolio-item col-sm-6 col-xs-6 padding-20">
                                 <figure class="animate fadeInLeft">
                                     {% if promocion.imagen.url != null %}
@@ -122,6 +123,7 @@
                                     </figcaption>
                                 </figure>
                         </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>

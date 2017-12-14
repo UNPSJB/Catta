@@ -17,17 +17,26 @@
                     <input name="empleadoA" placeholder="Apellido" value="{{ f.empleadoA }}" class="filtro">
                     <br>
                     Desde:
-                    <input name="fechaI" type="date" placeholder="Desde (aaa-mm-dd)" value="{{ f.fechaI }}" class="filtro">
+                    <input name="fechaI" placeholder="Desde (aaa-mm-dd)" value="{{ f.fechaI }}" class="datetimeinput">
                     Hasta:
-                    <input name="fechaF" type="date" placeholder="Hasta (aaa-mm-dd)" value="{{ f.fechaF }}" class="filtro">
+                    <input name="fechaF" placeholder="Hasta (aaa-mm-dd)" value="{{ f.fechaF }}" class="datetimeinput">
                     Servicio:
                     <input name="servicio" placeholder="Servicio" value="{{ f.servicio }}" class="filtro">
                     Estado:
                     <select name="estado">
-                      <option value=""></option>
-                      {% for id, nombre in Turno.ESTADOS %}
-                         <option value="{{ id }}">{{ nombre }}</option>
-                      {% endfor %}
+                    {% for id, nombre in Turno.ESTADOS %}
+                        {% if id == estado_filtrado %}
+                            <option value="{{ id }}">
+                            {{nombre}}
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                    <option value=""></option>
+                    {% for id, nombre in Turno.ESTADOS %}
+                        {% if estado_filtrado != id %}
+                        <option value="{{ id }}">{{ nombre }}</option>
+                        {% endif %}
+                    {% endfor %}
                     </select>
                     <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                 </form>
@@ -101,3 +110,12 @@
     </div>
 
 {% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    $(function() {
+        $(".datetimeinput").datepicker();
+    });
+</script>
+{% endblock%}

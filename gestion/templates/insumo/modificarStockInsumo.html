@@ -20,13 +20,20 @@
                                     <li> Contenido Neto: {{ insumo.contenidoNeto }} {{ insumo.unidadDeMedida }}
                                     <li> Stock actual: {{ insumo.stock }}
 
-                                    <br>
-                                    <br>
+                                    <br><br>
+                                    
                                     Actualizar cantidad en stock: <br>
                                     <input name="stockNuevo" value={{ insumo.stock }} pattern="[0-9]{1,4}" title="El valor no puede ser negativo" required>
-
+                                    <br><br>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        {% if user == 'duenia' %}
+                                            <a href="{% url 'duenio_lista_insumos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                        {% else %}
+                                            <a href="{% url 'empleado_lista_insumos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-5">
                                         <button class="btn btn-violet pull-right" type="submit" formmethod="post">Modificar Stock</button>
                                     </div>
                                 </div>

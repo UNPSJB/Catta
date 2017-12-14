@@ -37,16 +37,18 @@
                     </thread>
                     <tbody>
                         {% for cliente in clientes %}
-                        <tr>
-                            <td>{{cliente.persona.dni}}</td>
-                            <td>{{cliente.persona.nombre}}</td>
-                            <td>{{cliente.persona.apellido}}</td>
-                            <td>{{cliente.persona.direccion}}</td>
-                            <td>{{cliente.persona.telefono}}</td>
-                            <td>{{cliente.persona.localidad}}</td>
-                            <td>{{cliente.persona.cliente.email}}</td>
-                            <td>{{cliente.ausencias_turnos}}</td>
-                        </tr>
+                            {% if cliente.ausencias_turnos != 0 %}
+                            <tr>
+                                <td>{{cliente.persona.dni}}</td>
+                                <td>{{cliente.persona.nombre}}</td>
+                                <td>{{cliente.persona.apellido}}</td>
+                                <td>{{cliente.persona.direccion}}</td>
+                                <td>{{cliente.persona.telefono}}</td>
+                                <td>{{cliente.persona.localidad}}</td>
+                                <td>{{cliente.persona.cliente.email}}</td>
+                                <td>{{cliente.ausencias_turnos}}</td>
+                            </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>

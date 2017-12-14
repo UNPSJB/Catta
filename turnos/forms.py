@@ -2,11 +2,12 @@ from django import forms
 from django.forms import ModelForm
 from .models import Turno, TurnoFijo
 from personas.models import Empleado
-from gestion.models import ServicioBasico
+from gestion.models import ServicioBasico, Promocion
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, MultiField
 import datetime
 from datetime import timedelta
+from django.shortcuts import get_object_or_404
 
 
 class CrearTurnoForm(ModelForm):
@@ -74,12 +75,15 @@ class ModificarTurnoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
-
+        if  (self.instance).id != None :
+            self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector)
 
     def clean(self):
         tur = super(ModificarTurnoForm, self).clean()
 
         turno = self.instance
+
 
         servicios = tur.get('servicios')
         cantidad = tur.get('servicios').count()
@@ -167,6 +171,7 @@ class ConfirmarTurnoForm(ModelForm):
 
 #No Funciona el listado de servicios hay que terminarlo
 class CrearTurnoFijoForm(ModelForm):
+
     query_servicios = ServicioBasico.objects.all()
     servicios1 = []
     for servicio in query_servicios:
