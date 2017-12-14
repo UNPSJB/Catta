@@ -390,6 +390,7 @@ def duenio_lista_insumos(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
+    print(request.GET)
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     query = 'Turno.objects.filter(*mfiltros).order_by(\'-fecha\'))'
     query1 = str(mfiltros)

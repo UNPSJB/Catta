@@ -51,6 +51,7 @@
 {% block scripts %}
 {{ block.super }}
 <script src="{% static 'assets/js/lib/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/locale/es.js' %}"></script>
 <script src="{% static 'assets/js/lib/fullcalendar.js' %}"></script>
 <script>
     var URL_EVENTOS = "{% url "devuelvo_turnos" %}";

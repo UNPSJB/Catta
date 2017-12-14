@@ -18,8 +18,6 @@ class Cliente(Rol):
     email = models.EmailField(max_length=100, default='test@test.com')
     # historial = []  # LISTA DE TURNOS (HISTORIAL)
 
-    def sacar_turno(self):
-        print("sacando el turno")
 
 class Empleado(Rol):
     porc_comision = models.PositiveIntegerField()
@@ -35,33 +33,10 @@ class Empleado(Rol):
         return pago
 
 class Duenia(Rol):
-    # agenda = []  # LISTA DE TURNOS (AGENDA)
+    pass
 
-    def alta_sector(self):
-        pass
-
-    def reg_insumo(self):
-        pass
-
-    def reg_empleado(self):
-        pass
-
-    def reg_servicio(self):
-        pass
-
-    def mod_porcentaje_comision(self, empleado):
-        pass
-
-    def reporte_turnos(self):
-        pass
-
-    def servicios_mas_solicitados(self):
-        pass
-
+    
 class Usuario(AbstractUser, Rol):
-
-    def login(self):
-        pass
 
     def get_vista(self):
         try:
