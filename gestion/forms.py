@@ -143,13 +143,16 @@ class ModificarServicioForm(ModelForm):
 
     class Meta:
         model = ServicioBasico
-        fields = {
+        fields = (
             "descripcion",
             "precio",
             "duracion",
             "insumos"
-        }
+        )
 
+        labels = {
+            'duracion': '(Duracion en modulos de 15 min)'
+        }
 
 class PromoForm(ModelForm):
     servicios = forms.ModelMultipleChoiceField(queryset = ServicioBasico.objects.all())
