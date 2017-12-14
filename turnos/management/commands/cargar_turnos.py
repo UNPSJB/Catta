@@ -51,7 +51,7 @@ def generar_turno(dia, empleado, cargados):
     turno.dia = dia_realizacion.date()
     turno.hora = dia_realizacion.time()
     turno.fecha_creacion = dia
-    fecha_confirmacion = dia
+    turno.fecha_confirmacion = dia
     turno.empleado = empleado
     cliente_valido = False
     while cliente_valido == False:
@@ -78,8 +78,8 @@ class Command(BaseCommand):
     help = 'Carga los turnos duarente el año 2016 utilizando los clientes y los servicios actuales'
     #9-12 y de 16-20
     def handle(self, *args, **options):        
-        fecha_inicio = datetime(2017, 1, 1)
-        fecha_fin = datetime.today()
+        fecha_inicio = datetime(2015, 12, 7)
+        fecha_fin = datetime(2015,12,14)
         cargados = []
         for dia_actual in rango_de_fechas(fecha_inicio, fecha_fin):
             if es_laborable(dia_actual):
