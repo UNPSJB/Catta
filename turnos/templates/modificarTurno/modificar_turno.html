@@ -32,8 +32,10 @@
                                 
                                 {% if user == 'duenia' %}
                                     <a href="{% url 'duenio_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
-                                {% else %}
+                                {% elif user == 'empleado' %}
                                     <a href="{% url 'empleado_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                {% elif user == 'cliente' %}
+                                    <a href="{% url 'cliente_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>  
                                 {% endif %}
                                 
                             </div>

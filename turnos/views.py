@@ -101,8 +101,10 @@ def modificar_turno(request, id):
         form = ModificarTurnoForm(instance=turno)
         if (request.user.persona.duenia != None):
             user = 'duenia'
-        else:
+        elif (request.user.persona.empleado != None):
             user = 'empleado'
+        else:    
+            user = 'cliente'
     return render(request, 'modificarTurno/modificar_turno.html', {'turno': turno, "form_modificar_turno": form, 'user':user})
 
 def cancelar_turno(request, id):
@@ -122,8 +124,10 @@ def cancelar_turno(request, id):
             turno = get_object_or_404(Turno, pk=id)
             if (request.user.persona.duenia != None):
                 user = 'duenia'
-            else:
+            elif (request.user.persona.empleado != None):
                 user = 'empleado'
+            else:    
+                user = 'cliente'
         return render(request, 'cancelarTurno/cancelar_turno.html', {'turno': turno, 'user':user})
 
 
@@ -153,8 +157,10 @@ def marcar_realizado(request, id):
         form = RegistrarTurnoRealizadoForm(instance=turno)
         if (request.user.persona.duenia != None):
             user = 'duenia'
-        else:
+        elif (request.user.persona.empleado != None):
             user = 'empleado'
+        else:    
+            user = 'cliente'
     return render(request, 'marcarRealizado/marcar_realizado.html', {'turno': turno, 'form_registrar_turno_realizado': form, 'user':user})
 
 def confirmar_turno(request, id):
@@ -174,8 +180,10 @@ def confirmar_turno(request, id):
         turno = get_object_or_404(Turno, pk=id)
         if (request.user.persona.duenia != None):
             user = 'duenia'
-        else:
+        elif (request.user.persona.empleado != None):
             user = 'empleado'
+        else:    
+            user = 'cliente'
     return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno, 'user':user})
 
 def calendario(request):
