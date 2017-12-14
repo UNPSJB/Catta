@@ -2,11 +2,12 @@ from django import forms
 from django.forms import ModelForm
 from .models import Turno, TurnoFijo
 from personas.models import Empleado
-from gestion.models import ServicioBasico
+from gestion.models import ServicioBasico, Promocion
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div, MultiField
 import datetime
 from datetime import timedelta
+from django.shortcuts import get_object_or_404
 
 
 class CrearTurnoForm(ModelForm):
@@ -74,7 +75,9 @@ class ModificarTurnoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
-
+        if  (self.instance).id != None :
+            self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector)
 
     def clean(self):
         tur = super(ModificarTurnoForm, self).clean()
@@ -198,7 +201,6 @@ class CrearTurnoFijoForm(ModelForm):
             Div('fecha_fin'),
             Div('cliente'),
             Div('servicios'),
-            Div('promociones')
         )
         self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno Fijo'))
 
@@ -210,12 +212,8 @@ class CrearTurnoFijoForm(ModelForm):
 
         datos = super(CrearTurnoFijoForm, self).clean()
         p1 = datos.get('servicios')
-        p2 = datos.get('promociones')
         empleado = datos.get('empleado')
         servicios = datos.get('servicios')
-        for promocion in p2:
-            if (promocion.sector != empleado.sector):
-                raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
         for servicio in servicios:
             if (servicio.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
@@ -225,8 +223,6 @@ class CrearTurnoFijoForm(ModelForm):
         fecha = datos.get('fecha')
         hora = fecha.time()
         time = datetime.time(00, 00, 00)
-        print(hora)
-        print(time)
         if hora == time:
             raise forms.ValidationError("Debe seleccionar una hora para el turno")
 
@@ -234,7 +230,7 @@ class CrearTurnoFijoForm(ModelForm):
 
     class Meta:
         model = TurnoFijo
-        fields = {"empleado","fecha", "cliente", "promociones", "servicios", "fecha_fin"}
+        fields = {"empleado","fecha", "cliente", "servicios", "fecha_fin"}
 
 
 #form_registrar_turno_realizado

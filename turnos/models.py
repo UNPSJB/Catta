@@ -181,12 +181,6 @@ class Turno(models.Model):
     def confirmar_turno(self):
         self.fecha_confirmacion = datetime.now()
 
-    def agregar_servicio(self):
-        pass
-
-    def eliminar_servicio(self):
-        pass
-
     def get_costo(self):
         costo = 0
         for servicio in  self.servicios.all():
