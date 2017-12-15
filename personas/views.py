@@ -485,6 +485,8 @@ def ingreso_neto(request):
     contexto['turnos'] = turnos
     contexto['servicios'] = servicios
     contexto['f'] = ffilter
+    empleados = Empleado.objects.all()
+    contexto['empleados'] = empleados
     fechaActual = date.today()
     fechaActual = str(fechaActual)
     return render(request, "duenio/ingreso_neto.html", contexto, {"fechaActual":fechaActual})

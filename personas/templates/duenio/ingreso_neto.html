@@ -82,6 +82,13 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="chart-container1"><canvas id="myChart1"></canvas></div>  
+                <table style="width:100%">
+                  <tr>
+                  <th><div class="chart-container2"><canvas id="myChart2"></canvas></div></th>
+                  <th><div class="chart-container2"><canvas id="myChart3"></canvas></div></th>
+                  <tr>    
+                </table>  
             </div>
         </div>
     </div>
@@ -94,22 +101,38 @@
 <script src="\static\assets\js\Chart.min.js"></script>
 <script>
     var ctx = document.getElementById("myChart1").getContext('2d');
+    var gananciaPelu = 0;
+    {% for turno in turnos %} 
+        gananciaPelu = gananciaPelu + {{turno.get_ganancia_neta}} ;
+    {% endfor %}
+    var listaSumas = [];
+    var suma = 0;
+    var i = 0;
+    {% for empleadox in empleados %}
+        {% for turno in turnos %}
+            {% if turno.empleado.Persona.nombre == empleadox.Persona.nombre %}
+                suma = suma + {{turno.get_perdida_neta}};
+            {% endif %}
+        {% endfor %}
+        listaSumas.push(suma);
+    {% endfor %}
+
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: [
-                    {% for turno in turnos %}
-                            "{{turno.empleado.persona.nombre}}",
+                    "Peluquería",
+                    {% for empleado in empleados %}
+                        "{{empleado}}",
                     {% endfor %}
-                    "Peluquería"
                     ],
             datasets: [{
-                label: 'CAMBIAAAAAAAAAAR',
+                label: 'Ingresos en pesos',
                 data: [
-                        {% for turno in turnos %}
-                            {{turno.get_ganancia_neta}},    
-                            {{turno.get_ganancia_neta}}
-                        {% endfor %}
+                    gananciaPelu,
+                    {% for empleado in empleados %}
+                        listaSumas[i++],
+                    {% endfor %}
                     ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -144,20 +167,38 @@
 </script>
 <script>
     var ctx = document.getElementById("myChart2").getContext('2d');
-    var myChart2 = new Chart(ctx, {
+    var gananciaPelu = 0;
+    {% for turno in turnos %} 
+        gananciaPelu = gananciaPelu + {{turno.get_ganancia_neta}} ;
+    {% endfor %}
+    var listaSumas = [];
+    var suma = 0;
+    var i = 0;
+    {% for empleadox in empleados %}
+        {% for turno in turnos %}
+            {% if turno.empleado.Persona.nombre == empleadox.Persona.nombre %}
+                suma = suma + {{turno.get_perdida_neta}};
+            {% endif %}
+        {% endfor %}
+        listaSumas.push(suma);
+    {% endfor %}
+
+    var myChart = new Chart(ctx, {
         type: 'polarArea',
         data: {
             labels: [
+                    "Peluquería",
                     {% for empleado in empleados %}
-                            "{{empleado.persona.nombre}}",
+                        "{{empleado}}",
                     {% endfor %}
                     ],
             datasets: [{
-                label: 'Turnos Realizados',
+                label: 'Ingresos en pesos',
                 data: [
-                        {% for empleado in empleados %}
-                                {{empleado.cantidad_de_turnos}},
-                        {% endfor %}
+                    gananciaPelu,
+                    {% for empleado in empleados %}
+                        listaSumas[i++],
+                    {% endfor %}
                     ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -192,20 +233,38 @@
 </script>
 <script>
     var ctx = document.getElementById("myChart3").getContext('2d');
-    var myChart2 = new Chart(ctx, {
+    var gananciaPelu = 0;
+    {% for turno in turnos %} 
+        gananciaPelu = gananciaPelu + {{turno.get_ganancia_neta}} ;
+    {% endfor %}
+    var listaSumas = [];
+    var suma = 0;
+    var i = 0;
+    {% for empleadox in empleados %}
+        {% for turno in turnos %}
+            {% if turno.empleado.Persona.nombre == empleadox.Persona.nombre %}
+                suma = suma + {{turno.get_perdida_neta}};
+            {% endif %}
+        {% endfor %}
+        listaSumas.push(suma);
+    {% endfor %}
+
+    var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: [
+                    "Peluquería",
                     {% for empleado in empleados %}
-                            "{{empleado.persona.nombre}}",
+                        "{{empleado}}",
                     {% endfor %}
                     ],
             datasets: [{
-                label: 'Turnos Realizados',
+                label: 'Ingresos en pesos',
                 data: [
-                        {% for empleado in empleados %}
-                                {{empleado.cantidad_de_turnos}},
-                        {% endfor %}
+                    gananciaPelu,
+                    {% for empleado in empleados %}
+                        listaSumas[i++],
+                    {% endfor %}
                     ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
