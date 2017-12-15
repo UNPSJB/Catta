@@ -317,7 +317,10 @@ def duenio(request):
 
         else:
             contexto[form_name] = klassForm()
-    return render(request, ret, contexto)
+            fechaActual = date.today()
+            fechaActual = str(fechaActual)
+            fechaActual = "2017-12-01"
+    return render(request, ret, contexto, {"fecha":fechaActual})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -478,12 +481,13 @@ def ingreso_neto(request):
     contexto = {}
     mfiltros, ffilter = get_filtros(Turno, request.GET)
     turnos = Turno.objects.filter(*mfiltros)
-    #FALTA SABER COMO FILTRAR LOS TURNOS SEGUN EL ESTADO
     servicios = ServicioBasico.objects.all()
     contexto['turnos'] = turnos
     contexto['servicios'] = servicios
     contexto['f'] = ffilter
-    return render(request, "duenio/ingreso_neto.html", contexto)
+    fechaActual = date.today()
+    fechaActual = str(fechaActual)
+    return render(request, "duenio/ingreso_neto.html", contexto, {"fechaActual":fechaActual})
 
 
 @login_required(login_url='iniciar_sesion')
