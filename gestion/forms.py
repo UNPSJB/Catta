@@ -32,9 +32,12 @@ class SectorForm(ModelForm):
 
     class Meta:
         model = Sector
-        fields = {
+        fields = (
             "nombre",
             "descripcion"
+        )
+        labels = {  
+            'descripcion': 'Descripción'
         }
 
 
@@ -65,13 +68,17 @@ class InsumoForm(ModelForm):
 
     class Meta:
         model = Insumo
-        fields = {
+        fields = (
             "id",
             "nombre",
             "contenidoNeto",
             "unidadDeMedida",
             "marca",
             "stock"
+        )
+        labels = {  
+            'contenidoNeto': 'Contenido Neto',
+            'unidadDeMedida': 'Unidad de Medida'
         }
 
 
@@ -107,13 +114,17 @@ class ServicioForm(ModelForm):
 
     class Meta:
         model = ServicioBasico
-        fields = {
+        fields = (
             "sector",
             "nombre",
             "descripcion",
             "precio",
             "duracion",
             "insumos"
+        )
+        labels = {  
+            'duracion': 'Duración (En modulos de 15 min)',
+            'descripcion': 'Descripción'
         }
 
 
@@ -150,8 +161,9 @@ class ModificarServicioForm(ModelForm):
             "insumos"
         )
 
-        labels = {
-            'duracion': 'Duracion (En modulos de 15 min)'
+        labels = {  
+            'duracion': 'Duración (En modulos de 15 min)',
+            'descripcion': 'Descripción'
         }
 
 class PromoForm(ModelForm):
@@ -165,7 +177,7 @@ class PromoForm(ModelForm):
         self.helper.add_input(Submit('crear_promo', 'Crear Promo'))
 
         """
-        La duracion de la promo y los insumos se sacan de los servicios que la componen.
+        La duración de la promo y los insumos se sacan de los servicios que la componen.
         """
 
     def clean(self):
@@ -197,3 +209,6 @@ class PromoForm(ModelForm):
             "imagen",
             "activa"
         )
+        labels = {  
+            'descripcion': 'Descripción'
+        }
