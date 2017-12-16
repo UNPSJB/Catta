@@ -6,7 +6,7 @@
             "nombre": "Corte de Pelo",
             "descripcion": "Corte de Pelo Unisex",
             "precio": 200,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 2,
             "insumos":[]
         }
@@ -18,7 +18,7 @@
             "nombre": "Peinado",
             "descripcion": "Peinado de 15, Egreso o Casamiento",
             "precio": 300,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 3,
             "insumos":[9]
         }
@@ -30,7 +30,7 @@
             "nombre": "Alisado",
             "descripcion": "Alisado de Pelo",
             "precio": 400,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 3,
             "insumos":[7]
         }
@@ -42,7 +42,7 @@
             "nombre": "Permanente de Rulos",
             "descripcion": "Los mejores rulos",
             "precio": 500,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 3,
             "insumos":[]
         }
@@ -54,7 +54,7 @@
             "nombre": "Mechitas",
             "descripcion": "El mejor color para tu pelo",
             "precio": 100,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 2,
             "insumos":[4,5]
         }
@@ -66,7 +66,7 @@
             "nombre": "Tintura",
             "descripcion": "Decile chau a las canas",
             "precio": 300,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 2,
             "insumos":[1,5]
         }
@@ -78,7 +78,7 @@
             "nombre": "Baño de Crema",
             "descripcion": "Dale vida a tu pelo",
             "precio": 250,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 3,
             "insumos":[6,8,10]
         }
@@ -90,7 +90,7 @@
             "nombre": "Lavado de Pelo",
             "descripcion": "Deja tu pelo brillante",
             "precio": 100,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "duracion": 1,
             "insumos":[2,3]
         }
