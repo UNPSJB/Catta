@@ -97,7 +97,9 @@
                                         {% if turno.fecha_confirmacion == null %}
                                             <a href="{% url 'confirmar_turno' turno.id %}" class="btn btn-default btn-sm" role="button">Confirmar</a>
                                         {% else %}
-                                            <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
+                                            {% if turno.fecha < ahora %}
+                                                <a href="{% url 'marcar_realizado' turno.id %}" class="btn btn-default btn-sm" role="button">Realizar</a>
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 {% endif %}

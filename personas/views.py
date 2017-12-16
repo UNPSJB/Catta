@@ -423,7 +423,7 @@ def duenio_lista_insumos(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    print(request.GET)
+    ahora = datetime.now()
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     query = 'Turno.objects.filter(*mfiltros).order_by(\'-fecha\'))'
     query1 = str(mfiltros)
@@ -432,7 +432,7 @@ def duenio_lista_turnos(request):
         estado_filtrado = int(estado_filtrado)
     except KeyError:
         estado_filtrado = ""
-    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado})
+    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado, 'ahora': ahora})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
