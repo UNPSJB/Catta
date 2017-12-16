@@ -110,8 +110,7 @@ AUTH_PASSWORD_VALIDATORS = []    # TODO
 
 LANGUAGE_CODE = 'es-AR'
 
-# TIME_ZONE = 'America/Argentina/Buenos_Aires'
-TIME_ZONE = 'Africa/Timbuktu'  # Lo cambiamos a timbuktu por el -3 que nos corría la hora del servidor.
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 USE_I18N = True
 
