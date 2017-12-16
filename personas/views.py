@@ -492,6 +492,7 @@ def ayuda_duenio(request):
     contexto = {}
     contexto['dueño'] = True
     contexto['logeado'] = True
+    contexto['pagina'] = request.GET.get('pag')
     return render(request, 'ayuda/ayudaDueño.html',contexto)
 
 @login_required(login_url='iniciar_sesion')

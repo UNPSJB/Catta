@@ -48,7 +48,11 @@
         <div class="col-md-9">
             <div class="tab-content">
                 {{ block.super }}
+                {% if pagina == 'pantallaPrincipal' %}
+                <div class="tab-pane fade in active" id="pantallaPrincipal">
+                {% else %}
                 <div class="tab-pane fade in" id="pantallaPrincipal">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -85,7 +89,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoEmpleados' %}
+                <div class="tab-pane fade in active" id="listadoEmpleados">
+                {% else %}
                 <div class="tab-pane fade in" id="listadoEmpleados">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -108,7 +116,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'modificarComision' %}
+                <div class="tab-pane fade in active" id="modificarComisión">
+                {% else %}
                 <div class="tab-pane fade in" id="modificarComisión">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -127,7 +139,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'altaEmpleado' %}
+                <div class="tab-pane fade in active" id="altaEmpleado">
+                {% else %}
                 <div class="tab-pane fade in" id="altaEmpleado">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -144,7 +160,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoClientes' %}
+                <div class="tab-pane fade in active" id="listadoClientes">
+                {% else %}
                 <div class="tab-pane fade in" id="listadoClientes">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -165,7 +185,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'altaCliente' %}
+                <div class="tab-pane fade in active" id="altaCliente">
+                {% else %}
                 <div class="tab-pane fade in" id="altaCliente">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -181,7 +205,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoServYPromo' %}
+                <div class="tab-pane fade in active" id="listadoServYPromo">
+                {% else %}
                 <div class="tab-pane fade in" id="listadoServYPromo">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -204,7 +232,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'modificarServicio' %}
+                <div class="tab-pane fade in active" id="modificarServicio">
+                {% else %}
                 <div class="tab-pane fade in" id="modificarServicio">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -217,7 +249,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'altaServicio' %}
+                <div class="tab-pane fade in active" id="altaServicio">
+                {% else %}
                 <div class="tab-pane fade in" id="altaServicio">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -230,7 +266,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'altaPromocion' %}
+                <div class="tab-pane fade in active" id="altaPromocion">
+                {% else %}
                 <div class="tab-pane fade in" id="altaPromocion">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -243,7 +283,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoInsumos' %}
+                <div class="tab-pane fade in active" id="listadoInsumos">
+                {% else %}
                 <div class="tab-pane fade in" id="listadoInsumos">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -264,7 +308,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'modificarStock' %}
+                <div class="tab-pane fade in active" id="modificarStock">
+                {% else %}
                 <div class="tab-pane fade in" id="modificarStock">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -281,7 +329,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'altaInsumo' %}
+                <div class="tab-pane fade in active" id="altaInsumo">
+                {% else %}
                 <div class="tab-pane fade in" id="altaInsumo">
+                {% endif %}        
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -294,7 +346,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoTurnoyTurnoFijo' %}
+                <div class="tab-pane fade in active" id="listadoTurnoyTurnoFijo">
+                {% else %}
                 <div class="tab-pane fade in" id="listadoTurnoyTurnoFijo">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -315,7 +371,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'modificarTurno' %}
+                <div class="tab-pane fade in active" id="modificarTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="modificarTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -330,7 +390,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'confirmar-realizarTurno' %}
+                <div class="tab-pane fade in active" id="confirmar-realizarTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="confirmar-realizarTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -347,7 +411,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'cancelarTurno' %}
+                <div class="tab-pane fade in active" id="cancelarTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="cancelarTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -360,7 +428,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'crearTurno' %}
+                <div class="tab-pane fade in active" id="crearTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="crearTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -377,7 +449,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'crearTurnoFijo' %}
+                <div class="tab-pane fade in active" id="crearTurnoFijo">
+                {% else %}
                 <div class="tab-pane fade in" id="crearTurnoFijo">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -389,7 +465,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoComisiones' %}
+                <div class="tab-pane fade in active" id="listadoComisiones">
+                {% else %}
                 <div class="tab-pane fade in" id="listadoComisiones">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -408,7 +488,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'liquidarComision' %}
+                <div class="tab-pane fade in active" id="liquidarComision">
+                {% else %}
                 <div class="tab-pane fade in" id="liquidarComision">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -421,7 +505,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'altaSector' %}
+                <div class="tab-pane fade in active" id="altaSector">
+                {% else %}
                 <div class="tab-pane fade in" id="altaSector">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">

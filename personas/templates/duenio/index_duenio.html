@@ -80,7 +80,7 @@
                                                     <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                    <h4><a href="{% url 'ayuda_duenio' %}?pag=crearTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                                 </div>
                                             </div>
                                         {% crispy form_crear_turno %}
@@ -102,7 +102,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center>  Crear un Servicio </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=altaServicio" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_servicio %}
@@ -124,7 +124,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center>Crear una Promoción</center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=altaPromocion" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
@@ -148,7 +148,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center>  Crear un Empleado </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=altaEmpleado" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_empleado %}
@@ -170,7 +170,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center> Crear un Cliente </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=altaCliente" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_cliente %}
@@ -192,7 +192,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center>  Crear un Sector </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=altaSector" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_sector %}
@@ -214,7 +214,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center>  Crear un Insumo </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=altaInsumo" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_insumo %}
@@ -236,7 +236,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center> Crear Turno Fijo </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=crearTurnoFijo" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_crear_turno_fijo %}
@@ -258,7 +258,7 @@
                                                 <h2><font color="Purple"><font face="arial"><center> Liquidar Comisión </center></font></font></h2>
                                             </div>
                                             <div class="col-md-2">
-                                                <h4><a href="{% url 'ayuda_duenio' %}" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                <h4><a href="{% url 'ayuda_duenio' %}?pag=liquidarComision" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
                                             </div>
                                         </div>
                                         {% crispy form_liquidar_Comision %}
