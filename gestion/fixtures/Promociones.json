@@ -6,7 +6,7 @@
             "nombre": "Alisado permanente y nutricion",
             "descripcion": "Busca tu look preferido sin dañar tu pelo",
             "precio": 450,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1,3,7]
         }
     },
@@ -17,7 +17,7 @@
             "nombre": "Suavidad y fortaleza",
             "descripcion": "Tu cabello fuerte como el acero y suave como la seda",
             "precio": 300,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1,7,8]
         }
     },
@@ -28,7 +28,7 @@
             "nombre": "Cambia tu look con Catta",
             "descripcion": "Queres cambiar tu look? nosotras te ayudamos !",
             "precio": 450,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1,6]
         }
     },
@@ -39,7 +39,7 @@
             "nombre": "Brillando Con Catta",
             "descripcion": "Prepara tu pelo para brillar como la estrella que sos.",
             "precio": 350,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [5,7,8]
         }
     },
@@ -50,7 +50,7 @@
             "nombre": "Se una estrella",
             "descripcion": "Que tu pelo no sea excusa, se la estrella que mas brille",
             "precio": 150,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [2]
         }
     },
@@ -61,7 +61,7 @@
             "nombre": "La mas hermosa",
             "descripcion": "Saca el brillo que hay en vos",
             "precio": 400,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1,7,8]
         }
     },
@@ -72,7 +72,7 @@
             "nombre": " !Feliz Cumple!",
             "descripcion": "Festeja tu dia con Catta! Feliz cumple !!!",
             "precio": 500,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1,2,6,7,8]
         }
     },
@@ -83,7 +83,7 @@
             "nombre": "Un dia diferente",
             "descripcion": "Un dia diferente para tu pelo",
             "precio": 500,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [2,6]
         }
     },
@@ -94,7 +94,7 @@
             "nombre": "Promo Corte de Pelo",
             "descripcion": "Un corte de cabello al alcance tuyo",
             "precio": 100,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1]
         }
     },
@@ -105,7 +105,7 @@
             "nombre": "Mi pelo es saludable",
             "descripcion": "Catta te brinda el mejor servicio para que tu pelo crezca sano y fuerte",
             "precio": 700,
-            "sector": "Peluqueria",
+            "sector": "Peluquería",
             "servicios": [1,7,8]
         }
     },
