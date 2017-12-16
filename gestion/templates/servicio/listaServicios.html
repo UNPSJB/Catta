@@ -50,19 +50,41 @@
                         <th>Precio</th>
                         <th>Duración</th>
                         <th>Servicios</th>
+                        {% if usuario == 'duenia' or usuario == 'empleado' %}
+                            <th>Estado</th>
+                        {% endif %}
                     </tr>
                 </thread>
                 <tbody>
                     {% for promocion in promociones %}
                     <tr>
-                        <td>{{promocion.nombre}}</td>
-                        <td>{{promocion.descripcion}}</td>
-                        <td>{{promocion.precio}}</td>
-                        <td>{{promocion.get_duracion}}</td>
-                        <td>{% for servicio in promocion.servicios.all %}
-                                <li>{{servicio}}
-                            {% endfor %}
-                        </td>
+                        {% if not promocion.activa == False  and  usuario == 'cliente' or usuario == 'duenia' or usuario == 'empleado' %}
+                            <td>{{promocion.nombre}}</td>
+                            <td>{{promocion.descripcion}}</td>
+                            <td>{{promocion.precio}}</td>
+                            <td>{{promocion.get_duracion}}</td>
+                            <td>{% for servicio in promocion.servicios.all %}
+                                    <li>{{servicio}}
+                                {% endfor %}
+
+                            {% if usuario == 'duenia' or usuario == 'empleado' %}
+                                {% if promocion.activa == True %}
+                                    <td><a></a>ACTIVA</a></td>
+                                {% else %}
+                                    <td><a></a>INACTIVA</a></td>
+                                {% endif %}
+                            {% endif %}
+                            <td width=20>
+                                {% if usuario == 'duenia' or usuario == 'empleado' %}
+                                    {% if promocion.activa == True %}
+                                        <td><a href="{% url 'desactivar_promocion' promocion.id %}" button type="button" class="btn btn-warning" role="button">Desactivar</a></td>
+                                    {% else %}
+                                       <td><a href="{% url 'activar_promocion' promocion.id %}" button type="button" class="btn btn-warning" role="button">Activar</a></td>
+                                    {% endif %}
+                                {% endif %}
+                         {% endif %}
+
+                             </td>
                     </tr>
                     {% endfor %}
                 </tbody>

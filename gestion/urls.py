@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^modificarStockInsumo/(\d+)/$', views.modificarStockInsumo, name='modificarStockInsumo'),
     url(r'^modificar_servicio/(\d+)/$', views.modificar_servicio, name='modificar_servicio'),
     url(r'^eliminarInsumo/(\d+)/$', views.eliminarInsumo, name='eliminarInsumo'),
+    url(r'^desactivar_promocion/(\d+)/$', views.desactivar_promocion, name='desactivar_promocion'),
+    url(r'^activar_promocion/(\d+)/$', views.activar_promocion, name='activar_promocion'),
 ]

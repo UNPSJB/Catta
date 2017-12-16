@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ServicioForm, ModificarServicioForm, InsumoForm, SectorForm
-from .models import ServicioBasico, Servicio
+from .models import ServicioBasico, Servicio, Promocion
 from .models import Insumo
 from django.db.models import Q
 from django.contrib import messages
@@ -44,8 +44,12 @@ def servicio(request):
 
 
 def listaServicios(request):
-    usuario = request.user
-    print(usuario)
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
     servicios = ServicioBasico.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'servicio/listaServicios.html', {'servicios': servicios, 'insumos': insumos, 'usuario': usuario})
@@ -84,6 +88,54 @@ def modificar_servicio(request, id):
         servicio = get_object_or_404(ServicioBasico, pk=id)
         form = ModificarServicioForm(instance=servicio)
     return render(request, 'servicio/modificar_servicio.html', {'servicio': servicio, "form_modificar_servicio": form})
+
+def activar_promocion(request, id):
+    if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_servicios'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_servicios'
+            else:
+                ret = '/personas/cliente_lista_servicios'
+        promocion = get_object_or_404(Promocion, pk=id)
+        promocion.activa = True
+        promocion.save()
+        return redirect(ret)
+    else:
+        promocion = get_object_or_404(Promocion, pk=id)
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        elif (request.user.persona.empleado != None):
+            user = 'empleado'
+        else:
+            user = 'cliente'
+    return render(request, 'servicio/activar_promocion.html', {'promocion': promocion, 'user': user})
+
+
+def desactivar_promocion(request, id):
+    if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_servicios'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_servicios'
+            else:
+                ret = '/personas/cliente_lista_servicios'
+        promocion = get_object_or_404(Promocion, pk=id)
+        promocion.activa = False
+        promocion.save()
+        return redirect(ret)
+    else:
+        promocion = get_object_or_404(Promocion, pk=id)
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        elif (request.user.persona.empleado != None):
+            user = 'empleado'
+        else:
+            user = 'cliente'
+    return render(request, 'servicio/desactivar_promocion.html', {'promocion': promocion, 'user': user})
+
 
 def listaInsumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)

@@ -110,9 +110,15 @@ def cliente_lista_servicios(request):
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
     return render(request, 'cliente/servicios_cliente.html', {'servicios': servicios,
                                                               'promociones': promociones,
-                                                              'insumos': insumos, "f": ffilter})
+                                                              'insumos': insumos, "f": ffilter, 'usuario':usuario})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
@@ -239,9 +245,15 @@ def empleado_lista_servicios(request):
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
     return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
                                                             'promociones': promociones,
-                                                            'insumos': insumos, "f": ffilter})
+                                                            'insumos': insumos, "f": ffilter, 'usuario': usuario})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
@@ -374,11 +386,18 @@ def duenio_lista_servicios(request):
 
     topServicios = ServicioBasico.objects.annotate(cantidad_de_turnos=Count("turnos")).order_by("-cantidad_de_turnos")[:5]
 
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
+
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios1,
                                                             'promociones': promociones,
                                                              'insumos': insumos,
                                                             'topServicios': topServicios,
-                                                            "f": ffilter})
+                                                            "f": ffilter,'usuario': usuario})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
