@@ -35,7 +35,11 @@
         <div class="col-md-9">
             <div class="tab-content">
                 {{ block.super }}
+                {% if pagina == 'crearTurno' %}
+                <div class="tab-pane fade in active" id="crearCuenta">
+                {% else %}
                 <div class="tab-pane fade in" id="CrearCuenta">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -55,7 +59,12 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'pantallaPrincipal' %}
+                <div class="tab-pane fade in active" id="PantallaPrincipal">
+                {% else %}
                 <div class="tab-pane fade in" id="PantallaPrincipal">
+                {% endif %}
+
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -76,7 +85,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoServiciosPromociones' %}
+                <div class="tab-pane fade in active" id="ListadoServiciosPromociones">
+                {% else %}
                 <div class="tab-pane fade in" id="ListadoServiciosPromociones">
+                {%endif%}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -92,7 +105,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade in" id="CrearTurno">
+                {% if pagina == 'crearTurno' %}
+                <div class="tab-pane fade in active" id="crearTurno">
+                {% else %}
+                <div class="tab-pane fade in" id="crearTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -113,7 +130,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'listadoTurno' %}
+                <div class="tab-pane fade in active" id="ListadoTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="ListadoTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -133,7 +154,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'modificarTurno' %}
+                <div class="tab-pane fade in active" id="ModificarTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="ModificarTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -149,7 +174,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'confirmarTurno' %}
+                <div class="tab-pane fade in active" id="ConfirmarTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="ConfirmarTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -165,7 +194,11 @@
                         </div>
                     </div>
                 </div>
+                {% if pagina == 'cancelarTurno' %}
+                <div class="tab-pane fade in active" id="CancelarTurno">
+                {% else %}
                 <div class="tab-pane fade in" id="CancelarTurno">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">

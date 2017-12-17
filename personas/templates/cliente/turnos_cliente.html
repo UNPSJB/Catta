@@ -6,8 +6,12 @@
     <div class="container background-white" style="opacity: 0.95;">
         <div class="row margin-vert-30">
             <div class="col-md-12">
-                <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
-
+                 <div class="col-md-10">
+                     <h2><font color="Purple"><font face="arial"><center> Listado de Turnos </center></font></font></h2>
+                 </div>
+                <div class="col-md-2">
+                    <h4><a href="{% url 'ayuda_cliente' %}?pag=listadoTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                </div>
 
                 <!-- FILTRADO !-->
                 <form method="get" action="">

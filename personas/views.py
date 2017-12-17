@@ -142,6 +142,7 @@ def ayuda_cliente(request):
     contexto = {}
     contexto['cliente'] = True
     contexto['logeado'] = True
+    contexto['pagina'] = request.GET.get('pag')
     return render(request, 'ayuda/ayudaCliente.html', contexto)
 
 
