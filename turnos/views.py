@@ -83,6 +83,12 @@ def devuelvo_turnos(request):
 
 
 def modificar_turno(request, id):
+    if (request.user.persona.duenia != None):
+        user = 'duenia'
+    elif (request.user.persona.empleado != None):
+        user = 'empleado'
+    else:    
+        user = 'cliente'
     if request.method == "POST":
         if (request.user.persona.duenia != None):
             ret = '/personas/duenio_lista_turnos'
@@ -96,17 +102,9 @@ def modificar_turno(request, id):
         if form.is_valid():
             form.save()
             return redirect(ret)
-        else:
-            user = request.user
     else:
         turno = get_object_or_404(Turno, pk=id)
         form = ModificarTurnoForm(instance=turno)
-        if (request.user.persona.duenia != None):
-            user = 'duenia'
-        elif (request.user.persona.empleado != None):
-            user = 'empleado'
-        else:    
-            user = 'cliente'
     return render(request, 'modificarTurno/modificar_turno.html', {'turno': turno, "form_modificar_turno": form, 'user':user})
 
 def cancelar_turno(request, id):
