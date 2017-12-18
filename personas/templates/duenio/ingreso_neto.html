@@ -109,8 +109,9 @@
     var suma = 0;
     var i = 0;
     {% for empleadox in empleados %}
+        suma = 0;
         {% for turno in turnos %}
-            {% if turno.empleado.Persona.nombre == empleadox.Persona.nombre %}
+            {% if turno.empleado == empleadox %}
                 suma = suma + {{turno.get_perdida_neta}};
             {% endif %}
         {% endfor %}
@@ -175,8 +176,9 @@
     var suma = 0;
     var i = 0;
     {% for empleadox in empleados %}
+        suma = 0;
         {% for turno in turnos %}
-            {% if turno.empleado.Persona.nombre == empleadox.Persona.nombre %}
+            {% if turno.empleado == empleadox %}
                 suma = suma + {{turno.get_perdida_neta}};
             {% endif %}
         {% endfor %}
@@ -241,8 +243,9 @@
     var suma = 0;
     var i = 0;
     {% for empleadox in empleados %}
+        suma = 0;
         {% for turno in turnos %}
-            {% if turno.empleado.Persona.nombre == empleadox.Persona.nombre %}
+            {% if turno.empleado == empleadox %}
                 suma = suma + {{turno.get_perdida_neta}};
             {% endif %}
         {% endfor %}
