@@ -39,7 +39,11 @@
 {% endblock %}
 
 {% block contenido %}
-<div class="tab-pane fade in" id="Logueo">
+{% if pagina == 'Logueo' %}
+                <div class="tab-pane fade in active" id="Logueo">
+{% else %}
+                <div class="tab-pane fade in" id="Logueo">
+{% endif %}
     <div class="panel panel-default">
         <div class="container">
             <div class="row margin-vert-30">
