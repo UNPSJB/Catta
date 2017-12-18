@@ -107,6 +107,7 @@ def modificar_turno(request, id):
         form = ModificarTurnoForm(instance=turno)
     return render(request, 'modificarTurno/modificar_turno.html', {'turno': turno, "form_modificar_turno": form, 'user':user})
 
+
 def cancelar_turno(request, id):
         if request.method == "POST":
             if (request.user.persona.duenia != None):
@@ -163,6 +164,7 @@ def marcar_realizado(request, id):
             user = 'cliente'
     return render(request, 'marcarRealizado/marcar_realizado.html', {'turno': turno, 'form_registrar_turno_realizado': form, 'user':user})
 
+
 def confirmar_turno(request, id):
     if request.method == "POST":
         if (request.user.persona.duenia != None):
@@ -186,7 +188,7 @@ def confirmar_turno(request, id):
             user = 'cliente'
     return render(request, 'confirmarTurno/confirmar_turno.html', {'turno': turno, 'user':user})
 
+
 def calendario(request):
     turnos = Turno.objects.all()
     return render(request, 'calendario/fullcalendar.html', {'turnos': turnos})
-

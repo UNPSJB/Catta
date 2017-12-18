@@ -14,9 +14,12 @@
 
                         <form method="post" class="login-page">
                             {% csrf_token %}
-                            <div class="login-header margin-bottom-30">
+                            <div class="col-md-10">
                                 <h2>Cancelar Turno</h2>
                             </div>
+                            {% if request.user.persona.cliente != null %}
+                                <h4><a href="{% url 'ayuda_cliente' %}?pag=cancelarTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                            {% endif %}
                             <!-- -->
 
                                 <li> Fecha: {{ turno.fecha }}

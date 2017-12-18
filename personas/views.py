@@ -58,7 +58,9 @@ def get_filtros(modelo, datos):
     return (filtros, valores)
 
 def ayuda_externa(request):
-    return render(request, 'ayuda/ayudaExterna.html')
+    contexto = {}
+    contexto['pagina'] = request.GET.get('pag')
+    return render(request, 'ayuda/ayudaExterna.html', contexto)
 
 """
 Vistas del Cliente.
@@ -110,9 +112,15 @@ def cliente_lista_servicios(request):
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
     return render(request, 'cliente/servicios_cliente.html', {'servicios': servicios,
                                                               'promociones': promociones,
-                                                              'insumos': insumos, "f": ffilter})
+                                                              'insumos': insumos, "f": ffilter, 'usuario':usuario})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
@@ -134,6 +142,7 @@ def ayuda_cliente(request):
     contexto = {}
     contexto['cliente'] = True
     contexto['logeado'] = True
+    contexto['pagina'] = request.GET.get('pag')
     return render(request, 'ayuda/ayudaCliente.html', contexto)
 
 
@@ -239,9 +248,15 @@ def empleado_lista_servicios(request):
     servicios = ServicioBasico.objects.filter(*mfiltros)
     promociones = Promocion.objects.filter(*mfiltros)
     insumos = Insumo.objects.all()
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
     return render(request, 'empleado/servicios_empleado.html', {'servicios': servicios,
                                                             'promociones': promociones,
-                                                            'insumos': insumos, "f": ffilter})
+                                                            'insumos': insumos, "f": ffilter, 'usuario': usuario})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_empleado, login_url='restringido', redirect_field_name=None)
@@ -374,11 +389,18 @@ def duenio_lista_servicios(request):
 
     topServicios = ServicioBasico.objects.annotate(cantidad_de_turnos=Count("turnos")).order_by("-cantidad_de_turnos")[:5]
 
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
+
     return render(request, 'duenio/servicios_duenio.html', {'servicios': servicios1,
                                                             'promociones': promociones,
                                                              'insumos': insumos,
                                                             'topServicios': topServicios,
-                                                            "f": ffilter})
+                                                            "f": ffilter,'usuario': usuario})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -404,7 +426,7 @@ def duenio_lista_insumos(request):
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
 def duenio_lista_turnos(request):
     mfiltros, ffilter = get_filtros(Turno, request.GET)
-    print(request.GET)
+    ahora = datetime.now()
     turnos = Turno.objects.filter(*mfiltros).order_by('-fecha')
     query = 'Turno.objects.filter(*mfiltros).order_by(\'-fecha\'))'
     query1 = str(mfiltros)
@@ -413,7 +435,7 @@ def duenio_lista_turnos(request):
         estado_filtrado = int(estado_filtrado)
     except KeyError:
         estado_filtrado = ""
-    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado})
+    return render(request, 'duenio/turnos_duenio.html', {'query':query,'query1':query1,'turnos': turnos, "f": ffilter, 'Turno':Turno, 'estado_filtrado':estado_filtrado, 'ahora': ahora})
 
 @login_required(login_url='iniciar_sesion')
 @user_passes_test(es_duenio, login_url='restringido', redirect_field_name=None)
@@ -473,6 +495,7 @@ def ayuda_duenio(request):
     contexto = {}
     contexto['dueño'] = True
     contexto['logeado'] = True
+    contexto['pagina'] = request.GET.get('pag')
     return render(request, 'ayuda/ayudaDueño.html',contexto)
 
 @login_required(login_url='iniciar_sesion')

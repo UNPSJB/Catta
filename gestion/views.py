@@ -1,12 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ServicioForm, ModificarServicioForm, InsumoForm, SectorForm
-from .models import ServicioBasico, Servicio
+from .models import ServicioBasico, Servicio, Promocion
 from .models import Insumo
 from django.db.models import Q
 from django.contrib import messages
 
 
 def sector(request):
+    """
+    Vista para crear un nuevo sector, una vez creado retorna a la vista principal de duenio
+    :param request: requerimiento
+    :return:
+    """
     if request.method == "POST":
         form = SectorForm(request.POST)
         if form.is_valid():
@@ -19,6 +24,11 @@ def sector(request):
 
 
 def insumo(request):
+    """
+    Vista para crear un nuevo insumo, una vez creado retorna a la vista principal del duenio
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         form = InsumoForm(request.POST)
         if form.is_valid():
@@ -31,6 +41,11 @@ def insumo(request):
 
 
 def servicio(request):
+    """
+    Vista para crear un servicio, una vez creado retorna a la vista principal del duenio
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         form = ServicioForm(request.POST, request.FILES or None)
         if form.is_valid():
@@ -44,8 +59,17 @@ def servicio(request):
 
 
 def listaServicios(request):
-    usuario = request.user
-    print(usuario)
+    """
+    Vista para listar los servicios y funcionalidad dependiendo de el usuario
+    :param request: requerimiento
+    :return:
+    """
+    if (request.user.persona.duenia != None):
+        usuario = 'duenia'
+    elif (request.user.persona.empleado != None):
+        usuario = 'empleado'
+    else:
+        usuario = 'cliente'
     servicios = ServicioBasico.objects.all()
     insumos = Insumo.objects.all()
     return render(request, 'servicio/listaServicios.html', {'servicios': servicios, 'insumos': insumos, 'usuario': usuario})
@@ -84,6 +108,54 @@ def modificar_servicio(request, id):
         servicio = get_object_or_404(ServicioBasico, pk=id)
         form = ModificarServicioForm(instance=servicio)
     return render(request, 'servicio/modificar_servicio.html', {'servicio': servicio, "form_modificar_servicio": form})
+
+def activar_promocion(request, id):
+    if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_servicios'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_servicios'
+            else:
+                ret = '/personas/cliente_lista_servicios'
+        promocion = get_object_or_404(Promocion, pk=id)
+        promocion.activa = True
+        promocion.save()
+        return redirect(ret)
+    else:
+        promocion = get_object_or_404(Promocion, pk=id)
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        elif (request.user.persona.empleado != None):
+            user = 'empleado'
+        else:
+            user = 'cliente'
+    return render(request, 'servicio/activar_promocion.html', {'promocion': promocion, 'user': user})
+
+
+def desactivar_promocion(request, id):
+    if request.method == "POST":
+        if (request.user.persona.duenia != None):
+            ret = '/personas/duenio_lista_servicios'
+        else:
+            if (request.user.persona.empleado != None):
+                ret = '/personas/empleado_lista_servicios'
+            else:
+                ret = '/personas/cliente_lista_servicios'
+        promocion = get_object_or_404(Promocion, pk=id)
+        promocion.activa = False
+        promocion.save()
+        return redirect(ret)
+    else:
+        promocion = get_object_or_404(Promocion, pk=id)
+        if (request.user.persona.duenia != None):
+            user = 'duenia'
+        elif (request.user.persona.empleado != None):
+            user = 'empleado'
+        else:
+            user = 'cliente'
+    return render(request, 'servicio/desactivar_promocion.html', {'promocion': promocion, 'user': user})
+
 
 def listaInsumos(request):
     mfiltros, ffilter = get_filtros(Insumo, request.GET)

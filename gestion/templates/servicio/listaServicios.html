@@ -6,7 +6,14 @@
                 <input name="nombre" placeholder="Nombre" value="{{ f.nombre }}" class="filtro">
                 <button class="btn btn-violet pull-right" type="submit">Filtrar</button>
             </form>
-            <h2><font color="Purple"><font face="arial"><center> Listado de Servicios </center></font></font></h2>
+            <div class="col-md-10">
+                <h2><font color="Purple"><font face="arial"><center> Listado de Servicios </center></font></font></h2>
+            </div>
+            {% if request.user.persona.cliente != null %}
+                <div class="col-md-2">
+                    <h4><a href="{% url 'ayuda_cliente' %}?pag=listadoServiciosPromociones" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                </div>
+            {% endif %}
             <table class="table table-striped">
                 <thread>
                     <tr>
@@ -50,19 +57,41 @@
                         <th>Precio</th>
                         <th>Duración</th>
                         <th>Servicios</th>
+                        {% if usuario == 'duenia' or usuario == 'empleado' %}
+                            <th>Estado</th>
+                        {% endif %}
                     </tr>
                 </thread>
                 <tbody>
                     {% for promocion in promociones %}
                     <tr>
-                        <td>{{promocion.nombre}}</td>
-                        <td>{{promocion.descripcion}}</td>
-                        <td>{{promocion.precio}}</td>
-                        <td>{{promocion.get_duracion}}</td>
-                        <td>{% for servicio in promocion.servicios.all %}
-                                <li>{{servicio}}
-                            {% endfor %}
-                        </td>
+                        {% if not promocion.activa == False  and  usuario == 'cliente' or usuario == 'duenia' or usuario == 'empleado' %}
+                            <td>{{promocion.nombre}}</td>
+                            <td>{{promocion.descripcion}}</td>
+                            <td>{{promocion.precio}}</td>
+                            <td>{{promocion.get_duracion}}</td>
+                            <td>{% for servicio in promocion.servicios.all %}
+                                    <li>{{servicio}}
+                                {% endfor %}
+
+                            {% if usuario == 'duenia' or usuario == 'empleado' %}
+                                {% if promocion.activa == True %}
+                                    <td><a></a>ACTIVA</a></td>
+                                {% else %}
+                                    <td><a></a>INACTIVA</a></td>
+                                {% endif %}
+                            {% endif %}
+                            <td width=20>
+                                {% if usuario == 'duenia' or usuario == 'empleado' %}
+                                    {% if promocion.activa == True %}
+                                        <td><a href="{% url 'desactivar_promocion' promocion.id %}" button type="button" class="btn btn-warning" role="button">Desactivar</a></td>
+                                    {% else %}
+                                       <td><a href="{% url 'activar_promocion' promocion.id %}" button type="button" class="btn btn-warning" role="button">Activar</a></td>
+                                    {% endif %}
+                                {% endif %}
+                         {% endif %}
+
+                             </td>
                     </tr>
                     {% endfor %}
                 </tbody>

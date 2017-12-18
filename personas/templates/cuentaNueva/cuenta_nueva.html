@@ -12,6 +12,7 @@
                             <a href="{% url 'index' %}" class="fa-home">Principal</a>
                         </li>
                         <div class="navbar-right" style="margin-top: 12px;">
+                            <a class="btn btn-red" href="{%url 'ayuda_externa' %}" target="_blank" role="button">AYUDA</a>
                             <a class="btn btn-aqua" href="{% url 'cuenta' %}">Crear Cuenta</a>
                             <a class="btn btn-green" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
                         </div>
@@ -26,15 +27,21 @@
     <div class="container">
         <div class="row margin-vert-30">
             <!-- Login Box -->
-            <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+            <div class="col-md-8 col-md-offset-2 col-sm-offset-2">
                 <form method="post" class="login-page"> <!--buscaaar-->
                     {% load crispy_forms_tags %}
 
                     {% csrf_token %}
-                    <div class="login-header margin-bottom-30">
-                        <h2><font color="Purple"><font face="arial"> Crear una cuenta nueva </font></font></h2>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="login-header margin-bottom-30">
+                                <h2><font color="Purple"><font face="arial"> Crear una cuenta nueva </font></font></h2>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <h4><a href="{% url 'ayuda_externa' %}?pag=CrearCuenta" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                        </div>
                     </div>
-
                     {% crispy form %}
 
                 </form>

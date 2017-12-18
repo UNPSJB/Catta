@@ -23,7 +23,11 @@
         <div class="col-md-9">
             <div class="tab-content">
                 {{ block.super }}
+                {% if pagina == 'CrearCuenta' %}
+                <div class="tab-pane fade in active" id="CrearCuenta">
+                {% else %}
                 <div class="tab-pane fade in" id="CrearCuenta">
+                {% endif %}
                     <div class="panel panel-default">
                         <div class="container">
                             <div class="row margin-vert-30">
@@ -48,3 +52,4 @@
     </div>
 </div>
 {% endblock %}
+

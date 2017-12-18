@@ -14,9 +14,12 @@
 
                         <form method="post" class="login-page">
                             {% csrf_token %}
-                            <div class="login-header margin-bottom-30">
-                                <h2>Modificar Turno</h2>
-                            </div>
+                             <div class="col-md-10">
+                                 <h2>Modificar Turno  </h2>
+                             </div>
+                            {% if request.user.persona.cliente != null %}
+                                <h4><a href="{% url 'ayuda_cliente' %}?pag=modificarTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                            {% endif %}
                             <!-- -->
                             <div>
                                 <li> Fecha: {{ turno.fecha }}
@@ -38,7 +41,7 @@
                                     <a href="{% url 'cliente_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>  
                                 {% endif %}
                                 
-                            </div>
+                                    </div>
                         </form>
 
                 </div>

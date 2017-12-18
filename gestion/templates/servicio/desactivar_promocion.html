@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+
+{% load staticfiles %}
+
+
+{% block contenido %}
+<div id="content">
+    <div class="container background-transparent">
+        <div class="container">
+            <div class="row margin-vert-30">
+                <!-- Login Box -->
+                <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+
+                        <form method="post" class="login-page">
+                            {% csrf_token %}
+                            <div class="login-header margin-bottom-30">
+                                <h2><font color="Purple"> Desactivar Promocion </font></h2>
+                            </div>
+                            <!-- -->
+                            <div>
+                                Nombre: {{ promocion.nombre }}
+                                Descripcion: {{promocion.descripcion}}
+                                Precio: {{promocion.precio}}
+                                Duracion: {{promocion.get_duracion}}
+                                Servicios:
+                                {% for servicio in promocion.servicios.all %}
+                                    <li>{{servicio}}
+                                {% endfor %}
+
+                                <br>
+                                <br>
+                                 <div class="row">
+                                <div class="col-md-3">
+                                    {% if user == 'duenia' %}
+                                        <a href="{% url 'duenio_lista_servicios' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                    {% elif user == 'empleado' %}
+                                        <a href="{% url 'empleado_lista_servicios' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                    {% elif user == 'cliente' %}
+                                        <a href="{% url 'cliente_lista_servicios' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Aceptar</button>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+                <!-- End Login Box -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
