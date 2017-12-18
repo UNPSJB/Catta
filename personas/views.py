@@ -268,6 +268,7 @@ def ayuda_empleado(request):
     contexto = {}
     contexto['empleado'] = True
     contexto['logeado'] = True
+    contexto['pagina'] = request.GET.get('pag')
     return render(request, 'ayuda/ayudaEmpleado.html',contexto)
 
 """
