@@ -13,29 +13,37 @@
 
                         <form method="post" class="login-page">
                             {% csrf_token %}
-                            <div class="login-header margin-bottom-30">
+                            <div class="col-md-11">
                                 <h2>Confirmar Turno</h2>
                             </div>
+                            <br>
+                            {% if request.user.persona.cliente != null %}
+                                <h4><a href="{% url 'ayuda_cliente' %}?pag=confirmarTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                            {% endif %}
                             <!-- -->
 
+                            <div>
+                                <br>
                                 <li> Fecha: {{ turno.fecha }}
                                 <li> Fecha de creación: {{ turno.fecha_creacion }}
 
                                 <br><br>
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    {% if user == 'duenia' %}
-                                        <a href="{% url 'duenio_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
-                                    {% elif user == 'empleado' %}
-                                        <a href="{% url 'empleado_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
-                                    {% elif user == 'cliente' %}
-                                        <a href="{% url 'cliente_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>  
-                                    {% endif %}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {% if user == 'duenia' %}
+                                            <a href="{% url 'duenio_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                        {% elif user == 'empleado' %}
+                                            <a href="{% url 'empleado_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                        {% elif user == 'cliente' %}
+                                            <a href="{% url 'cliente_lista_turnos' %}" button type="button" class="btn btn-danger" role="button">Cancelar</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-violet pull-right" type="submit" formmethod="post">Aceptar</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-violet pull-right" type="submit" formmethod="post">Aceptar</button>
-                                </div>
+
                             </div>
 
                         </form>

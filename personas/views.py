@@ -58,7 +58,9 @@ def get_filtros(modelo, datos):
     return (filtros, valores)
 
 def ayuda_externa(request):
-    return render(request, 'ayuda/ayudaExterna.html')
+    contexto = {}
+    contexto['pagina'] = request.GET.get('pag')
+    return render(request, 'ayuda/ayudaExterna.html', contexto)
 
 """
 Vistas del Cliente.
@@ -140,6 +142,7 @@ def ayuda_cliente(request):
     contexto = {}
     contexto['cliente'] = True
     contexto['logeado'] = True
+    contexto['pagina'] = request.GET.get('pag')
     return render(request, 'ayuda/ayudaCliente.html', contexto)
 
 

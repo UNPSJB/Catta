@@ -7,6 +7,11 @@ from django.contrib import messages
 
 
 def sector(request):
+    """
+    Vista para crear un nuevo sector, una vez creado retorna a la vista principal de duenio
+    :param request: requerimiento
+    :return:
+    """
     if request.method == "POST":
         form = SectorForm(request.POST)
         if form.is_valid():
@@ -19,6 +24,11 @@ def sector(request):
 
 
 def insumo(request):
+    """
+    Vista para crear un nuevo insumo, una vez creado retorna a la vista principal del duenio
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         form = InsumoForm(request.POST)
         if form.is_valid():
@@ -31,6 +41,11 @@ def insumo(request):
 
 
 def servicio(request):
+    """
+    Vista para crear un servicio, una vez creado retorna a la vista principal del duenio
+    :param request:
+    :return:
+    """
     if request.method == "POST":
         form = ServicioForm(request.POST, request.FILES or None)
         if form.is_valid():
@@ -44,6 +59,11 @@ def servicio(request):
 
 
 def listaServicios(request):
+    """
+    Vista para listar los servicios y funcionalidad dependiendo de el usuario
+    :param request: requerimiento
+    :return:
+    """
     if (request.user.persona.duenia != None):
         usuario = 'duenia'
     elif (request.user.persona.empleado != None):

@@ -42,8 +42,15 @@ div.cities {
                             <div class="cities">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
-                                        {% crispy form %}
+                                        <div class="row">
+                                                <div class="col-md-10">
+                                                    <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h4><a href="{% url 'ayuda_cliente' %}?pag=crearTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                </div>
+                                        </div>
+                                            {% crispy form %}
                                         <h6>Los campos que contienen asteriscos(*) son obligatorios.</h6>
                                     </div>
                                 </div>
