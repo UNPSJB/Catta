@@ -59,10 +59,12 @@
                          <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                            <div class="login-header margin-bottom-30">
+                                            <div class="col-md-10">
                                                 <h2><font color="Purple"><font face="arial"> Crear un cliente </font></font></h2>
                                             </div>
-
+                                            <div class="col-md-2">
+                                                <h4><a href="{% url 'ayuda_empleado' %}?pag=AltaCliente" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                            </div>
                                             {% crispy form_cliente %}
                                             <h6>Los campos que contienen asteriscos(*) son obligatorios.</h6>
                                     </div>
@@ -75,7 +77,12 @@
                             <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <h2><font color="Purple"><font face="arial"><center> Crear Servicio </center></font></font></h2>
+                                        <div class="col-md-10">
+                                            <h2><font color="Purple"><font face="arial"><center> Crear Servicio </center></font></font></h2>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h4><a href="{% url 'ayuda_empleado' %}?pag=AltaServicio" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                        </div>
                                         {% crispy form_servicio %}
                                         <h6>Los campos que contienen asteriscos(*) son obligatorios.</h6>
                                     </div>
@@ -89,7 +96,12 @@
                             <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <h2><font color="Purple"><font face="arial"><center> Crear Promoción </center></font></font></h2>
+                                        <div class="col-md-10">
+                                            <h2><font color="Purple"><font face="arial"><center> Crear Promoción </center></font></font></h2>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h4><a href="{% url 'ayuda_empleado' %}?pag=AltaPromocion" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                        </div>
                                         {% crispy form_promo %}
                                         <h6>Los campos que contienen asteriscos(*) son obligatorios.</h6>
                                     </div>
@@ -104,7 +116,13 @@
                             <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                        <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
+                                        
+                                        <div class="col-md-10">
+                                            <h2><font color="Purple"><font face="arial"><center> Crear un turno </center></font></font></h2>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h4><a href="{% url 'ayuda_empleado' %}?pag=CrearTurno" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                        </div>
                                         {% crispy form_crear_turno %}
                                         <h6>Los campos que contienen asteriscos(*) son obligatorios.</h6>
                                     </div>
@@ -118,8 +136,13 @@
                             <div class="container">
                                 <div class="row margin-vert-30">
                                     <div class="col-md-8 col-md-offset-2 col-sm-offset-3">
-                                            <div class="login-header margin-bottom-30">
-                                                <h2><font color="Purple"><font face="arial"> Crear un turno Fijo </font></font></h2>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <h2><font color="Purple"><font face="arial"> Crear un turno Fijo </font></font></h2>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h4><a href="{% url 'ayuda_empleado' %}?pag=CrearTurnoFijo" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                                                </div>
                                             </div>
                                             {% crispy form_crear_turno_fijo %}
                                             <h6>Los campos que contienen asteriscos(*) son obligatorios.</h6>
