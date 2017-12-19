@@ -260,5 +260,39 @@
             fileext:".xls",
             });
         });
+    /*
+    $(function() {
+        $('#boton_excel').on('click', function() {
+            // Obtiene los gráficos
+            var grafico1 = document.getElementById("myChart1");
+            var grafico2 = document.getElementById("myChart2");
+            var grafico3 = document.getElementById("myChart3");
+            // Convierte los gráficos a imagenes
+            var image1 = new Image();
+            image1.id = "pic"
+            image1.src = grafico1.toDataURL();
+            var image2 = new Image();
+            image2.id = "pic"
+            image2.src = grafico2.toDataURL();
+            var image3 = new Image();
+            image3.id = "pic"
+            image3.src = grafico3.toDataURL();
+
+            $.ajax({
+                url: '../empleados_mas_solicitados_excel/',
+                type: 'POST',
+                data: {
+                    img1: grafico1.toDataURL(),
+                    img2: grafico2.toDataURL(),
+                    img3: grafico3.toDataURL(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(datos) {
+                    // No es necesario hacer nada acá
+                }
+            });
+        });
+    });
+    */
 </script>
 {% endblock%}

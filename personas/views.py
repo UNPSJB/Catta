@@ -1,3 +1,4 @@
+from PIL import Image
 from django import forms
 from django.contrib.auth import logout, login
 from django.shortcuts import render, redirect, get_object_or_404
@@ -710,6 +711,18 @@ class EmpleadosMasSolicitadosPDF(PDFTemplateView):
         context['datos'] = datos
         return context
 
+
+def empleados_mas_solicitados_excel(request):
+    if request.method == "POST":
+        print(request.POST)
+        img = Image.open("tmp.png")
+        r, g, b, a = img.split()
+        img = Image.merge("RGB", (r, g, b))
+        img.save('imagetoadd.bmp')
+        xlwt.insert_bitmap('imagetoadd.bmp', row, col)
+    else:
+        print("Llegó un get, na que ve!")
+    return redirect('empleados_mas_solicitados') 
 
 """
 Vistas del control de cuentas.
