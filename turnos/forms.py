@@ -238,6 +238,9 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('registrar_turno', 'Registrar Turno Realizado'))
+        if  (self.instance).id != None :
+            self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector)
 
     class Meta:
         model = Turno
