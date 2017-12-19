@@ -10,7 +10,7 @@ from catta.forms import LoginForm
 
 def index(request):
     contexto = {}
-    contexto["promociones"] = Promocion.objects.all()
+    contexto["promociones"] = Promocion.objects.all().order_by("-id")
     contexto["logeado"] = True
     try:
         persona = request.user.persona

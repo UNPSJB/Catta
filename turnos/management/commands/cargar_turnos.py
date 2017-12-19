@@ -78,8 +78,8 @@ class Command(BaseCommand):
     help = 'Carga los turnos duarente el año 2016 utilizando los clientes y los servicios actuales'
     #9-12 y de 16-20
     def handle(self, *args, **options):        
-        fecha_inicio = datetime(2015, 12, 7)
-        fecha_fin = datetime(2015,12,14)
+        fecha_inicio = datetime(2017, 11, 1)
+        fecha_fin = datetime(2017,11,14)
         cargados = []
         for dia_actual in rango_de_fechas(fecha_inicio, fecha_fin):
             if es_laborable(dia_actual):
