@@ -23,6 +23,8 @@ class CrearTurnoForm(ModelForm):
             Div('promociones')
         )
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
+        self.fields['promociones'].queryset = Promocion.objects.filter(activa=True)
+
 
 
     def save(self, commit=True):
