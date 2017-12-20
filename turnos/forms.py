@@ -17,10 +17,10 @@ class CrearTurnoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Div('empleado'),
-            Div('fecha', css_id='fecha_inicio_simple'),
             Div('cliente'),
             Div('servicios'),
-            Div('promociones')
+            Div('promociones'),
+            Div('fecha', css_id='fecha_inicio_simple'),
         )
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
         self.fields['promociones'].queryset = Promocion.objects.filter(activa=True)
@@ -200,10 +200,10 @@ class CrearTurnoFijoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Div('empleado'),
-            Div('fecha', css_id='fecha_inicio_fijo'),
-            Div('fecha_fin'),
             Div('cliente'),
             Div('servicios'),
+            Div('fecha', css_id='fecha_inicio_fijo'),
+            Div('fecha_fin'),
         )
         self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno Fijo'))
 
