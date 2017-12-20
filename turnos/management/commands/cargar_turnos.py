@@ -24,13 +24,10 @@ def get_servicios_random(empleado):
     indice = random.randint(0,len(servicios)-1)
     return servicios[indice]
 
-def get_promociones(dia, empleado):
+def get_promociones(empleado):
     promocion = Promocion.objects.filter(sector=empleado.sector)
-    opcion = random.randint(0,1)
-    if opcion == 0:
-        return None
-    else:
-        return promocion[random]
+    opcion = random.randint(0,len(promocion)-1)
+    return promocion[opcion]
 
 def get_fecha(dia, servicio):
     opcion = random.randint(0,1)
@@ -63,8 +60,8 @@ def generar_turno(dia, empleado, cargados):
             cargados.append(cliente_tentativo)
             cliente_valido = True
     turno.save()
-    servicioX = get_servicios_random(empleado)
-    turno.servicios.add(servicioX)
+    servicioX = get_promociones(empleado)
+    turno.promociones.add(servicioX)
     turno.fecha_realizacion, turno.fecha_cancelacion = get_fecha(dia_realizacion, servicioX)
     turno.comision = None
     turno.save()
@@ -78,14 +75,14 @@ class Command(BaseCommand):
     help = 'Carga los turnos duarente el año 2016 utilizando los clientes y los servicios actuales'
     #9-12 y de 16-20
     def handle(self, *args, **options):        
-        fecha_inicio = datetime(2017, 11, 1)
-        fecha_fin = datetime(2017,11,14)
+        fecha_inicio = datetime(2017, 12, 1)
+        fecha_fin = datetime(2017,12,15)
         cargados = []
         for dia_actual in rango_de_fechas(fecha_inicio, fecha_fin):
             if es_laborable(dia_actual):
                 for empleado in Empleado.objects.all():
                     #Un Turno a la mañana
-                    generar_turno(dia_actual.replace(hour=9),empleado,cargados)
+                    generar_turno(dia_actual.replace(hour=12),empleado,cargados)
                     #Uno a la tarde
-                    generar_turno(dia_actual.replace(hour=16),empleado,cargados)
+                    generar_turno(dia_actual.replace(hour=18),empleado,cargados)
                 cargados.clear()
