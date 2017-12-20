@@ -17,10 +17,10 @@ class CrearTurnoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Div('empleado'),
-            Div('fecha', css_id='fecha_inicio_simple'),
             Div('cliente'),
             Div('servicios'),
-            Div('promociones')
+            Div('promociones'),
+            Div('fecha', css_id='fecha_inicio_simple'),
         )
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
         self.fields['promociones'].queryset = Promocion.objects.filter(activa=True)
@@ -200,10 +200,10 @@ class CrearTurnoFijoForm(ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.layout = Layout(
             Div('empleado'),
-            Div('fecha', css_id='fecha_inicio_fijo'),
-            Div('fecha_fin'),
             Div('cliente'),
             Div('servicios'),
+            Div('fecha', css_id='fecha_inicio_fijo'),
+            Div('fecha_fin'),
         )
         self.helper.add_input(Submit('crear_turno_fijo', 'Crear Turno Fijo'))
 
@@ -216,7 +216,12 @@ class CrearTurnoFijoForm(ModelForm):
         datos = super(CrearTurnoFijoForm, self).clean()
         p1 = datos.get('servicios')
         empleado = datos.get('empleado')
+        cliente = datos.get('cliente')
         servicios = datos.get('servicios')
+
+        if cliente.persona == empleado.persona:
+            raise forms.ValidationError("Un empleado no se puede atender a si mismo.")
+
         for servicio in servicios:
             if (servicio.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
