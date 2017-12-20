@@ -75,7 +75,7 @@ FORMS_CLIENTE = {
 @user_passes_test(es_cliente, login_url='restringido', redirect_field_name=None)
 def cliente(request):
 
-    promociones = Promocion.objects.all()
+    promociones = Promocion.objects.all().order_by("-id")
     # return render(request, 'cliente/index_cliente.html', {'promociones': promociones})
 
     ret = 'cliente/index_cliente.html'
