@@ -79,7 +79,7 @@ class ModificarTurnoForm(ModelForm):
         self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
         if  (self.instance).id != None :
             self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
-            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector, activa=True)
 
     def clean(self):
         tur = super(ModificarTurnoForm, self).clean()
@@ -242,7 +242,7 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         self.helper.add_input(Submit('registrar_turno', 'Registrar Turno Realizado'))
         if  (self.instance).id != None :
             self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
-            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector,activa=True)
 
     class Meta:
         model = Turno
