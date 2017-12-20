@@ -49,8 +49,9 @@ urlpatterns = [
     url(r'^horarios_mas_solicitados/$', views.horarios_mas_solicitados, name='horarios_mas_solicitados'),
     url(r'^servicios_mas_solicitados/$', views.servicios_mas_solicitados, name='servicios_mas_solicitados'),
     url(r'^empleados_mas_solicitados/$', views.empleados_mas_solicitados, name='empleados_mas_solicitados'),
-    # Reportes PDF
+    # Reportes
     url(r'^empleados_mas_solicitados_pdf/', views.EmpleadosMasSolicitadosPDF.as_view(), name="empleados_mas_solicitados_pdf"),
+    url(r'^empleados_mas_solicitados_excel/', views.empleados_mas_solicitados_excel, name="empleados_mas_solicitados_excel"),
     # Cerrar Sesión.
     url(r'^$', views.cerrar_sesion, name='cerrar_sesion')
 

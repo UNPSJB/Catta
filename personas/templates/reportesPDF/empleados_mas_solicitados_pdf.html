@@ -3,61 +3,48 @@
 {% load staticfiles %}
 
 {% block layout_style %}
-
-  <style>
-      
-      table{
+    <style>
+        table{
         background-color: #ffffff;
         text-align: center;
         border-collapse: collapse;
         border: 1px solid black;
-      }
-      th, tr{
-          padding-top: 5px;
-      }
-  </style>
-
-{%endblock%}
-
-{% block content %}
-
-    <!-- SCRIPTS -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
-    <div class="container">
-
-          <div class="row" style="height:60px">
-            <center>
-              <h2><font color="Purple" face="arial"> Empleados Mas Solicitados</font></h2>
-            </center>
-          </div>
-
-          <table>
-              <thread>
-                  <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Sector</th>
-                      <th>Turnos Realizados</th>
-
-                  </tr>
-              </thread>
-              <tbody>
-                  {% for empleado, cantidad in datos %}
-                  <tr>
-                      <td>{{empleado.persona.nombre}}</td>
-                      <td>{{empleado.persona.apellido}}</td>
-                      <td>{{empleado.sector}}</td>
-                      <td>{{cantidad}}</td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-    </div>
+        }
+        th, tr{
+            padding-top: 5px;
+        }
+    </style>
 {% endblock %}
 
+{% block content %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <div class="container">
+        <div style="height:60px">
+            <center>
+                <h2><font color="Purple" face="arial"> Empleados Mas Solicitados</font></h2>
+            </center>
+        </div>
+
+        <table>
+            <thread>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Sector</th>
+                    <th>Turnos Realizados</th>
+                </tr>
+            </thread>
+            <tbody>
+                {% for empleado, cantidad in datos %}
+                <tr>
+                    <td>{{empleado.persona.nombre}}</td>
+                    <td>{{empleado.persona.apellido}}</td>
+                    <td>{{empleado.sector}}</td>
+                    <td>{{cantidad}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

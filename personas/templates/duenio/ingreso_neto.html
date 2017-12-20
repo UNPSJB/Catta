@@ -10,7 +10,12 @@
 
                 <div class="row" style="height:60px">
                     <center>
-                        <h2><font color="Purple" face="arial">Ingreso Neto</font></h2>
+                        <div class="col-md-10">
+                            <h2><font color="Purple" face="arial">Ingreso Neto</font></h2>
+                        </div>
+                        <div class="col-md-2">
+                            <h4><a href="{% url 'ayuda_duenio' %}?pag=ingresoNeto" button type="button" class="glyphicon glyphicon-question-sign" target="_blank" role="button"></center></a></h4>
+                        </div>
                     </center>
                 </div>
                 <div class="row" style="height:80px">
@@ -38,9 +43,7 @@
                         <button class="btn btn-violet pull-right" type="submit">Filtrar</button><br><br>
                     </form>
                 <!--FIN FILTRADO!-->
-                    <form method="post" action="">
-                        <button class="btn btn-violet pull-right" type="submit">PDF</button><br><br>
-                    </form>
+                <br><br><br><br><br><br>
                 </div>
                 <table class="table table-striped">
                     <thread>
