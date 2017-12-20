@@ -216,7 +216,12 @@ class CrearTurnoFijoForm(ModelForm):
         datos = super(CrearTurnoFijoForm, self).clean()
         p1 = datos.get('servicios')
         empleado = datos.get('empleado')
+        cliente = datos.get('cliente')
         servicios = datos.get('servicios')
+
+        if cliente.persona == empleado.persona:
+            raise forms.ValidationError("Un empleado no se puede atender a si mismo.")
+
         for servicio in servicios:
             if (servicio.sector != empleado.sector):
                 raise forms.ValidationError("Los servicios deben ser del mismo sector en el que trabaja el empleado")
