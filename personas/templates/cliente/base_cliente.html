@@ -28,7 +28,21 @@
                         </li>
 
                         <li class="navbar-right">
-                            <a href="{% url 'cliente_lista_turnos' %}" role="button" onclick="goto_link ('/cliente/cliente_lista_turnos/')"><i class="fa fa-calendar-o"></i> Mis Turnos</a>
+                            <script> 
+                                n1 = new Date();
+                                n1.setDate(n1.getDate() -7)
+                                yI = n1.getFullYear();
+                                mI = n1.getMonth() + 1;
+                                dI = n1.getDate();
+                                n2 =  new Date();
+                                yF = n2.getFullYear();
+                                mF = n2.getMonth() + 1;
+                                dF = n2.getDate();
+                                fechaFn = yF + "-" + mF + "-" + dF;
+                                fechaIn = yI + "-" + mI + "-" + dI;
+                                cadena = "<a href=\"{% url 'cliente_lista_turnos' %}?clienteN=&clienteA=&empleadoN=&empleadoA=&fechaI=" + fechaIn + "&fechaF=" + fechaFn + "&servicio=\" role=\"button\" onclick=\"goto_link ('/cliente/cliente_lista_turnos/')\"><i class=\"fa fa-calendar-o\"></i> Mis Turnos</a>"
+                                document.write(cadena); 
+                            </script>
                         </li>
 
                          <li class="navbar-right" >
