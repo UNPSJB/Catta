@@ -12,13 +12,13 @@ $(document).ready(function() {
                                  "Servicios: " + event.servicios + "<br>" + "Promociones: " + event.promociones + "</font>");
             $('#fullCalModal').modal();
         },
-        defaultDate: '2016-11-07',
+        defaultDate: '2017-12-20',
         navLinks: true, // can click day/week names to navigate views
 
         weekNumbers: true,
         weekNumbersWithinDays: true,
         weekNumberCalculation: 'ISO',
-        lang: 'es',
+        locale: 'es',
         editable: false,
         eventLimit: true, // allow "more" link when too many events
 

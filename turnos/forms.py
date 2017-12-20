@@ -23,6 +23,8 @@ class CrearTurnoForm(ModelForm):
             Div('promociones')
         )
         self.helper.add_input(Submit('crear_turno', 'Crear Turno'))
+        self.fields['promociones'].queryset = Promocion.objects.filter(activa=True)
+
 
 
     def save(self, commit=True):
@@ -41,15 +43,17 @@ class CrearTurnoForm(ModelForm):
         fecha = datos.get('fecha')
         hora = fecha.time()
         time = datetime.time(00,00,00)
-        print(hora)
-        print(time)
         if hora == time:
             raise forms.ValidationError("Debe seleccionar una hora para el turno")
 
         p1 = datos.get('servicios')
         p2 = datos.get('promociones')
         empleado = datos.get('empleado')
+        cliente = datos.get('cliente')
         servicios = datos.get('servicios')
+
+        if cliente.persona == empleado.persona:
+            raise forms.ValidationError("Un empleado no se puede atender a si mismo.")
 
         for promocion in p2:
             if (promocion.sector != empleado.sector):
@@ -77,7 +81,7 @@ class ModificarTurnoForm(ModelForm):
         self.helper.add_input(Submit('modificar_turno', 'Modificar Turno'))
         if  (self.instance).id != None :
             self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
-            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector, activa=True)
 
     def clean(self):
         tur = super(ModificarTurnoForm, self).clean()
@@ -231,7 +235,6 @@ class CrearTurnoFijoForm(ModelForm):
         model = TurnoFijo
         fields = {"empleado","fecha", "cliente", "servicios", "fecha_fin"}
 
-
 #form_registrar_turno_realizado
 class RegistrarTurnoRealizadoForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -239,6 +242,9 @@ class RegistrarTurnoRealizadoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('registrar_turno', 'Registrar Turno Realizado'))
+        if  (self.instance).id != None :
+            self.fields['servicios'].queryset = ServicioBasico.objects.filter(sector=(self.instance).empleado.sector)
+            self.fields['promociones'].queryset = Promocion.objects.filter(sector=(self.instance).empleado.sector,activa=True)
 
     class Meta:
         model = Turno

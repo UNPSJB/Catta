@@ -21,7 +21,7 @@
                     <ul class="nav nav-list tree">
                         <li><a href="#pantallaPrincipal" data-toggle="tab" >Pantalla principal</a></li>
                         <li><a href="#listadoEmpleados" data-toggle="tab" >Listado de empleados</a></li>
-                        <li><a href="#modificarComisión" data-toggle="tab" >Modificar comisión de <emple></emple>ado</a></li>
+                        <li><a href="#modificarComisión" data-toggle="tab" >Modificar comisión de empleado</a></li>
                         <li><a href="#altaEmpleado" data-toggle="tab" >Alta de empleado</a></li>
                         <li><a href="#listadoClientes" data-toggle="tab" >Listado de clientes</a></li>
                         <li><a href="#altaCliente" data-toggle="tab" >Alta de cliente</a></li>
@@ -41,6 +41,14 @@
                         <li><a href="#listadoComisiones" data-toggle="tab" >Listado de comisiones</a></li>
                         <li><a href="#liquidarComision" data-toggle="tab" >Liquidar comision</a></li>
                         <li><a href="#altaSector" data-toggle="tab" >Alta de sector</a></li>
+                        <li><a href="#ingresoNeto" data-toggle="tab" >Reporte de Ingreso Neto</a></li>
+                        <li><a href="#servYPromMasSolcitados" data-toggle="tab" >Reporte de Servicios y Promociones más solicitados</a></li>
+                        <li><a href="#mesMayorTrabajo" data-toggle="tab" >Reporte de Mes con Mayor Trabajo</a></li>
+                        <li><a href="#diasMayorTrabajo" data-toggle="tab" >Reporte de Días con Mayor Trabajo</a></li>
+                        <li><a href="#diasMayorCreacionTurnos" data-toggle="tab" >Reporte de Dias con Mayor Creaciones de Turnos</a></li>
+                        <li><a href="#clientesMasAusencias" data-toggle="tab" >Reporte de Clientes con Mas Ausencias</a></li>
+                        <li><a href="#empleadosMasSolicitados" data-toggle="tab" >Reporte de Empleados Más Solicitados</a></li>
+                        <li><a href="#horariosMasSolicitados" data-toggle="tab" >Reporte de Horarios Más Solicitados</a></li>
                     </ul>
                 </li>
             </div>
@@ -522,8 +530,175 @@
                         </div>
                     </div>
                 </div>
+              {% if pagina == 'ingresoNeto' %}
+              <div class="tab-pane fade in active" id="ingresoNeto">
+             {% else %}
+              <div class="tab-pane fade in" id="ingresoNeto">
+             {% endif %}
+                  <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de Ingreso Neto </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_ingresoNeto.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>En este reporte se puede observar un listado de turnos en el que cada turno además de
+                                   poseer sus propios datos como fecha y hora, cliente, empleado y servicios, también muestra
+                                   una ganancia bruta, la comisión del empleado, la ganancia del empleado y el ingreso neto. </p>
+                                <img src="/media/ayuda/dueño_ingresoNeto2.png"  class="imgcenter">
+                                <p> Al final del listado de turnos se muestran los mismos datos pero en forma gráfica&nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if pagina == 'servYPromMasSolcitados' %}
+                <div class="tab-pane fade in active" id="servYPromMasSolcitados">
+                {% else %}
+                <div class="tab-pane fade in" id="servYPromMasSolcitados">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de Servicios y Promociones Más Solicitados </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_servYPromMasSolicitados.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>El primer listado es de los servicios más solicitados, mostrando la cantidad de veces que han sido solicitados en turnos.
+                                   Al final de éste se encuentran los mismos datos representados en diversos gráficos. </p>
+                                <img src="/media/ayuda/dueño_servYPromMasSolicitados2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <img src="/media/ayuda/dueño_servYPromMasSolicitados3.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>El segundo listado corresponde a las promociones más solicitadas con sus datos correspondientes y
+                                    con la cantidad de veces que se han solicitado.
+                                    Al final del listado se encuentran los mismos datos en distintos gráficos.</p>
+                                <img src="/media/ayuda/dueño_servYPromMasSolicitados4.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p></p>
+                                <img src="/media/ayuda/dueño_servYPromMasSolicitados5.png"  class="imgcenter">
+                            </div>
+                        </div>
+                    </div>
+
             </div>
+
+              {% if pagina == 'mesMayorTrabajo' %}
+                <div class="tab-pane fade in active" id="mesMayorTrabajo">
+                {% else %}
+                <div class="tab-pane fade in" id="mesMayorTrabajo">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de Mes con Mayor Trabajo </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_mesMayorTrabajo.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Este reporte compara y muestra el mes donde más turnos se realizaron, indicando tambien la respectiva cantidad de turnos
+                                    de cada mes. </p>
+                                <img src="/media/ayuda/dueño_mesMayorTrabajo2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
         </div>
+            {% if pagina == 'diaMayorTrabajo' %}
+                <div class="tab-pane fade in active" id="diaMayorTrabajo">
+                {% else %}
+                <div class="tab-pane fade in" id="diaMayorTrabajo">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de dia con Mayor Trabajo </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_diaMayorTrabajo.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Este reporte compara y muestra el dia donde más turnos se realizaron, indicando tambien la respectiva cantidad de turnos
+                                    de cada dia. </p>
+                                <img src="/media/ayuda/dueño_diaMayorTrabajo2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             {% if pagina == 'diasMayorCreacionTurnos' %}
+                <div class="tab-pane fade in active" id="diasMayorCreacionTurnos">
+                {% else %}
+                <div class="tab-pane fade in" id="diasMayorCreacionTurnos">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de dia con Mayor Creaciones de Turnos </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_diasMayorCreacionTurnos.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Este reporte compara y muestra el dia donde más turnos se crearon, indicando tambien la respectiva cantidad de turnos
+                                    de cada dia. </p>
+                                <img src="/media/ayuda/dueño_diasMayorCreacionTurnos2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             {% if pagina == 'clientesMasAusencias' %}
+                <div class="tab-pane fade in active" id="clientesMasAusencias">
+                {% else %}
+                <div class="tab-pane fade in" id="clientesMasAusencias">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de Clientes con Más Ausencias </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_clientesMasAusencias.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Este reporte compara y muestra el cliente con más cancelaciones de turnos, indicando tambien la respectiva cantidad de turnos
+                                    cancelados. </p>
+                                <img src="/media/ayuda/dueño_clientesMasAusencias2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <img src="/media/ayuda/dueño_clientesMasAusencias3.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             {% if pagina == 'empleadosMasSolicitados' %}
+                <div class="tab-pane fade in active" id="empleadosMasSolicitados">
+                {% else %}
+                <div class="tab-pane fade in" id="empleadosMasSolicitados">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de Empleados Más Solicitados </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_empleadosMasSolicitados.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Este reporte compara y muestra el empleado con más turnos realizados, indicando tambien la respectiva
+                                    cantidad de turnos realizados.
+                                    Además contiene los botones exportar a PDF que abre un archivo PDF con las tablas del reporte,
+                                    y exportar a Excel que descarga un archivo Excel con las tablas del reporte de los empleados
+                                    mas solicitados</p>
+                                <img src="/media/ayuda/dueño_empleadosMasSolicitados2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             {% if pagina == 'horariosMasSolicitados' %}
+                <div class="tab-pane fade in active" id="horariosMasSolicitados">
+                {% else %}
+                <div class="tab-pane fade in" id="horariosMasSolicitados">
+                {% endif %}
+                    <div class="panel panel-default">
+                        <div class="container">
+                            <div class="row margin-vert-30">
+                                <h2 class="text-center"><font color="#ce2323"><font size=6.9> Reporte de Horarios Más Solicitados </font></font></h2><br>
+                                <img src="/media/ayuda/dueño_horariosMasSolicitados.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                                <p>Este reporte compara y muestra el horario con más turnos, indicando tambien la respectiva
+                                    cantidad de turnos.</p>
+                                <img src="/media/ayuda/dueño_horariosMasSolicitados2.png"  class="imgcenter">
+                                <p> &nbsp;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
 </div>
 {% endblock %}
